@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use App\Models\Skill;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasSkills

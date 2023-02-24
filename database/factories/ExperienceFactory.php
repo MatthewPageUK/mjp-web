@@ -20,11 +20,11 @@ class ExperienceFactory extends Factory
     public function definition(): array
     {
         $start = fake()->dateTimeBetween('-10 years');
-        $end = $start->modify('+100 days');
+        $end = fake()->dateTimeBetween($start, $start->format('Y-m-d').' +200 days');
 
         return [
-            'start' => $start,
-            'end' => $end,
+            'start' => $start->format('Y-m-d'),
+            'end' => $end->format('Y-m-d'),
             'title' => fake()->sentence(),
             'description' => fake()->paragraphs(3, true),
             'active' => true,

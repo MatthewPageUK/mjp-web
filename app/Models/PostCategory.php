@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\{
     Model,
     SoftDeletes,
     Factories\HasFactory,
-    Relations\HasMany,
+    Relations\BelongsToMany,
 };
 
 class PostCategory extends Model
@@ -37,11 +37,11 @@ class PostCategory extends Model
     /**
      * Posts in this category
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function posts(): HasMany
+    public function posts(): BelongsToMany
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 
 }
