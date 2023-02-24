@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\{
     Model,
     SoftDeletes,
     Factories\HasFactory,
-    Relations\BelongsTo,
+    Relations\BelongsToMany,
     Relations\MorphToMany,
 };
 
@@ -48,11 +48,11 @@ class Post extends Model
     /**
      * The post category
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function category(): BelongsTo
+    public function postCategories(): BelongsToMany
     {
-        return $this->belongsTo(PostCategory::class);
+        return $this->belongsToMany(PostCategory::class);
     }
 
     /**
