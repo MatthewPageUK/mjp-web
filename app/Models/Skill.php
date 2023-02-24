@@ -88,7 +88,7 @@ class Skill extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function experience(): MorphToMany
+    public function experiences(): MorphToMany
     {
         return $this->morphedByMany(Experience::class, 'skillable');
     }
