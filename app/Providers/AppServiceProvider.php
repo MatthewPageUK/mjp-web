@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\SettingService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // The SettingService singleton
+        $this->app->singleton(SettingService::class, function () {
+            return new SettingService();
+        });
     }
 
     /**
@@ -19,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Share the settings variable on all views
+        View::share('settings', app(SettingService::class));
     }
 }

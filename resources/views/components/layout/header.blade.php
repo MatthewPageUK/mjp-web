@@ -33,17 +33,17 @@
     </div>
     <div class="flex space-x-2 flex-grow justify-end">
         {{-- Github Icon --}}
-        <x-layout.header-icon href="#" title="Github">
+        <x-layout.header-icon href="{{ $settings->getValue('url_github') }}" title="My Github profile">
             <x-icons.github class="w-8 h-8 text-white fill-white hover:fill-amber-400"/>
         </x-layout.header-icon>
 
         {{-- LinkedIn Icon --}}
-        <x-layout.header-icon href="#" title="LinkedIn">
+        <x-layout.header-icon href="{{ $settings->getValue('url_linkedin') }}" title="My LinkedIn profile">
             <x-icons.linkedin class="w-8 h-8 text-white fill-white hover:fill-amber-400"/>
         </x-layout.header-icon>
 
         {{-- Youtube Icon --}}
-        <x-layout.header-icon href="#" title="Youtube">
+        <x-layout.header-icon href="{{ $settings->getValue('url_youtube') }}" title="My Youtube channel">
             <x-icons.youtube class="w-8 h-8 text-white fill-white hover:fill-amber-400"/>
         </x-layout.header-icon>
     </div>

@@ -59,6 +59,27 @@ class DatabaseSeeder extends Seeder
             ->count(5)
             ->create();
 
+        Setting::create([
+            'key' => 'site_name',
+            'value' => 'My Web Site',
+        ]);
+        Setting::create([
+            'key' => 'site_tagline',
+            'value' => 'A cool place to hang out....',
+        ]);
+        Setting::create([
+            'key' => 'url_github',
+            'value' => 'https://www.github.com/MatthewPageUK',
+        ]);
+        Setting::create([
+            'key' => 'url_linkedin',
+            'value' => 'https://www.linkedin.com',
+        ]);
+        Setting::create([
+            'key' => 'url_youtube',
+            'value' => 'https://www.youtube.com',
+        ]);
+
         SkillGroup::factory()
             ->count(3)
             ->state(new Sequence(
