@@ -3,7 +3,7 @@
     class="flex px-6 py-4 text-sm bg-zinc-800 text-white"
 >
     <p class="flex-1">
-        Website Name - description
+        {{ $settings->getValue('site_name') }} - {{ $settings->getValue('site_tagline') }}
     </p>
     <p class="flex-1 text-center text-xs text-zinc-400">
         Copyright &copy; {{ date('Y') }}

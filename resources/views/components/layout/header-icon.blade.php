@@ -1,4 +1,5 @@
 {{-- A header icon link --}}
 <a
-    href="#"
+    {{ $attributes }}
+    target="_blank"
 >{{ $slot }}</a>
