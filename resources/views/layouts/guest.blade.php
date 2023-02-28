@@ -16,15 +16,27 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-zinc-200">
+
+            {{-- Main header --}}
             <x-layout.header />
-            <x-layout.masthead />
+
+            {{-- Mastheads --}}
+            <livewire:show-masthead />
+
+            {{-- Main page --}}
             <main class="max-w-7xl mx-auto p-6 lg:p-8">
                 {{ $slot }}
             </main>
+
         </div>
+
+        {{-- Footer --}}
         <x-layout.footer />
+
+        @livewireScripts
     </body>
 </html>

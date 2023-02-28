@@ -13,6 +13,7 @@ use App\Models\{
     SkillGroup,
     User,
 };
+use Database\Factories\MastheadFactory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
      * 5 Projects
      * Skillable - attach 3 random skills to each skillable
      * Postable - attach 3 random posts to each postable
+     * 5 Mastheads
      */
     public function run(): void
     {
@@ -48,6 +50,7 @@ class DatabaseSeeder extends Seeder
         DB::table('demos')->truncate();
         DB::table('experiences')->truncate();
         DB::table('projects')->truncate();
+        DB::table('mastheads')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         User::factory()->create([
@@ -82,21 +85,21 @@ class DatabaseSeeder extends Seeder
 
         SkillGroup::factory()
             ->count(3)
-            ->state(new Sequence(
+            ->sequence(
                 ['name' => 'Web Development'],
                 ['name' => 'Management'],
                 ['name' => 'Organisational'],
-            ))
+            )
             ->hasSkills(5)
             ->create();
 
         PostCategory::factory()
             ->count(3)
-            ->state(new Sequence(
+            ->sequence(
                 ['name' => 'Web Stuff'],
                 ['name' => 'Not work stuff'],
                 ['name' => 'Tutorials'],
-            ))
+            )
             ->hasPosts(5)
             ->create();
 
@@ -127,5 +130,10 @@ class DatabaseSeeder extends Seeder
                 $project->skills()->attach(Skill::all()->random(3));
                 $project->posts()->attach(Post::all()->random(3));
             });
+
+        MastheadFactory::new()
+            ->count(5)
+            ->sequence(fn (Sequence $sequence) => ['order' => $sequence->index + 1])
+            ->create();
     }
 }

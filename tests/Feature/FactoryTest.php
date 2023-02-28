@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\{
     Demo,
     Experience,
+    Masthead,
     Post,
     PostCategory,
     Project,
@@ -104,5 +105,11 @@ class FactoryTest extends TestCase
         $this->assertModelExists($post->demos->first());
         $this->assertModelExists($post->projects->first());
         $this->assertModelExists($post->experiences->first());
+    }
+
+    public function test_masthead_factory(): void
+    {
+        $masthead = Masthead::factory()->create();
+        $this->assertModelExists($masthead);
     }
 }

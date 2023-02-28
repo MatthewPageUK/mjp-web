@@ -1,6 +1,6 @@
 {{-- Main web site header component --}}
 <header
-    class="sticky top-0 flex space-x-8 items-center px-8 py-6 pt-10 bg-zinc-800 text-white border-b-2 border-amber-400 shadow-lg"
+    class="z-50 sticky top-0 flex space-x-8 items-center px-8 py-6 pt-10 bg-zinc-800 text-white border-b-2 border-amber-400 shadow-lg"
 >
     <div>
         <a href="/" class="border w-32 h-16 block">SITE LOGO</a>
