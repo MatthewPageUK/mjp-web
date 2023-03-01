@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database with demo data
      * for development only.
      *
-     * Demo user
+     * Demo user (admin and normal)
      * Demo settings
      * 3 Skill Groups with 5 skills in each
      * 3 Post Categories with 5 posts in each
@@ -53,9 +53,15 @@ class DatabaseSeeder extends Seeder
         DB::table('mastheads')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        User::factory()->create([
+        User::factory()->admin()->create([
             'name' => 'Demo User',
             'email' => 'demo@example.com',
+        ]);
+
+        User::factory()->create([
+            'name' => 'Demo User',
+            'email' => 'demo2@example.com',
+            'is_admin' => 0,
         ]);
 
         Setting::factory()
