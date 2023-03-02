@@ -28,7 +28,7 @@
             <livewire:show-masthead />
 
             {{-- Main page --}}
-            <main class="max-w-7xl mx-auto p-6 lg:p-8">
+            <main class="max-w-7xl mx-auto p-6 lg:p-8 bg-white">
                 {{ $slot }}
             </main>
 
