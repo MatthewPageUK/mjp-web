@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-    <div class="grid grid-cols-2">
+    <div class="lg:grid lg:grid-cols-2">
 
         <div>
             <p>This is my web site</p>
@@ -10,14 +10,6 @@
 
         <div>
             <livewire:skill.top10 />
-
-            <p>This is my web site</p>
-            <p>This is my web site</p>
-            <p>This is my web site</p>
-            <p>This is my web site</p>
-            <p>This is my web site</p>
-            <p>This is my web site</p>
-            <p>This is my web site</p>
         </div>
 
     </div>

@@ -19,7 +19,7 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-zinc-200">
+        <div class="min-h-screen bg-zinc-800">
 
             {{-- Main header --}}
             <x-layout.header />
@@ -28,7 +28,7 @@
             <livewire:show-masthead />
 
             {{-- Main page --}}
-            <main class="max-w-7xl mx-auto p-6 lg:p-8 bg-white">
+            <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">
                 {{ $slot }}
             </main>
 
