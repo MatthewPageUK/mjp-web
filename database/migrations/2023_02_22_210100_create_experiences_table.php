@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->date('start');
             $table->date('end')->nullable();
-            $table->string('title');
+            $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
             $table->softDeletes();

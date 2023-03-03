@@ -1,3 +1,4 @@
+@props(['masthead' => false])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -10,6 +11,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        {{-- <link href="https://fonts.bunny.net/css?family=orbitron:400,500,600&display=swap" rel="stylesheet" /> --}}
 
         <!-- Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -19,16 +21,18 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-zinc-200">
+        <div class="min-h-screen bg-zinc-800">
 
             {{-- Main header --}}
             <x-layout.header />
 
             {{-- Mastheads --}}
-            <livewire:show-masthead />
+            @if ($masthead)
+                <livewire:show-masthead />
+            @endif
 
             {{-- Main page --}}
-            <main class="max-w-7xl mx-auto p-6 lg:p-8">
+            <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">
                 {{ $slot }}
             </main>
 

@@ -29,7 +29,7 @@ class Experience extends Model
     protected $fillable = [
         'start',
         'end',
-        'title',
+        'name',
         'description',
         'active',
     ];
