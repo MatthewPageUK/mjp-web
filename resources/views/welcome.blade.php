@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :masthead="true">
 
     <div class="lg:grid lg:grid-cols-2">
 
@@ -13,67 +13,6 @@
         </div>
 
     </div>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
-    <p>This is my web site</p>
+
 
 </x-guest-layout>

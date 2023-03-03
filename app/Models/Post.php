@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Traits\{
     HasActive,
     HasSkills,
-    HasTitleSlug,
+    HasNameSlug,
 };
 use Illuminate\Database\Eloquent\{
     Model,
@@ -19,7 +19,7 @@ class Post extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use HasTitleSlug;
+    use HasNameSlug;
     use HasSkills;
     use HasActive;
 
@@ -29,7 +29,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
+        'name',
         'slug',
         'snippet',
         'content',

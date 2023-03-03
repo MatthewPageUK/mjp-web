@@ -18,15 +18,9 @@
             @endif --}}
             <div class="">
                 <p class=" text-center">
-                    <a href="skill" class="block p-4 m-2 border rounded-lg bg-zinc-800 hover:bg-zinc-700">
+                    <a href="{{ route('skill', $skill) }}" class="block p-4 m-2 border rounded-lg bg-zinc-800 hover:bg-zinc-700">
                         <span class="block text-lg">{{ $skill->name }}</span>
-                        @for ($x = 0; $x < 10; $x++)
-                            @if ($x >= $skill->level)
-                                <span class="material-icons-outlined text-zinc-600 text-lg">star_rate</span>
-                            @else
-                                <span class="material-icons-outlined text-amber-400 text-lg">star_rate</span>
-                            @endif
-                        @endfor
+                        <x-skills.stars :skill="$skill" />
                     </a>
                 </p>
             </div>
