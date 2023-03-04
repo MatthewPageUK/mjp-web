@@ -45,6 +45,7 @@ class Project extends Model
      */
     protected $casts = [
         'active' => 'boolean',
+        'last_active' => 'datetime',
     ];
 
 }

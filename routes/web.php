@@ -42,14 +42,14 @@ Route::get('/skill/{skill}', function (Skill $skill) {
     return view('skill', ['skill' => $skill]);
 })->name('skill');
 
-Route::get('/skills', function () {
+Route::get('/skillsg', function () {
     return "Skills Explorer";
 })->name('skills.group');
 
 
 
 Route::get('/projects', function () { return "Projects"; })->name('projects');
-Route::get('/project/{project}', function (Project $project) { return "Project ".$project->name; })->name('project');
+Route::get('/project/{project}', function (Project $project) { return view('project', ['project' => $project]); })->name('project');
 
 Route::get('/demos', function () { return "demos"; })->name('demos');
 Route::get('/demo/{demo}', function (Demo $demo) { return "demos ".$demo->name; })->name('demo');

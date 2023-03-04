@@ -1,13 +1,14 @@
 <div>
-    <h1 class="text-5xl text-center mb-2">Top 10 Skills</h1>
-    <p class="text-center">
+    <div class="flex">
+        <h1 class="flex-1 text-5xl mb-2">Top 10 Skills</h1>
+
         <select wire:model="group" class="bg-zinc-800 text-xs">
             <option value="">All</option>
             @foreach ($this->groups as $skillGroup)
                 <option value="{{ $skillGroup->id }}">{{ $skillGroup->name }}</option>
             @endforeach
         </select>
-    </p>
+    </div>
 
     <div class="md:grid md:grid-cols-2">
         @foreach ($this->skills as $key => $skill)
