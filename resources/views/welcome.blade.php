@@ -1,11 +1,9 @@
 <x-guest-layout :masthead="true">
 
-    <div class="lg:grid lg:grid-cols-2">
+    <div class="mt-16 lg:grid lg:grid-cols-2 gap-x-32">
 
         <div>
-            <p>This is my web site</p>
-            <p>This is my web site</p>
-            <p>This is my web site</p>
+            <livewire:project.recent />
         </div>
 
         <div>
