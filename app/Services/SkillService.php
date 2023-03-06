@@ -50,4 +50,14 @@ class SkillService
         })->get();
     }
 
+    /**
+     * Get all skills that have a Demo
+     *
+     * @return Collection
+     */
+    public function getDemoableSkills(): Collection
+    {
+        return Skill::whereHas('demos')->get();
+    }
+
 }

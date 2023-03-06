@@ -1,7 +1,7 @@
 {{-- A header button component --}}
 <div>
     <a
-        href="#"
+        href="{{ $href }}"
         class="
             flex items-center
             rounded px-6 py-2

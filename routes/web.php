@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Demo\Explorer as DemoExplorer;
 use App\Models\Demo;
 use App\Models\Experience;
 use App\Models\Post;
@@ -51,8 +52,8 @@ Route::get('/skillsg', function () {
 Route::get('/projects', function () { return "Projects"; })->name('projects');
 Route::get('/project/{project}', function (Project $project) { return view('project', ['project' => $project]); })->name('project');
 
-Route::get('/demos', function () { return "demos"; })->name('demos');
-Route::get('/demo/{demo}', function (Demo $demo) { return "demos ".$demo->name; })->name('demo');
+Route::get('/demos', DemoExplorer::class)->name('demos');
+Route::get('/demo/{demo}', function (Demo $demo) { return view('demo', ['demo' => $demo]); })->name('demo');
 
 Route::get('/experiences', function () { return "experiences"; })->name('experiences');
 Route::get('/experience/{experience}', function (Experience $experience) { return "experience ".$experience->name; })->name('experience');

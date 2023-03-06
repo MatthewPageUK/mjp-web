@@ -22,7 +22,7 @@
         </x-layout.header-button>
 
         {{-- Demos --}}
-        <x-layout.header-button href="#" icon="smart_toy">
+        <x-layout.header-button href="{{ route('demos') }}" icon="smart_toy">
             {{ __('Demos') }}
         </x-layout.header-button>
 

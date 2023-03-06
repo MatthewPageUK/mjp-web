@@ -10,7 +10,10 @@
             <livewire:skill.top10 />
         </div>
 
-    </div>
+        <div>
+            <livewire:demo.recent />
+        </div>
 
+    </div>
 
 </x-guest-layout>
