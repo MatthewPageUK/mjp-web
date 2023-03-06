@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\{
     SoftDeletes,
     Factories\HasFactory,
 };
+use Illuminate\Support\Str;
 
 class Demo extends Model
 {
@@ -44,5 +45,15 @@ class Demo extends Model
     protected $casts = [
         'active' => 'boolean',
     ];
+
+    /**
+     * Get the demo's snippet
+     *
+     * @return string
+     */
+    public function getSnippetAttribute()
+    {
+        return Str::words($this->description, 10, '...');
+    }
 
 }

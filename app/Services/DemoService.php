@@ -71,7 +71,7 @@ class DemoService
         // Skill filter
         if (isset($filters['skill']) && $filters['skill']) {
             $query->whereHas('skills', function (Builder $query) use ($filters) {
-                $query->where('id', $filters['skill']);
+                $query->where('slug', $filters['skill']);
             });
         }
 

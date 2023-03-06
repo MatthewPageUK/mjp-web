@@ -71,8 +71,8 @@ class Explorer extends Component
      */
     public function boot(DemoService $demoService, SkillService $skillService)
     {
-        $this->skillService = $skillService;
         $this->demoService = $demoService;
+        $this->skillService = $skillService;
     }
 
     /**
@@ -82,7 +82,7 @@ class Explorer extends Component
      */
     public function mount()
     {
-        $this->demos = $this->demoService->getAll();
+        $this->populateDemos();
         $this->skills = $this->skillService->getDemoableSkills();
     }
 
@@ -94,6 +94,16 @@ class Explorer extends Component
      * @return void
      */
     public function updated(string $name, mixed $value): void
+    {
+        $this->populateDemos();
+    }
+
+    /**
+     * Populate the demo list
+     *
+     * @return void
+     */
+    private function populateDemos(): void
     {
         $this->demos = $this->demoService->getFiltered([
             'skill' => $this->skill,
