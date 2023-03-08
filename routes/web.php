@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Demo\Explorer as DemoExplorer;
+use App\Http\Livewire\Skill\Explorer as SkillExplorer;
 use App\Models\Demo;
 use App\Models\Experience;
 use App\Models\Post;
@@ -35,9 +36,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/skills', function () {
-    return "Skills Explorer";
-})->name('skills');
+Route::get('/skills', SkillExplorer::class)->name('skills');
 
 Route::get('/skill/{skill}', function (Skill $skill) {
     return view('skill', ['skill' => $skill]);

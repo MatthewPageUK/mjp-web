@@ -15,6 +15,23 @@ use Illuminate\Database\Eloquent\Collection;
 class SkillService
 {
     /**
+     * Get only active Skills
+     *
+     * @var bool
+     */
+    public bool $activeOnly = true;
+
+    /**
+     * Get the base query
+     *
+     * @return Builder
+     */
+    private function getBaseQuery(): Builder
+    {
+        return $this->activeOnly ? Skill::active() : Skill::query();
+    }
+
+    /**
      * Get 10 Top Skills
      *
      * @param int|string|null $group   Limit to this group
@@ -36,6 +53,31 @@ class SkillService
             ->orderBy('level', 'desc')
             ->limit(10)
             ->get();
+    }
+
+    /**
+     * Get filtered Skills
+     *
+     * @param array $filters    Array of filters
+     * @return Collection
+     */
+    public function getFiltered(array $filters): Collection
+    {
+        // Base query
+        $query = $this->getBaseQuery();
+
+        // Group filter
+        if (isset($filters['group']) && $filters['group']) {
+            $query->whereHas('skillGroups', function (Builder $query) use ($filters) {
+                $query->where('slug', $filters['group']);
+            });
+        }
+
+        // Order
+        $query->orderBy('level', 'desc');
+
+        // Get and return Collection
+        return $query->get();
     }
 
     /**
