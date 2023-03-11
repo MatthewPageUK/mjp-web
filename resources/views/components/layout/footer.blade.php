@@ -18,4 +18,5 @@
 <p class="flex items-center text-xs text-green-400 bg-black px-6 py-2">
     Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
     <a href="#" class="flex items-center hover:text-amber-400"><span class="material-icons-outlined text-sm mr-1 ml-4 hover:fill-amber-400">terminal</span> Source code</a>
+    <span class="flex-1 text-right block text-zinc-500"><a href="{{ route('the.secret') }}">&pi;</a></span>
 </p>
