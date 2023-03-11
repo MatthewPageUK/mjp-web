@@ -32,10 +32,12 @@
         @endforeach
         </div>
 
-        <div class="border rounded-lg p-8">
+        <div>
 
             @if ($this->skill)
-                <div wire:key="skill-view-{{ $this->skill?->slug }}">
+                <div wire:key="skill-view-{{ $this->skill?->slug }}"
+                    class="bg-zinc-900 rounded-xl p-8"
+                >
                     <livewire:skill.view-skill :skill="$this->skill" wire:key="skill-view-{{ $this->skill?->slug }}-component" />
                 </div>
             @else

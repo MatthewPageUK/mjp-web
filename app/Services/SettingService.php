@@ -26,7 +26,7 @@ class SettingService
      */
     public function __construct()
     {
-        $this->settings = $this->loadSettings();
+        $this->settings = $this->getSettings();
     }
 
     /**
@@ -34,7 +34,7 @@ class SettingService
      *
      * @return Collection
      */
-    public function loadSettings(): Collection
+    public function getSettings(): Collection
     {
         return Setting::all();
     }
@@ -51,7 +51,9 @@ class SettingService
         $setting = $this->settings->where('key', $key)->first();
 
         if (! $setting) {
-            throw new SettingNotFoundException(sprintf('Setting not found for key %s', $key));
+            throw new SettingNotFoundException(
+                sprintf('Setting not found for key %s', $key)
+            );
         }
 
         return $setting;
@@ -91,6 +93,7 @@ class SettingService
 
         $setting->value = $value;
         $setting->save();
+
         return true;
     }
 }

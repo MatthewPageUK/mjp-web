@@ -15,7 +15,7 @@
         <p class="pt-8">{{ $skill->description }}</p>
     </div>
 
-    <div class="text-right">
+    <div class="">
 
         <x-related.links :model="$skill" />
 

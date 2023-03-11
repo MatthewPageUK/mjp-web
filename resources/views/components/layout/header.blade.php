@@ -1,37 +1,54 @@
 {{-- Main web site header component --}}
 <header
-    class="z-50 sticky top-0 flex space-x-8 items-center px-8 py-6 pt-10 bg-zinc-800 text-white border-b-2 border-amber-400 shadow-lg"
+    x-data="{
+        isMobile: (window.innerWidth < 1024) ? true : false,
+        openMenu: false,
+    }"
+    x-on:resize.window.debounce.500ms="isMobile = (window.innerWidth < 1024) ? true : false"
+    x-on:click.outside="openMenu = false"
+    class="z-50 sticky top-0 md:flex md:space-x-8 md:items-center px-8 py-6 md:pt-10 bg-zinc-800 text-white border-b-2 border-amber-400 shadow-lg"
 >
-    <div>
-        <a href="/" class="border w-32 h-16 block">SITE LOGO</a>
+    <div class="text-center">
+        <a href="/" class="border w-32 h-16 inline-block md:block">SITE LOGO</a>
     </div>
-    <div class="flex space-x-2">
+
+    {{-- Burger menu button --}}
+    <button
+        x-on:click="openMenu = !openMenu"
+        class="absolute top-0 right-0 md:hidden hover:text-amber-500 ease-in-out duration-500"
+    >
+        <span class="material-icons-outlined text-4xl ml-1">menu</span>
+    </button>
+
+    {{-- Header buttons --}}
+    <nav x-show="(isMobile && openMenu) || ! isMobile" class="mt-8 md:flex md:space-x-2" x-transition.opacity x-transition.duration.500ms>
         {{-- Skills --}}
-        <x-layout.header-button href="#" icon="construction">
+        <x-layout.header-button href="{{ route('skills') }}" icon="construction" tag="skill">
             {{ __('Skills') }}
         </x-layout.header-button>
 
         {{-- Experience --}}
-        <x-layout.header-button href="#" icon="public">
+        <x-layout.header-button href="{{ route('experiences') }}" icon="public" tag="experience">
             {{ __('Experience') }}
         </x-layout.header-button>
 
         {{-- Projects --}}
-        <x-layout.header-button href="#" icon="rocket_launch" :active="true">
+        <x-layout.header-button href="{{ route('projects') }}" icon="rocket_launch" tag="project">
             {{ __('Projects') }}
         </x-layout.header-button>
 
         {{-- Demos --}}
-        <x-layout.header-button href="{{ route('demos') }}" icon="smart_toy">
+        <x-layout.header-button href="{{ route('demos') }}" icon="smart_toy" tag="demo">
             {{ __('Demos') }}
         </x-layout.header-button>
 
         {{-- Contact --}}
-        <x-layout.header-button href="#" icon="connect_without_contact">
+        <x-layout.header-button href="#" icon="connect_without_contact" tag="contact">
             {{ __('Contact') }}
         </x-layout.header-button>
-    </div>
-    <div class="flex space-x-2 flex-grow justify-end">
+    </nav>
+
+    <nav x-show="(isMobile && openMenu) || ! isMobile" class="mt-8 flex space-x-8 flex-grow justify-center md:justify-end" x-transition.opacity x-transition.duration.500ms>
         {{-- Github Icon --}}
         <x-layout.header-icon href="{{ $settings->getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-amber-400">
             <x-icons.github class="w-8 h-8 text-white"/>
@@ -46,11 +63,11 @@
         <x-layout.header-icon href="{{ $settings->getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-amber-400">
             <x-icons.youtube class="w-8 h-8 text-white"/>
         </x-layout.header-icon>
-    </div>
+    </nav>
 
     {{-- Authentication --}}
     @if (Route::has('login'))
-        <div class="flex items-center sm:fixed sm:top-0 sm:right-0 px-8 py-2 text-right text-sm">
+        <nav x-show="(isMobile && openMenu) || ! isMobile" class="mt-8 flex justify-center md:justify-start sm:fixed sm:top-0 sm:right-0 px-8 py-2 text-right text-sm" x-transition.opacity x-transition.duration.500ms>
             @auth
                 {{-- Logged in user dashboard --}}
                 <a href="{{ url('/dashboard') }}" class="flex items-center text-white dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
@@ -71,6 +88,6 @@
                     </a>
                 @endif
             @endauth
-        </div>
+        </nav>
     @endif
 </header>

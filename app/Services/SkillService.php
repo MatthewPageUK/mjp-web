@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Masthead;
 use App\Models\Skill;
 use App\Models\SkillGroup;
+use App\Services\Traits\HasActiveStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -14,22 +15,25 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class SkillService
 {
-    /**
-     * Get only active Skills
-     *
-     * @var bool
-     */
-    public bool $activeOnly = true;
+    use HasActiveStatus;
 
-    /**
-     * Get the base query
-     *
-     * @return Builder
-     */
-    private function getBaseQuery(): Builder
-    {
-        return $this->activeOnly ? Skill::active() : Skill::query();
-    }
+    public $model = Skill::class;
+    // /**
+    //  * Get only active Skills
+    //  *
+    //  * @var bool
+    //  */
+    // public bool $activeOnly = true;
+
+    // /**
+    //  * Get the base query
+    //  *
+    //  * @return Builder
+    //  */
+    // private function getBaseQuery(): Builder
+    // {
+    //     return $this->activeOnly ? Skill::active() : Skill::query();
+    // }
 
     /**
      * Get 10 Top Skills

@@ -17,7 +17,8 @@ class MastheadService
      */
     public function getRandomMasthead(): Masthead
     {
-        return Masthead::inRandomOrder()->first();
+        return Masthead::inRandomOrder()
+            ->first();
     }
 
     /**
@@ -28,7 +29,9 @@ class MastheadService
      */
     public function getNextMasthead(Masthead $masthead): Masthead
     {
-        $next = Masthead::where('order', '>', $masthead->order)->orderBy('order')->first();
+        $next = Masthead::where('order', '>', $masthead->order)
+            ->orderBy('order')
+            ->first();
 
         if (! $next) {
             $next = Masthead::orderBy('order')->first();

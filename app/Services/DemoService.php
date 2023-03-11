@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Demo;
+use App\Services\Traits\HasActiveStatus;
 use Illuminate\Database\Eloquent\{
     Builder,
     Collection,
@@ -14,22 +15,9 @@ use Illuminate\Database\Eloquent\{
  */
 class DemoService
 {
-    /**
-     * Get only active Demos
-     *
-     * @var bool
-     */
-    public bool $activeOnly = true;
+    use HasActiveStatus;
 
-    /**
-     * Get the base query
-     *
-     * @return Builder
-     */
-    private function getBaseQuery(): Builder
-    {
-        return $this->activeOnly ? Demo::active() : Demo::query();
-    }
+    public $model = Demo::class;
 
     /**
      * Get recent Demos
@@ -61,6 +49,9 @@ class DemoService
      * Get filtered Demos
      *
      * @param array $filters    Array of filters
+     *                          [
+     *                              'skill' => string
+     *                          ]
      * @return Collection
      */
     public function getFiltered(array $filters): Collection
@@ -78,7 +69,7 @@ class DemoService
         // Order
         $query->orderBy('created_at', 'desc');
 
-        // Get and return Collection
+        // Get and return collection
         return $query->get();
     }
 
