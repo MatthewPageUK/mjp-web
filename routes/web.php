@@ -47,7 +47,6 @@ Route::get('/skillsg', function () {
 })->name('skills.group');
 
 
-
 Route::get('/projects', function () { return "Projects"; })->name('projects');
 Route::get('/project/{project}', function (Project $project) { return view('project', ['project' => $project]); })->name('project');
 
@@ -60,6 +59,8 @@ Route::get('/experience/{experience}', function (Experience $experience) { retur
 Route::get('/posts', function () { return "posts"; })->name('posts');
 Route::get('/post/{post}', function (Post $post) { return "post ".$post->name; })->name('post');
 
-
+Route::get('/secret', function () {
+    return "The secret is .... ";
+})->name('the.secret');
 
 require __DIR__.'/auth.php';
