@@ -20,3 +20,6 @@
     <a href="#" class="flex items-center hover:text-amber-400"><span class="material-icons-outlined text-sm mr-1 ml-4 hover:fill-amber-400">terminal</span> Source code</a>
     <span class="flex-1 text-right block text-zinc-500"><a href="{{ route('the.secret') }}">&pi;</a></span>
 </p>
+
+{{-- <h3 class="text-center mb-4">Github Activity</h3> --}}
+{{-- <img class="w-full" src="https://ghchart.rshah.org/MatthewPageUK" alt="MatthewPageUK's Github chart" /> --}}
