@@ -25,7 +25,7 @@
             @endforeach
         </p>
 
-        <p class="text-xs">
+        <p class="text-xs pl-9">
             <button
                 class="border border-zinc-400 px-2 py-1 rounded mt-2 hover:text-amber-400"
                 x-show="! expanded && count > showCount"

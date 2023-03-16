@@ -2,10 +2,7 @@
 
 namespace App\Http\Livewire\Skill;
 
-use App\Models\Skill;
-use App\Services\{
-    SkillService,
-};
+use App\Services\SkillService;
 use App\View\Components\GuestLayout;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
@@ -13,7 +10,7 @@ use Livewire\Component;
 
 /**
  * Skill Explorer
- * Shows a list of Skills with a filter
+ * Shows a list of Skills with a filter for groups
  *
  */
 class Explorer extends Component
@@ -35,13 +32,9 @@ class Explorer extends Component
     /**
      * Selected group
      *
-     * @var int|string|null
+     * @var string|null
      */
-    public int|string|null $group = null;
-
-
-
-    public ?Skill $skill = null;
+    public ?string $group = null;
 
     /**
      * Skill Service for retrieving Skill models
@@ -78,7 +71,7 @@ class Explorer extends Component
     public function mount()
     {
         $this->populateSkills();
-        $this->groups = $this->skillService->getSkillGroups();
+        $this->populateGroups();
     }
 
     /**
@@ -103,10 +96,24 @@ class Explorer extends Component
         $this->skills = $this->skillService->getFiltered([
             'group' => $this->group,
         ]);
+
+        if ($this->skills->count() < 1) {
+            abort(404, 'No skills found');
+        }
     }
 
     /**
-     * Render the Skills page
+     * Populate the skill groups list
+     *
+     * @return void
+     */
+    private function populateGroups(): void
+    {
+        $this->groups = $this->skillService->getSkillGroups();
+    }
+
+    /**
+     * Render the Skills Explorer page
      *
      * @return View
      */
@@ -116,9 +123,4 @@ class Explorer extends Component
             ->layout(GuestLayout::class);
     }
 
-
-    public function setSkill(Skill $skill)
-    {
-        $this->skill = $skill;
-    }
 }
