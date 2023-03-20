@@ -1,4 +1,3 @@
-@props(['masthead' => false])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -31,8 +30,8 @@
             <x-layout.header />
 
             {{-- Mastheads --}}
-            @if ($masthead)
-                <livewire:show-masthead />
+            @if ($showMasthead)
+                <livewire:layout.show-masthead />
             @endif
 
             {{-- Main page --}}

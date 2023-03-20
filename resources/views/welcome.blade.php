@@ -1,4 +1,6 @@
-<x-guest-layout :masthead="true">
+<x-guest-layout
+    :showMasthead="true"
+>
 
     <div class="flex space-x-16">
         <div class="w-1/3">

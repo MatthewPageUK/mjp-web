@@ -5,8 +5,10 @@ namespace App\Services;
 use App\Models\Masthead;
 
 /**
- * Service for managing Mastheads.
+ * Service for managing and retrieving Mastheads.
  *
+ * @method Masthead getRandom(): Masthead
+ * @method Masthead getNextMasthead(Masthead $masthead): Masthead
  */
 class MastheadService
 {
@@ -15,29 +17,25 @@ class MastheadService
      *
      * @return Masthead
      */
-    public function getRandomMasthead(): Masthead
+    public function getRandom(): Masthead
     {
         return Masthead::inRandomOrder()
             ->first();
     }
 
     /**
-     * Get the next Masthead or the first one if there is no next.
+     * Get the next Masthead or the first one if there is no more.
      *
-     * @param Masthead $masthead
+     * @param Masthead $masthead    The currently displayed Masthead
      * @return Masthead
      */
-    public function getNextMasthead(Masthead $masthead): Masthead
+    public function getNext(Masthead $masthead): Masthead
     {
-        $next = Masthead::where('order', '>', $masthead->order)
-            ->orderBy('order')
-            ->first();
-
-        if (! $next) {
-            $next = Masthead::orderBy('order')->first();
-        }
-
-        return $next;
+        return Masthead::where('order', '>', $masthead->order)
+            ->ordered()
+            ->firstOr(function () {
+                return Masthead::ordered()->first();
+            });
     }
 
 }
