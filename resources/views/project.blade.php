@@ -1,4 +1,4 @@
-<x-guest-layout :masthead="false">
+<x-ui-layout>
 
     <div class="border-b pb-8 mb-16">
         <h1 class="text-6xl font-black">Projects</h1>
@@ -56,4 +56,4 @@
 
     </div>
 
-</x-guest-layout>
+</x-ui-layout>

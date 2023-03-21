@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Skill;
 
 use App\Services\SkillService;
-use App\View\Components\GuestLayout;
+use App\View\Components\UiLayout;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -120,7 +120,10 @@ class Explorer extends Component
     public function render(): View
     {
         return view('livewire.skill.explorer')
-            ->layout(GuestLayout::class);
+            ->layout(UiLayout::class, [
+                'title' => 'Skills Explorer',
+                'showMasthead' => false,
+            ]);
     }
 
 }

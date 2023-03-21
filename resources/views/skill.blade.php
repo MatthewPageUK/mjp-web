@@ -1,13 +1,20 @@
-<x-guest-layout :masthead="false">
+{{--
+    Skill detail page
+--}}
+<x-ui-layout
+    title="{{ $settings->getValue('site_name') }} - {{ $skill->name }} skills"
+>
 
     <div class="border-b pb-8 mb-16">
-        <h1 class="text-6xl font-black">Skills</h1>
+        <h1 class="text-6xl font-black flex items-center">
+            <span class="flex-1">{{ $skill->name }}</span>
+            <span class="material-icons-outlined text-6xl ml-1">construction</span>
+        </h1>
     </div>
 
     <div class="lg:grid lg:grid-cols-2 gap-x-16">
 
         <div>
-            <h1 class="text-5xl mb-2 font-bold"><span class="material-icons-outlined text-4xl ml-1">construction</span> {{ $skill->name }}</h1>
             <p>
                 @foreach ($skill->skillGroups as $skillGroup)
                     <a class="border-r mr-2 pr-2 last:border-none" href="{{ route('skills.group', $skillGroup) }}">{{ $skillGroup->name }}</a>
@@ -28,4 +35,4 @@
 
     </div>
 
-</x-guest-layout>
+</x-ui-layout>

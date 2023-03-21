@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-ui-layout>
 
     <div class="w-1/2 mx-auto p-16">
 
@@ -51,4 +51,4 @@
     </form>
 
     </div>
-</x-guest-layout>
+</x-ui-layout>

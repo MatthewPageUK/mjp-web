@@ -1,4 +1,4 @@
-<x-guest-layout
+<x-ui-layout
     :showMasthead="true"
 >
 
@@ -29,4 +29,4 @@
 
     </div>
 
-</x-guest-layout>
+</x-ui-layout>
