@@ -21,5 +21,9 @@
     <span class="flex-1 text-right block text-zinc-500"><a href="{{ route('the.secret') }}">&pi;</a></span>
 </p>
 
+<div class="p-2">
+    <livewire:hit-counter :page="url()->current()" />
+</div>
+
 {{-- <h3 class="text-center mb-4">Github Activity</h3> --}}
 {{-- <img class="w-full" src="https://ghchart.rshah.org/MatthewPageUK" alt="MatthewPageUK's Github chart" /> --}}

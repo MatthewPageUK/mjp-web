@@ -13,6 +13,7 @@ use App\Models\{
     SkillGroup,
     User,
 };
+use Database\Factories\HitCounterFactory;
 use Database\Factories\MastheadFactory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
