@@ -12,6 +12,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://fonts.bunny.net/css?family=orbitron:400,500,600&display=swap" rel="stylesheet" />
 
+        <link href="https://fonts.bunny.net/css?family=adamina:100,200,300,400,600,700,800,900" rel="stylesheet" />
+
         {{-- <link href="https://fonts.bunny.net/css?family=blinker:100,200,300,400,600,700,800,900" rel="stylesheet" /> --}}
 
         <!-- Icons -->

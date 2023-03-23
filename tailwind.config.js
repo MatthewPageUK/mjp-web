@@ -13,6 +13,7 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 orbitron: ['Orbitron'],
+                adamina: ['Adamina'],
             },
         },
     },

@@ -15,9 +15,9 @@ class HitCounterService
      * Register a hit on a page
      *
      * @param string $page
-     * @return int
+     * @return HitCounter
      */
-    public function hit(string $page): int
+    public function hit(string $page): HitCounter
     {
         $hitCounter = HitCounter::firstOrCreate([
             'page' => $page,
@@ -25,7 +25,48 @@ class HitCounterService
 
         $hitCounter->increment('hits');
 
-        return $hitCounter->hits;
+        return $hitCounter;
     }
 
+    /**
+     * Get the number of days since the first hit on a page
+     *
+     * @param string|HitCounter $page
+     * @return int
+     */
+    public function daysSinceFirstHit(string|HitCounter $page): int
+    {
+        if (! $page instanceof HitCounter) {
+            $hitCounter = HitCounter::where('page', $page)->first();
+        } else {
+            $hitCounter = $page;
+        }
+
+        if ($hitCounter) {
+            return $hitCounter->created_at->diffInDays();
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get the number of hits per day on a page
+     *
+     * @param string|HitCounter $page
+     * @return float
+     */
+    public function hitsPerDay(string|HitCounter $page): float
+    {
+        if (! $page instanceof HitCounter) {
+            $hitCounter = HitCounter::where('page', $page)->first();
+        } else {
+            $hitCounter = $page;
+        }
+
+        if ($hitCounter) {
+            return $hitCounter->hits / max(1, $this->daysSinceFirstHit($page));
+        }
+
+        return 0.0;
+    }
 }
