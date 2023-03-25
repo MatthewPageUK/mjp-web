@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/d2', function () {
+    return view('design2');
+})->name('cms');
+
 Route::get('/cms', function () {
     return view('cms');
 })->name('cms');

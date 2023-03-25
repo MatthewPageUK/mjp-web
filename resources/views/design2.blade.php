@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ $title }}</title>
+        <title>dddd</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,31 +23,32 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
     </head>
-    <body class="font-sans antialiased bg-fixed bg-cover"
+    <body
+        class="font-sans antialiased bg-fixed bg-cover min-h-screen"
         style="background-image: url('/mjp-back-1.jpg')"
         x-data="{
             page: '{{ \Route::currentRouteName() }}',
         }"
     >
-        <div class="min-h-screen">
+        <div class="">
 
             {{-- Main header --}}
             <x-layout.header />
 
             {{-- Mastheads --}}
-            @if ($showMasthead)
+            {{-- @if ($showMasthead)
                 <livewire:layout.show-masthead />
-            @endif
+            @endif --}}
 
             {{-- Main page --}}
             <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">
-                {{ $slot }}
+               asdas
             </main>
 
         </div>
 
         {{-- Footer --}}
-        <x-layout.footer />
+        {{-- <x-layout.footer /> --}}
 
         @livewireScripts
     </body>
