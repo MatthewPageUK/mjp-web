@@ -36,6 +36,8 @@
             <x-layout.header />
 
             {{-- Mastheads --}}
+
+
             {{-- @if ($showMasthead)
                 <livewire:layout.show-masthead />
             @endif --}}
