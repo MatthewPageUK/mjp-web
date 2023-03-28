@@ -1,5 +1,5 @@
 <x-cms-layout
-    title="CMS"
+    title="Content Management System"
 >
 
             <div class="grid sm:grid-cols-12 gap-8">
