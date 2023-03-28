@@ -21,6 +21,7 @@
     <span class="flex-1 text-right block text-zinc-500"><a href="{{ route('the.secret') }}">&pi;</a></span>
 </p>
 
+{{-- Hit Counter - party like it's 1999 --}}
 <div class="p-2">
     <livewire:hit-counter :page="url()->current()" />
 </div>

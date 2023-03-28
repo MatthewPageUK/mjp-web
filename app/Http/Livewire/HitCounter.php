@@ -90,7 +90,7 @@ class HitCounter extends Component
         $this->days = $hitCounterService->daysSinceFirstHit($this->hitCounter);
 
         // Hits per day
-        $this->hitsPerDay = $hitCounterService->hitsPerDay($this->hitCounter);
+        $this->hitsPerDay = number_format($hitCounterService->hitsPerDay($this->hitCounter), 1);
 
         // Available formats
         $this->formats = HitCounterFormats::toArray();

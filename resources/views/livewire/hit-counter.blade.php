@@ -6,9 +6,9 @@
     }"
     x-on:mouseover="expanded = true"
     x-on:mouseleave="expanded = false"
-    class="grid grid-cols-12 w-[500px] gap-1"
+    class="grid grid-cols-12 w-full lg:w-[500px] gap-1"
 >
-    <div class="col-span-6 p-1 border-2 rounded-sm text-center border-zinc-700 bg-zinc-900 text-emerald-600">
+    <div class="col-span-12 lg:col-span-6 p-1 border-2 rounded-sm text-center border-zinc-700 bg-zinc-900 text-emerald-600">
         {{-- Title --}}
         <span class="block text-xs">
             {{ __('Hit counter') }}
@@ -29,7 +29,7 @@
         x-cloak
         x-show="expanded"
         x-transition.scale.origin.left.duration.500ms
-        class="col-span-6 grid grid-cols-2 p-1 border-2 rounded-sm text-center border-zinc-700 bg-zinc-900 text-emerald-600 text-xs"
+        class="col-span-12 lg:col-span-6 grid grid-cols-2 p-1 border-2 rounded-sm text-center border-zinc-700 bg-zinc-900 text-emerald-600 text-xs"
     >
         {{-- Stats --}}
         <div class="grid grid-cols-1 items-center text-center ml-1 mr-2 border-r-2 border-zinc-700">
