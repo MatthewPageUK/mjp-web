@@ -29,6 +29,10 @@ Route::get('/d3', function () {
     return view('design3');
 })->name('cms3');
 
+Route::get('/d4', function () {
+    return view('design4');
+});
+
 Route::get('/cms', function () {
     return view('cms');
 })->name('cms');

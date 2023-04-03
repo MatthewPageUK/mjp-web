@@ -24,17 +24,12 @@
         @livewireStyles
     </head>
     <body
-        class="font-sans antialiased text-white min-h-screen
-            bg-fixed bg-cover bg-bottom
-
-        "
+        class="font-sans antialiased text-white min-h-screen bg-fixed bg-cover bg-bottom"
         style="background-image: url('/mjp-back-1.jpg')"
         x-data="{
             page: '{{ \Route::currentRouteName() }}',
         }"
     >
-
-
 
         <header
             x-data="{
@@ -48,40 +43,32 @@
             x-on:click.outside="openMenu = false"
 
             class="
-                border
                 overflow-hidden
                 bg-zinc-800 border-b-2 border-amber-400
-                z-50 sticky top-0 w-full
-
-                md:w-[150px] md:h-full md:fixed
-                lg:w-[400px] lg:sticky
-                "
+                z-50 sticky top-0
+            "
         >
             {{-- Burger menu button --}}
             <button
                 x-on:click.prevent="toggle()"
-                class="absolute top-4 right-4 lg:hidden text-white hover:text-amber-500 ease-in-out duration-500"
+                class="
+                    absolute top-4 right-4
+                    text-white hover:text-amber-500
+                "
             >
                 <x-icons.material class="text-4xl ml-1">menu</x-icons.material>
             </button>
 
-        {{-- lg:flex lg:space-x-8 lg:items-center px-8 py-6 lg:pt-10 bg-zinc-800 text-white  shadow-lg --}}
             <div class="text-left p-4 mb-0">
-                <a href="/" class="md:rotate-90 md:w-[400px] lg:rotate-0 origin-bottom-left block text-4xl text-white">Matthew Page</a>
-                <span class="text-xs">Backend Web Developer</span>
+                <a href="/" class="block text-4xl text-white">Matthew Page</a>
+                <span class="text-xs">Backend PHP Web Developer</span>
             </div>
 
 
 
-
-
-
-
-
-
-            <div class="bg-zinc-900 p-4 w-full" x-show="(isMobile && openMenu) || ! isMobile">
+            <div class="p-4 w-full" x-show="(isMobile && openMenu) || ! isMobile">
                 {{-- Header buttons --}}
-                <nav class="lg:flex lg:space-x-2">
+                <nav class="grid gap-4">
                     {{-- Skills --}}
                     <x-layout.header-button href="{{ route('skills') }}" icon="construction" tag="skill">
                         {{ __('Skills') }}
@@ -108,7 +95,7 @@
                     </x-layout.header-button>
                 </nav>
 
-                <nav class="mt-8 flex space-x-4 flex-grow justify-center lg:justify-end">
+                <nav class="mt-8 flex space-x-4 flex-grow justify-center">
                     {{-- Github Icon --}}
                     <x-layout.header-icon href="{{ $settings->getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-amber-400">
                         <x-icons.github class="w-8 h-8 text-white"/>
@@ -127,7 +114,7 @@
 
                 {{-- Authentication --}}
                 @if (Route::has('login'))
-                    <nav class="mt-8 lg:mt-4 flex justify-center lg:justify-start lg:fixed lg:top-0 lg:right-0 px-8 py-2 text-right text-sm">
+                    <nav class="mt-8 flex justify-center px-8 py-2 text-right text-sm">
                         @auth
                             {{-- Logged in user dashboard --}}
                             <a href="{{ url('/dashboard') }}" class="flex items-center text-white dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
@@ -155,80 +142,45 @@
 
         </header>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="">
-
-            {{-- Main header --}}
-            {{-- <x-layout.header /> --}}
-
-            {{-- Mastheads --}}
-
-
-            {{-- @if ($showMasthead)
-                <livewire:layout.show-masthead />
-            @endif --}}
-
-            {{-- Main page --}}
-            <main class="max-w-7xl md:ml-[150px] lg:ml-[420px] lg:mt-[-200px] p-6 lg:p-8 text-white">
+            <main class="max-w-7xl p-6">
                <p>asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas</p>
                <p>asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas  asdas asdasas d asasdasas  dasasdasas dasa sdasa sdasasda sasda sasdasasdasasdasas dasasdas asdasa sdasasda sasdas</p>
             </main>
-
         </div>
 
-        {{-- Footer --}}
-        {{-- <x-layout.footer /> --}}
 
 
-
-{{-- Main web site footer component --}}
-<footer
-    class="lg:flex px-6 py-4 text-sm bg-zinc-800 text-white"
->
-    <p class="flex-1">
-        {{ $settings->getValue('site_name') }} - {{ $settings->getValue('site_tagline') }}
-    </p>
-    <p class="flex-1 text-center text-xs text-zinc-400">
-        Copyright &copy; {{ date('Y') }}
-    </p>
-
-</footer>
+        {{-- Main web site footer component --}}
+        <footer
+            class="px-6 py-4 text-sm bg-zinc-800 text-white"
+        >
+            <p class="flex-1">
+                {{ $settings->getValue('site_name') }} - {{ $settings->getValue('site_tagline') }}
+            </p>
+            <p class="flex-1 text-center text-xs text-zinc-400">
+                Copyright &copy; {{ date('Y') }}
+            </p>
+        </footer>
 
 
-{{-- Hit Counter - party like it's 1999 --}}
-<div class="p-2">
-    <livewire:hit-counter :page="url()->current()" />
-</div>
+        {{-- Hit Counter - party like it's 1999 --}}
+        <div class="p-2">
+            <livewire:hit-counter :page="url()->current()" />
+        </div>
 
-<p class="p-4">
-    <a class="flex items-center justify-end hover:text-amber-400" href="#top" title="{{ __('Go to top of page') }}">
-        {{ __('Top') }}
-        <span class="material-icons-outlined text-sm ml-1 hover:fill-amber-400">arrow_circle_up</span>
-    </a>
-</p>
+        <p class="p-4">
+            <a class="flex items-center justify-end hover:text-amber-400" href="#top" title="{{ __('Go to top of page') }}">
+                {{ __('Top') }}
+                <span class="material-icons-outlined text-sm ml-1 hover:fill-amber-400">arrow_circle_up</span>
+            </a>
+        </p>
 
-<p class="flex items-center text-xs text-green-400 bg-black px-6 py-2">
-    Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-    <a href="#" class="flex items-center hover:text-amber-400"><span class="material-icons-outlined text-sm mr-1 ml-4 hover:fill-amber-400">terminal</span> Source code</a>
-    <span class="flex-1 text-right block text-zinc-500"><a href="{{ route('the.secret') }}">&pi;</a></span>
-</p>
+        <p class="flex items-center text-xs text-green-400 bg-black px-6 py-2">
+            Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+            <a href="#" class="flex items-center hover:text-amber-400"><span class="material-icons-outlined text-sm mr-1 ml-4 hover:fill-amber-400">terminal</span> Source code</a>
+            <span class="flex-1 text-right block text-zinc-500"><a href="{{ route('the.secret') }}">&pi;</a></span>
+        </p>
 
         @livewireScripts
     </body>
