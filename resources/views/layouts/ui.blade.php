@@ -36,7 +36,7 @@
 
             {{-- Mastheads --}}
             @if ($showMasthead)
-                <livewire:layout.show-masthead />
+                {{-- <livewire:layout.show-masthead /> --}}
             @endif
 
             {{-- Main page --}}

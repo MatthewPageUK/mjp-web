@@ -9,7 +9,7 @@
             {{-- Content iframe --}}
             <iframe
                 src="{{ $this->masthead->url }}"
-                class="w-full min-h-[256px]"
+                class="w-full min-h-[450px]"
                 scrolling="no"
             ></iframe>
 

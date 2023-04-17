@@ -10,7 +10,7 @@
             <p> I am currently available for freelance work and would love to hear from you if you have a project that you would like to discuss.</p>
         </div>
         <div class="border w-full">
-            contact
+            <livewire:layout.show-masthead />
         </div>
     </div>
     <div class="mt-16 lg:grid lg:grid-cols-2 gap-x-32">
