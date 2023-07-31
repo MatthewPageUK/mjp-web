@@ -12,8 +12,15 @@
             <p>Working from the Norfolk, UK area - prefer local clients but can work with anyone, anywhere.</p>
         </div>
         <div class="col-span-6">
-            <ul class="grid grid-cols-2 gap-4">
-                <li class="bg-red-400 text-center py-4 opacity-80 hover:tracking-wider hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Rapid On-boarding</li>
+            <x-homepage.bullet-points :bullets="$bulletPoints" />
+            {{-- <ul class="grid grid-cols-2 gap-4">
+
+                @foreach ($bulletPoints as $bulletPoint)
+                    <li class="{{ $bulletPoint->colour }} text-center py-4 opacity-80 hover:tracking-wider hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all"
+                        >{{ $bulletPoint->title }}</li>
+                @endforeach --}}
+
+                {{-- <li class="bg-red-400 text-center py-4 opacity-80 hover:tracking-wider hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Rapid On-boarding</li>
                 <li class="bg-orange-400 text-center py-4 opacity-80 hover:tracking-wider hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Professional WFH office</li>
                 <li class="bg-amber-400 text-center py-4 opacity-80 hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Proven track record</li>
                 <li class="bg-yellow-400 text-center py-4 opacity-80 hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Client presentable</li>
@@ -22,7 +29,7 @@
                 <li class="bg-emerald-400 text-center py-4 opacity-80 hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Zero cost setup</li>
                 <li class="bg-teal-400 text-center py-4 opacity-80 hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Freelance</li>
                 <li class="bg-cyan-400 text-center py-4 opacity-80 hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">Norfolk, England.</li>
-                <li class="bg-sky-400 text-center py-4 opacity-80 hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">'Useful guy to have around'</li>
+                <li class="bg-sky-400 text-center py-4 opacity-80 hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all">'Useful guy to have around'</li> --}}
                 {{-- <li class="bg-blue-400 text-center py-4">Professional WFH office</li> --}}
                 {{-- <li class="bg-indigo-400 text-center py-4">Proven track record</li> --}}
                 {{-- <li class="bg-violet-400 text-center py-4">MySQL</li> --}}
@@ -30,7 +37,7 @@
                 {{-- <li class="bg-fuchsia-400 text-center py-4">JavaScript</li> --}}
                 {{-- <li class="bg-pink-400 text-center py-4">Professional WFH office</li> --}}
                 {{-- <li class="bg-rose-400 text-center py-4">Proven track record</li> --}}
-            </ul>
+            {{-- </ul> --}}
         </div>
     </div>
     <div class="mt-16 lg:grid lg:grid-cols-2 gap-x-16">

@@ -51,11 +51,16 @@
             class="fixed top-4 left-16 md:left-32 border md:w-96 bg-zinc-400 rounded-lg shadow-lg text-white p-8"
 
         >
-            menu
+            <ul>
+                <li><a href="{{ route('cms') }}">Dashboard</a></li>
+                <li><a href="{{ route('cms.bullet-points') }}">Bullet Points</a></li>
+            </ul>
         </div>
-        <div class="">
+
+        <div class="bg-fixed bg-cover"
+            style="background-image: url('/mjp-back-1.jpg')">
             {{-- Main page --}}
-            <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">
+            <main class="min-h-screen max-w-7xl mx-auto p-6 lg:p-8 text-white">
                 {{ $slot }}
             </main>
 

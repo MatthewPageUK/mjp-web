@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Cms\BulletPointsEditor;
 use App\Http\Livewire\Demo\Explorer as DemoExplorer;
 use App\Http\Livewire\Skill\Explorer as SkillExplorer;
 use App\Models\Demo;
@@ -37,9 +39,9 @@ Route::get('/cms', function () {
     return view('cms');
 })->name('cms');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/cms/bullet-points', BulletPointsEditor::class)->name('cms.bullet-points');
+
+Route::get('/', [HomepageController::class, 'show'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
