@@ -10,7 +10,7 @@
         x-data="{
             count: {{ $model->$relationship->count() }},
             expanded: false,
-            showCount: 2,
+            showCount: 5,
         }"
         x-show="count > 0"
     >
@@ -21,7 +21,7 @@
         </h1>
         <p class="pl-9">
             @foreach ($model->$relationship as $key => $link)
-                <a class="block" x-show="expanded || {{ $key }} < 2" href="{{ route($section, [$section => $link]) }}">{{ $link->name }}</a>
+                <a class="block" x-show="expanded || {{ $key }} < showCount" href="{{ route($section, [$section => $link]) }}">{{ $link->name }}</a>
             @endforeach
         </p>
 

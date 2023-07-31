@@ -7,6 +7,7 @@ use App\Models\Traits\{
     HasNameSlug,
 };
 use Illuminate\Database\Eloquent\{
+    Builder,
     Model,
     SoftDeletes,
     Factories\HasFactory,
@@ -16,10 +17,10 @@ use Illuminate\Database\Eloquent\{
 
 class Skill extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
-    use HasNameSlug;
     use HasActive;
+    use HasFactory;
+    use HasNameSlug;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -44,7 +45,7 @@ class Skill extends Model
     ];
 
     /**
-     * Skill groups
+     * Groups this skill is in.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -54,7 +55,7 @@ class Skill extends Model
     }
 
     /**
-     * Posts related to this Skill
+     * Posts about this Skill
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
@@ -64,7 +65,7 @@ class Skill extends Model
     }
 
     /**
-     * Projects related to this Skill
+     * Projects using this Skill
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
@@ -74,7 +75,7 @@ class Skill extends Model
     }
 
     /**
-     * Demos related to this Skill
+     * Demos using this Skill
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
@@ -91,6 +92,20 @@ class Skill extends Model
     public function experiences(): MorphToMany
     {
         return $this->morphedByMany(Experience::class, 'skillable');
+    }
+
+    /**
+     * Scope the query to only include skills within the specified group.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $group
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInGroup(Builder $query, string $group): Builder
+    {
+        return $query->whereHas('skillGroups', function ($query) use ($group) {
+            $query->where('slug', $group);
+        });
     }
 
 }

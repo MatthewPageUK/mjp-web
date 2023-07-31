@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\{
 class PostCategory extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use HasNameSlug;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.

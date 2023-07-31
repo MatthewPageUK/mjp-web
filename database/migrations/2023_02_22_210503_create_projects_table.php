@@ -7,6 +7,18 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Table for storing project details and links.
  *
+ * projects
+ * - id
+ * - name
+ * - slug
+ * - description
+ * - github
+ * - website
+ * - last_active
+ * - active
+ * - created_at
+ * - updated_at
+ * - deleted_at
  */
 return new class extends Migration
 {
@@ -17,14 +29,48 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->text('description')->nullable();
-            $table->string('github')->nullable();
-            $table->string('website')->nullable();
-            $table->dateTime('last_active')->nullable();
-            $table->boolean('active')->default(true);
+
+            // The name of the project
+            $table->string('name')
+                ->comment('Name of the project');
+
+            // URL safe and unique slug
+            $table->string('slug')
+                ->comment('Unique slug for the project');
+
+            // Description of the project
+            $table->text('description')
+                ->nullable()
+                ->comment('Description of the project');
+
+            // GitHub URL
+            $table->string('github')
+                ->nullable()
+                ->comment('GitHub URL');
+
+            // Website / demo URL
+            $table->string('website')
+                ->nullable()
+                ->comment('Website / demo URL');
+
+            // Date of last activity
+            $table->dateTime('last_active')
+                ->nullable()
+                ->comment('Date of last activity');
+
+            // Is the project active on the web site
+            $table->boolean('active')
+                ->default(true)
+                ->comment('Active on the web site');
+
+            // Indexes
+            $table->index('slug');
+            $table->index('active');
+
+            // Enable soft delete column
             $table->softDeletes();
+
+            // Created and updated timestamps
             $table->timestamps();
         });
     }

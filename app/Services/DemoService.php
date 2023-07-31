@@ -54,7 +54,7 @@ class DemoService
      *                          ]
      * @return Collection
      */
-    public function getFiltered(array $filters): Collection
+    public function getFilteredQuery(array $filters)
     {
         // Base query
         $query = $this->getBaseQuery();
@@ -69,8 +69,7 @@ class DemoService
         // Order
         $query->orderBy('created_at', 'desc');
 
-        // Get and return collection
-        return $query->get();
+        return $query;
     }
 
 }

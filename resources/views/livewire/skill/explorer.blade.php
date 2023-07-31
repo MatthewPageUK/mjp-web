@@ -33,8 +33,11 @@
         </div>
     @endif
 
+    <div class="grid grid-cols-3 gap-x-16">
+
+
     {{-- Skills block --}}
-    <div class="sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div class="col-span-2 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
         @foreach ($this->skills as $key => $skill)
 
@@ -57,12 +60,38 @@
 
     </div>
 
-    <div class="text-xs mt-8 text-zinc-500">
-        Skill Stars Key <br />
-        1 - 3 : Junior <br />
-        4 - 6 : Mid <br />
-        7 - 9 : Profesional<br />
-        10 : Master<br />
+    <div class="text-zinc-200">
+
+        <h2>Skill Rating Multiplier</h2>
+        <p>
+            To help compare to other developers I've include a skill multiplier value. This increases over time as I gain experience in the field for web development.
+            It is assigned at 1 point per 5 years (estimated 10,000 hours of experience)
+            My Score : 4
+        </p>
+
+        <h2 class="text-xl font-semibold my-4">Subjective skill ratings</h2>
+        <h3 class="font-semibold my-4">1 - 3 : Junior</h3>
+        <p>
+            Able to get up and running and develop simple features with guidance and support of a more senior developer.
+        </p>
+
+        <h3 class="font-semibold my-4">4 - 6 : Mid </h2>
+
+            Able to develop more complex features and bug fixing with minimal guidance and support of a more senior developer. Can offer support and guidance to junior developers.
+
+            7 - 9 : Senior<br />
+
+            Able to develop complex features and bug fixing with no guidance and support of a more senior developer. Can offer support and guidance to junior and mid developers.
+
+            10 : Master<br />
+
+            Best left alone to do what they're doing. A master must be singularly focused on a single tech stack item.
+        </p>
+
+        <h2>Skill Decay</h2>
+        <p>Skills I have not used for a while will decay over time. 1 skill point will be lost per 6 months, down to a minimum of 5 points.</p>
+
+
 
     </div>
 

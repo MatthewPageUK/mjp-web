@@ -5,7 +5,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Table for storing blog post categories.
+ * Pivot table for Posts -> Categories.
+ *
+ * post_post_category
+ * - id
+ * - post_id
+ * - post_category_id
+ * - created_at
+ * - updated_at
  *
  */
 return new class extends Migration
@@ -17,8 +24,20 @@ return new class extends Migration
     {
         Schema::create('post_post_category', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->nullable()->constrained('posts')->nullOnDelete();
-            $table->foreignId('post_category_id')->nullable()->constrained('post_categories')->nullOnDelete();
+
+            // The post ID
+            $table->foreignId('post_id')
+                ->nullable()
+                ->constrained('posts')
+                ->nullOnDelete();
+
+            // The post category ID
+            $table->foreignId('post_category_id')
+                ->nullable()
+                ->constrained('post_categories')
+                ->nullOnDelete();
+
+            // Created and updated timestamps
             $table->timestamps();
         });
     }

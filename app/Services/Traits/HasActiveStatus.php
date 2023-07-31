@@ -18,7 +18,7 @@ trait HasActiveStatus
      *
      * @return Builder
      */
-    private function getBaseQuery(): Builder
+    public function getBaseQuery(): Builder
     {
         return $this->activeOnly ? $this->model::active() : $this->model::query();
     }

@@ -26,6 +26,7 @@ class ExperienceFactory extends Factory
             'start' => $start->format('Y-m-d'),
             'end' => $end->format('Y-m-d'),
             'name' => fake()->sentence(),
+            'slug' => fake()->slug(),
             'description' => fake()->paragraphs(3, true),
             'active' => true,
         ];

@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasNameSlug;
+use App\Models\Traits\{
+    HasActive,
+    HasNameSlug,
+};
 use Illuminate\Database\Eloquent\{
     Model,
     SoftDeletes,
@@ -12,9 +15,10 @@ use Illuminate\Database\Eloquent\{
 
 class SkillGroup extends Model
 {
+    use HasActive;
     use HasFactory;
-    use SoftDeletes;
     use HasNameSlug;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +29,7 @@ class SkillGroup extends Model
         'name',
         'slug',
         'description',
+        'active',
     ];
 
     /**

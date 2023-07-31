@@ -18,6 +18,11 @@ trait HasNameSlug
         $this->attributes['slug'] = Str::slug($value);
     }
 
+    /**
+     * Use the slug as a route key name for this model
+     *
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';

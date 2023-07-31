@@ -17,11 +17,11 @@ use Illuminate\Database\Eloquent\{
 
 class Post extends Model
 {
+    use HasActive;
     use HasFactory;
-    use SoftDeletes;
     use HasNameSlug;
     use HasSkills;
-    use HasActive;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

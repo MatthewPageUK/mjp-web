@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Masthead;
+use App\Exceptions\Skills\NoSkillsFound;
+use App\Exceptions\Skills\SkillNotFound;
 use App\Models\Skill;
 use App\Models\SkillGroup;
 use App\Services\Traits\HasActiveStatus;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Service for managing Mastheads.
+ * Service for managing Skills.
  *
  */
 class SkillService
@@ -36,27 +37,47 @@ class SkillService
     // }
 
     /**
-     * Get 10 Top Skills
+     * Get a Skill by its slug
      *
-     * @param int|string|null $group   Limit to this group
-     * @return Collection
+     * @param string $slug
+     * @throws SkillNotFound
+     * @return Skill
      */
-    public function getTop10(int|string $group = null): Collection
+    public function getSkill(string $slug): Skill
     {
-        if ($group) {
-            return Skill::active()
-                ->whereHas('skillGroups', function (Builder $query) use ($group) {
-                    $query->where('skill_groups.id', $group);
-                })
-                ->orderBy('level', 'desc')
-                ->limit(10)
-                ->get();
+        $skill = Skill::find($slug);
+
+        if (! $skill) {
+            throw new SkillNotFound($slug);
         }
 
-        return Skill::active()
-            ->orderBy('level', 'desc')
-            ->limit(10)
-            ->get();
+        return $skill;
+    }
+
+    /**
+     * Get 10 Top Skills
+     *
+     * @param string|null $group   Limit to this group only
+     * @return Collection
+     */
+    public function getTop10(?string $group = null): Collection
+    {
+        $query = $this->getBaseQuery();
+
+        if ($group) {
+            $query->inGroup($group);
+        }
+
+        $query->orderBy('level', 'desc')
+            ->limit(10);
+
+        $skills = $query->get();
+
+        if ($skills->count() < 1) {
+            throw new NoSkillsFound();
+        }
+
+        return $skills;
     }
 
     /**
@@ -72,12 +93,10 @@ class SkillService
 
         // Group filter
         if (isset($filters['group']) && $filters['group']) {
-            $query->whereHas('skillGroups', function (Builder $query) use ($filters) {
-                $query->where('slug', $filters['group']);
-            });
+            $query->whereRelation('skillGroups', 'slug', $filters['group']);
         }
 
-        // Order
+        // Order skills by level, highest first.
         $query->orderBy('level', 'desc');
 
         // Get and return Collection
@@ -104,6 +123,26 @@ class SkillService
     public function getDemoableSkills(): Collection
     {
         return Skill::whereHas('demos')->get();
+    }
+
+
+
+
+    public function getFilteredQuery(array $filters)
+    {
+        // Base query
+        $query = $this->getBaseQuery();
+
+        // Group filter
+        if (isset($filters['group']) && $filters['group']) {
+            $query->whereRelation('skillGroups', 'slug', $filters['group']);
+        }
+
+        // Order skills by level, highest first.
+        $query->orderBy('level', 'desc');
+
+        // Get and return Collection
+        return $query;
     }
 
 }

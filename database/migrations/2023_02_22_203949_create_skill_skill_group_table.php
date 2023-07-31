@@ -5,7 +5,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Many to Many relationship between skills and skill groups.
+ * Skill -> Skill Group Pivot Table.
+ *
+ * skill_skill_group
+ * - id
+ * - skill_id
+ * - skill_group_id
+ * - created_at
+ * - updated_at
  *
  */
 return new class extends Migration
@@ -17,8 +24,18 @@ return new class extends Migration
     {
         Schema::create('skill_skill_group', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('skill_id')->nullable()->constrained('skills')->nullOnDelete();
-            $table->foreignId('skill_group_id')->nullable()->constrained('skill_groups')->nullOnDelete();
+
+            // The skill ID
+            $table->foreignId('skill_id')
+                ->constrained('skills')
+                ->comment('The skill ID');
+
+            // The skill group ID
+            $table->foreignId('skill_group_id')
+                ->constrained('skill_groups')
+                ->comment('The skill group ID');
+
+            // Created and updated timestamps
             $table->timestamps();
         });
     }

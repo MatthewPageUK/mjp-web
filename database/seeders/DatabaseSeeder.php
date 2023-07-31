@@ -13,7 +13,6 @@ use App\Models\{
     SkillGroup,
     User,
 };
-use Database\Factories\HitCounterFactory;
 use Database\Factories\MastheadFactory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -51,7 +50,6 @@ class DatabaseSeeder extends Seeder
         DB::table('demos')->truncate();
         DB::table('experiences')->truncate();
         DB::table('projects')->truncate();
-        DB::table('mastheads')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         User::factory()->admin()->create([
@@ -138,9 +136,9 @@ class DatabaseSeeder extends Seeder
                 $project->posts()->attach(Post::all()->random(3));
             });
 
-        MastheadFactory::new()
-            ->count(5)
-            ->sequence(fn (Sequence $sequence) => ['order' => $sequence->index + 1])
-            ->create();
+        // MastheadFactory::new()
+        //     ->count(5)
+        //     ->sequence(fn (Sequence $sequence) => ['order' => $sequence->index + 1])
+        //     ->create();
     }
 }

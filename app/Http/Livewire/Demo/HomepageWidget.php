@@ -5,10 +5,14 @@ namespace App\Http\Livewire\Demo;
 use App\Services\DemoService;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
-class Recent extends Component
+class HomepageWidget extends Component
 {
-    public $demos;
+    use WithPagination;
+    private $demoService;
+
+    public $queryString = [];
 
     /**
      * Mount the component and populate the data
@@ -16,7 +20,12 @@ class Recent extends Component
      */
     public function mount(DemoService $demoService)
     {
-        $this->demos = $demoService->getRecent();
+        $this->demoService = $demoService;
+    }
+
+    public function getDemosProperty()
+    {
+        return app()->make(DemoService::class)->getFilteredQuery([])->paginate(2);
     }
 
     /**
@@ -28,4 +37,5 @@ class Recent extends Component
     {
         return view('livewire.demo.recent');
     }
+
 }

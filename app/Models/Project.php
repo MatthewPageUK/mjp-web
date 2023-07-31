@@ -16,12 +16,12 @@ use Illuminate\Database\Eloquent\{
 
 class Project extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
-    use HasNameSlug;
-    use HasSkills;
-    use HasPosts;
     use HasActive;
+    use HasFactory;
+    use HasNameSlug;
+    use HasPosts;
+    use HasSkills;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

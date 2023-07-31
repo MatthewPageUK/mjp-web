@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\Schema;
  * Table for storing basic settings and values such as contact
  * details and social media links.
  *
- * Simple key / value pairs.
- *
+ * settings
+ * - id
+ * - key
+ * - value
+ * - created_at
+ * - updated_at
  */
 return new class extends Migration
 {
@@ -20,9 +24,18 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('value')->nullable();
-            $table->softDeletes();
+
+            // The setting key
+            $table->string('key')
+                ->unique()
+                ->comment('Setting key');
+
+            // The setting value
+            $table->string('value')
+                ->nullable()
+                ->comment('Setting value');
+
+            // Created and updated timestamps
             $table->timestamps();
         });
     }

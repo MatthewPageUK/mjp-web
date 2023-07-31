@@ -15,11 +15,11 @@ use Illuminate\Database\Eloquent\{
 
 class Experience extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
-    use HasSkills;
-    use HasPosts;
     use HasActive;
+    use HasFactory;
+    use HasPosts;
+    use HasSkills;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -41,6 +41,8 @@ class Experience extends Model
      */
     protected $casts = [
         'active' => 'boolean',
+        'start' => 'date',
+        'end' => 'date',
     ];
 
 }

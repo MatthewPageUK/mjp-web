@@ -2,57 +2,60 @@
 <header
     x-data="{
         openMenu: false,
-        isMobile: (window.innerWidth < 1024) ? true : false,
+        isMobile: (window.innerWidth < 1024),
         toggle() {
             this.openMenu = ! this.openMenu
         },
     }"
-    x-on:resize.window.debounce.500ms="isMobile = (window.innerWidth < 1024) ? true : false"
+    x-on:resize.window.debounce.500ms="isMobile = (window.innerWidth < 1024)"
     x-on:click.outside="openMenu = false"
     class="z-50 sticky top-0 lg:flex lg:space-x-8 lg:items-center px-8 py-6 lg:pt-10 bg-zinc-800 text-white border-b-2 border-amber-400 shadow-lg"
 >
-    <div class="text-center">
-        <a href="/" class="border w-32 h-16 inline-block lg:block">SITE LOGO</a>
+    {{-- Main Logo --}}
+    <div class="w-full lg:w-48">
+        <a href="/" title="">
+            <img src="/logo-chrome.png" class="w-32 h-auto mx-auto" alt="" />
+        </a>
     </div>
 
     {{-- Burger menu button --}}
     <button
         x-on:click.prevent="toggle()"
-        class="absolute top-0 right-0 lg:hidden hover:text-amber-500 ease-in-out duration-500"
+        class="absolute top-0 right-1 lg:hidden hover:text-amber-500 ease-in-out duration-500"
     >
         <x-icons.material class="text-4xl ml-1">menu</x-icons.material>
     </button>
 
     <div class="lg:flex lg:space-x-8 lg:items-center w-full" x-show="(isMobile && openMenu) || ! isMobile" x-transition.opacity x-transition.duration.500ms>
         {{-- Header buttons --}}
-        <nav class="mt-8 lg:flex lg:space-x-2">
+        <nav class="mt-8 lg:mt-0 lg:flex lg:space-x-2">
             {{-- Skills --}}
-            <x-layout.header-button href="{{ route('skills') }}" icon="construction" tag="skill">
+            <x-layout.header-button href="{{ route('skills') }}" icon="construction" tag="skill" title="My Skill Ratings">
                 {{ __('Skills') }}
             </x-layout.header-button>
 
             {{-- Experience --}}
-            <x-layout.header-button href="{{ route('experiences') }}" icon="public" tag="experience">
+            <x-layout.header-button href="{{ route('experiences') }}" icon="public" tag="experience" title="Previous work experience">
                 {{ __('Experience') }}
             </x-layout.header-button>
 
             {{-- Projects --}}
-            <x-layout.header-button href="{{ route('projects') }}" icon="rocket_launch" tag="project">
+            <x-layout.header-button href="{{ route('projects') }}" icon="rocket_launch" tag="project" title="Projects I am working on">
                 {{ __('Projects') }}
             </x-layout.header-button>
 
             {{-- Demos --}}
-            <x-layout.header-button href="{{ route('demos') }}" icon="smart_toy" tag="demo">
+            <x-layout.header-button href="{{ route('demos') }}" icon="smart_toy" tag="demo" title="Demos and fun widgets">
                 {{ __('Demos') }}
             </x-layout.header-button>
 
             {{-- Contact --}}
-            <x-layout.header-button href="#" icon="connect_without_contact" tag="contact">
+            <x-layout.header-button href="#" icon="connect_without_contact" tag="contact" title="Contact me">
                 {{ __('Contact') }}
             </x-layout.header-button>
         </nav>
 
-        <nav class="mt-8 flex space-x-4 flex-grow justify-center lg:justify-end">
+        <nav class="mt-8 lg:mt-0 flex space-x-4 flex-grow justify-center lg:justify-end">
             {{-- Github Icon --}}
             <x-layout.header-icon href="{{ $settings->getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-amber-400">
                 <x-icons.github class="w-8 h-8 text-white"/>
