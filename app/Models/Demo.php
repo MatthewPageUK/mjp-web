@@ -34,6 +34,7 @@ class Demo extends Model
         'slug',
         'description',
         'url',
+        'demo_url',
         'active',
     ];
 
@@ -43,7 +44,7 @@ class Demo extends Model
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
+        //'active' => 'boolean',
     ];
 
     /**
