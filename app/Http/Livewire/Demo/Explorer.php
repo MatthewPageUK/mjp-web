@@ -7,6 +7,7 @@ use App\Services\{
     SkillService,
 };
 use App\View\Components\GuestLayout;
+use App\View\Components\UiLayout;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -118,6 +119,6 @@ class Explorer extends Component
     public function render(): View
     {
         return view('livewire.demo.explorer')
-            ->layout(GuestLayout::class);
+            ->layout(UiLayout::class);
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Schema;
  * - slug
  * - description
  * - url
+ * - demo_url
  * - active
  * - created_at
  * - updated_at
@@ -42,10 +43,15 @@ return new class extends Migration
                 ->nullable()
                 ->comment('Description of the demo');
 
-            // URL of the demo
+            // URL of the demo web site
             $table->string('url')
                 ->nullable()
-                ->comment('URL of the demo');
+                ->comment('URL of the demo web site');
+
+            // URL of the embedded demo page
+            $table->string('demo_url')
+                ->nullable()
+                ->comment('URL of the embedded demo page');
 
             // Is the demo active on the web site
             $table->boolean('active')

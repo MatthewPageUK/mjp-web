@@ -54,6 +54,7 @@
             <ul>
                 <li><a href="{{ route('cms') }}">Dashboard</a></li>
                 <li><a href="{{ route('cms.bullet-points') }}">Bullet Points</a></li>
+                <li><a href="{{ route('cms.demos') }}">Demos</a></li>
             </ul>
         </div>
 

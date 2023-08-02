@@ -20,6 +20,18 @@ class DemoService
     public $model = Demo::class;
 
     /**
+     * Get a single demo by ID.
+     *
+     * @param int $id
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @return BulletPoint
+     */
+    public function get(int $id): Demo
+    {
+        return Demo::findOrFail($id);
+    }
+
+    /**
      * Get recent Demos
      *
      * @param int $count    How many to get
@@ -40,9 +52,12 @@ class DemoService
      */
     public function getAll(): Collection
     {
-        return $this->getBaseQuery()
-            ->orderBy('created_at', 'desc')
-            ->get();
+        return Demo::orderBy('name')->get();
+    }
+
+    public function getFiltered(array $filters)
+    {
+        return $this->getFilteredQuery($filters)->get();
     }
 
     /**
@@ -54,7 +69,7 @@ class DemoService
      *                          ]
      * @return Collection
      */
-    public function getFilteredQuery(array $filters)
+    public function getFilteredQuery(array $filters): Builder
     {
         // Base query
         $query = $this->getBaseQuery();

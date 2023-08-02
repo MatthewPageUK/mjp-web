@@ -32,11 +32,15 @@
                 Created : {{ $demo->created_at->diffForHumans() }}
             </p>
 
+            {{-- Embedded demo --}}
+            @if ($demo->demo_url)
+                <iframe src="{{ $demo->demo_url }}" class="w-full h-[600px] mt-8 border border-2 border-zinc-900 shadow-lg"></iframe>
+            @endif
+
             {{-- Demo description --}}
             <p class="pt-8">{{ $demo->description }}</p>
 
             <img src="https://via.placeholder.com/840x500" class="mt-8" />
-
 
         </div>
 
