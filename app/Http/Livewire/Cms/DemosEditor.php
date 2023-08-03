@@ -6,6 +6,7 @@ use App\Facades\Demos;
 use App\Models\Demo;
 use App\Models\Skill;
 use App\View\Components\CmsLayout;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -66,11 +67,19 @@ class DemosEditor extends Component
      * Mount the component and populate the data
      *
      */
-    public function mount()
+    public function mount(Request $request)
     {
         $this->demo = new Demo();
         $this->demos = Demos::getAll();
         $this->skills = Skill::orderBy('name')->get();
+
+        if ($request->mode === 'create') {
+            $this->add();
+        } elseif ($request->mode === 'edit') {
+            $this->edit($request->id);
+        } elseif ($request->mode === 'delete') {
+            $this->confirmDelete($request->id);
+        }
     }
 
     /**

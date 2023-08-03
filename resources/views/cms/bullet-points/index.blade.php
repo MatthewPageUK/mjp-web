@@ -20,7 +20,7 @@
         x-show="mode === 'create' || mode === 'edit'"
         title="{{ ucwords($this->mode) }} Bullet Point"
     >
-        <div class="grid grid-cols-3 gap-x-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
             {{-- Title --}}
             <div>
@@ -78,13 +78,13 @@
     <ul class="mt-16">
 
         @forelse ($this->points as $bulletPoint)
-            <li class="group flex gap-4 mb-2 border-b pb-2 items-center" wire:key="bullet-point-{{ $bulletPoint->id }}">
+            <li class="group flex gap-2 lg:gap-4 mb-2 border-b pb-2 items-center" wire:key="bullet-point-{{ $bulletPoint->id }}">
 
                 {{-- Colour --}}
-                <span class="{{ $bulletPoint->colour }} block w-8 h-8 rounded-full group-hover:w-32 transition-all"></span>
+                <span class="{{ $bulletPoint->colour }} block w-8 h-8 rounded-full lg:group-hover:w-32 transition-all"></span>
 
                 {{-- Title --}}
-                <span class="flex-1 text-2xl">{{ $bulletPoint->title }}</span>
+                <span class="flex-1 lg:text-2xl">{{ $bulletPoint->title }}</span>
 
                 {{-- Buttons --}}
                 <x-cms.icon-button icon="edit" wire:click.prevent="edit({{ $bulletPoint->id }})" title="Edit" />

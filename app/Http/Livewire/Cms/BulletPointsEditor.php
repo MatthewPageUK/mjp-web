@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Cms;
 
 use App\Facades\BulletPoints;
 use App\View\Components\CmsLayout;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -86,9 +87,17 @@ class BulletPointsEditor extends Component
      * Mount the component and populate the data
      *
      */
-    public function mount()
+    public function mount(Request $request)
     {
         $this->points = BulletPoints::getAllWithColour();
+
+        if ($request->mode === 'create') {
+            $this->add();
+        } elseif ($request->mode === 'edit') {
+            $this->edit($request->id);
+        } elseif ($request->mode === 'delete') {
+            $this->confirmDelete($request->id);
+        }
     }
 
     /**
@@ -291,6 +300,7 @@ class BulletPointsEditor extends Component
     public function cancelEdit(): void
     {
         $this->mode = 'view';
+        $this->editId = 0;
         $this->newTitle = '';
         $this->newPosition = 0;
     }
