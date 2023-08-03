@@ -98,33 +98,7 @@
                 {{-- Posts --}}
                 <label class="col-span-3 block mb-2">Posts</label>
                 <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
-                    <ul>
-                        @foreach ($this->demo->posts as $post)
-                            <li class="flex items-center gap-2 mb-2">
-                                <span class="flex-1">{{ $post->name }}</span>
-                                <x-cms.icon-button
-                                    iconClass=""
-                                    icon="link_off"
-                                    title="Remove Post"
-                                />
-                            </li>
-                        @endforeach
-                    </ul>
-
-                    <h3 class="text-2xl mt-4 mb-2">Link a Post</h3>
-                    <x-cms.form.input class="text-sm" xwire:model="searchPosts" placeholder="Search posts..." />
-                    <ul class="mt-2">
-                        @foreach ($this->demo->posts as $post)
-                            <li class="flex items-center gap-2 mb-2">
-                                <span class="flex-1">{{ $post->name }}</span>
-                                <x-cms.icon-button
-                                    iconClass=""
-                                    icon="add_link"
-                                    title="Link Post"
-                                />
-                            </li>
-                        @endforeach
-                    </ul>
+                    <livewire:cms.postable :postable="$this->demo" />
                 </div>
             @endif
 
