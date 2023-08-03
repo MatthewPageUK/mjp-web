@@ -2,10 +2,7 @@
 
 namespace App\Http\Livewire\Cms;
 
-use App\Facades\Demos;
-use App\Models\Demo;
-use App\Models\Skill;
-use App\View\Components\CmsLayout;
+use App\Models\SkillGroup;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -20,16 +17,16 @@ class Skillable extends Component
     /**
      * The current Skillable model
      *
-     * @var Demo|Project...
+     * @var Demo|Project etc...
      */
     public $skillable;
 
     /**
-     * All skills
+     * All skill groups
      *
      * @var array|Collection
      */
-    public $skills = [];
+    public $skillGroups = [];
 
     /**
      * Mount the component and populate the data
@@ -37,28 +34,27 @@ class Skillable extends Component
      */
     public function mount()
     {
-        $this->skills = Skill::orderBy('name')->get();
+        $this->skillGroups = SkillGroup::with('skills')->orderBy('name')->get();
     }
 
-    /**
-     * Hydrate the component
-     *
-     * @return void
-     */
-    public function hydrate()
+    public function toggleSkill(int $skillId)
     {
-        $this->skills = Skill::orderBy('name')->get();
+        if ($this->skillable->skills->contains($skillId)) {
+            $this->skillable->skills()->detach($skillId);
+        } else {
+            $this->skillable->skills()->attach($skillId);
+        }
+
+        $this->skillable->refresh();
     }
 
-
     /**
-     * Render the Demos page
+     * Render the Skill Selector page
      *
      * @return View
      */
     public function render(): View
     {
-        return view('cms.skills.skillable-select')
-            ->layout(CmsLayout::class);
+        return view('cms.skills.skillable-select');
     }
 }
