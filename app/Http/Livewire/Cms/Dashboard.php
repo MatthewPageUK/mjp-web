@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Cms;
 use App\Facades\BulletPoints;
 use App\Facades\Demos;
 use App\Models\Post;
+use App\Models\Skill;
 use App\View\Components\CmsLayout;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -24,6 +25,8 @@ class Dashboard extends Component
     public $demos = [];
 
     public $posts = [];
+
+    public $skills = [];
 
     /**
      * Mount the component and populate the data
@@ -45,6 +48,13 @@ class Dashboard extends Component
             ->sortBy('name')
             ->pluck('name', 'id')
             ->toArray();
+
+        $this->skills = Skill::orderBy('name')->get()->map(function ($skill) {
+            return (object) [
+                'id' => $skill->id,
+                'name' => $skill->name,
+            ];
+        })->toArray();
     }
 
 

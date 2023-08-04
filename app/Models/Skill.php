@@ -41,8 +41,34 @@ class Skill extends Model
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
+        //'active' => 'boolean',
     ];
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Deleting hook
+        static::deleting(function (Skill $skill) {
+
+            // Remove from categories
+            $skill->skillGroups()->detach();
+
+            // Remove from demos
+            $skill->demos()->detach();
+
+            // Remove from projects
+            $skill->projects()->detach();
+
+            // Remove from experiences
+            $skill->experiences()->detach();
+
+            // Remove from posts
+            $skill->posts()->detach();
+
+        });
+    }
 
     /**
      * Groups this skill is in.

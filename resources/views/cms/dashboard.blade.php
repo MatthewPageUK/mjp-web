@@ -78,7 +78,55 @@
             </p>
         </x-cms.dashboard.widget>
 
-        <livewire:skill.cms.dashboard.widget />
+        {{-- Skills --}}
+        <x-cms.dashboard.widget title="Skills" :count="count($this->skills)" >
+            <ul class="py-4">
+                <li class="flex">
+                    <a href="{{ route('cms.skills') }}">View Skills</a>
+                     |
+                     <a href="{{ route('cms.skills.groups') }}" class="
+                     {{-- flex items-center rounded px-6 py-2 gap-2
+                        bg-black border border-t-zinc-700 border-r-zinc-700 border-b-zinc-900 border-l-zinc-900
+                        hover:text-amber-400 hover:bg-zinc-700 hover:border-t-zinc-500 hover:border-r-zinc-500 hover:border-b-zinc-900 hover:border-l-zinc-900 --}}
+                        ">
+                     <x-icons.material class="" >visibility</x-icons.material>
+                     Groups</a>
+
+                </li>
+                <li class="flex">
+
+                    {{-- <a href="{{ route('cms.skills.groups') }}" class="w-12 flex items-center justify-center rounded px-2 py-2 gap-2
+                            bg-black border border-t-zinc-700 border-r-zinc-700 border-b-zinc-900 border-l-zinc-900
+                            hover:text-amber-400 hover:bg-zinc-700 hover:border-t-zinc-500 hover:border-r-zinc-500 hover:border-b-zinc-900 hover:border-l-zinc-900">
+                        <x-icons.material class="" >visibility</x-icons.material>
+                    </a>
+
+                    <a href="{{ route('cms.skills.groups') }}" class="w-12 flex items-center justify-center rounded px-2 py-2 gap-2
+                            bg-black border border-t-zinc-700 border-r-zinc-700 border-b-zinc-900 border-l-zinc-900
+                            hover:text-amber-400 hover:bg-zinc-700 hover:border-t-zinc-500 hover:border-r-zinc-500 hover:border-b-zinc-900 hover:border-l-zinc-900">
+                        <x-icons.material class="" >add_cirlce</x-icons.material>
+                    </a> --}}
+
+
+                    <a href="{{ route('cms.skills', ['mode' => 'create']) }}">Add Skill</a>
+                      | <a href="{{ route('cms.skills.groups', ['mode' => 'create']) }}">Group</a>
+                </li>
+            </ul>
+            <p class="py-4">
+            <x-cms.form.select class="w-full"
+                x-data="{ link : '' }"
+                x-model="link"
+                x-init="$watch('link', value => window.location = link)"
+            >
+                <option>Choose a skill</option>
+                @foreach ($this->skills as $skill)
+                    <option value="{{ route('cms.skills', ['mode' => 'edit', 'id' => $skill->id]) }}">{{ $skill->name }}</option>
+                @endforeach
+            </x-cms.form.select>
+            </p>
+        </x-cms.dashboard.widget>
+
+        {{-- <livewire:skill.cms.dashboard.widget /> --}}
 
     </div>
 

@@ -5,6 +5,8 @@ use App\Http\Livewire\Cms\Dashboard;
 use App\Http\Livewire\Cms\DemosEditor;
 use App\Http\Livewire\Cms\PostCategoriesEditor;
 use App\Http\Livewire\Cms\PostsEditor;
+use App\Http\Livewire\Cms\SkillGroupsEditor;
+use App\Http\Livewire\Cms\SkillsEditor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +54,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
     |--------------------------------------------------------------------------
     |
     */
+    Route::get('/skills', SkillsEditor::class)->name('skills');
+    Route::get('/skills/groups', SkillGroupsEditor::class)->name('skills.groups');
 
     /*
     |--------------------------------------------------------------------------
