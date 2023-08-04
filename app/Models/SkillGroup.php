@@ -33,6 +33,20 @@ class SkillGroup extends Model
     ];
 
     /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Deleting hook
+        static::deleting(function (SkillGroup $skillGroup) {
+
+            // Remove skills
+            $skillGroup->skills()->detach();
+
+        });
+    }
+
+    /**
      * Skills in this group
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
