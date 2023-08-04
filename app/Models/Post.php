@@ -42,8 +42,34 @@ class Post extends Model
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
+       // 'active' => 'boolean',
     ];
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Deleting hook
+        static::deleting(function (Post $post) {
+
+            // Remove from categories
+            $post->postCategories()->detach();
+
+            // Remove from demos
+            $post->demos()->detach();
+
+            // Remove from projects
+            $post->projects()->detach();
+
+            // Remove from experiences
+            $post->experiences()->detach();
+
+            // Remove from skills
+            $post->skills()->detach();
+
+        });
+    }
 
     /**
      * The post category
