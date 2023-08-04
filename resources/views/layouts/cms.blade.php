@@ -19,7 +19,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
     </head>
-    <body class="font-sans antialiased bg-zinc-800 text-white pt-24"
+    <body
+        class="font-sans antialiased bg-zinc-800 text-white pt-24 bg-fixed bg-cover"
+        style="background-image: url('/mjp-back-1.jpg')"
         x-data="{
             page: '{{ $routeName }}',
             openMenu: false,
@@ -56,6 +58,8 @@
                 <li><a href="{{ route('cms.dashboard') }}" class="block">Dashboard</a></li>
                 <li><a href="{{ route('cms.bullet-points') }}" class="block">Bullet Points</a></li>
                 <li><a href="{{ route('cms.demos') }}" class="block">Demos</a></li>
+                <li><a href="{{ route('cms.posts') }}" class="block">Posts</a></li>
+                <li><a href="{{ route('cms.posts.categories') }}" class="block">Post Categories</a></li>
                 <li><a href="{{ route('cms.demos') }}" class="block">Skills</a></li>
                 <li><a href="{{ route('cms.demos') }}" class="block">Projects</a></li>
                 <li><a href="{{ route('cms.demos') }}" class="block">Experience</a></li>
@@ -63,10 +67,10 @@
             </ul>
         </nav>
 
-        <div class="bg-fixed bg-cover" style="background-image: url('/mjp-back-1.jpg')">
+        <div>
 
             {{-- Main page --}}
-            <main class="min-h-screen max-w-7xl mx-auto p-6 lg:p-8 text-white">
+            <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">
                 {{ $slot }}
             </main>
 

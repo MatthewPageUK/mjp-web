@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Cms;
 
 use App\Facades\BulletPoints;
 use App\Facades\Demos;
+use App\Models\Post;
 use App\View\Components\CmsLayout;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,6 +23,8 @@ class Dashboard extends Component
 
     public $demos = [];
 
+    public $posts = [];
+
     /**
      * Mount the component and populate the data
      *
@@ -34,6 +37,11 @@ class Dashboard extends Component
             ->toArray();
 
         $this->demos = Demos::getAll()
+            ->sortBy('name')
+            ->pluck('name', 'id')
+            ->toArray();
+
+        $this->posts = Post::all()
             ->sortBy('name')
             ->pluck('name', 'id')
             ->toArray();

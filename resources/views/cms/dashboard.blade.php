@@ -52,6 +52,32 @@
             </p>
         </x-cms.dashboard.widget>
 
+        {{-- Posts --}}
+        <x-cms.dashboard.widget title="Posts" :count="count($this->posts)" >
+            <ul class="py-4">
+                <li>
+                    <a href="{{ route('cms.posts') }}">View Posts</a>
+                     | <a href="{{ route('cms.posts.categories') }}">Categories</a>
+                </li>
+                <li>
+                    <a href="{{ route('cms.posts', ['mode' => 'create']) }}">Add Post</a>
+                      | <a href="{{ route('cms.posts.categories', ['mode' => 'create']) }}">Category</a>
+                </li>
+            </ul>
+            <p class="py-4">
+            <x-cms.form.select class="w-full"
+                x-data="{ link : '' }"
+                x-model="link"
+                x-init="$watch('link', value => window.location = link)"
+            >
+                <option>Choose a post</option>
+                @foreach ($this->posts as $id => $name)
+                    <option value="{{ route('cms.posts', ['mode' => 'edit', 'id' => $id]) }}">{{ $name }}</option>
+                @endforeach
+            </x-cms.form.select>
+            </p>
+        </x-cms.dashboard.widget>
+
         <livewire:skill.cms.dashboard.widget />
 
     </div>
