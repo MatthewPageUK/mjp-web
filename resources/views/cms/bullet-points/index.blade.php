@@ -1,3 +1,5 @@
+<x-cms.layout.page>
+
 <div x-data="{ mode: @entangle('mode') }">
 
     {{-- Header --}}
@@ -75,7 +77,9 @@
     </x-cms.form.form>
 
     {{-- Bullet point list --}}
-    <ul class="mt-16">
+    <ul class="mt-16"
+        x-show="mode !== 'create' && mode !== 'edit'"
+    >
 
         @forelse ($this->points as $bulletPoint)
             <li class="group flex gap-2 lg:gap-4 mb-2 border-b pb-2 items-center" wire:key="bullet-point-{{ $bulletPoint->id }}">
@@ -102,3 +106,5 @@
 
     </ul>
 </div>
+
+</x-cms.layout.page>

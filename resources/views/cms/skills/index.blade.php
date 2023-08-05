@@ -1,7 +1,9 @@
-<div x-data="{ mode: @entangle('mode') }">
+<div x-data="{ mode: @entangle('mode') }" class="my-8">
 
     {{-- Header --}}
-    <h1 class="text-4xl flex">
+    <h1 class="text-4xl flex"
+        x-show="mode !== 'create' && mode !== 'edit'"
+    >
         <span class="flex-1">Skills</span>
 
         {{-- Add button --}}
@@ -20,56 +22,91 @@
         x-show="mode === 'create' || mode === 'edit'"
         title="{{ ucwords($this->mode) }} Skill"
     >
-        <div class="grid grid-cols-12 gap-x-8 gap-y-4">
+        <div class="grid grid-cols-12 gap-x-8 gap-y-1 md:gap-y-4">
 
             {{-- Name --}}
-            <label class="col-span-3 block mb-2">Name</label>
-            <div class="col-span-9">
-                <x-cms.form.input wire:model="skill.name" />
-                <x-cms.validation-error field="skill.name" />
+            <label class="col-span-12 md:col-span-3 block mb-2">Name</label>
+            <div class="col-span-12 md:col-span-9 flex gap-4 items-center">
+                <div class="flex-1">
+                    <x-cms.form.input wire:model="skill.name" class="text-2xl font-black" />
+                    {{-- <span class="text-sm text-zinc-400 pl-2">{{ $this->skill->slug }}</span> --}}
+                    <x-cms.validation-error field="skill.name" />
+                </div>
+                <div>
+
+
+                    {{-- Active --}}
+                    {{-- <label class="col-span-3 block mb-2">Active</label> --}}
+                    <div>
+                        <x-cms.validation-error field="skill.active" />
+
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" wire:model="skill.active" class="sr-only peer">
+                            <div class="w-11 h-6 bg-zinc-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-amber-400 dark:peer-focus:ring-amber-400
+                                rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full
+                                peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-400"></div>
+                            {{-- <span class="ml-3 text-sm font-medium text-zinc-300 ">Toggle me</span> --}}
+                        </label>
+
+                    </div>
+
+
+
+                </div>
             </div>
 
             {{-- Slug --}}
-            <label class="col-span-3 block mb-2">Slug</label>
+            {{-- <label class="col-span-3 block mb-2">Slug</label>
             <div class="col-span-9">
-                <x-cms.form.input wire:model="skill.slug" />
+                <x-cms.form.input wire:model="skill.slug" disabled />
                 <x-cms.validation-error field="skill.slug" />
-            </div>
+            </div> --}}
 
             {{-- Description --}}
-            <label class="col-span-3 block mb-2">Description</label>
-            <div class="col-span-9">
-                <x-cms.form.textarea wire:model="skill.description" class="h-32" />
+            <label class="col-span-12 md:col-span-3 block mb-2">Description</label>
+            <div class="col-span-12 md:col-span-9">
+                <x-cms.form.textarea wire:model="skill.description" class="h-64" />
                 <x-cms.validation-error field="skill.description" />
             </div>
 
             {{-- Level --}}
-            <label class="col-span-3 block mb-2">Level</label>
-            <div class="col-span-9">
-                <x-cms.form.select wire:model="skill.level">
+            <label class="col-span-12 md:col-span-3 block mb-2">Skill Level</label>
+            <div class="col-span-12 md:col-span-9">
+                {{-- <x-cms.form.select wire:model="skill.level" class="font-black">
                     @for ($x = 1; $x <= 10; $x++)
                         <option value="{{ $x }}">{{ $x }}</option>
                     @endfor
-                </x-cms.form.select>
+                </x-cms.form.select> --}}
                 <x-cms.validation-error field="skill.level" />
+                <input class="accent-amber-400 w-1/2 h-3 bg-zinc-900 rounded-lg cursor-pointer range-lg" type="range" min="1" max="10" step="1" wire:model="skill.level">
+                <span class="ml-2 text-2xl font-black">{{ $this->skill->level }}</span>
             </div>
 
             {{-- SVG --}}
-            <label class="col-span-3 block mb-2">SVG</label>
-            <div class="col-span-9">
-                <x-cms.form.textarea wire:model="skill.svg" class="h-32" />
+            <label class="col-span-12 md:col-span-3 block mb-2">SVG</label>
+            <div class="col-span-12 md:col-span-9">
+                <div class="flex gap-4">
+                    <x-cms.form.textarea wire:model="skill.svg" class="h-16 text-sm focus:h-64" />
+                    <div class="w-32 h-32">{!! $this->skill->svg !!}</div>
+                </div>
                 <x-cms.validation-error field="skill.svg" />
             </div>
 
             {{-- Active --}}
-            <label class="col-span-3 block mb-2">Active</label>
+            {{-- <label class="col-span-3 block mb-2">Active</label>
             <div class="col-span-9">
-                <x-cms.form.select wire:model="skill.active">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </x-cms.form.select>
                 <x-cms.validation-error field="skill.active" />
-            </div>
+
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" wire:model="skill.active" class="sr-only peer">
+                    <div class="w-11 h-6 bg-zinc-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-amber-400 dark:peer-focus:ring-amber-400
+                        rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full
+                        peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                        after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-400"></div>
+                  </label>
+
+            </div> --}}
 
             {{-- Create buttons --}}
             @if ($this->mode === 'create')
@@ -91,20 +128,20 @@
             @if ($this->mode === 'edit')
 
                 {{-- Skill Groups --}}
-                <label class="col-span-3 block mb-2">Groups</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <label class="col-span-12 md:col-span-3 block mb-2">Groups</label>
+                <div class="col-span-12 md:col-span-9 border border-zinc-700 rounded-lg p-4">
                     <livewire:cms.skill-groupable :skill="$this->skill" wire:key="skillgroupable-{{ $this->skill->id }}" />
                 </div>
 
                 {{-- Posts --}}
-                <label class="col-span-3 block mb-2">Posts</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <label class="col-span-12 md:col-span-3 block mb-2">Posts</label>
+                <div class="col-span-12 md:col-span-9 border border-zinc-700 rounded-lg p-4">
                     <livewire:cms.postable :postable="$this->skill" wire:key="skillabls-{{ $this->skill->id }}" />
                 </div>
 
                 {{-- Demos --}}
-                <label class="col-span-3 block mb-2">Demos</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <label class="col-span-12 md:col-span-3 block mb-2">Demos</label>
+                <div class="col-span-12 md:col-span-9 border border-zinc-700 rounded-lg p-4">
                     <livewire:cms.demoable :demoable="$this->skill" wire:key="demoable-{{ $this->skill->id }}" />
                 </div>
 
@@ -168,11 +205,11 @@
 
                 {{-- Name --}}
                 <div class="flex-1">
-                    <span class="block text-2xl text-white">{{ $skill->name }}</span>
+                    <span class="block md:text-2xl text-white">{{ $skill->name }}</span>
                 </div>
 
                 {{-- Group(s) --}}
-                <div class="">
+                <div class="hidden md:block">
                     <span class="text-sm">{{ $skill->skillGroups->implode('name', ', ') }}</span>
                 </div>
 

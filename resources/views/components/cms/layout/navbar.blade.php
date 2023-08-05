@@ -1,0 +1,76 @@
+@props([
+    'menu' => []
+])
+
+{{-- Navbar menu --}}
+<nav
+    x-show="(isMobile && openMenu) || ! isMobile"
+    class="md:w-[350px] font-orbitron bg-zinc-900 shadow-lg p-8 mt-24 lg:mt-0"
+>
+    <div class="grid grid-cols-1 gap-4">
+        {{-- Logo --}}
+        <a href="{{ route('cms.dashboard') }}" title="CMS Dashboard" class="hidden lg:block">
+            <img src="/logo-chrome.png" class="w-16 md:w-32 h-auto mx-auto" alt="">
+        </a>
+
+        {{-- Title --}}
+        <h1 class="uppercase text-amber-400 text-sm font-bold text-center mb-8 hidden lg:block">
+            Content Management System
+        </h1>
+
+    </div>
+
+    <ul class="grid grid-cols-1 gap-2">
+        {{-- Dashboard --}}
+        <li>
+            <x-cms.layout.menu-link route="cms.dashboard" title="Dashboard" />
+        </li>
+
+        {{-- Bullet Points --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.bullet-points" title="Bullet Points" :items="$menu['bullets']" />
+        </li>
+
+        {{-- Demos --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.demos" title="Demos" :items="$menu['demos']" />
+        </li>
+
+        {{-- Posts --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.posts" title="Posts" :items="$menu['posts']" />
+        </li>
+
+        {{-- Post Categories --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.posts.categories" title="Post Categories" :items="$menu['postCategories']" />
+        </li>
+
+        {{-- Skills --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.skills" title="Skills" :items="$menu['skills']" />
+        </li>
+
+        {{-- Skills Groups --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.skills.groups" title="Skill Groups" :items="$menu['skillGroups']" />
+        </li>
+
+        <li><x-cms.layout.menu-link route="cms.dashboard" title="Projects" /></li>
+        <li><x-cms.layout.menu-link route="cms.dashboard" title="Experience" /></li>
+        <li><x-cms.layout.menu-link route="cms.dashboard" title="Settings" /></li>
+
+        {{-- User --}}
+        <li class="mt-4 pt-4">
+            <x-cms.layout.menu-link route="cms.dashboard" title="User Profile" />
+        </li>
+        <li>
+            <x-cms.layout.menu-link route="cms.dashboard" title="Logout" />
+        </li>
+
+        {{-- Exit --}}
+        <li>
+            <x-cms.layout.menu-link route="home" title="Exit" />
+        </li>
+    </ul>
+</nav>

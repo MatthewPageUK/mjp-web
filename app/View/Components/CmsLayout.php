@@ -2,6 +2,12 @@
 
 namespace App\View\Components;
 
+use App\Models\BulletPoint;
+use App\Models\Demo;
+use App\Models\Post;
+use App\Models\PostCategory;
+use App\Models\Skill;
+use App\Models\SkillGroup;
 use App\Services\SettingService;
 use Illuminate\View\{
     Component,
@@ -14,6 +20,14 @@ use Illuminate\View\{
  */
 class CmsLayout extends Component
 {
+
+    /**
+     * Menu items
+     *
+     * @var array
+     */
+    public $menu = [];
+
     /**
      * Construct the UI Layout
      *
@@ -38,7 +52,60 @@ class CmsLayout extends Component
         if (! $this->routeName) {
             $this->routeName = request()->route()->getName();
         }
+
+        $this->prepareMenu();
     }
+
+    /**
+     * Prepare the menu items
+     *
+     * @return void
+     */
+    public function prepareMenu(): void
+    {
+        $this->menu['bullets'] = BulletPoint::orderBy('title')->get()->map(function ($item) {
+            return (object) [
+                'id' => $item->id,
+                'name' => $item->title,
+            ];
+        })->toArray();
+
+        $this->menu['demos'] = Demo::orderBy('name')->get()->map(function ($item) {
+            return (object) [
+                'id' => $item->id,
+                'name' => $item->name,
+            ];
+        })->toArray();
+
+        $this->menu['posts'] = Post::orderBy('name')->get()->map(function ($item) {
+            return (object) [
+                'id' => $item->id,
+                'name' => $item->name,
+            ];
+        })->toArray();
+
+        $this->menu['postCategories'] = PostCategory::orderBy('name')->get()->map(function ($item) {
+            return (object) [
+                'id' => $item->id,
+                'name' => $item->name,
+            ];
+        })->toArray();
+
+        $this->menu['skills'] = Skill::orderBy('name')->get()->map(function ($item) {
+            return (object) [
+                'id' => $item->id,
+                'name' => $item->name,
+            ];
+        })->toArray();
+
+        $this->menu['skillGroups'] = SkillGroup::orderBy('name')->get()->map(function ($item) {
+            return (object) [
+                'id' => $item->id,
+                'name' => $item->name,
+            ];
+        })->toArray();
+    }
+
 
     /**
      * Render the main layout.

@@ -1,3 +1,5 @@
+<x-cms.layout.page>
+
 <div x-data="{ mode: @entangle('mode') }">
 
     {{-- Header --}}
@@ -147,3 +149,5 @@
 
     </ul>
 </div>
+
+</x-cms.layout.page>
