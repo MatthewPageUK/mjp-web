@@ -1,153 +1,148 @@
+{{--
+    CMS - Demos - Editor
+--}}
 <x-cms.layout.page>
 
-<div x-data="{ mode: @entangle('mode') }">
+    <div x-data="{
+        mode: @entangle('mode')
+    }">
 
-    {{-- Header --}}
-    <h1 class="text-4xl flex">
-        <span class="flex-1">Demos</span>
+        {{-- Header --}}
+        <x-cms.crud.header title="{{ $this->modelName }}s" />
 
-        {{-- Add button --}}
-        <x-cms.icon-button
-            wire:click.prevent="add"
-            x-show="mode !== 'create'"
-            title="Add Demo"
-            icon="add_circle" />
-    </h1>
+        {{-- Session Messages --}}
+        <x-cms.session-messages />
 
-    {{-- Session Messages --}}
-    <x-cms.session-messages />
-
-    {{-- Create / Edit form --}}
-    <x-cms.form.form
-        x-show="mode === 'create' || mode === 'edit'"
-        title="{{ ucwords($this->mode) }} Demo"
-    >
-        <div class="grid grid-cols-12 gap-x-8 gap-y-4">
+        {{-- Create / Update form --}}
+        <x-cms.crud.form
+            x-show="mode === 'create' || mode === 'update'"
+            title="{{ ucwords($this->getMode()) }} {{ $this->modelName }}"
+        >
 
             {{-- Name --}}
-            <label class="col-span-3 block mb-2">Name</label>
-            <div class="col-span-9">
-                <x-cms.form.input wire:model="demo.name" />
-                <x-cms.validation-error field="demo.name" />
-            </div>
+            <x-cms.crud.field name="Name">
+                <div class="flex gap-4 items-center">
+                    <div class="flex-1">
+                        <x-cms.form.input wire:model="demo.name" class="text-2xl font-black" />
+                        {{-- <span class="text-sm text-zinc-400 pl-2">{{ $this->demo->slug }}</span> --}}
+                        <x-cms.validation-error field="demo.name" />
+                    </div>
+                    <div>
+                        {{-- Active --}}
+                        {{-- <label class="col-span-3 block mb-2">Active</label> --}}
+                        <div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" wire:model="demo.active" class="sr-only peer">
+                                <div class="w-11 h-6 bg-zinc-900 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-amber-400 dark:peer-focus:ring-amber-400
+                                    rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full
+                                    peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                    after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-400"></div>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </x-cms.crud.field>
 
             {{-- Slug --}}
-            <label class="col-span-3 block mb-2">Slug</label>
-            <div class="col-span-9">
-                <x-cms.form.input wire:model="demo.slug" />
-                <x-cms.validation-error field="demo.slug" />
-            </div>
+            <x-cms.crud.field name="Slug">
+                <x-cms.form.input wire:model="{{ $this->modelVar }}.slug" />
+                <x-cms.validation-error field="{{ $this->modelVar }}.slug" />
+            </x-cms.crud.field>
 
             {{-- Description --}}
-            <label class="col-span-3 block mb-2">Description</label>
-            <div class="col-span-9">
-                <x-cms.form.textarea wire:model="demo.description" class="h-64" />
-                <x-cms.validation-error field="demo.description" />
-            </div>
+            <x-cms.crud.field name="Description">
+                <x-cms.form.textarea wire:model="{{ $this->modelVar }}.description" class="h-64" />
+                <x-cms.validation-error field="{{ $this->modelVar }}.description" />
+            </x-cms.crud.field>
 
             {{-- URL --}}
-            <label class="col-span-3 block mb-2">URL</label>
-            <div class="col-span-9">
-                <x-cms.form.input wire:model="demo.url" />
-                <x-cms.validation-error field="demo.url" />
-            </div>
+            <x-cms.crud.field name="URL">
+                <x-cms.form.input wire:model="{{ $this->modelVar }}.url" />
+                <x-cms.validation-error field="{{ $this->modelVar }}.url" />
+            </x-cms.crud.field>
 
             {{-- Demo URL --}}
-            <label class="col-span-3 block mb-2">Demo URL</label>
-            <div class="col-span-9">
-                <x-cms.form.input wire:model.lazy="demo.demo_url" />
-                <x-cms.validation-error field="demo.demo_url" />
-                {{-- @if ($this->demo && $this->demo->demo_url)
-                    <iframe src="{{ $this->demo->demo_url }}" class="w-full h-64 mt-4"></iframe>
-                @endif --}}
-            </div>
-
-            {{-- Active --}}
-            <label class="col-span-3 block mb-2">Active</label>
-            <div class="col-span-9">
-                <x-cms.form.select wire:model="demo.active">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </x-cms.form.select>
-                <x-cms.validation-error field="demo.active" />
-            </div>
-
-            {{-- Create buttons --}}
-            @if ($this->mode === 'create')
-                <div class="col-span-12 text-right self-end mb-8">
-                    <x-cms.text-button wire:click.prevent="create" label="Create" />
-                    <x-cms.text-button wire:click.prevent="cancelAdd" label="Cancel" />
+            <x-cms.crud.field name="Demo URL">
+                <div x-data="{preview: false}">
+                    <div class="flex items-center gap-1">
+                        <x-cms.form.input wire:model.lazy="{{ $this->modelVar }}.demo_url" />
+                        <button @click.prevent="preview = ! preview" title="Preview demo">
+                            <x-icons.material x-show="! preview">visibility</x-icon.material>
+                            <x-icons.material x-show="preview">visibility_off</x-icon.material>
+                        </button>
+                    </div>
+                    <x-cms.validation-error field="{{ $this->modelVar }}.demo_url" />
+                    <div x-show="preview">
+                        <iframe src="{{ $this->demo->demo_url }}" class="w-full h-[450px] mt-4"></iframe>
+                    </div>
                 </div>
-            @endif
+            </x-cms.crud.field>
 
-            {{-- Edit buttons --}}
-            @if ($this->mode === 'edit')
-                <div class="col-span-12 text-right self-end mb-8">
-                    <x-cms.text-button wire:click.prevent="save" label="Save" />
-                    <x-cms.text-button wire:click.prevent="cancelEdit" label="Cancel" />
-                </div>
-            @endif
-
-
-            @if ($this->mode === 'edit')
+            @if ($this->mode === 'update')
 
                 {{-- Skills --}}
-                <label class="col-span-3 block mb-2">Skills</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <x-cms.crud.field name="Skills">
                     <livewire:cms.skillable :skillable="$this->demo" />
-                </div>
+                </x-cms.crud.field>
 
                 {{-- Posts --}}
-                <label class="col-span-3 block mb-2">Posts</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <x-cms.crud.field name="Posts">
                     <livewire:cms.postable :postable="$this->demo" />
-                </div>
+                </x-cms.crud.field>
+
             @endif
 
-        </div>
-    </x-cms.form.form>
+            {{-- Buttons --}}
+            <x-cms.crud.buttons-create />
+            <x-cms.crud.buttons-update />
 
-    {{-- Delete confirmation --}}
-    <x-cms.form.form
-        x-show="mode === 'delete'"
-        title="Delete Demo '{{ $this->demo->name }}'"
-    >
-        <div class="grid grid-cols-2 items-center">
-            <p>Are you sure you want to delete the Demo?</p>
-            <div class="text-right">
-                <x-cms.text-button wire:click.prevent="delete" label="Delete" />
-                <x-cms.text-button wire:click.prevent="cancelDelete" label="Cancel" />
-            </div>
-        </div>
-    </x-cms.form.form>
+        </x-cms.crud.form>
 
-    {{-- Demo list --}}
-    <ul class="mt-16">
+        {{-- Delete confirmation form --}}
+        <x-cms.crud.delete-form
+            title="Delete {{ $this->modelName }} - {{ $this->{$this->modelVar}->name }}"
+            question="Are you sure you want to delete this {{ strtolower($this->modelName) }}?"
+        />
 
-        @forelse ($this->demos as $demo)
-            <li class="group flex gap-4 mb-2 border-b pb-2 items-center" wire:key="demo-{{ $demo->id }}">
+        {{-- Models list --}}
+        <ul class="mt-16"
+            x-show="mode === 'read'"
+        >
+            @foreach ($this->demos as $model)
+                <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-zinc-400 hover:text-white" wire:key="{{ $this->modelVar }}-{{ $model->id }}">
 
-                {{-- Colour --}}
-                <span class="{{ $demo->active ? 'bg-amber-400' : 'bg-zinc-400' }} block w-4 h-4 rounded-full group-hover:rounded-sm transition-all"></span>
+                    {{-- Dot --}}
+                    <span @class([
+                        'block w-6 h-6 rounded-full lg:group-hover:h-2 transition-all',
+                        'bg-emerald-400 lg:group-hover:bg-amber-400' => $model->active === 1,
+                        'bg-zinc-400' => $model->active === 0,
+                    ])></span>
 
-                {{-- Name --}}
-                <div class="flex-1">
-                    <span class="block text-2xl">{{ $demo->name }}</span>
-                    <span class="text-sm">{{ $demo->skills->implode('name', ', ') }}</span>
-                    <span class="text-xs border rounded-full px-2 py-1">{{ $demo->posts->count() }} posts</span>
-                </div>
+                    {{-- Name --}}
+                    <button wire:click.prevent="update({{ $model->id }})" class="flex-1 text-left lg:text-2xl">{{ $model->name }}</button>
 
-                {{-- Buttons --}}
-                <x-cms.icon-button icon="edit" wire:click.prevent="edit({{ $demo->id }})" title="Edit" />
-                <x-cms.icon-button icon="delete" wire:click.prevent="confirmDelete({{ $demo->id }})" title="Delete" />
+                    {{-- Buttons --}}
+                    <div class="flex gap-1 ml-4">
 
-            </li>
-        @empty
-            {{-- No demos - open the add form on render --}}
-            <li class="text-2xl" wire:init="add">No demos found.</li>
-        @endforelse
+                        {{-- Edit --}}
+                        <x-cms.icon-button icon="edit" wire:click.prevent="update({{ $model->id }})" title="Edit" />
 
-    </ul>
-</div>
+                        {{-- Delete --}}
+                        <x-cms.icon-button icon="delete" wire:click.prevent="confirmDelete({{ $model->id }})" title="Delete" />
+
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+
+        @if (count($this->demos) < 1)
+            {{-- No models - open the add form on render --}}
+            <ul>
+                <li class="text-2xl" wire:init="add">No {{ strtolower($this->modelName) }} found, create a new one.</li>
+            </ul>
+        @endif
+
+    </div>
 
 </x-cms.layout.page>
