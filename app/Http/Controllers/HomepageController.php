@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\BulletPoints;
+use App\Facades\Ui\BulletPoints;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,7 +16,7 @@ class HomepageController extends Controller
     public function show(Request $request): View
     {
         return view('welcome', [
-            'bulletPoints' => BulletPoints::getAllWithColour(),
+            'bulletPoints' => BulletPoints::getAll(),
         ]);
     }
 }

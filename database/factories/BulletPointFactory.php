@@ -25,7 +25,7 @@ class BulletPointFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(2, false),
+            'name' => fake()->sentence(2, false),
             'order' => self::$order++,
         ];
     }

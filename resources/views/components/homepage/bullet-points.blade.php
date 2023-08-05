@@ -5,9 +5,9 @@
 @props(['bullets' => []])
 
 <ul class="grid grid-cols-2 gap-4">
-    @foreach ($bullets as $point)
+    @foreach ($bullets as $bullet)
         <li
-            class="{{ $point->colour }} text-center py-4 opacity-80 hover:tracking-wider hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all"
-        >{{ $point->title }}</li>
+            class="{{ $bullet->colour }} text-center py-4 opacity-80 hover:tracking-wider hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all"
+        >{{ $bullet->name }}</li>
     @endforeach
 </ul>

@@ -1,28 +1,29 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Cms;
 
 use App\Models\BulletPoint;
 use App\Services\Traits\WithRainbow;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Service for managing Bullet Points.
- *
- * @method BulletPoint create(array $data)
- * @method BulletPoint get(int $id)
- * @method void delete(int $id)
- * @method void moveDown(int $id)
- * @method void moveUp(int $id)
- * @method void reorder(Collection $bullets)
- * @method void update(int $id, array $data)
- * @method Collection getAll()
- * @method Collection getAllWithColour()
+ * Service for managing Bullet Points in the CMS.
  *
  */
 class BulletPointService
 {
     use WithRainbow;
+
+    /**
+     * Return a new BulletPoint model.
+     *
+     * @param array $data
+     * @return BulletPoint
+     */
+    public function new(array $data = []): BulletPoint
+    {
+        return new BulletPoint($data);
+    }
 
     /**
      * Get a single bullet point.
@@ -55,11 +56,12 @@ class BulletPointService
      */
     public function getAllWithColour(): Collection
     {
-        $bulletPoints = $this->getAll();
+        //$bulletPoints = $this->getAll();
 
-        foreach ($bulletPoints as $bulletPoint) {
+        $bulletPoints = $this->getAll()->map(function ($bulletPoint) {
             $bulletPoint->colour = $this->getNextColour();
-        }
+            return $bulletPoint;
+        });
 
         $this->resetColour();
 
@@ -81,7 +83,7 @@ class BulletPointService
 
         // Create a new model
         $bullet = BulletPoint::create([
-            'title' => $data['title'],
+            'name' => $data['name'],
             'order' => $data['order'],
         ]);
 
@@ -116,7 +118,7 @@ class BulletPointService
     {
         $bullet = BulletPoint::findOrFail($id);
 
-        $bullet->title = $data['title'];
+        $bullet->name = $data['name'];
         $bullet->order = $data['order'];
 
         $bullet->save();
@@ -134,10 +136,7 @@ class BulletPointService
      */
     public function delete(int $id): void
     {
-        $bullet = BulletPoint::findOrFail($id);
-
-        $bullet->delete();
-
+        $bullet = $this->get($id)->delete();
         $this->reorder();
     }
 
@@ -150,7 +149,7 @@ class BulletPointService
      */
     public function moveUp(int $id): void
     {
-        $bullet = BulletPoint::findOrFail($id);
+        $bullet = $this->get($id);
 
         // At the top already
         if ($bullet->order === 0) {
@@ -177,7 +176,7 @@ class BulletPointService
      */
     public function moveDown(int $id): void
     {
-        $bullet = BulletPoint::findOrFail($id);
+        $bullet = $this->get($id);
 
         // At the bottom already
         if ($bullet->order === $this->getAll()->count() - 1) {
@@ -203,7 +202,7 @@ class BulletPointService
      * @param Collection|null $bullets
      * @return void
      */
-    public function reorder($bullets = null): void
+    public function reorder(Collection|null $bullets = null): void
     {
         if (! $bullets) {
             $bullets = $this->getAll();

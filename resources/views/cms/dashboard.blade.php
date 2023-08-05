@@ -18,8 +18,8 @@
                     @foreach ($results as $result)
                         <div class="col-span-4 md:col-span-2"><span class="block border border-zinc-400 p-1 rounded-lg mr-2 text-xs text-zinc-400 whitespace-nowrap">{{ $type }}</span></div>
                         <div class="col-span-8 md:col-span-10">
-                            <a href="{{ route('cms.'.$type, ['mode' => 'edit', 'id' => $result['id']]) }}" class="hover:text-amber-400 transition-all">
-                            {{ $result['name'] ?? $result['title'] }}
+                            <a href="{{ route('cms.'.$type, ['mode' => 'update', 'id' => $result['id']]) }}" class="hover:text-amber-400 transition-all">
+                            {{ $result['name'] }}
                             </a>
 
                         </div>

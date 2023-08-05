@@ -26,7 +26,8 @@ class BulletPoint extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
+        'name',
+        'order',
     ];
 
     public function getColour(): string
