@@ -1,5 +1,5 @@
 {{-- Posts --}}
-<div>
+<div class="bg-zinc-900 border border-zinc-700 rounded-lg p-4">
     <ul>
         @foreach ($this->postable->posts->sortBy('created_at') as $post)
             <li class="flex items-center gap-2 mb-2">

@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Cms;
 
-use App\Facades\Demos;
+use App\Facades\Cms\Demos;
+use App\Http\Livewire\Cms\Traits\HasCrudActions;
+use App\Http\Livewire\Cms\Traits\HasCrudModes;
 use App\Models\Demo;
-use App\Models\Skill;
 use App\View\Components\CmsLayout;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,37 +14,32 @@ use Livewire\Component;
 /**
  * CMS - Demos Editor component
  *
- * Shows a list of Demos with add, edit, delete,
+ * Shows a list of Demos with create, update, delete,
  * move up and down functions.
  *
- * Depends heavily on app/Services/DemoService.php
- *
- * @method void mount()
- * @method array rules()
- * @method array messages()
- * @method void hydrate()
- * @method void add()
- * @method void create()
- * @method void cancelAdd()
- * @method void confirmDelete(int $id)
- * @method void delete()
- * @method void cancelDelete()
- * @method void edit(int $id)
- * @method void save()
- * @method void cancelEdit()
  */
 
 class DemosEditor extends Component
 {
+    use HasCrudModes;
+    use HasCrudActions;
+
     /**
-     * Current mode (view|create|delete)
+     * Readable name of the model
      *
      * @var string
      */
-    public $mode = 'view';
+    public $modelName = "Demo";
 
     /**
-     * Editable Demo
+     * Variable name of the model on the component
+     *
+     * @var string
+     */
+    public $modelVar = "demo";
+
+    /**
+     * Editable demo.
      *
      * @var Demo
      */
@@ -57,46 +53,30 @@ class DemosEditor extends Component
     public $demos = [];
 
     /**
-     * All skills
+     * Validation rules
      *
-     * @var array|Collection
+     * @var array
      */
-    public $skills = [];
+    public $rules = [
+        'demo.name' => 'required|string|min:2',
+        'demo.slug' => 'nullable',
+        'demo.description' => 'nullable',
+        'demo.url' => 'nullable',
+        'demo.demo_url' => 'nullable',
+        'demo.active' => 'boolean',
+    ];
 
     /**
      * Mount the component and populate the data
      *
+     * @param Request $request
+     * @return void
      */
     public function mount(Request $request)
     {
-        $this->demo = new Demo();
-        $this->demos = Demos::getAll();
-        $this->skills = Skill::orderBy('name')->get();
-
-        if ($request->mode === 'create') {
-            $this->add();
-        } elseif ($request->mode === 'edit') {
-            $this->edit($request->id);
-        } elseif ($request->mode === 'delete') {
-            $this->confirmDelete($request->id);
-        }
-    }
-
-    /**
-     * Rules for creating and editing demos
-     *
-     * @return array
-     */
-    public function rules(): array
-    {
-        return [
-            'demo.name' => 'required|string|min:2',
-            'demo.slug' => 'nullable',
-            'demo.description' => 'nullable',
-            'demo.url' => 'nullable',
-            'demo.demo_url' => 'nullable',
-            'demo.active' => 'boolean',
-        ];
+        $this->setModel();
+        $this->setDemos();
+        $this->setRequestMode($request);
     }
 
     /**
@@ -106,18 +86,37 @@ class DemosEditor extends Component
      */
     public function hydrate()
     {
+        $this->setDemos();
+    }
+
+    /**
+     * Set the Demos
+     *
+     * @return void
+     */
+    public function setDemos()
+    {
         $this->demos = Demos::getAll();
     }
 
     /**
-     * Show the form to add a new Demo
+     * Set the editable model for this component
      *
-     * @return void
      */
-    public function add(): void
+    public function setModel($data = [])
     {
-        $this->mode = 'create';
-        $this->demo = new Demo(['active' => 1]);
+        $this->demo = Demos::new($data);
+    }
+
+    /**
+     * Get the model for ID
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function getModel(int $id)
+    {
+        return Demos::get($id);
     }
 
     /**
@@ -128,105 +127,25 @@ class DemosEditor extends Component
      */
     public function create(): void
     {
-        $this->validate();
+        $this->executeCreate(function () {
+            $this->demo = Demos::create($this->demo->toArray());
+        });
 
-        try {
-
-            $this->demo->save();
-
-            session()->flash('success', 'Created new Demo - ' . $this->demo->name);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error creating Demo ' . $e->getMessage());
-            return;
-        }
-
-        $this->demos = Demos::getAll();
-        //$this->cancelAdd();
-
-        // Edit the new Demo
-        $this->edit($this->demo->id);
+        $this->setDemos();
     }
 
     /**
-     * Cancel and reset the creation form.
-     *
-     * @return void
-     */
-    public function cancelAdd(): void
-    {
-        $this->mode = 'view';
-        $this->demo = new Demo();
-    }
-
-    /**
-     * Show the confirmation dialog for deleting a Demo
-     *
-     * @param int $id
-     * @return void
-     */
-    public function confirmDelete(int $id): void
-    {
-        try {
-            $this->demo = Demos::get($id);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error finding Demo ' . $e->getMessage());
-            return;
-        }
-
-        $this->mode = 'delete';
-    }
-
-    /**
-     * Delete the Demo
+     * Delete the Demo referenced by deleteId
      *
      * @return void
      */
     public function delete(): void
     {
-        try {
+        $this->executeDelete(function () {
+            Demos::delete($this->demo->id);
+        });
 
-            $this->demo->delete();
-            $this->demos = Demos::getAll();
-
-            session()->flash('success', 'Deleted Demo - '.$this->demo->name);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error deleting Demo '.$e->getMessage());
-        }
-
-        $this->cancelDelete();
-    }
-
-    /**
-     * Cancel the delete operation and reset the form.
-     *
-     * @return void
-     */
-    public function cancelDelete(): void
-    {
-        $this->mode = 'view';
-        $this->demo = new Demo();
-    }
-
-    /**
-     * Show the form to edit a Demo
-     *
-     * @param int $id
-     * @return void
-     */
-    public function edit(int $id): void
-    {
-        try {
-            $this->demo = Demos::get($id);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error finding Demo ' . $e->getMessage());
-            return;
-        }
-
-        $this->mode = 'edit';
+        $this->setDemos();
     }
 
     /**
@@ -236,31 +155,11 @@ class DemosEditor extends Component
      */
     public function save(): void
     {
-        $this->validate();
+        $this->executeSave(function () {
+            Demos::update($this->demo->id, $this->demo->toArray());
+        });
 
-        try {
-
-            $this->demo->save();
-            $this->demos = Demos::getAll();
-
-            session()->flash('success', 'Updated Demo - '.$this->demo->name);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error updating Demo '.$e->getMessage());
-        }
-
-        $this->cancelEdit();
-    }
-
-    /**
-     * Cancel the edit operation and reset the form.
-     *
-     * @return void
-     */
-    public function cancelEdit(): void
-    {
-        $this->mode = 'view';
-        $this->demo = new Demo();
+        $this->setDemos();
     }
 
     /**
@@ -271,6 +170,6 @@ class DemosEditor extends Component
     public function render(): View
     {
         return view('cms.demos.index')
-            ->layout(CmsLayout::class);
+            ->layout(CmsLayout::class, ['title' => 'CMS - Demos']);
     }
 }

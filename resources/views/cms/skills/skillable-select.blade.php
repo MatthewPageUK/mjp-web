@@ -1,11 +1,11 @@
 {{--
     Skill selection panel for any skillable model
 --}}
-<div class="grid grid-cols-3 gap-8">
+<div class="grid grid-cols-1 gap-4 bg-zinc-900 border border-zinc-700 rounded-lg p-4">
     @foreach ($this->skillGroups as $skillGroup)
         <div class="">
-            <h3 class="mb-4 text-center">{{ $skillGroup->name }}</h3>
-            <ul class="grid grid-cols-2 gap-2">
+            <h3 class="mb-2">{{ $skillGroup->name }}</h3>
+            <ul class="grid grid-cols-3 gap-2">
                 @foreach ($skillGroup->skills as $skill)
                     <li>
                         <button
