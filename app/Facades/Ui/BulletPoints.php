@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Facades;
+namespace App\Facades\Ui;
 
-use App\Services\BulletPointService;
+use App\Services\Ui\BulletPointService;
 use Illuminate\Support\Facades\Facade;
 
 class BulletPoints extends Facade

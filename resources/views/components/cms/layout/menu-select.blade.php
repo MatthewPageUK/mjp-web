@@ -18,7 +18,7 @@
 
             <option
                 class="font-sans text-white"
-                value="{{ route($route, ['mode' => 'edit', 'id' => $item->id]) }}"
+                value="{{ route($route, ['mode' => 'update', 'id' => $item->id]) }}"
             >{{ $item->name }}</option>
 
         @endforeach

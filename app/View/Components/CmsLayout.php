@@ -63,10 +63,10 @@ class CmsLayout extends Component
      */
     public function prepareMenu(): void
     {
-        $this->menu['bullets'] = BulletPoint::orderBy('title')->get()->map(function ($item) {
+        $this->menu['bullets'] = BulletPoint::orderBy('name')->get()->map(function ($item) {
             return (object) [
                 'id' => $item->id,
-                'name' => $item->title,
+                'name' => $item->name,
             ];
         })->toArray();
 

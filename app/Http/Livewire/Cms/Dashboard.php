@@ -49,7 +49,7 @@ class Dashboard extends Component
             return;
         }
 
-        $bullets = BulletPoint::where('title', 'like', '%'.$this->search.'%')->limit(5)->get();
+        $bullets = BulletPoint::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
         $skills = Skill::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
         $demos = Demo::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
         $posts = Post::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();

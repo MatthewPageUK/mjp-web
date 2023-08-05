@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('bullet_points', function (Blueprint $table) {
             $table->id();
 
-            // Title of the bullet point
-            $table->string('title')
-                ->comment('Title of the bullet point');
+            // Name of the bullet point
+            $table->string('name')
+                ->comment('Name of the bullet point');
 
             // Sort order
             $table->unsignedTinyInteger('order')
@@ -24,7 +24,7 @@ return new class extends Migration
                 ->comment('Sort order');
 
             // Indexes
-            $table->index('title');
+            $table->index('name');
 
             // Enable soft delete column
             $table->softDeletes();

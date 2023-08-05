@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Cms;
 
-use App\Facades\BulletPoints;
+use App\Facades\Cms\BulletPoints;
+use App\Http\Livewire\Cms\Traits\HasCrudActions;
+use App\Http\Livewire\Cms\Traits\HasCrudModes;
+use App\Models\BulletPoint;
 use App\View\Components\CmsLayout;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -11,56 +14,36 @@ use Livewire\Component;
 /**
  * CMS - Bullet Points Editor component
  *
- * Shows a list of Bullet Points with add, edit, delete,
+ * Shows a list of Bullet Points with create, update, delete,
  * move up and down functions.
  *
- * Depends heavily on app/Services/BulletPointService.php
- *
- * @method void mount()
- * @method array rules()
- * @method array messages()
- * @method void hydrate()
- * @method void add()
- * @method void create()
- * @method void cancelAdd()
- * @method void confirmDelete(int $id)
- * @method void delete()
- * @method void cancelDelete()
- * @method void edit(int $id)
- * @method void save()
- * @method void cancelEdit()
- * @method void move(string $direction, int $id)
  */
 
 class BulletPointsEditor extends Component
 {
+    use HasCrudModes;
+    use HasCrudActions;
+
     /**
-     * Current mode (view|create|delete)
+     * Readable name of the model
      *
      * @var string
      */
-    public $mode = 'view';
+    public $modelName = "Bullet Point";
 
     /**
-     * ID of bullet point to be deleted
-     *
-     * @var int
-     */
-    public $deleteId;
-
-    /**
-     * Title of the bullet to be deleted
+     * Variable name of the model on the component
      *
      * @var string
      */
-    public $deleteTitle;
+    public $modelVar = "bullet";
 
     /**
-     * ID of the bullet to edit
+     * Editable bullet point.
      *
-     * @var int
+     * @var BulletPoint
      */
-    public $editId;
+    public $bullet;
 
     /**
      * All bullet points
@@ -70,63 +53,26 @@ class BulletPointsEditor extends Component
     public $points = [];
 
     /**
-     * New / edited title
+     * Validation rules
      *
-     * @var string
+     * @var array
      */
-    public $newTitle = '';
-
-    /**
-     * New / edited position
-     *
-     * @var string
-     */
-    public $newPosition = 0;
+    public $rules = [
+        'bullet.name' => 'required|string|min:2',
+        'bullet.order' => 'required|between:0,10',
+    ];
 
     /**
      * Mount the component and populate the data
      *
+     * @param Request $request
+     * @return void
      */
     public function mount(Request $request)
     {
-        $this->points = BulletPoints::getAllWithColour();
-
-        if ($request->mode === 'create') {
-            $this->add();
-        } elseif ($request->mode === 'edit') {
-            $this->edit($request->id);
-        } elseif ($request->mode === 'delete') {
-            $this->confirmDelete($request->id);
-        }
-    }
-
-    /**
-     * Rules for creating and editing bullet points
-     *
-     * @return array
-     */
-    public function rules(): array
-    {
-        return [
-            'newTitle' => 'required|string|min:2',
-            'newPosition' => 'required|integer',
-        ];
-    }
-
-    /**
-     * Custom validation messages
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'newTitle.required' => 'Please enter a title for the bullet point',
-            'newTitle.string' => 'The title must be a string',
-            'newTitle.min' => 'The title must be at least 2 characters long',
-            'newPosition.required' => 'Please enter a position for the new bullet point',
-            'newPosition.integer' => 'The position must be an integer',
-        ];
+        $this->setModel();
+        $this->setPoints();
+        $this->setRequestMode($request);
     }
 
     /**
@@ -136,17 +82,37 @@ class BulletPointsEditor extends Component
      */
     public function hydrate()
     {
+        $this->setPoints();
+    }
+
+    /**
+     * Set the bullet points
+     *
+     * @return void
+     */
+    public function setPoints()
+    {
         $this->points = BulletPoints::getAllWithColour();
     }
 
     /**
-     * Show the form to add a new Bullet Point
+     * Set the editable model for this component
      *
-     * @return void
      */
-    public function add(): void
+    public function setModel($data = ['order' => '0'])
     {
-        $this->mode = 'create';
+        $this->bullet = BulletPoints::new($data);
+    }
+
+    /**
+     * Get the model for ID
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function getModel(int $id)
+    {
+        return BulletPoints::get($id);
     }
 
     /**
@@ -157,57 +123,11 @@ class BulletPointsEditor extends Component
      */
     public function create(): void
     {
-        $this->validate();
+        $this->executeCreate(function () {
+            $this->bullet = BulletPoints::create($this->bullet->toArray());
+        });
 
-        try {
-
-            $bulletPoint = BulletPoints::create([
-                'title' => $this->newTitle,
-                'order' => $this->newPosition,
-            ]);
-
-            session()->flash('success', 'Created new Bullet Point - ' . $bulletPoint->title);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error creating Bullet Point ' . $e->getMessage());
-            return;
-        }
-
-        $this->points = BulletPoints::getAllWithColour();
-        $this->cancelAdd();
-    }
-
-    /**
-     * Cancel and reset the creation form.
-     *
-     * @return void
-     */
-    public function cancelAdd(): void
-    {
-        $this->mode = 'view';
-        $this->newTitle = '';
-        $this->newPosition = 0;
-    }
-
-    /**
-     * Show the confirmation dialog for deleting a Bullet Point
-     *
-     * @param int $id
-     * @return void
-     */
-    public function confirmDelete(int $id): void
-    {
-        try {
-            $bullet = BulletPoints::get($id);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error finding Bullet Point ' . $e->getMessage());
-            return;
-        }
-
-        $this->mode = 'delete';
-        $this->deleteId = $id;
-        $this->deleteTitle = $bullet->title;
+        $this->setPoints();
     }
 
     /**
@@ -217,52 +137,11 @@ class BulletPointsEditor extends Component
      */
     public function delete(): void
     {
-        try {
+        $this->executeDelete(function () {
+            BulletPoints::delete($this->bullet->id);
+        });
 
-            BulletPoints::delete($this->deleteId);
-            $this->points = BulletPoints::getAllWithColour();
-
-            session()->flash('success', 'Deleted Bullet Point - '.$this->deleteTitle);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error deleting Bullet Point '.$e->getMessage());
-        }
-
-        $this->cancelDelete();
-    }
-
-    /**
-     * Cancel the delete operation and reset the form.
-     *
-     * @return void
-     */
-    public function cancelDelete(): void
-    {
-        $this->mode = 'view';
-        $this->deleteId = null;
-        $this->deleteTitle = '';
-    }
-
-    /**
-     * Show the form to edit a Bullet Point
-     *
-     * @param int $id
-     * @return void
-     */
-    public function edit(int $id): void
-    {
-        try {
-            $bullet = BulletPoints::get($id);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error finding Bullet Point ' . $e->getMessage());
-            return;
-        }
-
-        $this->mode = 'edit';
-        $this->editId = $id;
-        $this->newTitle = $bullet->title;
-        $this->newPosition = $bullet->order;
+        $this->setPoints();
     }
 
     /**
@@ -272,37 +151,14 @@ class BulletPointsEditor extends Component
      */
     public function save(): void
     {
-        $this->validate();
-
-        try {
-
-            BulletPoints::update($this->editId, [
-                'title' => $this->newTitle,
-                'order' => (int) $this->newPosition,
+        $this->executeSave(function () {
+            BulletPoints::update($this->bullet->id, [
+                'name' => $this->bullet->name,
+                'order' => $this->bullet->order
             ]);
+        });
 
-            $this->points = BulletPoints::getAllWithColour();
-
-            session()->flash('success', 'Updated Bullet Point - '.$this->newTitle);
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error updating Bullet Point '.$e->getMessage());
-        }
-
-        $this->cancelEdit();
-    }
-
-    /**
-     * Cancel the edit operation and reset the form.
-     *
-     * @return void
-     */
-    public function cancelEdit(): void
-    {
-        $this->mode = 'view';
-        $this->editId = 0;
-        $this->newTitle = '';
-        $this->newPosition = 0;
+        $this->setPoints();
     }
 
     /**
@@ -321,7 +177,7 @@ class BulletPointsEditor extends Component
                 BulletPoints::moveDown($id);
             }
 
-            $this->points = BulletPoints::getAllWithColour();
+            $this->setPoints();
 
         } catch (\Exception $e) {
             session()->flash('error', 'Error moving Bullet Point '.$e->getMessage());
@@ -336,6 +192,6 @@ class BulletPointsEditor extends Component
     public function render(): View
     {
         return view('cms.bullet-points.index')
-            ->layout(CmsLayout::class);
+            ->layout(CmsLayout::class, ['title' => 'CMS - Bullet Points']);
     }
 }
