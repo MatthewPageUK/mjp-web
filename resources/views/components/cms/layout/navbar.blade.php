@@ -66,7 +66,7 @@
             <x-cms.layout.menu-select route="cms.experiences" title="Experience" :items="$menu['experiences']" />
         </li>
 
-        <li><x-cms.layout.menu-link route="cms.dashboard" title="Settings" /></li>
+        <li><x-cms.layout.menu-link route="cms.settings" title="Settings" /></li>
 
         {{-- User --}}
         <li class="mt-4 pt-4">
