@@ -13,7 +13,7 @@
         </div>
 
         @if (! empty($this->search))
-            <div class="grid grid-cols-12 bg-zinc-900 px-8 py-4 mt-1 rounded-lg text-left max-h-64 overflow-y-scroll">
+            <div class="grid grid-cols-12 bg-zinc-900 p-4 mt-1 rounded-lg text-left max-h-64 overflow-y-scroll gap-y-1">
                 @foreach ($this->results as $type => $results)
                     @foreach ($results as $result)
                         <div class="col-span-4 md:col-span-2"><span class="block border border-zinc-400 p-1 rounded-lg mr-2 text-xs text-zinc-400 whitespace-nowrap">{{ $type }}</span></div>

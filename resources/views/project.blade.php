@@ -15,7 +15,7 @@
 
             {{-- Last update --}}
             <p class="text-xs text-zinc-500">
-                Last update : {{ $project->last_active->diffForHumans() }}
+                Last update : {{ $project->updated_at->diffForHumans() }}
             </p>
 
             {{-- Project description --}}

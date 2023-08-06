@@ -5,6 +5,7 @@ namespace App\View\Components;
 use App\Facades\Cms\{
     BulletPoints,
     Demos,
+    Projects,
 };
 use App\Models\Post;
 use App\Models\PostCategory;
@@ -88,6 +89,10 @@ class CmsLayout extends Component
 
         $this->menu['skillGroups'] = $this->prepareMenuItem(
             SkillGroup::orderBy('name')->get()
+        );
+
+        $this->menu['projects'] = $this->prepareMenuItem(
+            Projects::getAll()
         );
     }
 
