@@ -7,6 +7,7 @@ use App\Http\Livewire\Cms\ExperiencesEditor;
 use App\Http\Livewire\Cms\PostCategoriesEditor;
 use App\Http\Livewire\Cms\PostsEditor;
 use App\Http\Livewire\Cms\ProjectsEditor;
+use App\Http\Livewire\Cms\SettingsEditor;
 use App\Http\Livewire\Cms\SkillGroupsEditor;
 use App\Http\Livewire\Cms\SkillsEditor;
 use Illuminate\Support\Facades\Route;
@@ -37,10 +38,6 @@ Route::prefix('cms')->name('cms.')->group(function () {
     |
     */
     Route::get('/bullet-points', BulletPointsEditor::class)->name('bullet-points');
-
-    // Route::get('/bullet-points/{mode}', BulletPointsEditor::class)->name('bullet-points.add');
-
-    // Route::get('/bullet-points/{editId}/{mode}', BulletPointsEditor::class)->name('bullet-points.edit');
 
     /*
     |--------------------------------------------------------------------------
@@ -90,6 +87,7 @@ Route::prefix('cms')->name('cms.')->group(function () {
     |--------------------------------------------------------------------------
     |
     */
+    Route::get('/settings', SettingsEditor::class)->name('settings');
 
     // Route::get('/dashboard', function () {
     //     return view('dashboard');

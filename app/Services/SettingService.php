@@ -26,7 +26,7 @@ class SettingService
      */
     public function __construct()
     {
-        $this->settings = $this->getSettings();
+        $this->settings = $this->getAll();
     }
 
     /**
@@ -34,7 +34,7 @@ class SettingService
      *
      * @return Collection
      */
-    public function getSettings(): Collection
+    public function getAll(): Collection
     {
         return Setting::all();
     }
