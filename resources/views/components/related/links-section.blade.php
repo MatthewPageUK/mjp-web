@@ -14,7 +14,7 @@
         }"
         x-show="count > 0"
     >
-        <h2 class="text-3xl mt-8 mb-2 first:mt-0">
+        <h2 class="font-orbitron font-black text-3xl mt-8 mb-2 first:mt-0">
             <a href="{{ route($relationship) }}">
                 <span class="material-icons-outlined text-2xl font-normal ml-1">{{ $icon }}</span> {{ $title }}
             </a>

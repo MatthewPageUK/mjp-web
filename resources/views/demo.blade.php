@@ -1,13 +1,18 @@
 <x-ui-layout>
 
-    <div class="border-b pb-8 mb-16">
+    <div class="border-b pb-8 mb-4">
         <h1 class="text-6xl font-black flex items-center">
             <span class="flex-1">{{ $demo->name }}</span>
             <span class="material-icons-outlined text-6xl ml-1">smart_toy</span>
         </h1>
     </div>
 
-    <div class="lg:grid lg:grid-cols-3 gap-x-16">
+            {{-- Embedded demo --}}
+            @if ($demo->demo_url)
+                <iframe src="{{ $demo->demo_url }}" class="w-full h-[700px] mt-8 border border-2 border-zinc-900 shadow-lg"></iframe>
+            @endif
+
+    <div class="lg:grid lg:grid-cols-3 gap-x-16 my-16">
 
         <div class="col-span-2">
 
@@ -27,20 +32,17 @@
                 </p>
             @endif
 
-            {{-- Created --}}
-            <p class="text-xs text-zinc-500">
-                Created : {{ $demo->created_at->diffForHumans() }}
-            </p>
 
-            {{-- Embedded demo --}}
-            @if ($demo->demo_url)
-                <iframe src="{{ $demo->demo_url }}" class="w-full h-[600px] mt-8 border border-2 border-zinc-900 shadow-lg"></iframe>
-            @endif
+
+
 
             {{-- Demo description --}}
-            <p class="pt-8">{{ $demo->description }}</p>
+            <p class="text-xl">{{ $demo->description }}</p>
 
-            <img src="https://via.placeholder.com/840x500" class="mt-8" />
+            {{-- Created --}}
+            <p class="mt-8 text-xs">
+                Created : {{ $demo->created_at->diffForHumans() }}
+            </p>
 
         </div>
 

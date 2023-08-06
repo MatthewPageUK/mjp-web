@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Demo;
 
+use App\Facades\Settings;
 use App\Services\{
-    DemoService,
+    Ui\DemoService,
     SkillService,
 };
 use App\View\Components\GuestLayout;
@@ -39,6 +40,13 @@ class Explorer extends Component
      * @var int|string|null
      */
     public int|string|null $skill = null;
+
+    /**
+     * Introduction text
+     *
+     * @var string
+     */
+    public string $intro = '';
 
     /**
      * Demo Service for retrieving Demo models
@@ -85,6 +93,7 @@ class Explorer extends Component
     {
         $this->populateDemos();
         $this->skills = $this->skillService->getDemoableSkills();
+        $this->intro = Settings::getValue('demos_intro');
     }
 
     /**

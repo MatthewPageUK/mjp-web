@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Facades;
+namespace App\Facades\Ui;
 
-use App\Services\DemoService;
+use App\Services\Ui\DemoService;
 use Illuminate\Support\Facades\Facade;
 
 class Demos extends Facade
