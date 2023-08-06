@@ -98,6 +98,10 @@
                 </div>
 
                 {{-- Projects --}}
+                <label class="col-span-12 md:col-span-3 block mb-2">Projects</label>
+                <div class="col-span-12 md:col-span-9">
+                    <livewire:cms.projectable :projectable="$this->post" wire:key="projectable-{{ $this->post->id }}" />
+                </div>
 
                 {{-- Experiences --}}
 

@@ -8,11 +8,13 @@ use App\Models\Traits\{
     HasPosts,
     HasSkills,
 };
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\{
     Model,
     SoftDeletes,
     Factories\HasFactory,
 };
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Project extends Model
 {
@@ -44,8 +46,14 @@ class Project extends Model
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
+        // 'active' => 'boolean',
         'last_active' => 'datetime',
     ];
 
+    public function lastActive(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
+        );
+    }
 }

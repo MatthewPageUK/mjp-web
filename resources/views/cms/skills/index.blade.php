@@ -135,17 +135,21 @@
 
                 {{-- Posts --}}
                 <label class="col-span-12 md:col-span-3 block mb-2">Posts</label>
-                <div class="col-span-12 md:col-span-9 border border-zinc-700 rounded-lg p-4">
+                <div class="col-span-12 md:col-span-9">
                     <livewire:cms.postable :postable="$this->skill" wire:key="skillabls-{{ $this->skill->id }}" />
                 </div>
 
                 {{-- Demos --}}
                 <label class="col-span-12 md:col-span-3 block mb-2">Demos</label>
-                <div class="col-span-12 md:col-span-9 border border-zinc-700 rounded-lg p-4">
+                <div class="col-span-12 md:col-span-9">
                     <livewire:cms.demoable :demoable="$this->skill" wire:key="demoable-{{ $this->skill->id }}" />
                 </div>
 
                 {{-- Projects --}}
+                <label class="col-span-12 md:col-span-3 block mb-2">Projects</label>
+                <div class="col-span-12 md:col-span-9">
+                    <livewire:cms.projectable :projectable="$this->skill" wire:key="projectable-{{ $this->skill->id }}" />
+                </div>
 
                 {{-- Experiences --}}
 

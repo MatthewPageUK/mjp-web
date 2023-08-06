@@ -1,6 +1,7 @@
 {{-- Posts --}}
-<div class="bg-zinc-900 border border-zinc-700 rounded-lg p-4">
-    <ul>
+<x-cms.crud.selectable-relationship>
+
+    <x-slot name="selected">
         @foreach ($this->postable->posts->sortBy('created_at') as $post)
             <li class="flex items-center gap-2 mb-2">
                 <span class="flex-1">{{ $post->name }}</span>
@@ -13,11 +14,9 @@
                 />
             </li>
         @endforeach
-    </ul>
+    </x-slot>
 
-    <h3 class="text-2xl mt-4 mb-2">Link a Post</h3>
-    <x-cms.form.input class="text-sm" wire:model="filter" placeholder="Search posts..." />
-    <ul class="mt-2">
+    <x-slot name="selectable">
         @foreach ($this->posts as $post)
             <li class="flex items-center gap-2 mb-2">
                 <span class="flex-1">{{ $post->name }}</span>
@@ -30,5 +29,6 @@
                 />
             </li>
         @endforeach
-    </ul>
-</div>
+    </x-slot>
+
+</x-cms.crud.selectable-relationship>

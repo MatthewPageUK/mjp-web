@@ -56,7 +56,11 @@
             <x-cms.layout.menu-select route="cms.skills.groups" title="Skill Groups" :items="$menu['skillGroups']" />
         </li>
 
-        <li><x-cms.layout.menu-link route="cms.dashboard" title="Projects" /></li>
+        {{-- Projects --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.projects" title="Projects" :items="$menu['projects']" />
+        </li>
+
         <li><x-cms.layout.menu-link route="cms.dashboard" title="Experience" /></li>
         <li><x-cms.layout.menu-link route="cms.dashboard" title="Settings" /></li>
 

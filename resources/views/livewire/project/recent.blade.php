@@ -20,7 +20,7 @@
                 <p class="" @mouseover="open = true">
                     <a href="{{ route('project', $project) }}" class="block p-4 my-2 border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600">
                         <span class="block text-lg">{{ $project->name }}</span>
-                        <span class="block text-xs">Last update : {{ $project->last_active->diffForHumans() }}</span>
+                        <span class="block text-xs">Last update : {{ $project->updated_at->diffForHumans() }} xx</span>
 
                     </a>
                     {{-- <div x-show="open" class="pr-4">
