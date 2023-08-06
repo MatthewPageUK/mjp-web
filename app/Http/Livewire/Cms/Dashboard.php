@@ -62,7 +62,7 @@ class Dashboard extends Component
             'demos' => $demos,
             'posts' => $posts,
             'projects' => $projects,
-            //'experience' => $experience,
+            'experiences' => $experience,
         ];
 
 

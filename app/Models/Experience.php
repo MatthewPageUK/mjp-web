@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{
     HasActive,
+    HasNameSlug,
     HasPosts,
     HasSkills,
 };
@@ -17,6 +18,7 @@ class Experience extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasNameSlug;
     use HasPosts;
     use HasSkills;
     use SoftDeletes;
@@ -40,9 +42,9 @@ class Experience extends Model
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
-        'start' => 'date',
-        'end' => 'date',
+        // 'active' => 'boolean',
+        'start' => 'datetime:Y-m-d',
+        'end' => 'datetime:Y-m-d',
     ];
 
 }

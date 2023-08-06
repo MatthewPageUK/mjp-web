@@ -61,7 +61,11 @@
             <x-cms.layout.menu-select route="cms.projects" title="Projects" :items="$menu['projects']" />
         </li>
 
-        <li><x-cms.layout.menu-link route="cms.dashboard" title="Experience" /></li>
+        {{-- Experiences --}}
+        <li>
+            <x-cms.layout.menu-select route="cms.experiences" title="Experience" :items="$menu['experiences']" />
+        </li>
+
         <li><x-cms.layout.menu-link route="cms.dashboard" title="Settings" /></li>
 
         {{-- User --}}

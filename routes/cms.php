@@ -3,6 +3,7 @@
 use App\Http\Livewire\Cms\BulletPointsEditor;
 use App\Http\Livewire\Cms\Dashboard;
 use App\Http\Livewire\Cms\DemosEditor;
+use App\Http\Livewire\Cms\ExperiencesEditor;
 use App\Http\Livewire\Cms\PostCategoriesEditor;
 use App\Http\Livewire\Cms\PostsEditor;
 use App\Http\Livewire\Cms\ProjectsEditor;
@@ -72,6 +73,7 @@ Route::prefix('cms')->name('cms.')->group(function () {
     |--------------------------------------------------------------------------
     |
     */
+    Route::get('/experiences', ExperiencesEditor::class)->name('experiences');
 
     /*
     |--------------------------------------------------------------------------
