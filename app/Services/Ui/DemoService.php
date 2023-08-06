@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Ui;
 
 use App\Models\Demo;
 use App\Services\Traits\HasActiveStatus;
