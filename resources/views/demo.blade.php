@@ -32,12 +32,10 @@
                 </p>
             @endif
 
-
-
-
-
             {{-- Demo description --}}
-            <p class="text-xl">{{ $demo->description }}</p>
+            <div class="prose prose-xl prose-zinc">
+                @markdown($demo->description)
+            </div>
 
             {{-- Created --}}
             <p class="mt-8 text-xs">
