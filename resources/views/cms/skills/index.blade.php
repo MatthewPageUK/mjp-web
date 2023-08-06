@@ -152,6 +152,10 @@
                 </div>
 
                 {{-- Experiences --}}
+                <label class="col-span-12 md:col-span-3 block mb-2">Experience</label>
+                <div class="col-span-12 md:col-span-9">
+                    <livewire:cms.experienceable :experienceable="$this->skill" wire:key="experienceable-{{ $this->skill->id }}" />
+                </div>
 
             @endif
 

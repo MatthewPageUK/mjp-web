@@ -81,19 +81,19 @@
 
                 {{-- Categories --}}
                 <label class="col-span-3 block mb-2">Categories</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <div class="col-span-9">
                     <livewire:cms.post-categoryable :post="$this->post" wire:key="postcategoryable-{{ $this->post->id }}" />
                 </div>
 
                 {{-- Skills --}}
                 <label class="col-span-3 block mb-2">Skills</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <div class="col-span-9">
                     <livewire:cms.skillable :skillable="$this->post" wire:key="skillabls-{{ $this->post->id }}" />
                 </div>
 
                 {{-- Demos --}}
                 <label class="col-span-3 block mb-2">Demos</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <div class="col-span-9">
                     <livewire:cms.demoable :demoable="$this->post" wire:key="demoable-{{ $this->post->id }}" />
                 </div>
 
@@ -104,6 +104,10 @@
                 </div>
 
                 {{-- Experiences --}}
+                <label class="col-span-12 md:col-span-3 block mb-2">Experience</label>
+                <div class="col-span-12 md:col-span-9">
+                    <livewire:cms.experienceable :experienceable="$this->post" wire:key="experienceable-{{ $this->post->id }}" />
+                </div>
 
             @endif
 

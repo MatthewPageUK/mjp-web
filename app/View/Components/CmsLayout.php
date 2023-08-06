@@ -5,6 +5,7 @@ namespace App\View\Components;
 use App\Facades\Cms\{
     BulletPoints,
     Demos,
+    Experiences,
     Projects,
 };
 use App\Models\Post;
@@ -93,6 +94,10 @@ class CmsLayout extends Component
 
         $this->menu['projects'] = $this->prepareMenuItem(
             Projects::getAll()
+        );
+
+        $this->menu['experiences'] = $this->prepareMenuItem(
+            Experiences::getAll()
         );
     }
 
