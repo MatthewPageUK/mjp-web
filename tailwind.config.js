@@ -16,6 +16,7 @@ module.exports = {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 orbitron: ['Orbitron'],
                 adamina: ['Adamina'],
+                gochi: ['Gochi Hand'],
             },
 
             typography: ({ theme }) => ({

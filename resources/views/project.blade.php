@@ -19,7 +19,9 @@
             </p>
 
             {{-- Project description --}}
-            <p class="pt-8">{{ $project->description }}</p>
+            <div class="prose prose-xl prose-zinc">
+                @markdown($project->description)
+            </div>
 
             {{-- Link to Github page --}}
             @if ($project->github)

@@ -34,7 +34,7 @@ class HomepageWidget extends Component
 
         $query->orderBy('level', 'desc');
 
-        $this->skills = $query->paginate(5);
+        $this->skills = $query->paginate(10);
 
         $this->groups = $skillService->getSkillGroups();
     }
