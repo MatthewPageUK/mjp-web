@@ -68,11 +68,9 @@ class ExperienceService
      * @throws \Exception
      * @return void
      */
-    public function update(int $id, array $data): void
+    public function update($experience): void
     {
-        $Experience = $this->get($id);
-        $Experience->fill($data);
-        $Experience->save();
+        $experience->save();
     }
 
     /**
