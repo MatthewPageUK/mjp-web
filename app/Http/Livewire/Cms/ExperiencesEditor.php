@@ -61,6 +61,9 @@ class ExperiencesEditor extends Component
         'experience.name' => 'required|string|min:2',
         'experience.slug' => 'nullable',
         'experience.description' => 'nullable',
+        'experience.key_points' => 'nullable|array',
+        'experience.key_points.*.title' => 'required|string',
+        'experience.key_points.*.text' => 'nullable|string',
         'experience.start' => 'nullable|date',
         'experience.end' => 'nullable|date',
         'experience.active' => 'boolean',
@@ -155,11 +158,43 @@ class ExperiencesEditor extends Component
      */
     public function save(): void
     {
+        $this->filterKeyPoints();
+
         $this->executeSave(function () {
-            Experiences::update($this->experience->id, $this->experience->toArray());
+            Experiences::update($this->experience);
         });
 
         $this->setExperiences();
+    }
+
+    /**
+     * Remove a key point from the array
+     *
+     * @param int $index
+     * @return void
+     */
+    public function removeKeyPoint(int $index): void
+    {
+        $this->filterKeyPoints($index);
+    }
+
+    /**
+     * Filter out empty key points or
+     * matching $index
+     *
+     * @param int|null $index
+     * @return void
+     */
+    public function filterKeyPoints(?int $index = null): void
+    {
+        $key_points = [];
+        foreach($this->experience->key_points as $key => $value) {
+            if ($value['title'] !== '' && $key !== $index) {
+                $key_points[] = $value;
+            }
+        }
+
+        $this->experience->key_points = $key_points;
     }
 
     /**
