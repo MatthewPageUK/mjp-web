@@ -92,6 +92,9 @@ class DatabaseSeeder extends Seeder
             'value' => fake()->text(255),
         ]);
 
+        /**
+         * Skills
+         */
         SkillGroup::factory()
             ->count(3)
             ->sequence(
@@ -99,8 +102,19 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Management'],
                 ['name' => 'Organisational'],
             )
-            ->hasSkills(5)
             ->create();
+
+        $skills = ['PHP', 'Laravel', 'Vue', 'JavaScript', 'CSS',
+            'HTML', 'MySQL', 'Git', 'Linux', 'Docker', 'AWS', 'Google Cloud',
+            'Azure', 'Heroku', 'Digital Ocean', 'Vagrant', 'Nginx', 'Apache',
+            'Caching', 'Redis', 'Memcached', 'Queueing', 'RabbitMQ',
+            'Beanstalkd', 'Supervisor'];
+
+        for ($x = 0; $x < count($skills); $x++) {
+            Skill::factory(['name' => $skills[$x]])
+                ->hasAttached(SkillGroup::all()->random(1))
+                ->create();
+        }
 
         PostCategory::factory()
             ->count(3)
