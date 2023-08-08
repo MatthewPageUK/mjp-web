@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Livewire\Demo\Explorer as DemoExplorer;
+use App\Http\Livewire\Experience\Timeline;
+use App\Http\Livewire\Experience\ViewExperience;
 use App\Http\Livewire\Skill\Explorer as SkillExplorer;
 use App\Models\Demo;
 use App\Models\Experience;
@@ -60,8 +62,8 @@ Route::get('/demo/{demo}', function (Demo $demo) { return view('demo', ['demo' =
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/experiences', function () { return "experiences"; })->name('experiences');
-Route::get('/experience/{experience}', function (Experience $experience) { return "experience ".$experience->name; })->name('experience');
+Route::get('/experiences', Timeline::class)->name('experiences');
+Route::get('/experience/{experience}', ViewExperience::class)->name('experience');
 
 /*
 |--------------------------------------------------------------------------

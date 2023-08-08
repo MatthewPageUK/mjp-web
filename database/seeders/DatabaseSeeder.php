@@ -87,6 +87,10 @@ class DatabaseSeeder extends Seeder
             'key' => 'url_youtube',
             'value' => 'https://www.youtube.com',
         ]);
+        Setting::create([
+            'key' => 'experience_intro',
+            'value' => fake()->text(255),
+        ]);
 
         SkillGroup::factory()
             ->count(3)
@@ -124,7 +128,7 @@ class DatabaseSeeder extends Seeder
             ->count(5)
             ->create()
             ->each(function ($experience) {
-                $experience->skills()->attach(Skill::all()->random(3));
+                $experience->skills()->attach(Skill::all()->random(8));
                 $experience->posts()->attach(Post::all()->random(3));
             });
 

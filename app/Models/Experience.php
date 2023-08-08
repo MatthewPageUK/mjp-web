@@ -45,6 +45,7 @@ class Experience extends Model
         // 'active' => 'boolean',
         'start' => 'datetime:Y-m-d',
         'end' => 'datetime:Y-m-d',
+        'key_points' => 'array',
     ];
 
 }
