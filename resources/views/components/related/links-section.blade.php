@@ -25,23 +25,23 @@
             @endforeach
         </p>
 
-        <p class="text-xs pl-9">
-            <button
-                class="border border-zinc-400 px-2 py-1 rounded mt-2 hover:text-amber-400"
+        <p class="text-xs pl-9 font-orbitron">
+            <x-primary-button
+                class="px-2 py-1 rounded mt-2 hover:text-amber-400"
                 x-show="! expanded && count > showCount"
                 x-on:click="expanded = true"
             >
-                    Show <span x-text="count - showCount"></span> more
+                <span>Show <span x-text="count - showCount"></span> more</span>
                 <span class="material-icons-outlined text-xs">keyboard_arrow_down</span>
-            </button>
-            <button
-                class="border border-zinc-400 px-2 py-1 rounded mt-2 hover:text-amber-400"
+            </x-primary-button>
+            <x-primary-button
+                class="px-2 py-1 rounded mt-2 hover:text-amber-400"
                 x-show="expanded"
                 x-on:click="expanded = false"
             >
-                Show less
+                <span>Show less</span>
                 <span class="material-icons-outlined text-xs">keyboard_arrow_up</span>
-            </button>
+            </x-primary-button>
         </p>
     </div>
 

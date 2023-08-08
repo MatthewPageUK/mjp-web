@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Schema;
  * - name
  * - slug
  * - description
+ * - key_points
  * - active
  * - created_at
  * - updated_at
@@ -50,6 +51,10 @@ return new class extends Migration
             $table->text('description')
                 ->nullable()
                 ->comment('Description of the experience');
+
+            $table->json('key_points')
+                ->nullable()
+                ->comment('Key points of the experience');
 
             // Is the experience active on the web site
             $table->boolean('active')
