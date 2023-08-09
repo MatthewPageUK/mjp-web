@@ -15,9 +15,20 @@
 
                     {{-- Edit setting --}}
                     @case('edit')
-                        <x-cms.form.input id="value" name="value" value="{{ $this->setting->getValue() }}"
-                            wire:model.lazy="value"
-                        />
+
+                        @switch($this->setting->type)
+
+                            @case('text')
+                                <x-cms.form.textarea id="value" name="value" class="h-[500px]" value="{{ $this->setting->getValue() }}"
+                                    wire:model.lazy="value"
+                                />
+                            @break
+
+                            @default
+                                <x-cms.form.input id="value" name="value" value="{{ $this->setting->getValue() }}"
+                                    wire:model.lazy="value"
+                                />
+                        @endswitch
                     @break
 
                     {{-- View setting --}}

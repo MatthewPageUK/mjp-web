@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\{
+    BulletPoint,
     Demo,
     Experience,
     Post,
@@ -47,9 +48,11 @@ class DatabaseSeeder extends Seeder
         DB::table('posts')->truncate();
         DB::table('post_categories')->truncate();
         DB::table('post_post_category')->truncate();
+        DB::table('postables')->truncate();
         DB::table('demos')->truncate();
         DB::table('experiences')->truncate();
         DB::table('projects')->truncate();
+        DB::table('bullet_points')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         User::factory()->admin()->create([
@@ -62,6 +65,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'demo2@example.com',
             'is_admin' => 0,
         ]);
+
+        BulletPoint::factory()
+            ->count(10)
+            ->create();
 
         Setting::factory()
             ->count(5)
@@ -90,6 +97,20 @@ class DatabaseSeeder extends Seeder
         Setting::create([
             'key' => 'experience_intro',
             'value' => fake()->text(255),
+            'type' => 'text',
+        ]);
+        Setting::create([
+            'key' => 'homepage_name',
+            'value' => fake()->sentence(2),
+        ]);
+        Setting::create([
+            'key' => 'homepage_tagline',
+            'value' => fake()->sentence(5),
+        ]);
+        Setting::create([
+            'key' => 'homepage_intro',
+            'value' => fake()->text(600),
+            'type' => 'text',
         ]);
 
         /**

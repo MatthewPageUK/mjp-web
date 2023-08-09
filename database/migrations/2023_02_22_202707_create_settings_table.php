@@ -31,9 +31,14 @@ return new class extends Migration
                 ->comment('Setting key');
 
             // The setting value
-            $table->string('value')
+            $table->text('value')
                 ->nullable()
                 ->comment('Setting value');
+
+            // Setting type
+            $table->string('type')
+                ->default('string')
+                ->comment('Setting type');
 
             // Created and updated timestamps
             $table->timestamps();
