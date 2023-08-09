@@ -10,8 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,900&display=swap" rel="stylesheet" />
-        <link href="https://fonts.bunny.net/css?family=orbitron:400,500,600,900&display=swap" rel="stylesheet" />
-        <link href="https://fonts.bunny.net/css?family=orbitron:400,500,600,900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=orbitron:400,500,600,700,800,900&display=swap" rel="stylesheet" />
 
         <link href="https://fonts.bunny.net/css?family=gochi-hand:400" rel="stylesheet" />
 
@@ -34,11 +33,6 @@
 
             {{-- Main header --}}
             <x-layout.header />
-
-            {{-- Mastheads --}}
-            @if ($showMasthead)
-                {{-- <livewire:layout.show-masthead /> --}}
-            @endif
 
             {{-- Main page --}}
             <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">

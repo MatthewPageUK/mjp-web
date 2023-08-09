@@ -72,8 +72,15 @@
         <li class="mt-4 pt-4">
             <x-cms.layout.menu-link route="cms.dashboard" title="User Profile" />
         </li>
+
+        {{-- Logout --}}
         <li>
-            <x-cms.layout.menu-link route="cms.dashboard" title="Logout" />
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="block text-left px-3 py-2 w-full bg-zinc-800 border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600 hover:-ml-1 transition-all">
+                    Logout
+                </button>
+            </form>
         </li>
 
         {{-- Exit --}}

@@ -22,7 +22,7 @@ class ProjectFactory extends Factory
         return [
             'name' => fake()->sentence(4),
             'description' => fake()->paragraphs(3, true),
-            'github' => fake()->url(),
+            'github' => 'https://github.com/MatthewPageUK/mjp-web',
             'website' => fake()->url(),
             'last_active' => fake()->dateTimeBetween('-1 year'),
             'active' => true,

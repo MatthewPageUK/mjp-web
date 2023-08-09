@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Project;
 
-use App\Services\ProjectService;
+use App\Services\Ui\ProjectService;
 use Illuminate\View\View;
 use Livewire\Component;
 

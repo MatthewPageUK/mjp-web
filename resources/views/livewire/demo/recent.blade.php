@@ -25,8 +25,9 @@
 
                 <a href="{{ route('demo', $demo) }}" class="block" title="View the '{{ $demo->name }}' demo">
                     <img src="https://loremflickr.com/640/360/computer?random=487643{{ $demo->id }}" class="" />
-                    <span class="block text-lg px-4 pt-2">{{ $demo->name }}</span>
-                    <span class="block text-xs px-4 text-slate-500">Created : {{ $demo->created_at->diffForHumans() }}</span>
+                    <span class="block leading-tight text-lg p-4 pb-2">{{ $demo->name }}</span>
+                    <span class="text-xs px-4">{{ $demo->skills()->pluck('name')->implode(', ') }}</span>
+                    <span class="block text-xs px-4 pb-2 text-slate-500">Created : {{ $demo->created_at->diffForHumans() }}</span>
                 </a>
             </div>
         @endforeach

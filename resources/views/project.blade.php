@@ -1,27 +1,23 @@
-<x-ui-layout>
+<x-ui-layout :title="$project->name">
 
-    <div class="border-b pb-8 mb-16">
-        <h1 class="text-6xl font-black">Projects</h1>
+    {{-- Project name --}}
+    <div class="border-b pb-8 mb-4">
+        <h1 class="text-6xl font-black flex items-center">
+            <span class="flex-1">{{ $project->name }}</span>
+            <span class="material-icons-outlined text-6xl ml-1">rocket_launch</span>
+        </h1>
     </div>
 
-    <div class="lg:grid lg:grid-cols-2 gap-x-16">
+    <div class="lg:grid lg:grid-cols-4 gap-x-16 mb-16">
 
-        <div>
-            {{-- Project name --}}
-            <h1 class="text-5xl mb-2 font-bold">
-                <span class="material-icons-outlined text-4xl ml-1">rocket_launch</span>
-                {{ $project->name }}
-            </h1>
-
-            {{-- Last update --}}
-            <p class="text-xs text-zinc-500">
-                Last update : {{ $project->updated_at->diffForHumans() }}
-            </p>
+        <div class="lg:col-span-3">
 
             {{-- Project description --}}
             <div class="prose prose-xl prose-zinc">
                 @markdown($project->description)
             </div>
+
+            <img src="https://loremflickr.com/640/400/software?random=3487143{{ $project->id }}" class="w-full my-8" />
 
             {{-- Link to Github page --}}
             @if ($project->github)
@@ -50,12 +46,14 @@
             @endif
         </div>
 
+        {{-- Related links --}}
         <div class="text-right">
-
             <x-related.links :model="$project" />
-
         </div>
 
     </div>
+
+    {{-- Github project panel --}}
+    <livewire:github.repo :project="$project" />
 
 </x-ui-layout>
