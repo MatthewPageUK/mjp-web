@@ -125,7 +125,15 @@ class SkillService
         return Skill::whereHas('demos')->get();
     }
 
-
+    /**
+     * Get all skills that have a Project
+     *
+     * @return Collection
+     */
+    public function getProjectableSkills(): Collection
+    {
+        return Skill::whereHas('projects')->get();
+    }
 
 
     public function getFilteredQuery(array $filters)

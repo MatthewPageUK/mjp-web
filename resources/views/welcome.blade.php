@@ -16,24 +16,20 @@
             <x-homepage.bullet-points :bullets="$bulletPoints" />
         </div>
     </div>
-    <div class="mt-16 lg:grid lg:grid-cols-2 gap-x-16">
+    <div class="my-16 lg:grid lg:grid-cols-2 gap-x-16">
 
-        <div>
-            <div class="mb-8 pb-8 border-b border-zinc-500">
+        <div class="grid grid-rows-2 gap-8">
+            <div class="">
                 <livewire:demo.homepage-widget />
             </div>
-            <div class="mb-8 pb-8 border-b border-zinc-500">
-                <livewire:project.recent />
+            <div class="self-end">
+                <livewire:project.homepage-widget />
             </div>
 
         </div>
 
-        <div class="mb-8 pb-8 border-b border-zinc-500">
+        <div class="XXmb-8 XXpb-8">
             <livewire:skill.homepage-widget />
-        </div>
-
-        <div>
-
         </div>
 
     </div>

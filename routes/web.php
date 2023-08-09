@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Livewire\Demo\Explorer as DemoExplorer;
+use App\Http\Livewire\Project\Explorer as ProjectExplorer;
 use App\Http\Livewire\Experience\Timeline;
 use App\Http\Livewire\Experience\ViewExperience;
 use App\Http\Livewire\Skill\Explorer as SkillExplorer;
@@ -44,7 +45,7 @@ Route::get('/skillsg', function () {
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/projects', function () { return "Projects"; })->name('projects');
+Route::get('/projects', ProjectExplorer::class)->name('projects');
 Route::get('/project/{project}', function (Project $project) { return view('project', ['project' => $project]); })->name('project');
 
 /*

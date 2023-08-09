@@ -1,10 +1,12 @@
 <div>
     <div class="flex mb-8">
-        <h1 class="flex-1 text-4xl font-bold text-amber-400">Skills</h1>
+        <h1 class="flex-1 text-4xl font-black font-orbitron text-amber-400">
+            <a class="hover:text-purple-400" href="{{ route('projects') }}">Skills</a>
+        </h1>
 
         <div class="text-sm">
             Group
-            <select wire:model="group" class="bg-zinc-800 ml-2 rounded-lg">
+            <select wire:model="group" class="bg-zinc-800 ml-2 border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600">
                 <option value="">All</option>
                 @foreach ($this->groups as $skillGroup)
                     <option value="{{ $skillGroup->slug }}">{{ $skillGroup->name }}</option>
@@ -13,7 +15,7 @@
         </div>
     </div>
 
-    <div class="md:grid md:grid-cols-1">
+    <div>
         @foreach ($skills as $key => $skill)
             <div class="">
                 <p class="">

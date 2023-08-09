@@ -9,3 +9,23 @@
   }
 
 [x-cloak] { display: none !important; }
+
+/* width */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-zinc-500 rounded-full;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-amber-400 rounded-full;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-amber-500;
+}

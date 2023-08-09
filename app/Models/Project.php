@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{
     HasActive,
+    HasGithub,
     HasNameSlug,
     HasPosts,
     HasSkills,
@@ -20,6 +21,7 @@ class Project extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasGithub;
     use HasNameSlug;
     use HasPosts;
     use HasSkills;
