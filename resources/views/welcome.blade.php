@@ -16,7 +16,7 @@
             <x-homepage.bullet-points :bullets="$bulletPoints" />
         </div>
     </div>
-    <div class="my-16 lg:grid lg:grid-cols-2 gap-x-16">
+    <div class="mt-16 mb-12 lg:grid lg:grid-cols-2 gap-x-16">
 
         <div class="grid grid-rows-2 gap-8">
             <div class="">
@@ -34,8 +34,14 @@
 
     </div>
 
+    <div>
+        <livewire:post.homepage-widget />
+    </div>
 
-    <livewire:ui.contact />
+    {{-- Contact form --}}
+    <div class="my-32">
+        <livewire:ui.contact />
+    </div>
 
 
 

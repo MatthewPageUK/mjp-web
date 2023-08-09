@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Project;
 
 use App\Facades\Ui\Projects;
+use App\Http\Livewire\Ui\Traits\HasSkillFilter;
 use App\Models\Skill;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -17,20 +18,7 @@ use Livewire\WithPagination;
 class HomepageWidget extends Component
 {
     use WithPagination;
-
-    /**
-     * Skills used in Projects
-     *
-     * @var array
-     */
-    public $skills = [];
-
-    /**
-     * Selected skill
-     *
-     * @var string
-     */
-    public $selectedSkill = '';
+    use HasSkillFilter;
 
     /**
      * Mount the component
@@ -39,8 +27,7 @@ class HomepageWidget extends Component
      */
     public function mount()
     {
-        $this->skills = Skill::whereHas('projects')->get();
-        //skillService->getProjectableSkills()
+        $this->setSkills(Skill::whereHas('projects')->get());
     }
 
     /**
