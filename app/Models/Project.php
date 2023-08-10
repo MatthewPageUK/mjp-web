@@ -58,4 +58,14 @@ class Project extends Model
             get: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
         );
     }
+
+    /**
+     * Get the project page url
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return route('project', ['project' => $this]);
+    }
 }

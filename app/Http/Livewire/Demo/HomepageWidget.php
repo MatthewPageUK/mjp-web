@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Demo;
 
 use App\Facades\Ui\Demos;
+use App\Http\Livewire\Ui\Traits\HasSkillFilter;
 use App\Models\Skill;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -17,20 +18,7 @@ use Livewire\WithPagination;
 class HomepageWidget extends Component
 {
     use WithPagination;
-
-    /**
-     * Skills used in Demos
-     *
-     * @var array
-     */
-    public $skills = [];
-
-    /**
-     * Selected skill
-     *
-     * @var string
-     */
-    public $selectedSkill = '';
+    use HasSkillFilter;
 
     /**
      * Mount the component
@@ -39,8 +27,7 @@ class HomepageWidget extends Component
      */
     public function mount()
     {
-        $this->skills = Skill::whereHas('demos')->get();
-        //skillService->getDemoableSkills()
+        $this->setSkills(Skill::whereHas('demos')->get());
     }
 
     /**

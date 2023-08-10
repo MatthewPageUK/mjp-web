@@ -25,20 +25,20 @@
 
     {{-- Projects block --}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-16">
-        @foreach ($this->projects as $key => $project)
+        @foreach ($this->posts as $key => $post)
 
             {{-- Project preview --}}
             <div class="border border-zinc-700 rounded-lg bg-zinc-700 hover:bg-zinc-800 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
                 <p class="p-4">
-                    <a href="{{ $project->url }}" class="block mb-2">
-                        <span class="block font-bold text-lg text-amber-400">{{ $project->name }}</span>
-                        <span class="block text-sm">{{ $project->snippet }}</span>
-                        <span class="block text-xs mt-2 text-zinc-400">Created : {{ $project->created_at->diffForHumans() }}</span>
+                    <a href="{{ $post->url }}" class="block mb-2">
+                        <span class="block font-bold text-lg text-amber-400">{{ $post->name }}</span>
+                        <span class="block text-sm">{{ $post->snippet }}</span>
+                        <span class="block text-xs mt-2 text-zinc-400">Created : {{ $post->created_at->diffForHumans() }}</span>
                     </a>
                 </p>
                 <div class="order-first lg:order-last">
-                    <a href="{{ $project->url }}">
-                        <img src="https://loremflickr.com/640/400/software?random=3487143{{ $project->id }}" class="" />
+                    <a href="{{ $post->url }}">
+                        <img src="https://loremflickr.com/640/400/software?random=3487143{{ $post->id }}" class="" />
                     </a>
                 </div>
 

@@ -23,7 +23,7 @@
         @foreach ($this->demos as $key => $demo)
             <div class="border rounded-lg overflow-hidden border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600 pb-2">
 
-                <a href="{{ route('demo', $demo) }}" class="block" title="View the '{{ $demo->name }}' demo">
+                <a href="{{ $demo->url }}" class="block" title="View the '{{ $demo->name }}' demo">
                     <img src="https://loremflickr.com/640/360/computer?random=487643{{ $demo->id }}" class="" />
                     <span class="block leading-tight text-lg p-4 pb-2">{{ $demo->name }}</span>
                     <span class="text-xs px-4">{{ $demo->skills()->pluck('name')->implode(', ') }}</span>

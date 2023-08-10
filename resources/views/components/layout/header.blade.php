@@ -49,9 +49,9 @@
                 {{ __('Demos') }}
             </x-layout.header-button>
 
-            {{-- Contact --}}
-            <x-layout.header-button href="#" icon="connect_without_contact" tag="contact" title="Contact me">
-                {{ __('Contact') }}
+            {{-- Posts --}}
+            <x-layout.header-button href="{{ route('posts') }}" icon="feed" tag="post" title="Posts and articles">
+                {{ __('Posts') }}
             </x-layout.header-button>
         </nav>
 

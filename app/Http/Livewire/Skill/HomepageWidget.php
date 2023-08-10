@@ -2,75 +2,79 @@
 
 namespace App\Http\Livewire\Skill;
 
-use App\Services\SkillService;
+use App\Facades\Ui\Skills;
+use App\Http\Livewire\Ui\Traits\HasCategoryFilter;
+use App\Models\Skill;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+/**
+ * UI - Skills - Homepage widget
+ *
+ * Shows 2 recent skills with simple pagination
+ *
+ */
 class HomepageWidget extends Component
 {
     use WithPagination;
-
-    private $skills;
-    public $group = null;
-    public $groups;
-
-    private $baseQuery = null;
+    use HasCategoryFilter;
 
     /**
-     * Mount the component and populate the data
+     * Mount the component
      *
-     */
-    public function mount(SkillService $skillService)
-    {
-        // $this->skills = $skillService->getTop10($this->group);
-
-        $this->baseQuery = $skillService->getBaseQuery();
-        $query = $this->baseQuery;
-
-        if ($this->group) {
-            $query->inGroup($this->group);
-        }
-
-        $query->orderBy('level', 'desc');
-
-        $this->skills = $query->paginate(10);
-
-        $this->groups = $skillService->getSkillGroups();
-    }
-
-    /**
-     * Group has been updated, remake the skills list
-     *
-     * @param mixed $value
      * @return void
      */
-    public function updatedGroup($value): void
+    public function mount()
     {
-        if ($this->group === '') {
-            $this->group = null;
-        }
-        $query = $this->baseQuery;
-
-        if ($this->group) {
-            $query->inGroup($this->group);
-        }
-
-        $query->orderBy('level', 'desc');
-
-        $this->skills = $query->paginate(5);
-
-        dd($this->skills);
-        //$this->skills = app(SkillService::class)->getTop10($this->group);
+        $this->setCategories(Skills::getCategories());
     }
 
     /**
-     * Render the Skills list
+     * Get the query string, return empty array
+     * to disable it on the homepage.
+     *
+     * @return array
+     */
+    public function getQueryString()
+    {
+        return [];
+    }
+
+    /**
+     * Updated skill category
+     *
+     * @param string $category
+     * @return void
+     */
+    public function updatedSelectedCategory($category)
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * Get the Skills and paginate them
+     *
+     * @return Collection
+     */
+    public function getSkillsProperty()
+    {
+        $filter = [];
+        if ($this->selectedCategory) {
+            $filter['category'] = $this->selectedCategory;
+        }
+
+        return Skills::getFilteredQuery($filter)->paginate(10);
+    }
+
+    /**
+     * Render the Skill list
      *
      * @return View
      */
     public function render(): View
     {
-        return view('livewire.skill.top10', ['skills' => $this->skills]);
+        return view('livewire.skill.top10');
     }
+
 }

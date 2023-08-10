@@ -23,7 +23,7 @@
         @foreach ($this->projects as $key => $project)
             <div class="border rounded-lg overflow-hidden border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600 pb-2">
 
-                <a href="{{ route('project', $project) }}" class="block" title="View the '{{ $project->name }}' project">
+                <a href="{{ $project->url }}" class="block" title="View the '{{ $project->name }}' project">
                     <img src="https://loremflickr.com/640/360/computer?random=487643{{ $project->id }}" class="" />
                     <span class="block leading-tight text-lg p-4 pb-2">{{ $project->name }}</span>
                     <span class="text-xs px-4">{{ $project->skills->pluck('name')->implode(', ') }}</span>

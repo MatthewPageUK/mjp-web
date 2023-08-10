@@ -19,7 +19,7 @@
                 </div>
                 <div class="relative grow pb-6 XXborder-b XXborder-slate-200">
                     <header class="text-2xl mb-4 leading-none">
-                        <a href="{{ route('experience', $experience->slug) }}" class="text-amber-500 font-black">
+                        <a href="{{ $experience->url }}" class="text-amber-500 font-black">
                             {{ $experience->name }}
                         </a>
                     </header>
@@ -28,7 +28,7 @@
                         <x-experience.key-points :key_points="$experience->key_points" />
 
 
-                        <x-primary-button class="font-orbitron" href="{{ route('experience', $experience->slug) }}">
+                        <x-primary-button class="font-orbitron" href="{{ $experience->url }}">
                             Read More
                             <x-icons.material>play_arrow</x-icons.material>
                         </x-primary-button>
