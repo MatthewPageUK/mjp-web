@@ -19,7 +19,7 @@
         @foreach ($this->skills as $key => $skill)
             <div class="">
                 <p class="">
-                    <a href="{{ route('skill', $skill) }}" class="block flex p-4 mb-2 border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600">
+                    <a href="{{ $skill->url }}" class="block flex p-4 mb-2 border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600">
                         <span class="flex-1 block text-lg">
 
 

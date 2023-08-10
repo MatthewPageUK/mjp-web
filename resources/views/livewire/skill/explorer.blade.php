@@ -47,7 +47,7 @@
                 wire:key="skill-{{ $skill->slug }}"
             >
                 <a
-                    href="{{ route('skill', $skill) }}"
+                    href="{{ $skill->url }}"
                     title="About my {{ $skill->name }} skills"
                     class="block p-4"
                 >

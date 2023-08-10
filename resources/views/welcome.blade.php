@@ -41,4 +41,9 @@
         <livewire:ui.contact />
     </div>
 
+    {{-- Random Page --}}
+    <div class="my-32">
+        <livewire:ui.random-page />
+    </div>
+
 </x-ui-layout>

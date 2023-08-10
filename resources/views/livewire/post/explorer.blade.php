@@ -30,14 +30,14 @@
             {{-- Project preview --}}
             <div class="border border-zinc-700 rounded-lg bg-zinc-700 hover:bg-zinc-800 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
                 <p class="p-4">
-                    <a href="{{ route('post', $post) }}" class="block mb-2">
+                    <a href="{{ $post->url }}" class="block mb-2">
                         <span class="block font-bold text-lg text-amber-400">{{ $post->name }}</span>
                         <span class="block text-sm">{{ $post->snippet }}</span>
                         <span class="block text-xs mt-2 text-zinc-400">Created : {{ $post->created_at->diffForHumans() }}</span>
                     </a>
                 </p>
                 <div class="order-first lg:order-last">
-                    <a href="{{ route('post', $post) }}">
+                    <a href="{{ $post->url }}">
                         <img src="https://loremflickr.com/640/400/software?random=3487143{{ $post->id }}" class="" />
                     </a>
                 </div>

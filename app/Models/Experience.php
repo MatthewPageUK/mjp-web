@@ -48,4 +48,14 @@ class Experience extends Model
         'key_points' => 'array',
     ];
 
+    /**
+     * Get the experience page url
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return route('experience', ['experience' => $this]);
+    }
+
 }

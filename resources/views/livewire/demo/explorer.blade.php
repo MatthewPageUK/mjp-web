@@ -30,14 +30,14 @@
             {{-- Demo preview --}}
             <div class="border border-zinc-700 rounded-lg bg-zinc-700 hover:bg-zinc-800 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
                 <p class="p-4">
-                    <a href="{{ route('demo', $demo) }}" class="block mb-2">
+                    <a href="{{ $demo->url }}" class="block mb-2">
                         <span class="block font-bold text-lg text-amber-400">{{ $demo->name }}</span>
                         <span class="block text-sm">{{ $demo->snippet }}</span>
                         <span class="block text-xs mt-2 text-zinc-400">Created : {{ $demo->created_at->diffForHumans() }}</span>
                     </a>
                 </p>
                 <div class="order-first lg:order-last">
-                    <a href="{{ route('demo', $demo) }}">
+                    <a href="{{ $demo->url }}">
                         <img src="https://loremflickr.com/640/400/computer,game?random=3487143{{ $demo->id }}" class="" />
                     </a>
                 </div>

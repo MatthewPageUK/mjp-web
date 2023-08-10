@@ -134,4 +134,13 @@ class Skill extends Model
         });
     }
 
+    /**
+     * Get the experience page url
+     *
+     * @return string
+     */
+    public function getUrlAttribute(): string
+    {
+        return route('skill', ['skill' => $this]);
+    }
 }

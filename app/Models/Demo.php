@@ -57,4 +57,14 @@ class Demo extends Model
         return Str::words($this->description, 10, '...');
     }
 
+    /**
+     * Get the demo page url
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return route('demo', ['demo' => $this]);
+    }
+
 }

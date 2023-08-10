@@ -82,7 +82,7 @@ Route::get('/post/{post}', function (Post $post) { return "post ".$post->name; }
 |
 */
 Route::get('/secret', function () {
-    return "The secret is .... ";
+    return view('secret');
 })->name('the.secret');
 
 /*

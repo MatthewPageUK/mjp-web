@@ -111,5 +111,14 @@ class Post extends Model
         return $this->morphedByMany(Experience::class, 'postable');
     }
 
+    /**
+     * Get the post page url
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return route('post', ['post' => $this]);
+    }
 
 }
