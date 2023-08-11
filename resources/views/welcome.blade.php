@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-span-2">
-            <livewire:post.homepage-widget />
+            <livewire:ui.post.homepage-widget />
         </div>
 
     </div>

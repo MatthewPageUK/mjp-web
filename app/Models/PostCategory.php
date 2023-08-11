@@ -44,4 +44,15 @@ class PostCategory extends Model
         return $this->belongsToMany(Post::class);
     }
 
+    /**
+     * Get the category page url
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return route('posts.category', [
+            'category' => $this
+        ]);
+    }
 }

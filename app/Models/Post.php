@@ -8,6 +8,7 @@ use App\Models\Traits\{
     HasNameSlug,
 };
 use Illuminate\Database\Eloquent\{
+    Builder,
     Model,
     SoftDeletes,
     Factories\HasFactory,
@@ -118,7 +119,26 @@ class Post extends Model
      */
     public function getUrlAttribute()
     {
-        return route('post', ['post' => $this]);
+        return route('post', [
+            'year' => $this->created_at->format('Y'),
+            'month' => $this->created_at->format('m'),
+            'day' => $this->created_at->format('d'),
+            'post' => $this
+        ]);
+    }
+
+    /**
+     * Scope the query to a specific category
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @param string $category
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInCategory($query, string $category): Builder
+    {
+        return $query->whereHas('postCategories', function ($query) use ($category) {
+            $query->where('slug', $category);
+        });
     }
 
 }

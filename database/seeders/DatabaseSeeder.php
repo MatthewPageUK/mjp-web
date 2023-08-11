@@ -144,7 +144,7 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Not work stuff'],
                 ['name' => 'Tutorials'],
             )
-            ->hasPosts(5)
+            ->hasPosts(10)
             ->create();
 
         Post::all()->each(function ($post) {

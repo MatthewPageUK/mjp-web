@@ -48,6 +48,9 @@
             <div class="col-span-9">
                 <x-cms.form.textarea wire:model="post.content" class="h-96" />
                 <x-cms.validation-error field="post.content" />
+                <div class="prose prose-zinc prose-lg">
+                    @markdown($this->post->content ?? '')
+                </div>
             </div>
 
             {{-- Active --}}
@@ -154,4 +157,19 @@
         @endforelse
 
     </ul>
+
+    <script>
+        var textareas = document.getElementsByTagName('textarea');
+        var count = textareas.length;
+        for(var i=0;i<count;i++){
+            textareas[i].onkeydown = function(e){
+                if(e.keyCode==9 || e.which==9){
+                    e.preventDefault();
+                    var s = this.selectionStart;
+                    this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+                    this.selectionEnd = s+1;
+                }
+            }
+        }
+    </script>
 </div>
