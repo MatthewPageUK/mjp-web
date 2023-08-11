@@ -32,7 +32,7 @@
         <!-- Remember Me -->
         <div class="block mt-8">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded bg-zinc-900 border-zinc-700 text-amber-600 shadow-sm focus:ring-amber-500" name="remember">
+                <input id="remember_me" type="checkbox" class="rounded bg-primary-900 border-primary-700 text-secondary-600 shadow-sm focus:ring-secondary-500" name="remember">
                 <span class="ml-2 text-sm text-green-700">{{ __('Remember me') }}</span>
             </label>
         </div>

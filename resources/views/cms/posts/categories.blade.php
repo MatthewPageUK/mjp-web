@@ -64,7 +64,7 @@
 
                 {{-- Posts --}}
                 <label class="col-span-3 block mb-2">Posts</label>
-                <div class="col-span-9 border border-zinc-700 rounded-lg p-4">
+                <div class="col-span-9 border border-primary-700 rounded-lg p-4">
                     <livewire:cms.postable :postable="$this->category" />
                 </div>
 
@@ -106,7 +106,7 @@
             <li class="group flex gap-4 mb-2 border-b pb-2 items-center" wire:key="category-{{ $category->id }}">
 
                 {{-- Colour --}}
-                <span class="{{ $category->active ? 'bg-amber-400' : 'bg-zinc-400' }} block w-4 h-4 rounded-full group-hover:rounded-sm transition-all"></span>
+                <span class="{{ $category->active ? 'bg-secondary-400' : 'bg-primary-400' }} block w-4 h-4 rounded-full group-hover:rounded-sm transition-all"></span>
 
                 {{-- Name --}}
                 <div class="flex-1">

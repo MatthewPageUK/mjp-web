@@ -24,7 +24,7 @@
             page: '{{ \Route::currentRouteName() }}',
         }"
     >
-        <div class="min-h-screen bg-zinc-800">
+        <div class="min-h-screen bg-primary-800">
 
             {{-- Main header --}}
             <x-layout.header />

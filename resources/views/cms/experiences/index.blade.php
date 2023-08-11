@@ -31,10 +31,10 @@
                         <div>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" wire:model="experience.active" class="sr-only peer">
-                                <div class="w-11 h-6 bg-zinc-900 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-amber-400 dark:peer-focus:ring-amber-400
-                                    rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full
+                                <div class="w-11 h-6 bg-primary-900 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-secondary-400
+                                    rounded-full peer peer-checked:after:translate-x-full
                                     peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
-                                    after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-400"></div>
+                                    after:border-primary-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary-400"></div>
                             </label>
                         </div>
 
@@ -95,7 +95,7 @@
                 {{-- Add key point --}}
                 <div x-data="{open: false}">
                     <div class="flex justify-end">
-                        <button x-on:click.prevent="open = ! open" class="p-2 hover:text-amber-400" title="Add Key Point">
+                        <button x-on:click.prevent="open = ! open" class="p-2 hover:text-secondary-400" title="Add Key Point">
                             <span x-show="! open" class="material-icons-outlined">add_circle</span>
                             <span x-show="open" class="material-icons-outlined">expand_less</span>
                         </button>
@@ -138,13 +138,13 @@
             x-show="mode === 'read'"
         >
             @foreach ($this->experiences as $model)
-                <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-zinc-400 hover:text-white" wire:key="{{ $this->modelVar }}-{{ $model->id }}">
+                <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-primary-400 hover:text-white" wire:key="{{ $this->modelVar }}-{{ $model->id }}">
 
                     {{-- Dot --}}
                     <span @class([
                         'block w-2 h-6 rounded-full lg:group-hover:w-6 lg:group-hover:h-2 transition-all',
-                        'bg-rose-400 lg:group-hover:bg-amber-400' => $model->active === 1,
-                        'bg-zinc-400' => $model->active === 0,
+                        'bg-rose-400 lg:group-hover:bg-secondary-400' => $model->active === 1,
+                        'bg-primary-400' => $model->active === 0,
                     ])></span>
 
                     {{-- Name --}}

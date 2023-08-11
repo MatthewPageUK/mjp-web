@@ -14,10 +14,10 @@
 
         <div>
             <h2 class="md:text-right md:mr-2 mt-4 md:mt-0">Skill Selector</h2>
-            <select wire:model="skill" class="rounded bg-zinc-800">
+            <select wire:model="skill" class="rounded bg-primary-800">
                 <option value="">All</option>
                 @foreach($skills as $skill)
-                    <option class="bg-zinc-800" value="{{ $skill->slug }}">{{ $skill->name }}</option>
+                    <option class="bg-primary-800" value="{{ $skill->slug }}">{{ $skill->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -28,12 +28,12 @@
         @foreach ($this->projects as $key => $project)
 
             {{-- Project preview --}}
-            <div class="border border-zinc-700 rounded-lg bg-zinc-700 hover:bg-zinc-800 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+            <div class="border border-primary-700 rounded-lg bg-primary-700 hover:bg-primary-800 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
                 <p class="p-4">
                     <a href="{{ $project->url }}" class="block mb-2">
-                        <span class="block font-bold text-lg text-amber-400">{{ $project->name }}</span>
+                        <span class="block font-bold text-lg text-secondary-400">{{ $project->name }}</span>
                         <span class="block text-sm">{{ $project->snippet }}</span>
-                        <span class="block text-xs mt-2 text-zinc-400">Created : {{ $project->created_at->diffForHumans() }}</span>
+                        <span class="block text-xs mt-2 text-primary-400">Created : {{ $project->created_at->diffForHumans() }}</span>
                     </a>
                 </p>
                 <div class="order-first lg:order-last">

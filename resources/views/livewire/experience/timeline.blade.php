@@ -12,14 +12,14 @@
 
     @foreach ($this->experiences as $experience)
 
-        <article class="pt-6 px-6 odd:bg-gradient-to-l even:bg-gradient-to-r from-zinc-900 from-20% to-50%  mb-8">
+        <article class="pt-6 px-6 odd:bg-gradient-to-l even:bg-gradient-to-r from-primary-900 from-20% to-50%  mb-8">
             <div class="xl:flex">
                 <div class="w-32 shrink-0">
-                    <h2 class="text-xl leading-snug font-bold text-zinc-100 xl:leading-7 mb-4 xl:mb-0">{{ $experience->start->format('Y') }}</h2>
+                    <h2 class="text-xl leading-snug font-bold text-primary-100 xl:leading-7 mb-4 xl:mb-0">{{ $experience->start->format('Y') }}</h2>
                 </div>
-                <div class="relative grow pb-6 XXborder-b XXborder-slate-200">
+                <div class="relative grow pb-6">
                     <header class="text-2xl mb-4 leading-none">
-                        <a href="{{ $experience->url }}" class="text-amber-500 font-black">
+                        <a href="{{ $experience->url }}" class="text-secondary-500 font-black">
                             {{ $experience->name }}
                         </a>
                     </header>

@@ -24,7 +24,7 @@
         @livewireStyles
     </head>
     <body
-        class="font-sans antialiased bg-zinc-800 text-white bg-fixed bg-cover"
+        class="font-sans antialiased bg-primary-800 text-white bg-fixed bg-cover"
         style="background-image: url('/mjp-back-1.jpg')"
         x-data="{
             page: '{{ $routeName }}',

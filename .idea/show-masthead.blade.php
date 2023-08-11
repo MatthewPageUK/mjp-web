@@ -24,10 +24,10 @@
                     {{-- More info link --}}
                     <span class="justify-self-end text-right">
                         <a href="{{ $this->masthead->more_url }}"
-                            class="flex items-center text-xs text-green-400 hover:text-amber-400 ease-in-out duration-500"
+                            class="flex items-center text-xs text-green-400 hover:text-secondary-400 ease-in-out duration-500"
                         >
                             {{ __('More info') }}
-                            <span class="material-icons-outlined text-sm ml-1 hover:fill-amber-400">help</span>
+                            <span class="material-icons-outlined text-sm ml-1 hover:fill-secondary-400">help</span>
                         </a>
                     </span>
                 @endif
@@ -35,7 +35,7 @@
 
             {{-- Next button --}}
             <button
-                class="absolute rounded-full top-4 right-4 bg-zinc-800 h-8 w-8 hover:bg-amber-400 ease-in-out duration-500"
+                class="absolute rounded-full top-4 right-4 bg-primary-800 h-8 w-8 hover:bg-secondary-400 ease-in-out duration-500"
                 title="Next demo"
                 wire:click="next"
             >{{ __('>') }}</button>

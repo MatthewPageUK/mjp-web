@@ -1,7 +1,7 @@
 {{--
     Skill selection panel for any skillable model
 --}}
-<div class="grid grid-cols-1 gap-4 bg-zinc-900 border border-zinc-700 rounded-lg p-4">
+<div class="grid grid-cols-1 gap-4 bg-primary-900 border border-primary-700 rounded-lg p-4">
     @foreach ($this->skillGroups as $skillGroup)
         <div class="">
             <h3 class="mb-2">{{ $skillGroup->name }}</h3>
@@ -11,12 +11,12 @@
                         <button
                             @class([
                             'w-full text-sm',
-                            'bg-zinc-700 hover:bg-zinc-600' => ! $this->skillable->skills->contains($skill),
-                            'border border-zinc-700 hover:border-zinc-600',
+                            'bg-primary-700 hover:bg-primary-600' => ! $this->skillable->skills->contains($skill),
+                            'border border-primary-700 hover:border-primary-600',
                             'rounded-lg px-2 py-1',
                             'transition duration-200 ease-in-out',
                             'focus:outline-none',
-                            'bg-amber-400 text-zinc-800 font-semibold' => $this->skillable->skills->contains($skill),
+                            'bg-secondary-400 text-primary-800 font-semibold' => $this->skillable->skills->contains($skill),
                         ])
                         type="button" wire:click.prevent="toggleSkill({{ $skill->id }})">
                             {{ $skill->name }}

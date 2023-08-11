@@ -24,7 +24,7 @@
         @endif
 
         {{-- Task --}}
-        <div class="bg-zinc-900 rounded-lg p-2 pl-3">
+        <div class="bg-primary-900 rounded-lg p-2 pl-3">
             <x-github.issue-item :issue="$issue" />
         </div>
 

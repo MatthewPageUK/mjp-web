@@ -5,7 +5,7 @@
         @foreach ($this->postable->posts->sortBy('created_at') as $post)
             <li class="flex items-center gap-2 mb-2">
                 <span class="flex-1">{{ $post->name }}</span>
-                <span class="flex text-xs text-zinc-400">{{ $post->created_at }}</span>
+                <span class="flex text-xs text-primary-400">{{ $post->created_at }}</span>
                 <x-cms.icon-button
                     wire:click.prevent="unlinkPost({{ $post->id }})"
                     iconClass=""
@@ -20,7 +20,7 @@
         @foreach ($this->posts as $post)
             <li class="flex items-center gap-2 mb-2">
                 <span class="flex-1">{{ $post->name }}</span>
-                <span class="flex text-xs text-zinc-400">{{ $post->created_at }}</span>
+                <span class="flex text-xs text-primary-400">{{ $post->created_at }}</span>
                 <x-cms.icon-button
                     wire:click.prevent="linkPost({{ $post->id }})"
                     iconClass=""

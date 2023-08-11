@@ -48,7 +48,7 @@
             <div class="col-span-9">
                 <x-cms.form.textarea wire:model="post.content" class="h-96" />
                 <x-cms.validation-error field="post.content" />
-                <div class="prose prose-zinc prose-lg">
+                <div class="prose prose-primary prose-lg">
                     @markdown($this->post->content ?? '')
                 </div>
             </div>
@@ -138,7 +138,7 @@
             <li class="group flex gap-4 mb-2 border-b pb-2 items-center" wire:key="post-{{ $post->id }}">
 
                 {{-- Colour --}}
-                <span class="{{ $post->active ? 'bg-amber-400' : 'bg-zinc-400' }} block w-4 h-4 rounded-full group-hover:rounded-sm transition-all"></span>
+                <span class="{{ $post->active ? 'bg-secondary-400' : 'bg-primary-400' }} block w-4 h-4 rounded-full group-hover:rounded-sm transition-all"></span>
 
                 {{-- Name --}}
                 <div class="flex-1">

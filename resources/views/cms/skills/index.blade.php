@@ -29,7 +29,7 @@
             <div class="col-span-12 md:col-span-9 flex gap-4 items-center">
                 <div class="flex-1">
                     <x-cms.form.input wire:model="skill.name" class="text-2xl font-black" />
-                    {{-- <span class="text-sm text-zinc-400 pl-2">{{ $this->skill->slug }}</span> --}}
+                    {{-- <span class="text-sm text-primary-400 pl-2">{{ $this->skill->slug }}</span> --}}
                     <x-cms.validation-error field="skill.name" />
                 </div>
                 <div>
@@ -42,11 +42,11 @@
 
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" wire:model="skill.active" class="sr-only peer">
-                            <div class="w-11 h-6 bg-zinc-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-amber-400 dark:peer-focus:ring-amber-400
-                                rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full
+                            <div class="w-11 h-6 bg-primary-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-secondary-400
+                                rounded-full peer peer-checked:after:translate-x-full
                                 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
-                                after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-400"></div>
-                            {{-- <span class="ml-3 text-sm font-medium text-zinc-300 ">Toggle me</span> --}}
+                                after:border-primary-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary-400"></div>
+                            {{-- <span class="ml-3 text-sm font-medium text-primary-300 ">Toggle me</span> --}}
                         </label>
 
                     </div>
@@ -79,7 +79,7 @@
                     @endfor
                 </x-cms.form.select> --}}
                 <x-cms.validation-error field="skill.level" />
-                <input class="accent-amber-400 w-1/2 h-3 bg-zinc-900 rounded-lg cursor-pointer range-lg" type="range" min="1" max="10" step="1" wire:model="skill.level">
+                <input class="accent-secondary-400 w-1/2 h-3 bg-primary-900 rounded-lg cursor-pointer range-lg" type="range" min="1" max="10" step="1" wire:model="skill.level">
                 <span class="ml-2 text-2xl font-black">{{ $this->skill->level }}</span>
             </div>
 
@@ -93,20 +93,7 @@
                 <x-cms.validation-error field="skill.svg" />
             </div>
 
-            {{-- Active --}}
-            {{-- <label class="col-span-3 block mb-2">Active</label>
-            <div class="col-span-9">
-                <x-cms.validation-error field="skill.active" />
 
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" wire:model="skill.active" class="sr-only peer">
-                    <div class="w-11 h-6 bg-zinc-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-amber-400 dark:peer-focus:ring-amber-400
-                        rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full
-                        peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
-                        after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-400"></div>
-                  </label>
-
-            </div> --}}
 
             {{-- Create buttons --}}
             @if ($this->mode === 'create')
@@ -129,7 +116,7 @@
 
                 {{-- Skill Groups --}}
                 <label class="col-span-12 md:col-span-3 block mb-2">Groups</label>
-                <div class="col-span-12 md:col-span-9 border border-zinc-700 rounded-lg p-4">
+                <div class="col-span-12 md:col-span-9 border border-primary-700 rounded-lg p-4">
                     <livewire:cms.skill-groupable :skill="$this->skill" wire:key="skillgroupable-{{ $this->skill->id }}" />
                 </div>
 
@@ -181,7 +168,7 @@
 
         @foreach ($this->groups as $skillGroup)
 
-            <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-zinc-400 hover:text-white" wire:key="skillgroup-{{ $skillGroup->id }}">
+            <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-primary-400 hover:text-white" wire:key="skillgroup-{{ $skillGroup->id }}">
 
                 {{-- Name --}}
                 <div class="flex-1">
@@ -197,14 +184,14 @@
             </li>
 
         @forelse ($skillGroup->skills as $skill)
-            <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-zinc-400 hover:text-white" wire:key="skill-{{ $skill->id }}">
+            <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-primary-400 hover:text-white" wire:key="skill-{{ $skill->id }}">
 
                 {{-- Level --}}
                 <span @class([
                         'flex items-center justify-center text-white font-bold font-orbitron w-8 h-8 rounded-full group-hover:w-16 group-hover:h-6 group-hover:shadow-lg group-hover:rounded-sm transition-all',
-                        'bg-zinc-400' => ! $skill->active,
+                        'bg-primary-400' => ! $skill->active,
                         'bg-red-400' => $skill->active && $skill->level < 3,
-                        'bg-amber-400' => $skill->active && $skill->level < 7 && $skill->level >= 3,
+                        'bg-secondary-400' => $skill->active && $skill->level < 7 && $skill->level >= 3,
                         'bg-green-400' => $skill->active && $skill->level >= 7,
                     ])
                 >

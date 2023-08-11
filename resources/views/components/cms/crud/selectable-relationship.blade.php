@@ -1,6 +1,6 @@
 {{-- Selectable relationship --}}
 <div
-    class="border border-zinc-700 bg-zinc-900 rounded-lg p-4"
+    class="border border-primary-700 bg-primary-900 rounded-lg p-4"
     x-data="{ open: false }"
 >
     <ul>

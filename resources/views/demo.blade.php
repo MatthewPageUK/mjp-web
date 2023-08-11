@@ -9,7 +9,7 @@
 
             {{-- Embedded demo --}}
             @if ($demo->demo_url)
-                <iframe src="{{ $demo->demo_url }}" class="w-full h-[700px] mt-8 border border-2 border-zinc-900 shadow-lg"></iframe>
+                <iframe src="{{ $demo->demo_url }}" class="w-full h-[700px] mt-8 border border-2 border-primary-900 shadow-lg"></iframe>
             @endif
 
     <div class="lg:grid lg:grid-cols-3 gap-x-16 my-16">
@@ -23,7 +23,7 @@
             @if ($demo->url)
                 <p class="pb-8">
                     <a href="{{ $demo->url }}" target="_blank">
-                        <span class="flex text-amber-400">
+                        <span class="flex text-secondary-400">
                             <span class="material-icons-outlined mr-1">open_in_browser</span>
                             Demo Website
                         </span>
@@ -33,18 +33,18 @@
             @endif
 
             {{-- Demo description --}}
-            <div class="prose prose-xl prose-zinc">
+            <div class="prose prose-xl prose-primary">
                 @markdown($demo->description)
             </div>
 
             {{-- Created --}}
-            <p class="mt-8 text-xs">
-                Created : {{ $demo->created_at->diffForHumans() }}
+            <p class="mt-8 text-xs flex items-center gap-1">
+                Created : <x-ui.badges.age :date="$demo->created_at" />
             </p>
 
         </div>
 
-        <div class="xxxtext-right">
+        <div class="">
 
             <x-related.links :model="$demo" />
 
