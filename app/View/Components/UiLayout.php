@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Facades\Page;
 use App\Services\SettingService;
 use Illuminate\View\{
     Component,

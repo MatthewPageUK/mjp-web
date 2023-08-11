@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Cms;
 
 use App\Facades\Cms\Demos;
+use App\Facades\Page;
 use App\Http\Livewire\Cms\Traits\HasCrudActions;
 use App\Http\Livewire\Cms\Traits\HasCrudModes;
 use App\Models\Demo;
@@ -169,6 +170,8 @@ class DemosEditor extends Component
      */
     public function render(): View
     {
+        Page::setTitle('CMS - Demos');
+
         return view('cms.demos.index')
             ->layout(CmsLayout::class, ['title' => 'CMS - Demos']);
     }
