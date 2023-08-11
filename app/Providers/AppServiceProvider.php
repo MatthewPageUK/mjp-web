@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Share the settings variable on all views
-        View::share('settings', app(SettingService::class));
+        //View::share('settings', app(SettingService::class));
     }
 }

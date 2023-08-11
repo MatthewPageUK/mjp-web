@@ -2,7 +2,7 @@
     Skill detail page
 --}}
 <x-ui-layout
-    title="{{ $settings->getValue('site_name') }} - {{ $skill->name }} skills"
+    title="{{ Settings::getValue('site_name') }} - {{ $skill->name }} skills"
 >
 
     <div class="border-b pb-8 mb-16">

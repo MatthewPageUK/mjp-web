@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ $settings->getValue('site_name') }} - {{ $settings->getValue('site_tagline') }}</title>
+        <title>{{ Settings::getValue('site_name') }} - {{ Settings::getValue('site_tagline') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

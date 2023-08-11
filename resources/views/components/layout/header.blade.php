@@ -57,17 +57,17 @@
 
         <nav class="mt-8 lg:mt-0 flex space-x-4 flex-grow justify-center lg:justify-end">
             {{-- Github Icon --}}
-            <x-layout.header-icon href="{{ $settings->getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-amber-400">
+            <x-layout.header-icon href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-amber-400">
                 <x-icons.github class="w-8 h-8 text-white"/>
             </x-layout.header-icon>
 
             {{-- LinkedIn Icon --}}
-            <x-layout.header-icon href="{{ $settings->getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-amber-400">
+            <x-layout.header-icon href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-amber-400">
                 <x-icons.linkedin class="w-8 h-8 text-white"/>
             </x-layout.header-icon>
 
             {{-- Youtube Icon --}}
-            <x-layout.header-icon href="{{ $settings->getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-amber-400">
+            <x-layout.header-icon href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-amber-400">
                 <x-icons.youtube class="w-8 h-8 text-white"/>
             </x-layout.header-icon>
         </nav>

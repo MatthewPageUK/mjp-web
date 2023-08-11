@@ -211,6 +211,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'GitHub' => GrahamCampbell\GitHub\Facades\GitHub::class,
         'Page' => App\Facades\Page::class,
+        'Settings' => App\Facades\Settings::class,
     ])->toArray(),
 
 ];
