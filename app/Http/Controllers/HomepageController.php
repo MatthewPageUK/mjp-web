@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Page;
 use App\Facades\Settings;
 use App\Facades\Ui\BulletPoints;
 use Illuminate\Http\Request;
@@ -16,6 +17,8 @@ class HomepageController extends Controller
      */
     public function show(Request $request): View
     {
+        Page::setTitle('My Homepage');
+
         return view('welcome', [
             'bulletPoints' => BulletPoints::getAll(),
             'name' => Settings::getValue('homepage_name'),

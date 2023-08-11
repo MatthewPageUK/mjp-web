@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ui\Post;
 
+use App\Facades\Page;
 use App\Facades\Settings;
 use App\Facades\Ui\Posts;
 use App\Http\Livewire\Ui\Traits\HasCategoryFilter;
@@ -112,11 +113,10 @@ class PostsHome extends Component
      */
     public function render(): View
     {
+        Page::setTitle('Posts Home');
+
         return view('ui.posts.posts')
-            ->layout(UiLayout::class, [
-                'title' => 'Posts',
-                'showMasthead' => false,
-            ]);
+            ->layout(UiLayout::class);
     }
 
 }
