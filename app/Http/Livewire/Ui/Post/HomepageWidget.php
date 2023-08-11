@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Post;
+namespace App\Http\Livewire\Ui\Post;
 
 use App\Facades\Ui\Posts;
 use App\Http\Livewire\Ui\Traits\HasCategoryFilter;
@@ -100,7 +100,7 @@ class HomepageWidget extends Component
      */
     public function render(): View
     {
-        return view('livewire.post.recent');
+        return view('ui.posts.homepage');
     }
 
 }

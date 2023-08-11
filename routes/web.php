@@ -5,6 +5,9 @@ use App\Http\Livewire\Demo\Explorer as DemoExplorer;
 use App\Http\Livewire\Project\Explorer as ProjectExplorer;
 use App\Http\Livewire\Experience\Timeline;
 use App\Http\Livewire\Experience\ViewExperience;
+use App\Http\Livewire\Ui\Post\PostsCategory;
+use App\Http\Livewire\Ui\Post\PostsHome;
+use App\Http\Livewire\Ui\Post\ViewPost;
 use App\Http\Livewire\Skill\Explorer as SkillExplorer;
 use App\Models\Demo;
 use App\Models\Experience;
@@ -72,8 +75,9 @@ Route::get('/experience/{experience}', ViewExperience::class)->name('experience'
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/posts', function () { return "posts"; })->name('posts');
-Route::get('/post/{post}', function (Post $post) { return "post ".$post->name; })->name('post');
+Route::get('/posts', PostsHome::class)->name('posts');
+Route::get('/posts/{category}', PostsCategory::class)->name('posts.category');
+Route::get('/post/{year}/{month}/{day}/{post}', ViewPost::class)->name('post');
 
 /*
 |--------------------------------------------------------------------------

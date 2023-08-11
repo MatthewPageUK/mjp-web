@@ -38,12 +38,19 @@ class PostService
      * @param int $count    How many to get
      * @return Collection
      */
-    public function getRecent(int $count = 5): Collection
+    public function getRecent(int $count = 5, ?string $category = null): Collection
     {
-        return $this->getBaseQuery()
-            ->orderBy('created_at', 'desc')
-            ->limit($count)
-            ->get();
+        $query = $this->getBaseQuery();
+
+        // Category filter
+        if ($category) {
+            $query->inCategory($category);
+        }
+
+        $query->orderBy('created_at', 'desc')
+            ->limit($count);
+
+        return $query->get();
     }
 
     /**
@@ -94,9 +101,7 @@ class PostService
 
         // Category filter
         if (isset($filters['category']) && $filters['category']) {
-            $query->whereHas('postCategories', function (Builder $query) use ($filters) {
-                $query->where('slug', $filters['category']);
-            });
+            $query->inCategory($filters['category']);
         }
 
         // Search filter
