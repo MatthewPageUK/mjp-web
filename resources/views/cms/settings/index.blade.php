@@ -8,12 +8,12 @@
 
     <ul class="mt-16">
         @foreach ($this->settings as $setting)
-            <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-zinc-400 hover:text-white" wire:key="setting-view-{{ $setting->id }}">
+            <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-primary-400 hover:text-white" wire:key="setting-view-{{ $setting->id }}">
 
                 {{-- Dot --}}
                 <span @class([
                     'block w-4 h-4 mx-2 lg:group-hover:w-8 lg:group-hover:h-8 group-hover:rounded-full group-hover:mx-0 transition-all',
-                    'bg-teal-400 lg:group-hover:bg-amber-400',
+                    'bg-teal-400 lg:group-hover:bg-secondary-400',
                 ])></span>
 
                 {{-- Setting --}}

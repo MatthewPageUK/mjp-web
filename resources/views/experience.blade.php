@@ -10,7 +10,7 @@
         <div class="col-span-2">
 
             {{-- Date from / to--}}
-            <div class="mb-8 text-lg grid grid-cols-3 items-center border border-zinc-700 rounded-lg bg-zinc-900 overflow-hidden p-4">
+            <div class="mb-8 text-lg grid grid-cols-3 items-center border border-primary-700 rounded-lg bg-primary-900 overflow-hidden p-4">
                 <div class="flex items-center gap-4">
                     {{-- Previous experience --}}
                     @if ($this->previous)
@@ -38,7 +38,7 @@
             </div>
 
             {{-- Description --}}
-            <div class="prose prose-xl prose-zinc">
+            <div class="prose prose-xl prose-primary">
                 @markdown($experience->description)
             </div>
 

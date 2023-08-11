@@ -10,7 +10,7 @@
         </p>
         <p>
             <x-skills.stars :skill="$skill" />
-            <p class="text-sm text-zinc-500">Competent but may need some help...</p>
+            <p class="text-sm text-primary-500">Competent but may need some help...</p>
         </p>
         <p class="pt-8">{{ $skill->description }}</p>
     </div>

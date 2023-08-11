@@ -53,7 +53,7 @@
             x-show="mode === 'read'"
         >
             @foreach ($this->points as $model)
-                <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-zinc-400 hover:text-white" wire:key="{{ $this->modelVar }}-{{ $model->id }}">
+                <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-primary-400 hover:text-white" wire:key="{{ $this->modelVar }}-{{ $model->id }}">
 
                     {{-- Colour --}}
                     <span class="{{ $model->colour }} block w-6 h-6 rounded-full lg:group-hover:w-32 transition-all"></span>

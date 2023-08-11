@@ -7,7 +7,7 @@
 
     {{-- Drop down menu --}}
     <x-cms.form.select
-        class="w-full hover:text-amber-400 mr-1 hover:-ml-1"
+        class="w-full hover:text-secondary-400 mr-1 hover:-ml-1"
         x-data="{ link : '' }"
         x-model="link"
         x-init="$watch('link', value => window.location = link)"

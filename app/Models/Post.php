@@ -128,6 +128,19 @@ class Post extends Model
     }
 
     /**
+     * Get the image attribute
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return 'https://loremflickr.com/640/360/computer?lock=42107643'.$this->id;
+
+        return asset('images/posts/' . $this->slug . '.jpg');
+    }
+
+
+    /**
      * Scope the query to a specific category
      *
      * @param Illuminate\Database\Eloquent\Builder $query

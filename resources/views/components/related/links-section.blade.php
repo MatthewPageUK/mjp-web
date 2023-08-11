@@ -28,7 +28,7 @@
 
         <p class="text-xs pl-9 font-orbitron">
             <x-primary-button
-                class="px-2 py-1 rounded mt-2 hover:text-amber-400"
+                class="px-2 py-1 rounded mt-2 hover:text-secondary-400"
                 x-show="! expanded && count > showCount"
                 x-on:click="expanded = true"
             >
@@ -36,7 +36,7 @@
                 <span class="material-icons-outlined text-xs">keyboard_arrow_down</span>
             </x-primary-button>
             <x-primary-button
-                class="px-2 py-1 rounded mt-2 hover:text-amber-400"
+                class="px-2 py-1 rounded mt-2 hover:text-secondary-400"
                 x-show="expanded"
                 x-on:click="expanded = false"
             >

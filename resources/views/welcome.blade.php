@@ -5,8 +5,8 @@
     <div class="grid grid-cols-6 lg:grid-cols-12 gap-4 lg:gap-16 lg:mt-16">
         <div class="col-span-6">
             <h1 class="text-4xl lg:text-6xl font-bold font-orbitron">{{ $name }}</h1>
-            <h1 class="text-xl lg:text-4xl font-bold text-amber-400 mb-8 font-orbitron">{{ $tagline }}</h1>
-            <div class="prose prose-zinc">
+            <h1 class="text-xl lg:text-4xl font-bold text-secondary-400 mb-8 font-orbitron">{{ $tagline }}</h1>
+            <div class="prose prose-primary">
                 @markdown($intro)
             </div>
         </div>

@@ -13,12 +13,12 @@
 <div class="overflow-y-auto h-[200px] pr-2">
     <ul>
         @foreach ($openPullRequests as $pr)
-            <li class="flex gap-4 bg-zinc-900 rounded-lg p-2 pl-3 mb-1 items-center">
+            <li class="flex gap-4 bg-primary-900 rounded-lg p-2 pl-3 mb-1 items-center">
 
                 <a class="flex-1" href="{{ $pr['html_url'] }}" target="_blank">
                     #{{ $pr['number'] }}. {{ $pr['title'] }}
                 </a>
-                <span class="text-xs text-zinc-500">
+                <span class="text-xs text-primary-500">
                     {{ \Carbon\Carbon::parse($pr['created_at'])->diffForHumans() }}
                 </span>
             </li>
@@ -31,12 +31,12 @@
     <ul>
         @foreach ($closedPullRequests as $pr)
 
-            <li class="flex gap-4 bg-zinc-900 rounded-lg p-2 pl-3 mb-1 items-center">
+            <li class="flex gap-4 bg-primary-900 rounded-lg p-2 pl-3 mb-1 items-center">
 
                 <a class="flex-1" href="{{ $pr['html_url'] }}" target="_blank">
                     #{{ $pr['number'] }}. <span class="line-through">{{ $pr['title'] }}</span>
                 </a>
-                <span class="text-xs text-zinc-500">
+                <span class="text-xs text-primary-500">
                     {{ \Carbon\Carbon::parse($pr['closed_at'])->diffForHumans() }}
                 </span>
             </li>

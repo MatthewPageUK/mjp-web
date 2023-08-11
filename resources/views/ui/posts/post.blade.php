@@ -26,7 +26,7 @@
             <div>
                 Posted in:
                 @foreach ($post->postCategories as $category)
-                    <a href="" class="text-zinc-500 hover:text-zinc-400">{{ $category->name }}</a>
+                    <a href="" class="text-primary-500 hover:text-primary-400">{{ $category->name }}</a>
                     {{-- {{ route('category', $category->slug) }} --}}
                     @if (!$loop->last)
                         ,
@@ -35,13 +35,13 @@
             </div>
 
             {{-- Snippet --}}
-            <div class="prose prose-xl prose-zinc font-bold mb-8">
+            <div class="prose prose-xl prose-primary font-bold mb-8">
                 @markdown($post->snippet)
             </div>
 
 
             {{-- Description --}}
-            <div class="prose prose-lg prose-zinc">
+            <div class="prose prose-lg prose-primary">
                 @markdown($post->content)
             </div>
 
@@ -62,21 +62,13 @@
                     <h3 class="text-4xl whitespace-nowrap leading-tight">
                         More from {{ $post->postCategories()->first()?->name }}
                     </h3>
-                    <div class="mt-6 w-full border-zinc-400 border-t"> </div>
+                    <div class="mt-6 w-full border-primary-400 border-t"> </div>
                 </div>
                 <div class="grid grid-cols-6 gap-4">
 
                     @foreach ($this->relatedPosts as $post)
 
-                        <div class="border rounded-lg overflow-hidden border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600 pb-2">
-
-                            <a href="{{ $post->url }}" class="block" title="View the '{{ $post->name }}' post">
-                                <img src="https://loremflickr.com/640/360/computer?lock=487643{{ $post->id }}" class="" />
-                                <span class="block leading-tight text-lg p-4 pb-2">{{ $post->name }}</span>
-                                {{-- <span class="text-xs px-4">{{ $post->skills->pluck('name')->implode(', ') }}</span> --}}
-                                <span class="block text-xs px-4 pb-2 text-slate-500">Last activity : {{ $post->created_at->diffForHumans() }}</span>
-                            </a>
-                        </div>
+                        <x-ui.posts.cards.small :post="$post" />
 
                     @endforeach
 

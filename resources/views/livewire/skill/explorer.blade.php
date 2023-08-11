@@ -15,14 +15,14 @@
 
             <select
                 wire:model="group"
-                class="rounded bg-zinc-800"
+                class="rounded bg-primary-800"
             >
                 <option value="">All</option>
 
                 @foreach($this->groups as $group)
 
                     <option
-                        class="bg-zinc-800"
+                        class="bg-primary-800"
                         value="{{ $group->slug }}"
                         wire:key="group-{{ $group->slug }}"
                     >{{ $group->name }}</option>
@@ -43,7 +43,7 @@
 
             {{-- Skills --}}
             <div
-                class="text-center border rounded-lg hover:bg-zinc-700 mb-1"
+                class="text-center border rounded-lg hover:bg-primary-700 mb-1"
                 wire:key="skill-{{ $skill->slug }}"
             >
                 <a
@@ -60,7 +60,7 @@
 
     </div>
 
-    <div class="text-zinc-200">
+    <div class="text-primary-200">
 
         <h2>Skill Rating Multiplier</h2>
         <p>

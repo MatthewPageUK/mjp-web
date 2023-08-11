@@ -5,7 +5,7 @@
 {{-- Navbar menu --}}
 <nav
     x-show="(isMobile && openMenu) || ! isMobile"
-    class="md:w-[350px] font-orbitron bg-zinc-900 shadow-lg p-8 mt-24 lg:mt-0"
+    class="md:w-[350px] font-orbitron bg-primary-900 shadow-lg p-8 mt-24 lg:mt-0"
 >
     <div class="grid grid-cols-1 gap-4">
         {{-- Logo --}}
@@ -14,7 +14,7 @@
         </a>
 
         {{-- Title --}}
-        <h1 class="uppercase text-amber-400 text-sm font-bold text-center mb-8 hidden lg:block">
+        <h1 class="uppercase text-secondary-400 text-sm font-bold text-center mb-8 hidden lg:block">
             Content Management System
         </h1>
 
@@ -77,7 +77,7 @@
         <li>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="block text-left px-3 py-2 w-full bg-zinc-800 border border-zinc-700 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600 hover:-ml-1 transition-all">
+                <button type="submit" class="block text-left px-3 py-2 w-full bg-primary-800 border border-primary-700 rounded-lg bg-primary-800 hover:bg-primary-700 hover:border-primary-600 hover:-ml-1 transition-all">
                     Logout
                 </button>
             </form>

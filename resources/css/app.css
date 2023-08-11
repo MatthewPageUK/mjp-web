@@ -4,7 +4,7 @@
 
 @layer base {
     a {
-      @apply transition duration-500 ease-in-out hover:text-amber-400;
+      @apply transition duration-500 ease-in-out hover:text-secondary-400;
     }
   }
 
@@ -17,15 +17,15 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  @apply bg-zinc-500 rounded-full;
+  @apply bg-primary-500 rounded-full;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply bg-amber-400 rounded-full;
+  @apply bg-secondary-400 rounded-full;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-amber-500;
+  @apply bg-secondary-500;
 }

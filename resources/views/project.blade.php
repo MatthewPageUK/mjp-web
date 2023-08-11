@@ -13,7 +13,7 @@
         <div class="lg:col-span-3">
 
             {{-- Project description --}}
-            <div class="prose prose-xl prose-zinc">
+            <div class="prose prose-xl prose-primary">
                 @markdown($project->description)
             </div>
 

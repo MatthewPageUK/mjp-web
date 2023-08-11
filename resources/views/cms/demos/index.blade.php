@@ -24,7 +24,7 @@
                 <div class="flex gap-4 items-center">
                     <div class="flex-1">
                         <x-cms.form.input wire:model="demo.name" class="text-2xl font-black" />
-                        {{-- <span class="text-sm text-zinc-400 pl-2">{{ $this->demo->slug }}</span> --}}
+                        {{-- <span class="text-sm text-primary-400 pl-2">{{ $this->demo->slug }}</span> --}}
                         <x-cms.validation-error field="demo.name" />
                     </div>
                     <div>
@@ -33,10 +33,10 @@
                         <div>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" wire:model="demo.active" class="sr-only peer">
-                                <div class="w-11 h-6 bg-zinc-900 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-amber-400 dark:peer-focus:ring-amber-400
-                                    rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full
+                                <div class="w-11 h-6 bg-primary-900 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-secondary-400
+                                    rounded-full peer peer-checked:after:translate-x-full
                                     peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
-                                    after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-400"></div>
+                                    after:border-primary-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary-400"></div>
                             </label>
                         </div>
 
@@ -110,13 +110,13 @@
             x-show="mode === 'read'"
         >
             @foreach ($this->demos as $model)
-                <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-zinc-400 hover:text-white" wire:key="{{ $this->modelVar }}-{{ $model->id }}">
+                <li class="group flex gap-4 pt-3 border-b pb-3 items-center text-primary-400 hover:text-white" wire:key="{{ $this->modelVar }}-{{ $model->id }}">
 
                     {{-- Dot --}}
                     <span @class([
                         'block w-6 h-6 rounded-full lg:group-hover:h-2 transition-all',
-                        'bg-emerald-400 lg:group-hover:bg-amber-400' => $model->active === 1,
-                        'bg-zinc-400' => $model->active === 0,
+                        'bg-emerald-400 lg:group-hover:bg-secondary-400' => $model->active === 1,
+                        'bg-primary-400' => $model->active === 0,
                     ])></span>
 
                     {{-- Name --}}

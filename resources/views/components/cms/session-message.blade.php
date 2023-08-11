@@ -6,7 +6,7 @@
 @props([
     'type' => 'message',
     'timeout' => 3000,
-    'class' => 'text-amber-600 border-amber-500'
+    'class' => 'text-secondary-600 border-secondary-500'
 ])
 
 @if (session()->has($type))

@@ -13,12 +13,12 @@
         </div>
 
         @if (! empty($this->search))
-            <div class="grid grid-cols-12 bg-zinc-900 p-4 mt-1 rounded-lg text-left max-h-64 overflow-y-scroll gap-y-1">
+            <div class="grid grid-cols-12 bg-primary-900 p-4 mt-1 rounded-lg text-left max-h-64 overflow-y-scroll gap-y-1 gap-x-2">
                 @foreach ($this->results as $type => $results)
                     @foreach ($results as $result)
-                        <div class="col-span-4 md:col-span-2"><span class="block border border-zinc-400 p-1 rounded-lg mr-2 text-xs text-zinc-400 whitespace-nowrap">{{ $type }}</span></div>
-                        <div class="col-span-8 md:col-span-10">
-                            <a href="{{ route('cms.'.$type, ['mode' => 'update', 'id' => $result['id']]) }}" class="hover:text-amber-400 transition-all">
+                        <div class="col-span-4 md:col-span-3"><span class="block border bg-highlight-400 text-primary-800 uppercase border-primary-700 px-2 py-1 rounded-lg text-xs text-primary-400 whitespace-nowrap">{{ $type }}</span></div>
+                        <div class="col-span-8 md:col-span-9">
+                            <a href="{{ route('cms.'.$type, ['mode' => 'update', 'id' => $result['id']]) }}" class="hover:text-secondary-400 transition-all">
                             {{ $result['name'] }}
                             </a>
 

@@ -23,7 +23,7 @@
             {{-- Header --}}
             <header class="flex mb-4 border-b pb-4">
                 <h1 class="flex-1 text-4xl flex gap-4 items-center font-orbitron">
-                    <x-icons.github class="w-8 h-8 fill-amber-400" />
+                    <x-icons.github class="w-8 h-8 fill-secondary-400" />
                     Project Development
                 </h1>
                 <div class="flex gap-2">

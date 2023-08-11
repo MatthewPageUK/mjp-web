@@ -5,7 +5,7 @@
         @foreach ($this->experienceable->experiences->sortByDesc('start') as $experience)
             <li class="flex items-center gap-2 mb-2">
                 <span class="flex-1">{{ $experience->name }}</span>
-                <span class="flex text-xs text-zinc-400">{{ $experience->start }}</span>
+                <span class="flex text-xs text-primary-400">{{ $experience->start }}</span>
                 <x-cms.icon-button
                     wire:click.prevent="unlinkExperience({{ $experience->id }})"
                     iconClass=""
@@ -20,7 +20,7 @@
         @foreach ($this->experiences as $experience)
             <li class="flex items-center gap-2 mb-2">
                 <span class="flex-1">{{ $experience->name }}</span>
-                <span class="flex text-xs text-zinc-400">{{ $experience->start }}</span>
+                <span class="flex text-xs text-primary-400">{{ $experience->start }}</span>
                 <x-cms.icon-button
                     wire:click.prevent="linkExperience({{ $experience->id }})"
                     iconClass=""

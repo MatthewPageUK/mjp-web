@@ -9,7 +9,7 @@
     }"
     x-on:resize.window.debounce.500ms="isMobile = (window.innerWidth < 1024)"
     x-on:click.outside="openMenu = false"
-    class="z-50 sticky top-0 lg:flex lg:space-x-8 lg:items-center px-8 py-6 lg:pt-10 bg-zinc-800 text-white border-b-2 border-amber-400 shadow-lg"
+    class="z-50 sticky top-0 lg:flex lg:space-x-8 lg:items-center px-8 py-6 lg:pt-10 bg-primary-800 text-white border-b-2 border-secondary-400 shadow-lg"
 >
     {{-- Main Logo --}}
     <div class="w-full lg:w-48">
@@ -21,7 +21,7 @@
     {{-- Burger menu button --}}
     <button
         x-on:click.prevent="toggle()"
-        class="absolute top-0 right-1 lg:hidden hover:text-amber-500 ease-in-out duration-500"
+        class="absolute top-0 right-1 lg:hidden hover:text-secondary-500 ease-in-out duration-500"
     >
         <x-icons.material class="text-4xl ml-1">menu</x-icons.material>
     </button>
@@ -57,17 +57,17 @@
 
         <nav class="mt-8 lg:mt-0 flex space-x-4 flex-grow justify-center lg:justify-end">
             {{-- Github Icon --}}
-            <x-layout.header-icon href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-amber-400">
+            <x-layout.header-icon href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-secondary-400">
                 <x-icons.github class="w-8 h-8 text-white"/>
             </x-layout.header-icon>
 
             {{-- LinkedIn Icon --}}
-            <x-layout.header-icon href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-amber-400">
+            <x-layout.header-icon href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-secondary-400">
                 <x-icons.linkedin class="w-8 h-8 text-white"/>
             </x-layout.header-icon>
 
             {{-- Youtube Icon --}}
-            <x-layout.header-icon href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-amber-400">
+            <x-layout.header-icon href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-secondary-400">
                 <x-icons.youtube class="w-8 h-8 text-white"/>
             </x-layout.header-icon>
         </nav>
@@ -77,7 +77,7 @@
             <nav class="mt-8 lg:mt-4 flex justify-center lg:justify-start lg:fixed lg:top-0 lg:right-0 px-8 py-2 text-right text-sm">
                 @auth
                     {{-- Logged in user dashboard --}}
-                    <a href="{{ url('/dashboard') }}" class="flex items-center text-white dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    <a href="{{ url('/dashboard') }}" class="flex items-center text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                         Dashboard
                         <x-icons.material class="text-sm ml-1">account_circle</x-icons.material>
                     </a>
