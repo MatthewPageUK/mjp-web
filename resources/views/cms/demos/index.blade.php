@@ -79,6 +79,14 @@
                 </div>
             </x-cms.crud.field>
 
+            <x-cms.crud.field name="Image">
+                <div x-data="{open: false}">
+                    <x-cms.form.input XXwire:model="{{ $this->modelVar }}.image" /> <button @click.prevent="open = ! open" title="Open media explorer">...</button>
+                    <x-cms.validation-error field="{{ $this->modelVar }}.url" />
+                    <iframe x-show="open" src="https://media.mjp.co/ui/explorer" class="w-full h-[650px] mt-4"></iframe>
+                </div>
+            </x-cms.crud.field>
+
             @if ($this->mode === 'update')
 
                 {{-- Skills --}}
