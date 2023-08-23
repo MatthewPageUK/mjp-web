@@ -5,48 +5,22 @@ namespace App\Services\Cms;
 use App\Models\BulletPoint;
 use App\Services\Traits\WithRainbow;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
+ * CMS - Bullet Point Service.
+ *
  * Service for managing Bullet Points in the CMS.
+ * Standard CRUD features and re-ordering.
  *
  */
-class BulletPointService
+class BulletPointService extends AbstractCrudService
 {
     use WithRainbow;
 
-    /**
-     * Return a new BulletPoint model.
-     *
-     * @param array $data
-     * @return BulletPoint
-     */
-    public function new(array $data = []): BulletPoint
-    {
-        return new BulletPoint($data);
-    }
+    protected $model = BulletPoint::class;
 
-    /**
-     * Get a single bullet point.
-     *
-     * @param int $id
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @return BulletPoint
-     */
-    public function get(int $id): BulletPoint
-    {
-        return BulletPoint::findOrFail($id);
-    }
-
-    /**
-     * Get all bullet points.
-     *
-     * @throws \Exception
-     * @return Collection
-     */
-    public function getAll(): Collection
-    {
-        return BulletPoint::orderBy('order')->get();
-    }
+    protected $defaultSort = 'order';
 
     /**
      * Get all bullet points with a rainbow colour.
@@ -56,88 +30,79 @@ class BulletPointService
      */
     public function getAllWithColour(): Collection
     {
-        //$bulletPoints = $this->getAll();
-
+        // Get the bullets and attach a colour to each in sequence
         $bulletPoints = $this->getAll()->map(function ($bulletPoint) {
             $bulletPoint->colour = $this->getNextColour();
             return $bulletPoint;
         });
 
+        // Reset the colour sequence
         $this->resetColour();
 
+        // Return the bullet points with colours
         return $bulletPoints;
     }
 
     /**
-     * Create a new Bullet Point insering it into
-     * the correct position and updating the order
-     * for all bullet points.
+     * Re-order the bullets after creating a new one.
      *
-     * @param array $data
+     * @param Model $model
      * @throws \Exception
-     * @return BulletPoint
+     * @return Model
      */
-    public function create(array $data): BulletPoint
+    public function afterCreate(Model $model): Model
     {
         $bullets = $this->getAll();
 
-        // Create a new model
-        $bullet = BulletPoint::create([
-            'name' => $data['name'],
-            'order' => $data['order'],
-        ]);
-
-        if ($data['order'] === 0) {
+        if ($model->order === 0) {
 
             // At the start, prepend it
-            $bullets = $bullets->prepend($bullet);
+            $bullets = $bullets->prepend($model);
         } else {
 
-            // In the middle, slice and dice the collection
-            $bullets = $bullets->slice(0, $data['order'])
-                ->push($bullet)
-                ->concat($bullets->slice($data['order'] + 1));
+            /**
+             * In the middle, slice and dice the collection
+             * to insert new bullet point in the correct
+             * position.
+             */
+            $bullets = $bullets->slice(0, $model->order)
+                ->push($model)
+                ->concat($bullets->slice($model->order + 1));
         }
 
-        // Save the new order
+        // Save the new order the bullet points
         $this->reorder($bullets);
 
-        return $bullet;
+        // Return the new bullet point
+        return $this->get($model->id);
     }
 
     /**
-     * Update an existing Bullet Point and update
-     * the order accordingly.
+     * After update hook - re-order the bullet points.
      *
      * @param int $id       The ID of the Bullet Point to update
      * @param array $data   The data to update with
      * @throws \Exception
-     * @return void
+     * @return BulletPoint
      */
-    public function update(int $id, array $data): void
+    public function afterUpdate(Model $model): Model
     {
-        $bullet = BulletPoint::findOrFail($id);
-
-        $bullet->name = $data['name'];
-        $bullet->order = $data['order'];
-
-        $bullet->save();
-
         $this->reorder();
+        return $this->get($model->id);
     }
 
     /**
-     * Delete a Bullet Point and update the order
-     * of the others.
+     * After deleting hook - re-order the remaining
+     * bullet points, removing the space left.
      *
      * @param int $id
      * @throws \Exception
-     * @return void
+     * @return Model
      */
-    public function delete(int $id): void
+    public function afterDelete(Model $model): Model
     {
-        $bullet = $this->get($id)->delete();
         $this->reorder();
+        return $model;
     }
 
     /**
@@ -149,6 +114,7 @@ class BulletPointService
      */
     public function moveUp(int $id): void
     {
+        // Get the Bullet Point
         $bullet = $this->get($id);
 
         // At the top already
@@ -156,14 +122,16 @@ class BulletPointService
             return;
         }
 
+        // Get all the bullet points
         $bullets = $this->getAll();
 
-        // Slice and dice the collection
+        // Slice and dice the collection to move the bullet point
         $bullets = $bullets->slice(0, $bullet->order - 1)
             ->push($bullet)
             ->push($bullets[$bullet->order - 1])
             ->concat($bullets->slice($bullet->order + 1));
 
+        // Save the new order
         $this->reorder($bullets);
     }
 
@@ -209,6 +177,12 @@ class BulletPointService
         }
 
         $order = 0;
+        /**
+         * Save a new order for all bullet points based
+         * on the current order in the collection. This
+         * will remove duplicate order values and fill
+         * gaps left by deleting.
+         */
         foreach ($bullets as $bullet) {
             $bullet->order = $order;
             $bullet->save();

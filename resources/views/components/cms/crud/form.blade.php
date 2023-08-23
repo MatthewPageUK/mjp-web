@@ -5,7 +5,7 @@
 @props(['title' => ''])
 
 <form
-    {{ $attributes->merge(['class' => 'rounded-lg']) }}
+    {{ $attributes->merge(['class' => 'relative rounded-lg']) }}
 >
     <h2 class="mb-4 text-2xl font-semibold text-secondary-400">{{ $title }}</h2>
 

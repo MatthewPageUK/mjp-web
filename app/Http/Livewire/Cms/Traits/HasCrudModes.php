@@ -2,24 +2,49 @@
 
 namespace App\Http\Livewire\Cms\Traits;
 
+use App\Enums\CrudModes;
+use Illuminate\Validation\Rules\Enum;
+
+/**
+ * Helper for settings, getting and checking the CRUD mode.
+ * Needed on all CRUD components.
+ * Uses the CrudModes enum.
+ *
+ */
 trait HasCrudModes
 {
     /**
-     * Current mode
+     * String mode name
      *
      * @var string
      */
-    public string $mode = 'read';
+    public $modeName = 'read';
+
+    /**
+     * Current mode
+     *
+     * @var Enum
+     */
+    protected CrudModes $mode = CrudModes::Read;
 
     /**
      * Set the mode
      *
-     * @param string $mode
+     * @param string|CrudModes $mode
      * @return void
      */
-    public function setMode(string $mode): void
+    public function setMode(string|CrudModes $mode): void
     {
+        if (is_string($mode)) {
+            try {
+                $mode = CrudModes::from($mode);
+            } catch (\Exception $e) {
+                $mode = CrudModes::Read;
+            }
+        }
+
         $this->mode = $mode;
+        $this->modeName = $mode->value;
     }
 
     /**
@@ -29,18 +54,23 @@ trait HasCrudModes
      */
     public function getMode(): string
     {
-        return $this->mode;
+        return $this->mode->value;
     }
 
     /**
-     * Is the mode
+     * Is the mode the same as the given mode?
      *
      * @param string $mode
      * @return bool
      */
     public function isMode(string $mode): bool
     {
+        try {
+            $mode = CrudModes::from($mode);
+        } catch (\Exception $e) {
+            return false;
+        }
+
         return $this->mode === $mode;
     }
-
 }

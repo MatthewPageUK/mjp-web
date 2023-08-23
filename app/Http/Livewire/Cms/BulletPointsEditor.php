@@ -3,13 +3,7 @@
 namespace App\Http\Livewire\Cms;
 
 use App\Facades\Cms\BulletPoints;
-use App\Http\Livewire\Cms\Traits\HasCrudActions;
-use App\Http\Livewire\Cms\Traits\HasCrudModes;
-use App\Models\BulletPoint;
-use App\View\Components\CmsLayout;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Livewire\Component;
+
 
 /**
  * CMS - Bullet Points Editor component
@@ -17,13 +11,12 @@ use Livewire\Component;
  * Shows a list of Bullet Points with create, update, delete,
  * move up and down functions.
  *
+ * Uses the CrudAbstract class for the basic CRUD functions.
+ *
  */
 
-class BulletPointsEditor extends Component
+class BulletPointsEditor extends CrudAbstract
 {
-    use HasCrudModes;
-    use HasCrudActions;
-
     /**
      * Readable name of the model
      *
@@ -32,25 +25,25 @@ class BulletPointsEditor extends Component
     public $modelName = "Bullet Point";
 
     /**
-     * Variable name of the model on the component
+     * The service facade to use for CRUD operations
      *
      * @var string
      */
-    public $modelVar = "bullet";
+    public $service = BulletPoints::class;
 
     /**
-     * Editable bullet point.
+     * The view used to render the CMS page.
      *
-     * @var BulletPoint
+     * @var string
      */
-    public $bullet;
+    public $view = "cms.bullet-points.index";
 
     /**
-     * All bullet points
+     * Title of the CMS Page
      *
-     * @var array|Collection
+     * @var string
      */
-    public $points = [];
+    public $title = "CMS - Bullet Points";
 
     /**
      * Validation rules
@@ -58,111 +51,38 @@ class BulletPointsEditor extends Component
      * @var array
      */
     public $rules = [
-        'bullet.name' => 'required|string|min:2',
-        'bullet.order' => 'required|between:0,10',
+        'model.name' => 'required|string|min:2',
+        'model.order' => 'required|between:0,100',
     ];
 
     /**
-     * Mount the component and populate the data
+     * Set the bullet points list
      *
-     * @param Request $request
-     * @return void
-     */
-    public function mount(Request $request)
-    {
-        $this->setModel();
-        $this->setPoints();
-        $this->setRequestMode($request);
-    }
-
-    /**
-     * Hydrate the component
+     * Override to get models
+     * with the colour attached.
      *
      * @return void
      */
-    public function hydrate()
+    public function setList(): void
     {
-        $this->setPoints();
-    }
-
-    /**
-     * Set the bullet points
-     *
-     * @return void
-     */
-    public function setPoints()
-    {
-        $this->points = BulletPoints::getAllWithColour();
+        $this->list = $this->service::getAllWithColour();
     }
 
     /**
      * Set the editable model for this component
+     * to a new blank model.
+     *
+     * Override to allow for default values
+     * for the order field.
      *
      */
     public function setModel($data = ['order' => '0'])
     {
-        $this->bullet = BulletPoints::new($data);
+        $this->model = $this->service::new($data);
     }
 
     /**
-     * Get the model for ID
-     *
-     * @param int $id
-     * @return mixed
-     */
-    public function getModel(int $id)
-    {
-        return BulletPoints::get($id);
-    }
-
-    /**
-     * Create a new Bullet Point from the details
-     * in the form.
-     *
-     * @return void
-     */
-    public function create(): void
-    {
-        $this->executeCreate(function () {
-            $this->bullet = BulletPoints::create($this->bullet->toArray());
-        });
-
-        $this->setPoints();
-    }
-
-    /**
-     * Delete the Bullet Point referenced by deleteId
-     *
-     * @return void
-     */
-    public function delete(): void
-    {
-        $this->executeDelete(function () {
-            BulletPoints::delete($this->bullet->id);
-        });
-
-        $this->setPoints();
-    }
-
-    /**
-     * Save the changes to the Bullet Point
-     *
-     * @return void
-     */
-    public function save(): void
-    {
-        $this->executeSave(function () {
-            BulletPoints::update($this->bullet->id, [
-                'name' => $this->bullet->name,
-                'order' => $this->bullet->order
-            ]);
-        });
-
-        $this->setPoints();
-    }
-
-    /**
-     * Move the Bullet Point up or down
+     * Move the model up or down in sort order.
      *
      * @param string $direction     up|down
      * @param int $id
@@ -172,26 +92,16 @@ class BulletPointsEditor extends Component
     {
         try {
             if ($direction == 'up') {
-                BulletPoints::moveUp($id);
+                $this->service::moveUp($id);
             } else {
-                BulletPoints::moveDown($id);
+                $this->service::moveDown($id);
             }
 
-            $this->setPoints();
+            $this->setList();
 
         } catch (\Exception $e) {
-            session()->flash('error', 'Error moving Bullet Point '.$e->getMessage());
+            session()->flash('error', 'Error moving ' . $this->modelName . ' '.$e->getMessage());
         }
     }
 
-    /**
-     * Render the Bullet Points page
-     *
-     * @return View
-     */
-    public function render(): View
-    {
-        return view('cms.bullet-points.index')
-            ->layout(CmsLayout::class, ['title' => 'CMS - Bullet Points']);
-    }
 }

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\{
     SoftDeletes,
     Factories\HasFactory,
 };
+use Illuminate\Routing\Exceptions\UrlGenerationException;
 use Illuminate\Support\Str;
 
 class Demo extends Model
@@ -64,7 +65,11 @@ class Demo extends Model
      */
     public function getUrlAttribute()
     {
-        return route('demo', ['demo' => $this]);
+        try {
+            return route('demo', ['demo' => $this]);
+        } catch (UrlGenerationException $e) {
+            return '';
+        }
     }
 
 }

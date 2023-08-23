@@ -7,7 +7,10 @@ use App\Services\Traits\WithRainbow;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Service for managing Bullet Points in th UI.
+ * UI - Bullet Point Service.
+ *
+ * Service for managing Bullet Points in the
+ * frontend web site.
  *
  */
 class BulletPointService
@@ -15,22 +18,27 @@ class BulletPointService
     use WithRainbow;
 
     /**
-     * Get all bullet points with a rainbow colour.
+     * Get all bullet points with a rainbow colour
+     * attached as $model->colour.
      *
      * @throws \Exception
      * @return Collection
      */
     public function getAll(): Collection
     {
+        // Get all the bullet points in order
         $bulletPoints =  BulletPoint::orderBy('order')->get();
 
+        // Attach a colour to each bullet point in sequence
         $bulletPoints = $bulletPoints->map(function ($bulletPoint) {
             $bulletPoint->colour = $this->getNextColour();
             return $bulletPoint;
         });
 
+        // Reset the colour sequence
         $this->resetColour();
 
+        // Return the bullet points
         return $bulletPoints;
     }
 }

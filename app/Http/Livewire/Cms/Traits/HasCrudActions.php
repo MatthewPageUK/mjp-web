@@ -2,9 +2,14 @@
 
 namespace App\Http\Livewire\Cms\Traits;
 
+use App\Enums\CrudModes;
 use Closure;
 use Illuminate\Http\Request;
 
+/**
+ * Extra functions and helpers for dealing with the general
+ * CRUD operations of the CMS Livewire components.
+ */
 trait HasCrudActions
 {
     /**
@@ -17,15 +22,15 @@ trait HasCrudActions
     public function setRequestMode(Request $request)
     {
         switch ($request->mode) {
-            case 'create':
+            case CrudModes::Create->value:
                 $this->add();
                 break;
 
-            case 'update':
+            case CrudModes::Update->value:
                 $this->update($request->id);
                 break;
 
-            case 'delete':
+            case CrudModes::Delete->value:
                 $this->confirmDelete($request->id);
                 break;
         }
@@ -38,7 +43,7 @@ trait HasCrudActions
      */
     public function add(): void
     {
-        $this->setMode('create');
+        $this->setMode(CrudModes::Create);
         $this->setModel();
     }
 
@@ -49,7 +54,7 @@ trait HasCrudActions
      */
     public function cancelAdd(): void
     {
-        $this->setMode('read');
+        $this->setMode(CrudModes::Read);
         $this->setModel();
     }
 
@@ -60,7 +65,7 @@ trait HasCrudActions
      */
     public function cancelDelete(): void
     {
-        $this->setMode('read');
+        $this->setMode(CrudModes::Read);
         $this->setModel();
     }
 
@@ -71,7 +76,7 @@ trait HasCrudActions
      */
     public function cancelUpdate(): void
     {
-        $this->setMode('read');
+        $this->setMode(CrudModes::Read);
         $this->setModel();
     }
 
@@ -84,14 +89,14 @@ trait HasCrudActions
     public function confirmDelete(int $id): void
     {
         try {
-            $this->{$this->modelVar} = $this->getModel($id);
+            $this->model = $this->getModel($id);
 
         } catch (\Exception $e) {
             session()->flash('error', sprintf('Error finding %s - %s', $this->modelName, $e->getMessage()));
             return;
         }
 
-        $this->setMode('delete');
+        $this->setMode(CrudModes::Delete);
     }
 
     /**
@@ -103,14 +108,14 @@ trait HasCrudActions
     public function update(int $id): void
     {
         try {
-            $this->{$this->modelVar} = $this->getModel($id);
+            $this->model = $this->getModel($id);
 
         } catch (\Exception $e) {
             session()->flash('error', sprintf('Error finding %s - %s', $this->modelName, $e->getMessage()));
             return;
         }
 
-        $this->setMode('update');
+        $this->setMode(CrudModes::Update);
     }
 
 
@@ -126,7 +131,7 @@ trait HasCrudActions
 
         try {
             $create();
-            session()->flash('success', sprintf('Created new %s - %s', $this->modelName, $this->{$this->modelVar}->name));
+            session()->flash('success', sprintf('Created new %s - %s', $this->modelName, $this->model->name));
 
         } catch (\Exception $e) {
             session()->flash('error', sprintf('Error creating %s - %s', $this->modelName, $e->getMessage()));
@@ -146,7 +151,7 @@ trait HasCrudActions
     {
         try {
             $delete();
-            session()->flash('success', sprintf('Deleted %s - %s', $this->modelName, $this->{$this->modelVar}->name));
+            session()->flash('success', sprintf('Deleted %s - %s', $this->modelName, $this->model->name));
 
         } catch (\Exception $e) {
             session()->flash('error', sprintf('Error deleting %s - %s', $this->modelName, $e->getMessage()));
@@ -167,7 +172,7 @@ trait HasCrudActions
 
         try {
             $save();
-            session()->flash('success', sprintf('Updated %s - %s', $this->modelName, $this->{$this->modelVar}->name));
+            session()->flash('success', sprintf('Updated %s - %s', $this->modelName, $this->model->name));
 
         } catch (\Exception $e) {
             session()->flash('error', sprintf('Error updating %s - %s', $this->modelName, $e->getMessage()));
