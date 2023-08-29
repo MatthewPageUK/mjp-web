@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\{
     Factories\HasFactory,
 };
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class Project extends Model
 {
@@ -48,7 +49,6 @@ class Project extends Model
      * @var array
      */
     protected $casts = [
-        // 'active' => 'boolean',
         'last_active' => 'datetime',
     ];
 
@@ -60,12 +60,28 @@ class Project extends Model
     }
 
     /**
-     * Get the project page url
+     * Get the project page route url
      *
      * @return string
      */
-    public function getUrlAttribute()
+    public function getRouteUrlAttribute()
     {
-        return route('project', ['project' => $this]);
+        try {
+            return route('project', ['project' => $this]);
+        } catch (UrlGenerationException $e) {
+            return '';
+        }
+    }
+
+    /**
+     * Get the image attribute
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return 'https://loremflickr.com/640/360/electronics?r='.rand(100,100000).'&lock=633873'.$this->id;
+
+        // return asset('images/posts/' . $this->slug . '.jpg');
     }
 }

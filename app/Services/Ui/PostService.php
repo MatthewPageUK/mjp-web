@@ -5,6 +5,7 @@ namespace App\Services\Ui;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Services\Traits\HasActiveStatus;
+use App\Services\Traits\HasFilteredQuery;
 use Illuminate\Database\Eloquent\{
     Builder,
     Collection,
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\{
 class PostService
 {
     use HasActiveStatus;
+    use HasFilteredQuery;
 
     public $model = Post::class;
 
@@ -33,24 +35,25 @@ class PostService
     }
 
     /**
-     * Get recent Posts
+     * Get recent Posts from optional category
      *
      * @param int $count    How many to get
      * @return Collection
      */
     public function getRecent(int $count = 5, ?string $category = null): Collection
     {
-        $query = $this->getBaseQuery();
+        $filters = [];
 
-        // Category filter
         if ($category) {
-            $query->inCategory($category);
+            $filters = [
+                'postCategory' => $category,
+            ];
         }
 
-        $query->orderBy('created_at', 'desc')
-            ->limit($count);
-
-        return $query->get();
+        return $this->getFilteredQuery($filters)
+            ->orderBy('created_at', 'desc')
+            ->limit($count)
+            ->get();
     }
 
     /**
@@ -60,7 +63,9 @@ class PostService
      */
     public function getAll(): Collection
     {
-        return Post::orderBy('name')->get();
+        return $this->getBaseQuery()
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     /**
@@ -70,52 +75,23 @@ class PostService
      */
     public function getCategories(): Collection
     {
-        return PostCategory::has('posts')->get();
+        return PostCategory::whereHas('posts', function (Builder $query) {
+            $query->active();
+        })->orderBy('name')->get();
     }
 
-    public function getFiltered(array $filters)
-    {
-        return $this->getFilteredQuery($filters)->get();
-    }
 
     /**
-     * Get filtered Posts
+     * Get filtered list of posts
      *
-     * @param array $filters    Array of filters
-     *                          [
-     *                              'skill' => string
-     *                          ]
+     * @param array $filters
      * @return Collection
      */
-    public function getFilteredQuery(array $filters): Builder
+    public function getFiltered(array $filters)
     {
-        // Base query
-        $query = $this->getBaseQuery();
-
-        // Skill filter
-        if (isset($filters['skill']) && $filters['skill']) {
-            $query->whereHas('skills', function (Builder $query) use ($filters) {
-                $query->where('slug', $filters['skill']);
-            });
-        }
-
-        // Category filter
-        if (isset($filters['category']) && $filters['category']) {
-            $query->inCategory($filters['category']);
-        }
-
-        // Search filter
-        if (isset($filters['search']) && $filters['search']) {
-            $query->where(function (Builder $query) use ($filters) {
-                $query->where('name', 'like', '%' . $filters['search'] . '%')
-                    ->orWhere('content', 'like', '%' . $filters['search'] . '%');
-            });
-        }
-
-        // Order
-        $query->orderBy('created_at', 'desc');
-
-        return $query;
+        return $this->getFilteredQuery($filters)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
 }

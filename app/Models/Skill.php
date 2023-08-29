@@ -32,6 +32,7 @@ class Skill extends Model
         'slug',
         'description',
         'level',
+        'svg',
         'active',
     ];
 
@@ -142,5 +143,17 @@ class Skill extends Model
     public function getUrlAttribute(): string
     {
         return route('skill', ['skill' => $this]);
+    }
+
+    /**
+     * Get the image attribute
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return 'https://loremflickr.com/640/360/technology,'.urlencode($this->slug).'?r='.rand(100,100000).'&lock=1834873'.$this->id;
+
+        // return asset('images/posts/' . $this->slug . '.jpg');
     }
 }

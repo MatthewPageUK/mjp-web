@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
     a {
       @apply transition duration-500 ease-in-out hover:text-secondary-400;
     }
-  }
+  } */
 
 [x-cloak] { display: none !important; }
 

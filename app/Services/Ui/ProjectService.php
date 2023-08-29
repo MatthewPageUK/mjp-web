@@ -4,10 +4,8 @@ namespace App\Services\Ui;
 
 use App\Models\Project;
 use App\Services\Traits\HasActiveStatus;
-use Illuminate\Database\Eloquent\{
-    Builder,
-    Collection,
-};
+use App\Services\Traits\HasFilteredQuery;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Service for managing Projects.
@@ -16,7 +14,13 @@ use Illuminate\Database\Eloquent\{
 class ProjectService
 {
     use HasActiveStatus;
+    use HasFilteredQuery;
 
+    /**
+     * The model class to use.
+     *
+     * @var Model
+     */
     public $model = Project::class;
 
     /**
@@ -28,21 +32,7 @@ class ProjectService
      */
     public function get(int $id): Project
     {
-        return Project::findOrFail($id);
-    }
-
-    /**
-     * Get recent Projects
-     *
-     * @param int $count    How many to get
-     * @return Collection
-     */
-    public function getRecent(int $count = 5): Collection
-    {
-        return $this->getBaseQuery()
-            ->orderBy('last_active', 'desc')
-            ->limit($count)
-            ->get();
+        return $this->getBaseQuery()->findOrFail($id);
     }
 
     /**
@@ -52,39 +42,21 @@ class ProjectService
      */
     public function getAll(): Collection
     {
-        return Project::orderBy('name')->get();
-    }
-
-    public function getFiltered(array $filters)
-    {
-        return $this->getFilteredQuery($filters)->get();
+        return $this->getBaseQuery()
+            ->orderBy('name')
+            ->get();
     }
 
     /**
-     * Get filtered Projects
+     * Get filtered list of projects
      *
-     * @param array $filters    Array of filters
-     *                          [
-     *                              'skill' => string
-     *                          ]
+     * @param array $filters
      * @return Collection
      */
-    public function getFilteredQuery(array $filters): Builder
+    public function getFiltered(array $filters): Collection
     {
-        // Base query
-        $query = $this->getBaseQuery();
-
-        // Skill filter
-        if (isset($filters['skill']) && $filters['skill']) {
-            $query->whereHas('skills', function (Builder $query) use ($filters) {
-                $query->where('slug', $filters['skill']);
-            });
-        }
-
-        // Order
-        $query->orderBy('last_active', 'desc');
-
-        return $query;
+        return $this->getFilteredQuery($filters)
+            ->orderBy('last_active', 'desc')
+            ->get();
     }
-
 }

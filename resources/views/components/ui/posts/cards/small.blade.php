@@ -1,8 +1,7 @@
 {{--
     Shows post in small vertical card with image, title and date.
 --}}
-<div class="border rounded-lg overflow-hidden border-primary-700 bg-primary-800 hover:bg-primary-700 hover:border-primary-600 pb-2">
-
+<x-ui.card>
     <a href="{{ $post->url }}" class="block" title="Read '{{ $post->name }}'">
 
         <img src="{{ $post->image }}"/>
@@ -12,5 +11,4 @@
         <x-ui.badges.age :date="$post->created_at" class="px-4" />
 
     </a>
-
-</div>
+</x-ui.card>

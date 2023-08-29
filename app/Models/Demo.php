@@ -40,36 +40,29 @@ class Demo extends Model
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        //'active' => 'boolean',
-    ];
-
-    /**
-     * Get the demo's snippet
+     * Get the demo page route url
      *
      * @return string
      */
-    public function getSnippetAttribute()
-    {
-        return Str::words($this->description, 10, '...');
-    }
-
-    /**
-     * Get the demo page url
-     *
-     * @return string
-     */
-    public function getUrlAttribute()
+    public function getRouteUrlAttribute()
     {
         try {
             return route('demo', ['demo' => $this]);
         } catch (UrlGenerationException $e) {
             return '';
         }
+    }
+
+    /**
+     * Get the image attribute
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return 'https://loremflickr.com/640/360/computer?lock=748373'.$this->id;
+
+        // return asset('images/posts/' . $this->slug . '.jpg');
     }
 
 }

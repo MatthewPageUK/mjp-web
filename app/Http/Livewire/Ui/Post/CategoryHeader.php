@@ -2,18 +2,11 @@
 
 namespace App\Http\Livewire\Ui\Post;
 
-use App\Facades\Settings;
 use App\Facades\Ui\Posts;
-use App\Http\Livewire\Ui\Traits\HasCategoryFilter;
-use App\Http\Livewire\Ui\Traits\HasSearchFilter;
-use App\Http\Livewire\Ui\Traits\HasSkillFilter;
+use App\Http\Livewire\Ui\Traits\HasPostCategoryFilter;
 use App\Models\PostCategory;
-use App\Services\SkillService;
-use App\View\Components\UiLayout;
-use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 /**
  * Posts category header.
@@ -21,10 +14,10 @@ use Livewire\WithPagination;
  */
 class CategoryHeader extends Component
 {
-    use HasCategoryFilter;
+    use HasPostCategoryFilter;
 
     /**
-     * Category ...
+     * Current category
      *
      * @var PostCategory
      */
@@ -37,7 +30,9 @@ class CategoryHeader extends Component
      */
     public function mount($category = null)
     {
-        $this->setCategories(Posts::getCategories());
+        $this->setCategories(
+            Posts::getCategories()
+        );
     }
 
     /**
@@ -52,7 +47,7 @@ class CategoryHeader extends Component
     }
 
     /**
-     * Render the posts page
+     * Render the category header
      *
      * @return View
      */

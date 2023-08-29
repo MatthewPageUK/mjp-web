@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         {{-- Page meta tags --}}
-        <x-layout.page-tags />
+        <x-ui.layout.page-tags />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -33,7 +33,7 @@
         <div class="min-h-screen">
 
             {{-- Main header --}}
-            <x-layout.header />
+            <x-ui.layout.header />
 
             {{-- Main page --}}
             <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">
@@ -43,7 +43,7 @@
         </div>
 
         {{-- Footer --}}
-        <x-layout.footer />
+        <x-ui.layout.footer />
 
         @livewireScripts
     </body>

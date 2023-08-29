@@ -4,7 +4,6 @@ namespace App\Services\Ui;
 
 use App\Models\Experience;
 use App\Services\Traits\HasActiveStatus;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -15,6 +14,11 @@ class ExperienceService
 {
     use HasActiveStatus;
 
+    /**
+     * The model class to use.
+     *
+     * @var Model
+     */
     public $model = Experience::class;
 
     /**

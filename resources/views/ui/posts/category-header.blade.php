@@ -9,7 +9,7 @@
         <a href="{{ route('posts') }}" @class([
             'p-4',
             'hover:bg-primary-700' => $this->category,
-            'bg-secondary-400 hover:text-primary-900' => ! $this->category,
+            'bg-secondary-400 text-primary-900 hover:text-primary-900' => ! $this->category,
         ])>
             All posts
         </a>
@@ -18,7 +18,7 @@
             <a href="{{ $category->url }}" @class([
                 'p-4',
                 'hover:bg-primary-700' => ! $this->isCurrentCategory($category),
-                'bg-secondary-400 hover:text-primary-900' => $this->isCurrentCategory($category),
+                'bg-secondary-400 text-primary-900 hover:text-primary-900' => $this->isCurrentCategory($category),
             ])>
                 {{ $category->name }}
             </a>

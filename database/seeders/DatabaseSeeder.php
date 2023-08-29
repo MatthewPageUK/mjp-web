@@ -113,6 +113,18 @@ class DatabaseSeeder extends Seeder
             'type' => 'text',
         ]);
 
+        Setting::create([
+            'key' => 'skills_intro',
+            'value' => fake()->text(600),
+            'type' => 'text',
+        ]);
+
+        Setting::create([
+            'key' => 'skills_content',
+            'value' => fake()->text(600),
+            'type' => 'text',
+        ]);
+
         /**
          * Skills
          */

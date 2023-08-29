@@ -12,26 +12,26 @@
         </div>
         <div class="col-span-6">
             {{-- Bullet Points --}}
-            <x-homepage.bullet-points :bullets="$bulletPoints" />
+            <x-ui.homepage.bullet-points :bullets="$bulletPoints" />
         </div>
     </div>
     <div class="mt-16 mb-12 lg:grid lg:grid-cols-2 gap-16">
 
         <div class="grid grid-rows-2 gap-8">
             <div>
-                <livewire:demo.homepage-widget />
+                <livewire:ui.demo.widget />
             </div>
             <div class="self-end">
-                <livewire:project.homepage-widget />
+                <livewire:ui.project.widget />
             </div>
         </div>
 
         <div>
-            <livewire:skill.homepage-widget />
+            <livewire:ui.skill.widget />
         </div>
 
         <div class="col-span-2">
-            <livewire:ui.post.homepage-widget />
+            <livewire:ui.post.widget />
         </div>
 
     </div>

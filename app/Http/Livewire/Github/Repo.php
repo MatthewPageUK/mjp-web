@@ -210,7 +210,7 @@ class Repo extends Component
      */
     public function render(): View
     {
-        return view('github.repo');
+        return view('ui.github.repo');
     }
 
 }

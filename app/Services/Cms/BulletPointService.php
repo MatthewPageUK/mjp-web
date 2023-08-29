@@ -4,8 +4,10 @@ namespace App\Services\Cms;
 
 use App\Models\BulletPoint;
 use App\Services\Traits\WithRainbow;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{
+    Collection,
+    Model,
+};
 
 /**
  * CMS - Bullet Point Service.
@@ -18,8 +20,18 @@ class BulletPointService extends AbstractCrudService
 {
     use WithRainbow;
 
+    /**
+     * The model class to use.
+     *
+     * @var Model
+     */
     protected $model = BulletPoint::class;
 
+    /**
+     * Default sort order for the list.
+     *
+     * @var string
+     */
     protected $defaultSort = 'order';
 
     /**

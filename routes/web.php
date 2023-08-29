@@ -1,19 +1,22 @@
 <?php
 
 use App\Http\Controllers\HomepageController;
-use App\Http\Livewire\Demo\Explorer as DemoExplorer;
-use App\Http\Livewire\Project\Explorer as ProjectExplorer;
-use App\Http\Livewire\Experience\Timeline;
-use App\Http\Livewire\Experience\ViewExperience;
-use App\Http\Livewire\Ui\Post\PostsCategory;
-use App\Http\Livewire\Ui\Post\PostsHome;
-use App\Http\Livewire\Ui\Post\ViewPost;
-use App\Http\Livewire\Skill\Explorer as SkillExplorer;
-use App\Models\Demo;
-use App\Models\Experience;
-use App\Models\Post;
-use App\Models\Project;
-use App\Models\Skill;
+use App\Http\Livewire\Ui\Experience\Index as ExperienceIndex;
+use App\Http\Livewire\Ui\Experience\View as ExperienceView;
+// use App\Http\Livewire\Skill\Explorer as SkillExplorer;
+use App\Http\Livewire\Ui\Skill\Index as SkillIndex;
+use App\Http\Livewire\Ui\Skill\View as SkillView;
+use App\Http\Livewire\Ui\Demo\Index as DemoIndex;
+use App\Http\Livewire\Ui\Demo\View as DemoView;
+use App\Http\Livewire\Ui\Project\{
+    Index as ProjectIndex,
+    View as ProjectView,
+};
+use App\Http\Livewire\Ui\Post\{
+    Index as PostIndex,
+    Category as PostCategory,
+    View as PostView,
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,16 +34,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomepageController::class, 'show'])->name('home');
 
 // Skills
-Route::get('/skills', SkillExplorer::class)->name('skills');
+// Route::get('/skills', SkillExplorer::class)->name('skills');
 
-Route::get('/skill/{skill}', function (Skill $skill) {
-    return view('skill', ['skill' => $skill]);
-})->name('skill');
+// Route::get('/skill/{skill}', function (Skill $skill) {
+//     return view('skill', ['skill' => $skill]);
+// })->name('skill');
 
-Route::get('/skillsg', function () {
-    return "Skills Explorer";
-})->name('skills.group');
+// Route::get('/skillsg', function () {
+//     return "Skills Explorer";
+// })->name('skills.group');
 
+/*
+|--------------------------------------------------------------------------
+| Skills
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/skills', SkillIndex::class)->name('skills');
+Route::get('/skill/{skill}', SkillView::class)->name('skill');
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +59,8 @@ Route::get('/skillsg', function () {
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/projects', ProjectExplorer::class)->name('projects');
-Route::get('/project/{project}', function (Project $project) { return view('project', ['project' => $project]); })->name('project');
+Route::get('/projects', ProjectIndex::class)->name('projects');
+Route::get('/project/{project}', ProjectView::class)->name('project');
 
 /*
 |--------------------------------------------------------------------------
@@ -57,8 +68,8 @@ Route::get('/project/{project}', function (Project $project) { return view('proj
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/demos', DemoExplorer::class)->name('demos');
-Route::get('/demo/{demo}', function (Demo $demo) { return view('demo', ['demo' => $demo]); })->name('demo');
+Route::get('/demos', DemoIndex::class)->name('demos');
+Route::get('/demo/{demo}', DemoView::class)->name('demo');
 
 /*
 |--------------------------------------------------------------------------
@@ -66,8 +77,8 @@ Route::get('/demo/{demo}', function (Demo $demo) { return view('demo', ['demo' =
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/experiences', Timeline::class)->name('experiences');
-Route::get('/experience/{experience}', ViewExperience::class)->name('experience');
+Route::get('/experiences', ExperienceIndex::class)->name('experiences');
+Route::get('/experience/{experience}', ExperienceView::class)->name('experience');
 
 /*
 |--------------------------------------------------------------------------
@@ -75,9 +86,9 @@ Route::get('/experience/{experience}', ViewExperience::class)->name('experience'
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/posts', PostsHome::class)->name('posts');
-Route::get('/posts/{category}', PostsCategory::class)->name('posts.category');
-Route::get('/post/{year}/{month}/{day}/{post}', ViewPost::class)->name('post');
+Route::get('/posts', PostIndex::class)->name('posts');
+Route::get('/posts/{category}', PostCategory::class)->name('posts.category');
+Route::get('/post/{year}/{month}/{day}/{post}', PostView::class)->name('post');
 
 /*
 |--------------------------------------------------------------------------

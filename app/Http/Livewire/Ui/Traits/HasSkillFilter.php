@@ -4,29 +4,33 @@ namespace App\Http\Livewire\Ui\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Common functionality for filtering by skill
+ *
+ */
 trait HasSkillFilter
 {
     /**
-     * Skills used
+     * Skills used list
      *
-     * @var array
+     * @var Collection
      */
-    public $skills = [];
+    public Collection $skills;
 
     /**
-     * Selected skill
+     * Selected skill slug
      *
      * @var string
      */
-    public $selectedSkill = '';
-
+    public string $selectedSkill = '';
 
     /**
-     * Set the selectable skills
+     * Set the skills list
      *
+     * @param Collection $skills
      * @return void
      */
-    public function setSkills(Collection $skills)
+    public function setSkills(Collection $skills): void
     {
         $this->skills = $skills;
     }
@@ -36,8 +40,21 @@ trait HasSkillFilter
      *
      * @return void
      */
-    public function resetSkill()
+    public function resetSkill(): void
     {
         $this->selectedSkill = '';
+    }
+
+    /**
+     * Updated selected skill, reset pagination.
+     *
+     * @param string $skill
+     * @return void
+     */
+    public function updatedSelectedSkill($skill): void
+    {
+        if (method_exists($this, 'resetPage')) {
+            $this->resetPage();
+        }
     }
 }

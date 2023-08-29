@@ -83,6 +83,6 @@
     @endif
 
     <div class="mt-2">
-        {{-- <x-layout.pagination-dots :paginator="$this->posts" /> --}}
+        {{-- <x-ui.pagination-dots :paginator="$this->posts" /> --}}
     </div>
 </div>

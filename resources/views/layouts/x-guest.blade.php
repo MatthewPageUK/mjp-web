@@ -27,7 +27,7 @@
         <div class="min-h-screen bg-primary-800">
 
             {{-- Main header --}}
-            <x-layout.header />
+            <x-ui.layout.header />
 
             {{-- Mastheads --}}
             @if ($showMasthead)
@@ -42,7 +42,7 @@
         </div>
 
         {{-- Footer --}}
-        <x-layout.footer />
+        <x-ui.layout.footer />
 
         @livewireScripts
     </body>
