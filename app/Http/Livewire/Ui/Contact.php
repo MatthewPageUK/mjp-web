@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ui;
 
+use App\Facades\Settings;
 use App\Mail\Contact as MailContact;
 use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Mail;
@@ -77,8 +78,10 @@ class Contact extends Component
         $this->validate();
 
         try {
-            Mail::to('work@mjp.co')
-                ->send(new MailContact($this->message));
+            Mail::to(Settings::getValue('contact_email'))
+                ->send(
+                    new MailContact($this->message)
+                );
         } catch (\Exception $e) {
             $this->mailError = $e->getMessage();
             return;
