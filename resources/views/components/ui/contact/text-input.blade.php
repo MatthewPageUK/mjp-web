@@ -7,7 +7,7 @@
     <input type="text" name="{{ $name }}" wire:model="{{ $name }}" class="
             appearance-none
             font-gochi
-            text-2xl font-bold text-primary-900
+            text-2xl font-bold text-primary-100
             block py-1 pt-2 px-0 w-full bg-transparent
             border-0 border-b-2 border-primary-700
             focus:outline-none focus:ring-0 focus:border-primary-600 peer

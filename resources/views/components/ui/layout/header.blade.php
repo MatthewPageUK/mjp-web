@@ -53,20 +53,25 @@
             </x-ui.layout.header-button>
         </nav>
 
-        <nav class="mt-8 lg:mt-0 flex space-x-4 flex-grow justify-center lg:justify-end">
+        <nav class="mt-8 lg:mt-0 flex space-x-3 flex-grow justify-center lg:justify-end">
             {{-- Github Icon --}}
             <x-ui.layout.header-icon href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-secondary-400">
-                <x-icons.github class="w-8 h-8 text-white hover:animate-spin"/>
+                <x-icons.github class="w-8 h-8 text-white"/>
             </x-ui.layout.header-icon>
 
             {{-- LinkedIn Icon --}}
             <x-ui.layout.header-icon href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-secondary-400">
-                <x-icons.linkedin class="w-8 h-8 text-white hover:animate-pulse"/>
+                <x-icons.linkedin class="w-8 h-8 text-white"/>
             </x-ui.layout.header-icon>
 
             {{-- Youtube Icon --}}
             <x-ui.layout.header-icon href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-secondary-400">
-                <x-icons.youtube class="w-8 h-8 text-white hover:animate-bounce"/>
+                <x-icons.youtube class="w-8 h-8 text-white"/>
+            </x-ui.layout.header-icon>
+
+            {{-- Contact Icon --}}
+            <x-ui.layout.header-icon href="/#contact" title="Contact me" target="_self" class="fill-none">
+                <x-icons.contact class="w-8 h-8 text-white hover:text-secondary-400"/>
             </x-ui.layout.header-icon>
         </nav>
 

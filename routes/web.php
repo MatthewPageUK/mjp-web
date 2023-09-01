@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Ui\UserDashboard;
 use App\Http\Livewire\Ui\Experience\Index as ExperienceIndex;
 use App\Http\Livewire\Ui\Experience\View as ExperienceView;
 // use App\Http\Livewire\Skill\Explorer as SkillExplorer;
@@ -99,6 +101,15 @@ Route::get('/post/{year}/{month}/{day}/{post}', PostView::class)->name('post');
 Route::get('/secret', function () {
     return view('secret');
 })->name('the.secret');
+
+Route::get('/dashboard', UserDashboard::class)->middleware(['auth'])->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 /*
 |--------------------------------------------------------------------------
