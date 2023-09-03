@@ -29,7 +29,7 @@ class RandomPage extends Component
                 'project' => Project::class,
                 'demo' => Demo::class,
                 'post' => Post::class,
-            ])->random()::active()->get()->random()->url;
+            ])->random()::active()->get()->random()->routeUrl;
         } catch (\Exception $e) {
             $this->page = '/';
         }

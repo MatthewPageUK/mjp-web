@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\{
     Factories\HasFactory,
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
-use Illuminate\Support\Str;
 
 class Demo extends Model
 {
@@ -61,8 +60,6 @@ class Demo extends Model
     public function getImageAttribute()
     {
         return 'https://loremflickr.com/640/360/computer?lock=748373'.$this->id;
-
-        // return asset('images/posts/' . $this->slug . '.jpg');
     }
 
 }

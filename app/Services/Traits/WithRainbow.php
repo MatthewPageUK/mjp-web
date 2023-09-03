@@ -12,7 +12,7 @@ namespace App\Services\Traits;
 trait WithRainbow
 {
     /**
-     * Last colour used.
+     * Last colour index used.
      *
      * @var int
      */

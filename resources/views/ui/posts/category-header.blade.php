@@ -15,7 +15,7 @@
         </a>
 
         @foreach ($this->categories as $category)
-            <a href="{{ $category->url }}" @class([
+            <a href="{{ $category->routeUrl }}" @class([
                 'p-4',
                 'hover:bg-primary-700' => ! $this->isCurrentCategory($category),
                 'bg-secondary-400 text-primary-900 hover:text-primary-900' => $this->isCurrentCategory($category),

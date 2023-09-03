@@ -11,8 +11,8 @@
     {{-- Slug --}}
     <x-cms.crud.fields.slug />
 
-    {{-- Description --}}
-    <x-cms.crud.fields.description />
+    {{-- Description (Markdown) --}}
+    <x-cms.crud.fields.markdown label="Description" field="description" />
 
     {{-- URL --}}
     <x-cms.crud.fields.url />
@@ -43,7 +43,7 @@
         </div>
     </x-cms.crud.field>
 
-    <script>
+    {{-- <script>
         window.addEventListener(
             "message",
             (event) => {
@@ -52,7 +52,7 @@
             },
             false,
             );
-    </script>
+    </script> --}}
 
     @if ($this->modeName === 'update')
 

@@ -8,7 +8,7 @@
     }">
 
         {{-- Header --}}
-        <x-cms.crud.header title="{{ $this->modelName }}s" />
+        <x-cms.crud.header title="{{ Str::plural($this->modelName) }}" />
 
         {{-- Session Messages --}}
         <x-cms.session-messages />

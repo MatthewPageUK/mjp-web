@@ -6,7 +6,13 @@
     <div class="border-b pb-4 md:pb-8 mb-4">
         <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center">
             <span class="flex-1">{{ $this->skill->name }}</span>
-            <span class="hidden md:block material-icons-outlined text-6xl ml-1">construction</span>
+            @if ($skill->svg)
+                <div class="w-16 h-16">
+                    {!! $skill->svg !!}
+                </div>
+            @else
+                <span class="hidden md:block material-icons-outlined text-6xl ml-1">construction</span>
+            @endif
         </h1>
     </div>
 

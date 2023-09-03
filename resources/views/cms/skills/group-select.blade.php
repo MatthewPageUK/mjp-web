@@ -6,6 +6,7 @@
             <ul class="grid grid-cols-2 gap-2">
                 @foreach ($groups as $group)
                     <li>
+                        {{-- @todo what is this css stuff? --}}
                         <button
                             @class([
                             'w-full text-sm',

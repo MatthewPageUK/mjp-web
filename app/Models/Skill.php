@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\{
     Relations\BelongsToMany,
     Relations\MorphToMany,
 };
+use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class Skill extends Model
 {
@@ -136,13 +137,17 @@ class Skill extends Model
     }
 
     /**
-     * Get the experience page url
+     * Get the skill page route url
      *
      * @return string
      */
-    public function getUrlAttribute(): string
+    public function getRouteUrlAttribute()
     {
-        return route('skill', ['skill' => $this]);
+        try {
+            return route('skill', ['skill' => $this]);
+        } catch (UrlGenerationException $e) {
+            return '';
+        }
     }
 
     /**

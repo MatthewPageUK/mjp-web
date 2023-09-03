@@ -1,3 +1,4 @@
+
 {{-- Main web site header component --}}
 <header
     x-data="{
@@ -12,7 +13,7 @@
     class="z-50 sticky top-0 lg:flex lg:space-x-8 lg:items-center px-8 py-6 lg:pt-10 bg-primary-800 text-white border-b-2 border-secondary-400 shadow-lg"
 >
     {{-- Main Logo --}}
-    <div class="w-full lg:w-48">
+    <div class="lg:justify-start w-full lg:w-48">
         <x-ui.layout.header-logo />
     </div>
 
@@ -28,22 +29,22 @@
         {{-- Header buttons --}}
         <nav class="mt-8 lg:mt-0 lg:flex lg:space-x-2">
             {{-- Skills --}}
-            <x-ui.layout.header-button href="{{ route('skills') }}" icon="construction" tag="skill" title="My Skill Ratings">
+            <x-ui.layout.header-button href="{{ route('skills') }}" icon="construction" tag="skill" title="My web development skills">
                 {{ __('Skills') }}
             </x-ui.layout.header-button>
 
             {{-- Experience --}}
-            <x-ui.layout.header-button href="{{ route('experiences') }}" icon="public" tag="experience" title="Previous work experience">
+            <x-ui.layout.header-button href="{{ route('experiences') }}" icon="public" tag="experience" title="Professional work experience">
                 {{ __('Experience') }}
             </x-ui.layout.header-button>
 
             {{-- Projects --}}
-            <x-ui.layout.header-button href="{{ route('projects') }}" icon="rocket_launch" tag="project" title="Projects I am working on">
+            <x-ui.layout.header-button href="{{ route('projects') }}" icon="rocket_launch" tag="project" title="Developer projects I am working on">
                 {{ __('Projects') }}
             </x-ui.layout.header-button>
 
             {{-- Demos --}}
-            <x-ui.layout.header-button href="{{ route('demos') }}" icon="smart_toy" tag="demo" title="Demos and fun widgets">
+            <x-ui.layout.header-button href="{{ route('demos') }}" icon="smart_toy" tag="demo" title="Web development demos and fun widgets">
                 {{ __('Demos') }}
             </x-ui.layout.header-button>
 
@@ -55,17 +56,17 @@
 
         <nav class="mt-8 lg:mt-0 flex space-x-3 flex-grow justify-center lg:justify-end">
             {{-- Github Icon --}}
-            <x-ui.layout.header-icon href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-secondary-400">
+            <x-ui.layout.header-icon href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-green-800">
                 <x-icons.github class="w-8 h-8 text-white"/>
             </x-ui.layout.header-icon>
 
             {{-- LinkedIn Icon --}}
-            <x-ui.layout.header-icon href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-secondary-400">
+            <x-ui.layout.header-icon href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-blue-700">
                 <x-icons.linkedin class="w-8 h-8 text-white"/>
             </x-ui.layout.header-icon>
 
             {{-- Youtube Icon --}}
-            <x-ui.layout.header-icon href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-secondary-400">
+            <x-ui.layout.header-icon href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-red-700">
                 <x-icons.youtube class="w-8 h-8 text-white"/>
             </x-ui.layout.header-icon>
 
@@ -75,30 +76,8 @@
             </x-ui.layout.header-icon>
         </nav>
 
-        {{-- Authentication --}}
-        @if (Route::has('login'))
-            <nav class="mt-8 lg:mt-4 flex justify-center lg:justify-start lg:fixed lg:top-0 lg:right-0 px-8 py-2 text-right text-sm">
-                @auth
-                    {{-- Logged in user dashboard --}}
-                    <a href="{{ url('/dashboard') }}" class="flex items-center text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                        Dashboard
-                        <x-icons.material class="text-sm ml-1">account_circle</x-icons.material>
-                    </a>
-                @else
-                    {{-- Log in --}}
-                    <a href="{{ route('login') }}" class="flex items-center text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                        Log in
-                        <x-icons.material class="text-sm ml-1">login</x-icons.material>
-                    </a>
-                    @if (Route::has('register'))
-                        {{-- Register --}}
-                        <a href="{{ route('register') }}" class="flex items-center ml-4 text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                            Register
-                            <x-icons.material class="text-sm ml-1">group_add</x-icons.material>
-                        </a>
-                    @endif
-                @endauth
-            </nav>
-        @endif
+        {{-- Authentication nav bar --}}
+        <x-ui.layout.auth-nav />
+
     </div>
 </header>

@@ -4,6 +4,12 @@ namespace App\Models\Traits;
 
 use Illuminate\Support\Str;
 
+/**
+ * Trait for models with a name and slug.
+ *
+ * Updates the slug on name changes and sets the
+ * route key name to the slug field instead of ID.
+ */
 trait HasNameSlug
 {
     /**

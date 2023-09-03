@@ -2,7 +2,7 @@
     Shows post in small vertical card with image, title and date.
 --}}
 <x-ui.card>
-    <a href="{{ $post->url }}" class="block" title="Read '{{ $post->name }}'">
+    <a href="{{ $post->routeUrl }}" class="block" title="Read '{{ $post->name }}'">
 
         <img src="{{ $post->image }}"/>
 

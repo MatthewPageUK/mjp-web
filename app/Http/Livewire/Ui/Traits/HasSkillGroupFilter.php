@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ui\Traits;
 
+use App\Models\SkillGroup;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -23,6 +24,8 @@ trait HasSkillGroupFilter
      * @var string
      */
     public string $selectedSkillGroup = '';
+
+    public ?SkillGroup $skillGroup = null;
 
     /**
      * Set the skill groups list
@@ -53,6 +56,12 @@ trait HasSkillGroupFilter
      */
     public function updatedSelectedSkillGroup($skillGroup): void
     {
+        if ($skillGroup !== '') {
+            $this->skillGroup = SkillGroup::where('slug', $skillGroup)->first();
+        } else {
+            $this->skillGroup = null;
+        }
+
         if (method_exists($this, 'resetPage')) {
             $this->resetPage();
         }

@@ -1,4 +1,5 @@
-<div class="flex-1 space-y-8 group">
+
+<div class="z-10 relative flex-1 space-y-8 group">
     <h1 class="font-orbitron font-black text-5xl flex items-center gap-2">
         <x-icons.material class="text-6xl group-hover:text-highlight-500 transition-all duration-500">account_circle</x-icons-material>
         <span class="flex-1">Dashboard</span>
@@ -18,6 +19,7 @@
     </h1>
     <div class="prose prose-xl prose-primary">
         <p>Welcome back {{ Auth::user()->name }}.</p>
+
 
         {{-- <h2>Collectables</h2>
         <p>My first range of collectable digital assets will be launched soon.</p>
@@ -44,4 +46,8 @@
         <p>You have found 0 easter eggs ... keep hunting</p> --}}
     </div>
 </div>
+
+
+
+
 

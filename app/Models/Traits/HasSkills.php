@@ -5,6 +5,10 @@ namespace App\Models\Traits;
 use App\Models\Skill;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
+/**
+ * Trait for models with skills via the skillable pivot table.
+ *
+ */
 trait HasSkills
 {
     /**

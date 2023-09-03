@@ -14,7 +14,7 @@
                 <div class="flex items-center gap-4">
                     {{-- Previous experience --}}
                     @if ($this->previous)
-                        <a href="{{ $this->previous->url }}" class="flex items-center leading-none" title="Previous work experience">
+                        <a href="{{ $this->previous->routeUrl }}" class="flex items-center leading-none" title="Previous work experience">
                             <x-icons.material class="rotate-180">start</x-icons.material>
                         </a>
                     @endif
@@ -30,7 +30,7 @@
                     <span class="text-xl font-semibold text-right flex-1">{{ $experience->end->format('F Y') }}</span>
                     {{-- Next experience --}}
                     @if ($this->next)
-                        <a href="{{ $this->next->url }}" class="flex items-center leading-none" title="Next work experience">
+                        <a href="{{ $this->next->routeUrl }}" class="flex items-center leading-none" title="Next work experience">
                             <x-icons.material>start</x-icons.material>
                         </a>
                     @endif

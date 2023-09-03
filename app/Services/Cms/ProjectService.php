@@ -3,88 +3,21 @@
 namespace App\Services\Cms;
 
 use App\Models\Project;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
+ * CMS - Project Service.
+ *
  * Service for managing Projects in the CMS.
+ * Standard CRUD features and re-ordering.
  *
  */
-class ProjectService
+class ProjectService extends AbstractCrudService
 {
     /**
-     * Return a new Project model.
+     * The model class to use.
      *
-     * @param array $data
-     * @return Project
+     * @var Model
      */
-    public function new(array $data = ['active' => 0]): Project
-    {
-        return new Project($data);
-    }
-
-    /**
-     * Get a single Project.
-     *
-     * @param int $id
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @return Project
-     */
-    public function get(int $id): Project
-    {
-        return Project::findOrFail($id);
-    }
-
-    /**
-     * Get all Projects.
-     *
-     * @throws \Exception
-     * @return Collection
-     */
-    public function getAll(): Collection
-    {
-        return Project::orderBy('name')
-            ->with(['skills', 'posts'])
-            ->get();
-    }
-
-    /**
-     * Create a new Project.
-     *
-     * @param array $data
-     * @throws \Exception
-     * @return Project
-     */
-    public function create(array $data): Project
-    {
-        return Project::create($data);
-    }
-
-    /**
-     * Update an existing Project and update
-     * the order accordingly.
-     *
-     * @param int $id       The ID of the Project to update
-     * @param array $data   The data to update with
-     * @throws \Exception
-     * @return void
-     */
-    public function update(int $id, array $data): void
-    {
-        $Project = $this->get($id);
-        $Project->fill($data);
-        $Project->save();
-    }
-
-    /**
-     * Delete a Project.
-     *
-     * @param int $id
-     * @throws \Exception
-     * @return void
-     */
-    public function delete(int $id): void
-    {
-        $this->get($id)->delete();
-    }
+    protected $model = Project::class;
 
 }
