@@ -15,8 +15,10 @@
         </a>
     </p>
 </footer>
-<p class="flex items-center text-xs text-green-400 bg-black px-6 py-4">
+<p class="flex items-center gap-4 text-xs text-green-400 bg-black px-6 py-4">
     Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-    <a href="#" class="flex items-center hover:text-secondary-400"><span class="material-icons-outlined text-sm mr-1 ml-4 hover:fill-secondary-400">terminal</span> Source code</a>
-    <span class="flex-1 text-right block text-primary-500"><a href="{{ route('the.secret') }}">&pi;</a></span>
+    <a href="{{ Settings::getValue('url_github') }}" class="flex items-center gap-1 hover:text-secondary-400">
+        <x-icons.material>terminal</x-ui.icons.material>
+        Source code
+    </a>
 </p>

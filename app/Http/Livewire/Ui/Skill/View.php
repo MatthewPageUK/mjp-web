@@ -27,6 +27,7 @@ class View extends Component
         }
 
         Page::setTitle('Skill - ' . $this->skill->name);
+        Page::setDescription('Brief description about my ' . $this->skill->name . ' skills including projects, demos, articles and example work.');
     }
 
     /**

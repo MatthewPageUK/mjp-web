@@ -66,7 +66,15 @@
             <x-cms.layout.menu-select route="cms.experiences" title="Experience" :items="$menu['experiences']" />
         </li>
 
-        <li><x-cms.layout.menu-link route="cms.settings" title="Settings" /></li>
+        {{-- Settings --}}
+        <li>
+            <x-cms.layout.menu-link route="cms.settings" title="Settings" />
+        </li>
+
+        {{-- Media Manager --}}
+        <li>
+            <x-cms.layout.menu-link route="cms.media" title="Media Manager" />
+        </li>
 
         {{-- User --}}
         <li class="mt-4 pt-4">

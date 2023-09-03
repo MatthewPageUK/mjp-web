@@ -21,7 +21,7 @@
         </h1>
         <p class="pl-9">
             @foreach ($model->$relationship as $key => $link)
-                <a class="block" x-show="expanded || {{ $key }} < showCount" href="{{ $link->url }}">{{ $link->name }}</a>
+                <a class="block" x-show="expanded || {{ $key }} < showCount" href="{{ $link->routeUrl }}">{{ $link->name }}</a>
             @endforeach
         </p>
         {{-- route($section, [$section => $link]) --}}

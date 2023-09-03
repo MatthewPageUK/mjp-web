@@ -5,7 +5,7 @@
     <div class="col-span-1 space-y-2">
 
         <h2 class="text-3xl">
-            <a href="{{ $post->url }}" class="text-secondary-400 hover:text-highlight-400">{{ $post->name }}</a>
+            <a href="{{ $post->routeUrl }}" class="text-secondary-400 hover:text-highlight-400">{{ $post->name }}</a>
         </h2>
 
         <p>

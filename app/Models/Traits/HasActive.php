@@ -2,6 +2,12 @@
 
 namespace App\Models\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Trait for models with an active status field.
+ *
+ */
 trait HasActive
 {
     /**
@@ -10,7 +16,7 @@ trait HasActive
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeActive($query)
+    public function scopeActive($query): Builder
     {
         return $query->where('active', true);
     }
@@ -21,7 +27,7 @@ trait HasActive
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeInactive($query)
+    public function scopeInactive($query): Builder
     {
         return $query->where('active', false);
     }

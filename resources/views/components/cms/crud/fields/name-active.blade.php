@@ -2,7 +2,7 @@
 <x-cms.crud.field name="Name">
     <div class="flex gap-4 items-center">
         <div class="flex-1">
-            <x-cms.form.input wire:model="model.name" class="text-2xl font-black" />
+            <x-cms.form.input wire:model="model.name" class="text-base md:text-2xl font-black" />
             <x-cms.validation-error field="model.name" />
         </div>
         <div>

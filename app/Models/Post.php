@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\{
     Relations\BelongsToMany,
     Relations\MorphToMany,
 };
+use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class Post extends Model
 {
@@ -113,18 +114,22 @@ class Post extends Model
     }
 
     /**
-     * Get the post page url
+     * Get the post page route url
      *
      * @return string
      */
-    public function getUrlAttribute()
+    public function getRouteUrlAttribute()
     {
-        return route('post', [
-            'year' => $this->created_at->format('Y'),
-            'month' => $this->created_at->format('m'),
-            'day' => $this->created_at->format('d'),
-            'post' => $this
-        ]);
+        try {
+            return route('post', [
+                'year' => $this->created_at->format('Y'),
+                'month' => $this->created_at->format('m'),
+                'day' => $this->created_at->format('d'),
+                'post' => $this
+            ]);
+        } catch (UrlGenerationException $e) {
+            return '';
+        }
     }
 
     /**

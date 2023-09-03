@@ -37,7 +37,9 @@ class Index extends Component
      * @var array
      */
     protected $queryString = [
-        'selectedSkillGroup'  => ['except' => '', 'as' => 'group']
+        'selectedSkillGroup'  => [
+            'except' => '', 'as' => 'group'
+        ]
     ];
 
     /**
@@ -47,30 +49,27 @@ class Index extends Component
      */
     public function mount()
     {
-        // Get the skills for the skill filter list
+        // Get the skill groups for the skill filter list.
         $this->setSkillGroups(
             SkillGroups::getActiveGroups()
         );
 
-        // Get the intro text
+        // Get the intro text from the settings.
         $this->intro = Settings::getValue('skills_intro');
 
-        Page::setTitle('Skills');
+        Page::setTitle('Web Developement Skills');
+        Page::setDescription('A list of web development skills and technologies I have experience with.');
     }
 
     /**
-     * Get the Skills.
+     * Get the Skills list.
      *
      * @return Collection|LengthAwarePaginator
      */
     public function getSkillsProperty(): Collection|LengthAwarePaginator
     {
-        $filter = [];
-
-        // Filter by skill group if set
-        if ($this->selectedSkillGroup) {
-            $filter['skillGroup'] = $this->selectedSkillGroup;
-        }
+        $filter = $this->selectedSkillGroup ?
+            ['skillGroup' => $this->selectedSkillGroup] : [];
 
         return Skills::getFilteredQuery($filter)
             ->orderBy('level', 'desc')

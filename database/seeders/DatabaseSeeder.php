@@ -125,6 +125,18 @@ class DatabaseSeeder extends Seeder
             'type' => 'text',
         ]);
 
+        Setting::create([
+            'key' => 'contact_email',
+            'value' => fake()->email(),
+            'type' => 'text',
+        ]);
+
+        Setting::create([
+            'key' => 'register_intro',
+            'value' => fake()->text(300),
+            'type' => 'text',
+        ]);
+
         /**
          * Skills
          */

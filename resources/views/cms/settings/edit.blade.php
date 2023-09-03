@@ -6,7 +6,7 @@
         {{ $this->setting->getLabel() }}
     </div>
 
-    <div class="flex justify-between items-start">
+    <div class="flex justify-between items-center">
 
         <!-- Left -->
         <div class="grow mr-2">
@@ -33,28 +33,28 @@
 
                     {{-- View setting --}}
                     @default
-                        <div class="mt-2 flex content-center">
+                        {{-- <div class="mt-2 flex content-center"> --}}
                             {{-- URL icon and link --}}
-                            @if(filter_var($this->setting->getValue(), FILTER_VALIDATE_URL))
+                            {{-- @if(filter_var($this->setting->getValue(), FILTER_VALIDATE_URL))
                                 <span>
                                     <a href="{{ $this->setting->getValue() }}" target="_blank">
                                         <x-icons.material class="mr-1 text-sm">open_in_new</x-icons-material>
                                     </a>
                                 </span>
-                            @endif
+                            @endif --}}
 
                             {{-- Email address icon and link --}}
-                            @if(filter_var($this->setting->getValue(), FILTER_VALIDATE_EMAIL))
+                            {{-- @if(filter_var($this->setting->getValue(), FILTER_VALIDATE_EMAIL))
                                 <span>
                                     <a href="mailto:{{ $this->setting->getValue() }}" target="_blank">
                                         <x-icons.material class="mr-1 text-sm">mail</x-icons-material>
                                     </a>
                                 </span>
-                            @endif
+                            @endif --}}
 
                             {{-- Setting value --}}
-                            <span>{{ $this->setting->getValue() }}</span>
-                        </div>
+                            {{-- <span>{{ $this->setting->getValue() }}</span> --}}
+                        {{-- </div> --}}
                 @endswitch
             </div>
         </div>

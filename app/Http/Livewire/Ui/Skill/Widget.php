@@ -18,7 +18,8 @@ use Livewire\{
 /**
  * UI - Skills - Homepage widget
  *
- * Shows 2 recent skills with simple pagination
+ * Shows 10 top skills with simple pagination
+ * and a skill group filter.
  *
  */
 class Widget extends Component
@@ -33,6 +34,7 @@ class Widget extends Component
      */
     public function mount(): void
     {
+        // Get the skill groups for the skill filter list.
         $this->setSkillGroups(
             SkillGroups::getActiveGroups()
         );
@@ -56,12 +58,8 @@ class Widget extends Component
      */
     public function getSkillsProperty(): Collection|LengthAwarePaginator
     {
-        $filter = [];
-
-        // Filter by skill if set
-        if ($this->selectedSkillGroup) {
-            $filter['skillGroup'] = $this->selectedSkillGroup;
-        }
+        $filter = $this->selectedSkillGroup ?
+            ['skillGroup' => $this->selectedSkillGroup] : [];
 
         return Skills::getFilteredQuery($filter)
             ->orderBy('level', 'desc')

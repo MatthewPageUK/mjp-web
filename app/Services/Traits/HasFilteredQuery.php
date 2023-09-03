@@ -12,7 +12,7 @@ trait HasFilteredQuery
      * @param array $filters    Array of filters
      * @return Builder
      */
-    public function getFilteredQuery(array $filters): Builder
+    public function getFilteredQuery(array $filters = []): Builder
     {
         // Base query
         $query = $this->getBaseQuery();

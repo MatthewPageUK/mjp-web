@@ -10,7 +10,7 @@
 
         {{-- Search filter --}}
         <div>
-            <x-text-input wire:model="search" type="text" placeholder="search..." />
+            <x-auth.text-input wire:model="search" type="text" placeholder="search..." />
         </div>
 
         {{-- Category select --}}

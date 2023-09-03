@@ -5,6 +5,10 @@ namespace App\Models\Traits;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
+/**
+ * Trait for models with posts via the postable pivot table.
+ *
+ */
 trait HasPosts
 {
     /**

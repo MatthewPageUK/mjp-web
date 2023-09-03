@@ -4,9 +4,11 @@
     'icon' => 'help',
     'tag' => 'help',
     'active' => false,
+    'title' => '',
 ])
 <div>
     <a
+        title="{{ $title }}"
         href="{{ $href }}"
         class="
             flex items-center

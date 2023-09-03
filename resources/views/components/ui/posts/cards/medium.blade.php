@@ -2,7 +2,7 @@
     Shows post in medium vertical card with image, title, skills and date.
 --}}
 <x-ui.card>
-    <a href="{{ $post->url }}" class="block" title="View the '{{ $post->name }}' post">
+    <a href="{{ $post->routeUrl }}" class="block" title="View the '{{ $post->name }}' post">
         <img src="{{ $post->image }}" />
         <span class="block leading-tight text-lg p-4 pb-2">{{ $post->name }}</span>
         <span class="text-xs px-4">{{ $post->skills->pluck('name')->implode(', ') }}</span>

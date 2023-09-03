@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\{
     SoftDeletes,
     Factories\HasFactory,
 };
+use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class Experience extends Model
 {
@@ -33,6 +34,7 @@ class Experience extends Model
         'end',
         'name',
         'description',
+        'key_points',
         'active',
     ];
 
@@ -49,13 +51,17 @@ class Experience extends Model
     ];
 
     /**
-     * Get the experience page url
+     * Get the experience page route url
      *
      * @return string
      */
-    public function getUrlAttribute()
+    public function getRouteUrlAttribute()
     {
-        return route('experience', ['experience' => $this]);
+        try {
+            return route('experience', ['experience' => $this]);
+        } catch (UrlGenerationException $e) {
+            return '';
+        }
     }
 
 }

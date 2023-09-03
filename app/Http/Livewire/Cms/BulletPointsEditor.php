@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Cms;
 
 use App\Facades\Cms\BulletPoints;
 
-
 /**
  * CMS - Bullet Points Editor component
  *
@@ -58,7 +57,7 @@ class BulletPointsEditor extends CrudAbstract
     /**
      * Set the bullet points list
      *
-     * Override to get models
+     * Overrided to get models
      * with the colour attached.
      *
      * @return void
@@ -72,7 +71,7 @@ class BulletPointsEditor extends CrudAbstract
      * Set the editable model for this component
      * to a new blank model.
      *
-     * Override to allow for default values
+     * Overrided to allow for default values
      * for the order field.
      *
      */

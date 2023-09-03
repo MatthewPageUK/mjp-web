@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\{
     Factories\HasFactory,
     Relations\BelongsToMany,
 };
+use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class PostCategory extends Model
 {
@@ -45,14 +46,18 @@ class PostCategory extends Model
     }
 
     /**
-     * Get the category page url
+     * Get the post category page route url
      *
      * @return string
      */
-    public function getUrlAttribute()
+    public function getRouteUrlAttribute()
     {
-        return route('posts.category', [
-            'category' => $this
-        ]);
+        try {
+            return route('posts.category', [
+                'category' => $this
+            ]);
+        } catch (UrlGenerationException $e) {
+            return '';
+        }
     }
 }

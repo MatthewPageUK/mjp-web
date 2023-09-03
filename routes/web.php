@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Ui\UserDashboard;
 use App\Http\Livewire\Ui\Experience\Index as ExperienceIndex;
 use App\Http\Livewire\Ui\Experience\View as ExperienceView;
 // use App\Http\Livewire\Skill\Explorer as SkillExplorer;
@@ -32,17 +34,6 @@ use Illuminate\Support\Facades\Route;
 
 // Homepage
 Route::get('/', [HomepageController::class, 'show'])->name('home');
-
-// Skills
-// Route::get('/skills', SkillExplorer::class)->name('skills');
-
-// Route::get('/skill/{skill}', function (Skill $skill) {
-//     return view('skill', ['skill' => $skill]);
-// })->name('skill');
-
-// Route::get('/skillsg', function () {
-//     return "Skills Explorer";
-// })->name('skills.group');
 
 /*
 |--------------------------------------------------------------------------
@@ -96,9 +87,16 @@ Route::get('/post/{year}/{month}/{day}/{post}', PostView::class)->name('post');
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/secret', function () {
-    return view('secret');
-})->name('the.secret');
+
+
+Route::get('/dashboard', UserDashboard::class)->middleware(['auth'])->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 /*
 |--------------------------------------------------------------------------

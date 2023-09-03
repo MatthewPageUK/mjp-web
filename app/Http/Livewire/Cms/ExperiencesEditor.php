@@ -3,13 +3,6 @@
 namespace App\Http\Livewire\Cms;
 
 use App\Facades\Cms\Experiences;
-use App\Http\Livewire\Cms\Traits\HasCrudActions;
-use App\Http\Livewire\Cms\Traits\HasCrudModes;
-use App\Models\Experience;
-use App\View\Components\CmsLayout;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Livewire\Component;
 
 /**
  * CMS - Experiences Editor component
@@ -19,11 +12,8 @@ use Livewire\Component;
  *
  */
 
-class ExperiencesEditor extends Component
+class ExperiencesEditor extends CrudAbstract
 {
-    use HasCrudModes;
-    use HasCrudActions;
-
     /**
      * Readable name of the model
      *
@@ -32,25 +22,25 @@ class ExperiencesEditor extends Component
     public $modelName = "Experience";
 
     /**
-     * Variable name of the model on the component
+     * The service facade to use for CRUD operations
      *
      * @var string
      */
-    public $modelVar = "experience";
+    public $service = Experiences::class;
 
     /**
-     * Editable experience.
+     * The view used to render the CMS page.
      *
-     * @var Experience
+     * @var string
      */
-    public $experience;
+    public $view = "cms.experiences.index";
 
     /**
-     * All experiences
+     * Title of the CMS Page
      *
-     * @var array|Collection
+     * @var string
      */
-    public $experiences = [];
+    public $title = "CMS - Experiences";
 
     /**
      * Validation rules
@@ -58,102 +48,23 @@ class ExperiencesEditor extends Component
      * @var array
      */
     public $rules = [
-        'experience.name' => 'required|string|min:2',
-        'experience.slug' => 'nullable',
-        'experience.description' => 'nullable',
-        'experience.key_points' => 'nullable|array',
-        'experience.key_points.*.title' => 'required|string',
-        'experience.key_points.*.text' => 'nullable|string',
-        'experience.start' => 'nullable|date',
-        'experience.end' => 'nullable|date',
-        'experience.active' => 'boolean',
+        'model.name' => 'required|string|min:2',
+        'model.slug' => 'nullable',
+        'model.description' => 'nullable',
+        'model.key_points' => 'nullable|array',
+        'model.key_points.*.title' => 'required|string',
+        'model.key_points.*.text' => 'nullable|string',
+        'model.start' => 'nullable|date',
+        'model.end' => 'nullable|date',
+        'model.active' => 'boolean',
     ];
 
     /**
-     * Mount the component and populate the data
+     * Save the changes to the current model.
      *
-     * @param Request $request
-     * @return void
-     */
-    public function mount(Request $request)
-    {
-        $this->setModel();
-        $this->setExperiences();
-        $this->setRequestMode($request);
-    }
-
-    /**
-     * Hydrate the component
+     * Overrided to allow for filtering of key points
      *
-     * @return void
-     */
-    public function hydrate()
-    {
-        $this->setExperiences();
-    }
-
-    /**
-     * Set the Experiences
-     *
-     * @return void
-     */
-    public function setExperiences()
-    {
-        $this->experiences = Experiences::getAll();
-    }
-
-    /**
-     * Set the editable model for this component
-     *
-     */
-    public function setModel($data = [])
-    {
-        $this->experience = Experiences::new($data);
-    }
-
-    /**
-     * Get the model for ID
-     *
-     * @param int $id
-     * @return mixed
-     */
-    public function getModel(int $id)
-    {
-        return Experiences::get($id);
-    }
-
-    /**
-     * Create a new Experience from the details
-     * in the form.
-     *
-     * @return void
-     */
-    public function create(): void
-    {
-        $this->executeCreate(function () {
-            $this->experience = Experiences::create($this->experience->toArray());
-        });
-
-        $this->setExperiences();
-    }
-
-    /**
-     * Delete the Experience referenced by deleteId
-     *
-     * @return void
-     */
-    public function delete(): void
-    {
-        $this->executeDelete(function () {
-            Experiences::delete($this->experience->id);
-        });
-
-        $this->setExperiences();
-    }
-
-    /**
-     * Save the changes to the Experience
-     *
+     * @todo The filterKeyPoints could be moved to the model or the serivce beforeUpdating() method
      * @return void
      */
     public function save(): void
@@ -161,10 +72,10 @@ class ExperiencesEditor extends Component
         $this->filterKeyPoints();
 
         $this->executeSave(function () {
-            Experiences::update($this->experience);
+            $this->service::update($this->model->id, $this->model->toArray());
         });
 
-        $this->setExperiences();
+        $this->setList();
     }
 
     /**
@@ -188,23 +99,13 @@ class ExperiencesEditor extends Component
     public function filterKeyPoints(?int $index = null): void
     {
         $key_points = [];
-        foreach($this->experience->key_points as $key => $value) {
+        foreach($this->model->key_points as $key => $value) {
             if ($value['title'] !== '' && $key !== $index) {
                 $key_points[] = $value;
             }
         }
 
-        $this->experience->key_points = $key_points;
+        $this->model->key_points = $key_points;
     }
 
-    /**
-     * Render the Experiences page
-     *
-     * @return View
-     */
-    public function render(): View
-    {
-        return view('cms.experiences.index')
-            ->layout(CmsLayout::class, ['title' => 'CMS - Experiences']);
-    }
 }

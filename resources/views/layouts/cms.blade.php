@@ -52,7 +52,7 @@
 
             {{-- Main page --}}
             <div class="flex-1">
-                <main class="max-w-7xl mx-auto px-6 lg:px-8 text-white">
+                <main class="relative max-w-7xl mx-auto px-6 lg:px-8 text-white">
                     {{ $slot }}
                 </main>
             </div>
