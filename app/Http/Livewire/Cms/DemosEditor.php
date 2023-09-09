@@ -59,6 +59,7 @@ class DemosEditor extends CrudAbstract
         'model.url' => 'nullable',
         'model.demo_url' => 'nullable',
         'model.active' => 'boolean',
+        'model.image.url' => 'nullable',
     ];
 
     public function mediaSelected($message)

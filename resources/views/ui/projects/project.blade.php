@@ -19,7 +19,7 @@
                 @markdown($project->description)
             </div>
 
-            <img src="{{ $project->image }}" class="w-full" />
+            <x-ui.imageable :model="$project" />
 
             {{-- Link to Github page --}}
             @if ($project->github)

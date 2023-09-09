@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{
     HasActive,
+    HasImage,
     HasNameSlug,
     HasPosts,
     HasSkills,
@@ -19,6 +20,7 @@ class Demo extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasImage;
     use HasNameSlug;
     use HasPosts;
     use HasSkills;
@@ -50,16 +52,6 @@ class Demo extends Model
         } catch (UrlGenerationException $e) {
             return '';
         }
-    }
-
-    /**
-     * Get the image attribute
-     *
-     * @return string
-     */
-    public function getImageAttribute()
-    {
-        return 'https://loremflickr.com/640/360/computer?lock=748373'.$this->id;
     }
 
 }

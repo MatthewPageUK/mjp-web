@@ -39,6 +39,7 @@
                 @markdown($post->snippet)
             </div>
 
+            <x-ui.imageable :model="$post" />
 
             {{-- Description --}}
             <div class="prose prose-lg prose-primary">

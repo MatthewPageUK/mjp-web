@@ -137,7 +137,7 @@ class PostFactory extends Factory
 
         return [
             'name' => fake()->randomElement($articleTitles),
-            'snippet' => fake()->sentence(25),
+            'snippet' => fake()->sentence(20),
             'content' => fake()->paragraphs(3, true),
             'active' => true,
             'created_at' => fake()->dateTimeBetween('-3 year', 'now'),

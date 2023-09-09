@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{
     HasActive,
+    HasImage,
     HasSkills,
     HasNameSlug,
 };
@@ -21,6 +22,7 @@ class Post extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasImage;
     use HasNameSlug;
     use HasSkills;
     use SoftDeletes;
@@ -131,19 +133,6 @@ class Post extends Model
             return '';
         }
     }
-
-    /**
-     * Get the image attribute
-     *
-     * @return string
-     */
-    public function getImageAttribute()
-    {
-        return 'https://loremflickr.com/640/360/computer?lock=42107643'.$this->id;
-
-        return asset('images/posts/' . $this->slug . '.jpg');
-    }
-
 
     /**
      * Scope the query to a specific category

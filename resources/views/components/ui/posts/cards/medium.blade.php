@@ -3,7 +3,7 @@
 --}}
 <x-ui.card>
     <a href="{{ $post->routeUrl }}" class="block" title="View the '{{ $post->name }}' post">
-        <img src="{{ $post->image }}" />
+        <x-ui.imageable :model="$post" />
         <span class="block leading-tight text-lg p-4 pb-2">{{ $post->name }}</span>
         <span class="text-xs px-4">{{ $post->skills->pluck('name')->implode(', ') }}</span>
 

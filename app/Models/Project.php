@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\{
     HasActive,
     HasGithub,
+    HasImage,
     HasNameSlug,
     HasPosts,
     HasSkills,
@@ -23,6 +24,7 @@ class Project extends Model
     use HasActive;
     use HasFactory;
     use HasGithub;
+    use HasImage;
     use HasNameSlug;
     use HasPosts;
     use HasSkills;
@@ -73,15 +75,4 @@ class Project extends Model
         }
     }
 
-    /**
-     * Get the image attribute
-     *
-     * @return string
-     */
-    public function getImageAttribute()
-    {
-        return 'https://loremflickr.com/640/360/electronics?r='.rand(100,100000).'&lock=633873'.$this->id;
-
-        // return asset('images/posts/' . $this->slug . '.jpg');
-    }
 }

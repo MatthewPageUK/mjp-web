@@ -18,7 +18,7 @@
     </div>
 
     <div>
-        <img src="{{ $post->image }}" class="object-cover rounded-lg" />
+        <x-ui.imageable :model="$post" class="object-cover rounded-lg"/>
     </div>
 
 </div>

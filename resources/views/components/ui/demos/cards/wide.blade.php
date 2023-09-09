@@ -13,7 +13,7 @@
         </p>
         <div class="order-first lg:order-last">
             <a href="{{ $demo->routeUrl }}">
-                <img src="{{ $demo->image }}" class="" />
+                <x-ui.imageable :model="$demo" />
             </a>
         </div>
     </div>

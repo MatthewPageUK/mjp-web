@@ -14,7 +14,9 @@
     <iframe src="{{ $demo->demo_url }}" class="w-full h-[700px] mt-8 border border-2 border-primary-900 shadow-lg"></iframe>
 @else
     {{-- or Image --}}
-    <img src="{{ $demo->image }}" class="w-full mt-8 border border-2 border-primary-900 shadow-lg" />
+    <div class="w-full mt-8 border border-2 border-primary-900 shadow-lg" >
+        <x-ui.imageable :model="$demo" />
+    </div>
 @endif
 
 <div class="lg:grid lg:grid-cols-3 gap-x-16 my-16">

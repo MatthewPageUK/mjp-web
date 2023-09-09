@@ -25,7 +25,7 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased bg-fixed bg-cover bg-primary-800 bg-gradient-to-b from-black"
-        style="background-image: url('/mjp-back-1.jpg')"
+        style="XXbackground-image: url('/mjp-back-1.jpg')"
         x-data="{
             page: '{{ \Route::currentRouteName() }}',
         }"

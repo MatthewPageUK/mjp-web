@@ -21,6 +21,9 @@
 
     @if ($this->modeName === 'update')
 
+        {{-- Image --}}
+        <x-cms.crud.fields.imageable />
+
         {{-- Post Categories --}}
         <x-cms.crud.fields.post-categoryable />
 

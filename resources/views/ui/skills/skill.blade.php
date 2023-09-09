@@ -36,7 +36,8 @@
                 @markdown($skill->description)
             </div>
 
-            <img src="{{ $skill->image }}" class="w-full" />
+            {{-- Image --}}
+            <x-ui.imageable :model="$skill" />
 
         </div>
 

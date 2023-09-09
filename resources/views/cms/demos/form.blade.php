@@ -35,13 +35,13 @@
     </x-cms.crud.field>
 
     {{-- Image WIP --}}
-    <x-cms.crud.field name="Image">
+    {{-- <x-cms.crud.field name="Image">
         <div x-data="{open: false}">
-            <x-cms.form.input XXwire:model="model.image" /> <button @click.prevent="open = ! open" title="Open media explorer">...</button>
-            <x-cms.validation-error field="model.url" />
+            <x-cms.form.input wire:model="model.image.url" /> <button @click.prevent="open = ! open" title="Open media explorer">...</button>
+            <x-cms.validation-error field="model.image.url" />
             <iframe x-show="open" src="https://media.mjp.co/ui/explorer" class="w-full h-[650px] mt-4"></iframe>
         </div>
-    </x-cms.crud.field>
+    </x-cms.crud.field> --}}
 
     {{-- <script>
         window.addEventListener(
@@ -55,6 +55,9 @@
     </script> --}}
 
     @if ($this->modeName === 'update')
+
+        {{-- Image --}}
+        <x-cms.crud.fields.imageable />
 
         {{-- Skills --}}
         <x-cms.crud.fields.skillable />

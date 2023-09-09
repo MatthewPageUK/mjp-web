@@ -25,7 +25,7 @@ class View extends Component
     public function mount($year, $month, $day, Post $post)
     {
         $this->post = $post;
-        $this->relatedPosts = Posts::getRecent(6, $this->post->postCategories()->first()->slug);
+        $this->relatedPosts = Posts::getRecent(6, $this->post->postCategories()->first()?->slug);
     }
 
     /**

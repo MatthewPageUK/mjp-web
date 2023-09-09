@@ -5,7 +5,7 @@
 >
     <ul>
         {{ $selected }}
-        <li class="flex items-center gap-2 mb-2">
+        <li class="flex items-center gap-2">
             <span class="flex-1"></span>
             <x-cms.icon-button
                 x-show="! open"

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\{
     HasActive,
     HasNameSlug,
+    HasImage,
 };
 use Illuminate\Database\Eloquent\{
     Builder,
@@ -20,6 +21,7 @@ class Skill extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasImage;
     use HasNameSlug;
     use SoftDeletes;
 
@@ -150,15 +152,4 @@ class Skill extends Model
         }
     }
 
-    /**
-     * Get the image attribute
-     *
-     * @return string
-     */
-    public function getImageAttribute()
-    {
-        return 'https://loremflickr.com/640/360/technology,'.urlencode($this->slug).'?r='.rand(100,100000).'&lock=1834873'.$this->id;
-
-        // return asset('images/posts/' . $this->slug . '.jpg');
-    }
 }

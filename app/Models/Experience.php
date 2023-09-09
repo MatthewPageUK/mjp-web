@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{
     HasActive,
+    HasImage,
     HasNameSlug,
     HasPosts,
     HasSkills,
@@ -19,6 +20,7 @@ class Experience extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasImage;
     use HasNameSlug;
     use HasPosts;
     use HasSkills;

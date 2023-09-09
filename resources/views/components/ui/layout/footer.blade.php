@@ -17,8 +17,11 @@
 </footer>
 <p class="flex items-center gap-4 text-xs text-green-400 bg-black px-6 py-4">
     Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-    <a href="{{ Settings::getValue('url_github') }}" class="flex items-center gap-1 hover:text-secondary-400">
-        <x-icons.material>terminal</x-ui.icons.material>
-        Source code
-    </a>
+
+    @if (Settings::getValue('source'))
+        <a href="{{ Settings::getValue('source') }}" class="flex items-center gap-1 hover:text-secondary-400">
+            <x-icons.material>terminal</x-ui.icons.material>
+            Source code
+        </a>
+    @endif
 </p>

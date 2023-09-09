@@ -68,6 +68,9 @@
 
     @if ($this->modeName === 'update')
 
+        {{-- Image --}}
+        <x-cms.crud.fields.imageable />
+
         {{-- Skills --}}
         <x-cms.crud.fields.skillable />
 

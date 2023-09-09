@@ -37,6 +37,8 @@
                 </div>
             </div>
 
+            <x-ui.imageable :model="$experience" />
+
             {{-- Description --}}
             <div class="prose prose-xl prose-primary">
                 @markdown($experience->description)

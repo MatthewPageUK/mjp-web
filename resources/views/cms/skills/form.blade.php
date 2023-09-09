@@ -32,6 +32,9 @@
 
     @if ($this->modeName === 'update')
 
+        {{-- Image --}}
+        <x-cms.crud.fields.imageable />
+
         {{-- Skills Groups --}}
         <x-cms.crud.fields.skill-groupable />
 
