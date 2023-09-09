@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Commands\Traits\MjpSetup;
 use App\Models\BulletPoint;
 use App\Models\Demo;
 use App\Models\Experience;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Log;
  */
 class Reset extends Command
 {
+    use MjpSetup;
+
     /**
      * The name and signature of the console command.
      *
@@ -44,11 +47,7 @@ class Reset extends Command
      */
     public function handle()
     {
-        $this->newline(2);
-        $this->line('----------------------------------------------------');
-        $this->line(' Reset the MJP application');
-        $this->line('----------------------------------------------------');
-        $this->newline();
+        $this->header('Reset the');
 
         $this->warn('This will delete all the database content.');
 
@@ -104,7 +103,11 @@ class Reset extends Command
         DB::table('users')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $this->info('Reset complete - please run `artisan mjpweb:setup` to setup the default data.');
+        $this->newLine();
+        $this->info('Reset complete');
 
+        $this->newLine();
+        $this->line('Run `artisan mjpweb:setup` to setup the default data or `artisan mjpweb:demosetup` to populate the database with example content.');
+        $this->line('----------------------------------------------------');
     }
 }

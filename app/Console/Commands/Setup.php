@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Commands\Traits\MjpSetup;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Sets up the application for first use.
@@ -14,6 +16,8 @@ use Illuminate\Console\Command;
  */
 class Setup extends Command
 {
+    use MjpSetup;
+
     /**
      * The name and signature of the console command.
      *
@@ -33,23 +37,27 @@ class Setup extends Command
      */
     public function handle()
     {
-        $this->newline(2);
-        $this->line('----------------------------------------------------');
-        $this->line(' Setting up the MJP application');
-        $this->line('----------------------------------------------------');
-        $this->newline();
+        $this->header('Setting up the');
 
-        if (User::admins()->count() > 0) {
-            $this->error('An admin user already exists. Setup can only be run on a clean database.');
-            $this->newline();
-            $this->line('Run "artisan mjpweb:reset" to reset the application.');
-            $this->newline(2);
+        if (false === $this->requireCleanDatabase()) {
             return;
         }
 
-        $this->info('Running database seeder');
+        $this->info('Running essential database seeder');
         $seeder = new \Database\Seeders\DatabaseSeeder();
         $seeder->run();
+        $this->info('Completed database seeding');
+
+        $this->newline();
+        $email = $this->ask('Enter your admin email address');
+        $password = $this->secret('Enter your admin password');
+
+        $user = User::admins()->first();
+
+        $user->forceFill([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ])->save();
 
         $this->info('Setup complete!');
         $this->info('----------------------------------------------------');
