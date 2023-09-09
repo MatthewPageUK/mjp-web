@@ -21,7 +21,7 @@ module.exports = {
             },
 
             colors: {
-                primary: colors.sky,
+                primary: colors.zinc,
                 secondary: colors.amber,
                 highlight: colors.purple,
             },
