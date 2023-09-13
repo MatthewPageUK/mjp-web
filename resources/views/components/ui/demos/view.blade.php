@@ -11,7 +11,10 @@
 
 {{-- Embedded demo iframe --}}
 @if ($demo->demo_url)
-    <iframe src="{{ $demo->demo_url }}" class="w-full h-[700px] mt-8 border border-2 border-primary-900 shadow-lg"></iframe>
+    <iframe
+        src="{{ $demo->demo_url }}"
+        class="w-full h-[700px] mt-8"
+    ></iframe>
 @else
     {{-- or Image --}}
     <div class="w-full mt-8 border border-2 border-primary-900 shadow-lg" >
