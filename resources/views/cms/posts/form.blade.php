@@ -12,7 +12,7 @@
 
     {{-- Snippet --}}
     <x-cms.crud.field name="Snippet">
-        <x-cms.form.textarea wire:model="model.snippet" class="h-32" />
+        <x-cms.form.textarea wire:model.live="model.snippet" class="h-32" />
         <x-cms.validation-error field="model.snippet" />
     </x-cms.crud.field>
 

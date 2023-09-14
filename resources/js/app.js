@@ -1,11 +1,14 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
-import persist from '@alpinejs/persist';
+// import Alpine from 'alpinejs';
+// import persist from '@alpinejs/persist';
 
-Alpine.plugin(persist);
+// Alpine.plugin(persist);
 
-window.Alpine = Alpine;
+// window.Alpine = Alpine;
 
-Alpine.start();
+// Alpine.start();
 
+// import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+
+// Livewire.start();

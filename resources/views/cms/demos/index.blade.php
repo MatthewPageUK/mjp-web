@@ -4,7 +4,7 @@
 <x-cms.layout.page>
 
     <div x-data="{
-        mode: @entangle('modeName')
+        mode: @entangle('modeName').live
     }">
 
         {{-- Header --}}

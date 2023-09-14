@@ -31,7 +31,6 @@ class DemoSeeder extends Seeder
      * 5 Projects
      * Skillable - attach 3 random skills to each skillable
      * Postable - attach 3 random posts to each postable
-     * 5 Mastheads
      */
     public function run(): void
     {

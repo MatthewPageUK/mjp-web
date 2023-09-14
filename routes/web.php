@@ -2,19 +2,18 @@
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Livewire\Ui\UserDashboard;
-use App\Http\Livewire\Ui\Experience\Index as ExperienceIndex;
-use App\Http\Livewire\Ui\Experience\View as ExperienceView;
-// use App\Http\Livewire\Skill\Explorer as SkillExplorer;
-use App\Http\Livewire\Ui\Skill\Index as SkillIndex;
-use App\Http\Livewire\Ui\Skill\View as SkillView;
-use App\Http\Livewire\Ui\Demo\Index as DemoIndex;
-use App\Http\Livewire\Ui\Demo\View as DemoView;
-use App\Http\Livewire\Ui\Project\{
+use App\Livewire\Ui\UserDashboard;
+use App\Livewire\Ui\Experience\Index as ExperienceIndex;
+use App\Livewire\Ui\Experience\View as ExperienceView;
+use App\Livewire\Ui\Skill\Index as SkillIndex;
+use App\Livewire\Ui\Skill\View as SkillView;
+use App\Livewire\Ui\Demo\Index as DemoIndex;
+use App\Livewire\Ui\Demo\View as DemoView;
+use App\Livewire\Ui\Project\{
     Index as ProjectIndex,
     View as ProjectView,
 };
-use App\Http\Livewire\Ui\Post\{
+use App\Livewire\Ui\Post\{
     Index as PostIndex,
     Category as PostCategory,
     View as PostView,

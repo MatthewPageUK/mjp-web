@@ -3,7 +3,9 @@
     class="flex px-6 py-4 text-sm bg-primary-800 text-white"
 >
     <p class="flex-1">
-        {{ Settings::getValue('site_name') }} - {{ Settings::getValue('site_tagline') }}
+        <a href="{{ route('home') }}" title="Homepage" class="hover:text-amber-400">
+            {{ Settings::getValue('site_name') }} - {{ Settings::getValue('site_tagline') }}
+        </a>
     </p>
     <p class="flex-1 text-center text-xs text-primary-400">
         Copyright &copy; {{ date('Y') }}

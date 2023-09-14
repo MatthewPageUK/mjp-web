@@ -14,19 +14,19 @@
 
     {{-- Github --}}
     <x-cms.crud.field name="Github URL">
-        <x-cms.form.input wire:model="model.github" />
+        <x-cms.form.input wire:model.live="model.github" />
         <x-cms.validation-error field="model.github" />
     </x-cms.crud.field>
 
     {{-- Website --}}
     <x-cms.crud.field name="Website">
-        <x-cms.form.input wire:model="model.website" />
+        <x-cms.form.input wire:model.live="model.website" />
         <x-cms.validation-error field="model.website" />
     </x-cms.crud.field>
 
     {{-- Last Active --}}
     <x-cms.crud.field name="Last Activity">
-        <input type="date" wire:model.lazy="model.last_active" class="w-full bg-primary-900"/>
+        <input type="date" wire:model.blur="model.last_active" class="w-full bg-primary-900"/>
         <x-cms.validation-error field="model.last_active" />
     </x-cms.crud.field>
 

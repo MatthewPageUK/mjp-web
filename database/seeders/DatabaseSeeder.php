@@ -14,7 +14,6 @@ use App\Models\{
     SkillGroup,
     User,
 };
-use Database\Factories\MastheadFactory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -48,15 +47,15 @@ class DatabaseSeeder extends Seeder
         ]);
         Setting::create([
             'key' => 'url_github',
-            'value' => '',
+            'value' => 'https://github.com',
         ]);
         Setting::create([
             'key' => 'url_linkedin',
-            'value' => '',
+            'value' => 'https://www.linkedin.com',
         ]);
         Setting::create([
             'key' => 'url_youtube',
-            'value' => '',
+            'value' => 'https://www.youtube.com',
         ]);
         Setting::create([
             'key' => 'experience_intro',
