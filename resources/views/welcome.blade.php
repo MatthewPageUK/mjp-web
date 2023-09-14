@@ -1,6 +1,4 @@
-<x-ui-layout
-    :showMasthead="false"
->
+<x-ui-layout>
 
     <div class="grid grid-cols-6 lg:grid-cols-12 gap-4 lg:gap-16 lg:mt-16">
         <div class="col-span-6">

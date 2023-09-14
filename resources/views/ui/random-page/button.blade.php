@@ -1,5 +1,5 @@
 {{-- UI - Jump to random page button --}}
-<div class="text-center">
+<div class="text-center" id="jump-to-random-page">
     <h1 class="text-2xl font-black font-orbitron text-secondary-400 my-4">
         Still looking for more?
     </h1>

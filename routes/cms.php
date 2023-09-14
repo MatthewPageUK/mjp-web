@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Livewire\Cms\BulletPointsEditor;
-use App\Http\Livewire\Cms\Dashboard;
-use App\Http\Livewire\Cms\DemosEditor;
-use App\Http\Livewire\Cms\ExperiencesEditor;
-use App\Http\Livewire\Cms\MediaManager;
-use App\Http\Livewire\Cms\PostCategoriesEditor;
-use App\Http\Livewire\Cms\PostsEditor;
-use App\Http\Livewire\Cms\ProjectsEditor;
-use App\Http\Livewire\Cms\SettingsEditor;
-use App\Http\Livewire\Cms\SkillGroupsEditor;
-use App\Http\Livewire\Cms\SkillsEditor;
+use App\Livewire\Cms\BulletPointsEditor;
+use App\Livewire\Cms\Dashboard;
+use App\Livewire\Cms\DemosEditor;
+use App\Livewire\Cms\ExperiencesEditor;
+use App\Livewire\Cms\MediaManager;
+use App\Livewire\Cms\PostCategoriesEditor;
+use App\Livewire\Cms\PostsEditor;
+use App\Livewire\Cms\ProjectsEditor;
+use App\Livewire\Cms\SettingsEditor;
+use App\Livewire\Cms\SkillGroupsEditor;
+use App\Livewire\Cms\SkillsEditor;
 use Illuminate\Support\Facades\Route;
 
 /*

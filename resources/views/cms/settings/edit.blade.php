@@ -20,13 +20,13 @@
 
                             @case('text')
                                 <x-cms.form.textarea id="value" name="value" class="h-[500px]" value="{{ $this->setting->getValue() }}"
-                                    wire:model.lazy="value"
+                                    wire:model.blur="value"
                                 />
                             @break
 
                             @default
                                 <x-cms.form.input id="value" name="value" value="{{ $this->setting->getValue() }}"
-                                    wire:model.lazy="value"
+                                    wire:model.blur="value"
                                 />
                         @endswitch
                     @break

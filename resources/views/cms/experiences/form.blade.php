@@ -18,13 +18,13 @@
         <div class="grid grid-cols-12 gap-4 items-center">
             <div class="col-span-5">
                 {{-- Start --}}
-                <x-cms.form.input type="date" wire:model.lazy="model.start" />
+                <x-cms.form.input type="date" wire:model.blur="model.start" />
                 <x-cms.validation-error field="model.start" />
             </div>
             <div class="col-span-2 text-center">to</div>
             <div class="col-span-5">
                 {{-- End --}}
-                <x-cms.form.input type="date" wire:model.lazy="model.end" />
+                <x-cms.form.input type="date" wire:model.blur="model.end" />
                 <x-cms.validation-error field="model.end" />
             </div>
         </div>
@@ -40,8 +40,8 @@
                         <span class="text-2xl">{{ $key + 1 }}. </span>
                     </div>
                     <div class="flex-1">
-                        <x-cms.form.input type="text" class="text-lg font-semibold mb-1" wire:model.lazy="model.key_points.{{ $key }}.title" />
-                        <x-cms.form.input type="text" wire:model.lazy="model.key_points.{{ $key }}.text" />
+                        <x-cms.form.input type="text" class="text-lg font-semibold mb-1" wire:model.blur="model.key_points.{{ $key }}.title" />
+                        <x-cms.form.input type="text" wire:model.blur="model.key_points.{{ $key }}.text" />
                         <x-cms.validation-error field="model.key_points.{{ $key }}.title" />
                         <x-cms.validation-error field="model.key_points.{{ $key }}.text" />
                     </div>
@@ -60,7 +60,7 @@
                 </button>
             </div>
             <div x-show="open">
-                <x-cms.form.input type="text" class="font-semibold" wire:model.lazy="model.key_points.{{ sizeof($this->model->key_points ?? []) }}.title" />
+                <x-cms.form.input type="text" class="font-semibold" wire:model.blur="model.key_points.{{ sizeof($this->model->key_points ?? []) }}.title" />
                 <x-cms.validation-error field="model.key_points.{{ sizeof($this->model->key_points ?? []) }}.title" />
             </div>
         </div>

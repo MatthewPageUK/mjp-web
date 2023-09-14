@@ -5,7 +5,7 @@
             <button x-on:click.prevent="preview = ! preview" x-text="preview ? 'Hide preview' : 'Show preview'" class="text-right text-secondary-400"></button>
         </p>
         <x-cms.form.textarea
-            wire:model="model.{{ $field }}"
+            wire:model.live="model.{{ $field }}"
             class="h-96"
             x-data="{
                 insertTab() {

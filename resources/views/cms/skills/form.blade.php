@@ -16,14 +16,14 @@
     {{-- Level --}}
     <x-cms.crud.field name="Level">
         <x-cms.validation-error field="model.level" />
-        <input class="accent-secondary-400 w-1/2 h-3 bg-primary-900 rounded-lg cursor-pointer range-lg" type="range" min="1" max="10" step="1" wire:model="model.level">
+        <input class="accent-secondary-400 w-1/2 h-3 bg-primary-900 rounded-lg cursor-pointer range-lg" type="range" min="1" max="10" step="1" wire:model.live="model.level">
         <span class="ml-2 text-2xl font-black">{{ $this->model->level }}</span>
     </x-cms.crud.field>
 
     {{-- SVG --}}
     <x-cms.crud.field name="SVG">
         <div class="flex gap-4">
-            <x-cms.form.textarea wire:model="model.svg" class="h-16 text-sm focus:h-64" />
+            <x-cms.form.textarea wire:model.live="model.svg" class="h-16 text-sm focus:h-64" />
             <div class="w-32 h-32">{!! $this->model->svg !!}</div>
         </div>
         <x-cms.validation-error field="model.svg" />

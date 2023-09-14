@@ -25,7 +25,7 @@
     </ul>
 
     <div x-show="open">
-        <x-cms.form.input class="text-sm" wire:model="filter" placeholder="Search..." />
+        <x-cms.form.input class="text-sm" wire:model.live="filter" placeholder="Search..." />
         <ul class="mt-2">
             {{ $selectable }}
         </ul>
