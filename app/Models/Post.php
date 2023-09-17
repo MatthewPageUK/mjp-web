@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{
     HasActive,
+    HasGithub,
     HasImage,
     HasSkills,
     HasNameSlug,
@@ -22,6 +23,7 @@ class Post extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasGithub;
     use HasImage;
     use HasNameSlug;
     use HasSkills;

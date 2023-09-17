@@ -51,6 +51,15 @@
         <div>
             {{-- Related links --}}
             <x-related.links :model="$post" />
+
+            <div>
+                @if ($post->hasGithubRepo())
+                    <div>
+                        {{-- Github info panel --}}
+                        <livewire:github.info :model="$post" />
+                    </div>
+                @endif
+            </div>
         </div>
 
     </div>

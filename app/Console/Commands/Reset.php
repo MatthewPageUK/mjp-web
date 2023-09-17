@@ -6,6 +6,8 @@ use App\Console\Commands\Traits\MjpSetup;
 use App\Models\BulletPoint;
 use App\Models\Demo;
 use App\Models\Experience;
+use App\Models\GithubRepo;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Project;
@@ -55,6 +57,8 @@ class Reset extends Command
             ['Bullet Points', BulletPoint::all()->count()],
             ['Demos', Demo::all()->count()],
             ['Experiences', Experience::all()->count()],
+            ['Github Repos', GithubRepo::all()->count()],
+            ['Images', Image::all()->count()],
             ['Posts', Post::all()->count()],
             ['Post Categories', PostCategory::all()->count()],
             ['Projects', Project::all()->count()],
@@ -89,6 +93,7 @@ class Reset extends Command
         DB::table('bullet_points')->truncate();
         DB::table('demos')->truncate();
         DB::table('experiences')->truncate();
+        DB::table('github_repos')->truncate();
         DB::table('images')->truncate();
         DB::table('post_categories')->truncate();
         DB::table('post_post_category')->truncate();

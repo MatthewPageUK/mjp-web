@@ -39,6 +39,9 @@
         {{-- Experiences --}}
         <x-cms.crud.fields.experienceable />
 
+        {{-- Github Repo --}}
+        <x-cms.crud.fields.githubable />
+
     @endif
 
     {{-- Buttons --}}

@@ -39,7 +39,6 @@ class Project extends Model
         'name',
         'slug',
         'description',
-        'github',
         'website',
         'last_active',
         'active',

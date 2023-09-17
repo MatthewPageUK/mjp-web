@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'github_owner'      => env('GITHUB_OWNER', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

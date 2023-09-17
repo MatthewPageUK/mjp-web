@@ -2,8 +2,7 @@
 
 namespace App\Livewire\Github;
 
-use App\Models\Project;
-use Carbon\Carbon;
+use App\Livewire\Github\Traits\HasGithubRepo;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -16,55 +15,7 @@ use Livewire\Component;
  */
 class Repo extends Component
 {
-
-    /**
-     * Repo home URL
-     *
-     * @var string
-     */
-    public $urlHome = '';
-
-    /**
-     * Repo clone URL
-     *
-     * @var string
-     */
-    public $urlClone = '';
-
-    /**
-     * Stars achieved
-     *
-     * @var int
-     */
-    public $stars = 0;
-
-    /**
-     * Watchers
-     *
-     * @var int
-     */
-    public $watchers = 0;
-
-    /**
-     * Created diff
-     *
-     * @var string
-     */
-    public $created = '';
-
-    /**
-     * Updated diff
-     *
-     * @var string
-     */
-    public $updated = '';
-
-    /**
-     * Pushed diff
-     *
-     * @var string
-     */
-    public $pushed = '';
+    use HasGithubRepo;
 
     /**
      * Issues
@@ -88,36 +39,15 @@ class Repo extends Component
     public $closedPullRequests = [];
 
     /**
-     * Error message
+     * Load the basic repo and extended information from the Github API.
      *
-     * @var string|null
-     */
-    public ?string $error = null;
-
-    /**
-     * The project
-     *
-     * @var Project
-     */
-    public Project $project;
-
-    /**
-     * Mount the component
-     *
-     * @param Project $project
      * @return void
      */
-    public function mount(Project $project)
-    {
-        $this->project = $project;
-
-    }
-
     public function loadRepo()
     {
         try {
             $this->setRepo(
-                GitHub::connection('main')->repo()->show($this->project->githubOwner, $this->project->githubRepo)
+                GitHub::connection('main')->repo()->show($this->model->githubRepo->owner, $this->model->githubRepo->name)
             );
 
         } catch (\Exception $e) {
@@ -127,7 +57,7 @@ class Repo extends Component
 
         try {
             $this->setIssues(
-                GitHub::connection('main')->issues()->all($this->project->githubOwner, $this->project->githubRepo, array('state' => 'open'))
+                GitHub::connection('main')->issues()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, array('state' => 'open'))
             );
 
         } catch (\Exception $e) {
@@ -137,11 +67,11 @@ class Repo extends Component
 
         try {
             $this->setOpenPullRequests(
-                GitHub::connection('main')->pull_requests()->all($this->project->githubOwner, $this->project->githubRepo, array('state' => 'open'))
+                GitHub::connection('main')->pull_requests()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, array('state' => 'open'))
             );
 
             $this->setClosedPullRequests(
-                GitHub::connection('main')->pull_requests()->all($this->project->githubOwner, $this->project->githubRepo, array('state' => 'closed'))
+                GitHub::connection('main')->pull_requests()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, array('state' => 'closed'))
             );
 
         } catch (\Exception $e) {
@@ -184,23 +114,6 @@ class Repo extends Component
     {
         // @todo map out fields not needed
         $this->issues = $issues;
-    }
-
-    /**
-     * Set the repo data
-     *
-     * @param array $repo
-     * @return void
-     */
-    public function setRepo(array $repo)
-    {
-        $this->urlHome = $repo['html_url'];
-        $this->urlClone = $repo['clone_url'];
-        $this->stars = $repo['stargazers_count'];
-        $this->watchers = $repo['watchers_count'];
-        $this->created = Carbon::parse($repo['created_at'])?->diffForHumans();
-        $this->updated = Carbon::parse($repo['updated_at'])?->diffForHumans();
-        $this->pushed = Carbon::parse($repo['pushed_at'])?->diffForHumans();
     }
 
     /**

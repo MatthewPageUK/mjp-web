@@ -6,6 +6,7 @@ use App\Models\{
     BulletPoint,
     Demo,
     Experience,
+    GithubRepo,
     Image,
     Post,
     PostCategory,
@@ -84,9 +85,11 @@ class DemoSeeder extends Seeder
         Post::all()->each(function ($post) {
             $post->skills()->attach(Skill::all()->random(3));
             $post->image()->save(Image::factory()->make());
+            $post->githubRepo()->save(GithubRepo::factory()->make());
         });
 
         Demo::factory()
+            ->hasGithubRepo()
             ->count(5)
             ->create()
             ->each(function ($demo) {
@@ -105,6 +108,7 @@ class DemoSeeder extends Seeder
             });
 
         Project::factory()
+            ->hasGithubRepo()
             ->count(5)
             ->create()
             ->each(function ($project) {
