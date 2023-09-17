@@ -2,39 +2,32 @@
 
 namespace App\Models\Traits;
 
+use App\Models\GithubRepo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+
 /**
- * Trait for models with a Github URL.
+ * Trait for models with a Github repo.
  *
  */
 trait HasGithub
 {
     /**
-     * Get the Github owner from the Github URL
+     * Get the model's github repo.
      *
-     * eg.
-     * https://github.com/MatthewPageUK/mjp-web
-     * would return MatthewPageUK
-     *
-     * @todo Improve this to be more robust
-     * @return string
+     * @return MorphOne
      */
-    public function getGithubOwnerAttribute()
+    public function githubRepo(): MorphOne
     {
-        return explode('/', $this->github)[3];
+        return $this->morphOne(GithubRepo::class, 'githubable');
     }
 
     /**
-     * Get the Github repo name from the Github URL
+     * Does the model have a Github repo ?
      *
-     * eg.
-     * https://github.com/MatthewPageUK/mjp-web
-     * would return mjp-web
-     *
-     * @todo Improve this to be more robust
-     * @return string
+     * @return bool
      */
-    public function getGithubRepoAttribute(): string
+    public function hasGithubRepo(): bool
     {
-        return explode('/', $this->github)[4];
+        return $this->githubRepo()->exists();
     }
 }

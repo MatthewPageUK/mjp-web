@@ -12,12 +12,6 @@
     {{-- Description (Markdown) --}}
     <x-cms.crud.fields.markdown label="Description" field="description" />
 
-    {{-- Github --}}
-    <x-cms.crud.field name="Github URL">
-        <x-cms.form.input wire:model.live="model.github" />
-        <x-cms.validation-error field="model.github" />
-    </x-cms.crud.field>
-
     {{-- Website --}}
     <x-cms.crud.field name="Website">
         <x-cms.form.input wire:model.live="model.website" />
@@ -40,6 +34,9 @@
 
         {{-- Posts --}}
         <x-cms.crud.fields.postable />
+
+        {{-- Github Repo --}}
+        <x-cms.crud.fields.githubable />
 
     @endif
 

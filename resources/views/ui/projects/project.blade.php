@@ -39,7 +39,13 @@
 
     </div>
 
-    {{-- Github project panel --}}
-    <livewire:github.repo :project="$project" />
+    <div>
+        @if ($project->hasGithubRepo())
+            <div>
+                {{-- Github project panel --}}
+                <livewire:github.repo :model="$project" />
+            </div>
+        @endif
+    </div>
 
 </div>

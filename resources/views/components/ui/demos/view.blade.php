@@ -47,6 +47,14 @@
 
         <x-related.links :model="$demo" />
 
+        <div>
+            @if ($demo->hasGithubRepo())
+                <div>
+                    {{-- Github info panel --}}
+                    <livewire:github.info :model="$demo" />
+                </div>
+            @endif
+        </div>
     </div>
 
 </div>

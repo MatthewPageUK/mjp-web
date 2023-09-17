@@ -65,6 +65,9 @@
         {{-- Posts --}}
         <x-cms.crud.fields.postable />
 
+        {{-- Github Repo --}}
+        <x-cms.crud.fields.githubable />
+
     @endif
 
     {{-- Buttons --}}

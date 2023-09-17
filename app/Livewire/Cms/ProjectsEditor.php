@@ -51,7 +51,6 @@ class ProjectsEditor extends CrudAbstract
         'model.name' => 'required|string|min:2',
         'model.slug' => 'nullable',
         'model.description' => 'nullable',
-        'model.github' => 'nullable',
         'model.website' => 'nullable',
         'model.last_active' => 'nullable|date',
         'model.active' => 'boolean',

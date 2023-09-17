@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{
     HasActive,
+    HasGithub,
     HasImage,
     HasNameSlug,
     HasPosts,
@@ -20,6 +21,7 @@ class Demo extends Model
 {
     use HasActive;
     use HasFactory;
+    use HasGithub;
     use HasImage;
     use HasNameSlug;
     use HasPosts;
