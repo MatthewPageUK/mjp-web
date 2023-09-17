@@ -12,13 +12,13 @@
 
                 {{-- Search filter --}}
                 <div>
-                    <x-auth.text-input wire:model.live="search" type="text" placeholder="search..." />
+                    <x-auth.text-input wire:model="search" type="text" placeholder="search..." />
                 </div>
 
                 {{-- Category select --}}
                 <div class="text-sm">
                     In
-                    <select wire:model.live="selectedCategory" class="bg-primary-800 ml-2 border border-primary-700 rounded-lg bg-primary-800 hover:bg-primary-700 hover:border-primary-600">
+                    <select wire:model="selectedCategory" class="bg-primary-800 ml-2 border border-primary-700 rounded-lg bg-primary-800 hover:bg-primary-700 hover:border-primary-600">
                         <option value="">Any category</option>
                         @foreach ($this->categories as $category)
                             <option value="{{ $category->slug }}">{{ $category->name }}</option>
@@ -29,7 +29,7 @@
                 {{-- Skill select --}}
                 <div class="text-sm">
                     Using
-                    <select wire:model.live="selectedSkill" class="bg-primary-800 ml-2 border border-primary-700 rounded-lg bg-primary-800 hover:bg-primary-700 hover:border-primary-600">
+                    <select wire:model="selectedSkill" class="bg-primary-800 ml-2 border border-primary-700 rounded-lg bg-primary-800 hover:bg-primary-700 hover:border-primary-600">
                         <option value="">Any skill</option>
                         @foreach ($this->skills as $skill)
                             <option value="{{ $skill->slug }}">{{ $skill->name }}</option>

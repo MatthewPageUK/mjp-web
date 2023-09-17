@@ -9,7 +9,7 @@
 
     {{-- Position --}}
     <x-cms.crud.field name="Position">
-        <x-cms.form.select wire:model.live="model.order">
+        <x-cms.form.select wire:model="model.order">
             <option value="0">First</option>
             @foreach ($this->list as $order => $bulletPoint)
                 <option value="{{ $order + 1 }}">After {{ $bulletPoint->name }}</option>

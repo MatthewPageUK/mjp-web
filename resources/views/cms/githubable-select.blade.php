@@ -3,13 +3,13 @@
     <div>
         <div class="flex gap-2 items-start">
             <div class="flex-1">
-                <x-cms.form.input wire:model.live="url" class="flex-1" placeholder="Full URL of repository"/>
+                <x-cms.form.input wire:model="url" class="flex-1" placeholder="Full URL of repository"/>
                 <x-cms.validation-error field="url" />
 
-                <x-cms.form.input wire:model.live="owner" class="flex-1" placeholder="Repository Owner"/>
+                <x-cms.form.input wire:model="owner" class="flex-1" placeholder="Repository Owner"/>
                 <x-cms.validation-error field="owner" />
 
-                <x-cms.form.input wire:model.live="name" class="flex-1" placeholder="Repository Name"/>
+                <x-cms.form.input wire:model="name" class="flex-1" placeholder="Repository Name"/>
                 <x-cms.validation-error field="name" />
             </div>
 

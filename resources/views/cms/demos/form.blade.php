@@ -37,7 +37,7 @@
     {{-- Image WIP --}}
     {{-- <x-cms.crud.field name="Image">
         <div x-data="{open: false}">
-            <x-cms.form.input wire:model.live="model.image.url" /> <button @click.prevent="open = ! open" title="Open media explorer">...</button>
+            <x-cms.form.input wire:model="model.image.url" /> <button @click.prevent="open = ! open" title="Open media explorer">...</button>
             <x-cms.validation-error field="model.image.url" />
             <iframe x-show="open" src="https://media.mjp.co/ui/explorer" class="w-full h-[650px] mt-4"></iframe>
         </div>

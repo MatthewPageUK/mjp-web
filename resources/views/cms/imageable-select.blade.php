@@ -2,7 +2,7 @@
 <div>
     <div x-data="{open: false, preview: false}">
         <div class="flex gap-1">
-            <x-cms.form.input wire:model.live="imageUrl" class="flex-1"/>
+            <x-cms.form.input wire:model="imageUrl" class="flex-1"/>
             <button @click.prevent="preview = ! preview" title="Preview image">
                 <x-icons.material >visibility</x-icon.material>
             </button>

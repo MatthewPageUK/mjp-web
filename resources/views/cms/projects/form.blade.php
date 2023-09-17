@@ -14,7 +14,7 @@
 
     {{-- Website --}}
     <x-cms.crud.field name="Website">
-        <x-cms.form.input wire:model.live="model.website" />
+        <x-cms.form.input wire:model="model.website" />
         <x-cms.validation-error field="model.website" />
     </x-cms.crud.field>
 

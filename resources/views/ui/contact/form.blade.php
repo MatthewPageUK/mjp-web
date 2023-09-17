@@ -73,7 +73,7 @@
             <div class="relative z-0 w-full mb-6 group">
                 <textarea
                     name="message.message"
-                    wire:model.live="message.message"
+                    wire:model="message.message"
                     class="font-gochi h-32 block py-2.5 px-0 w-full text-2xl text-primary-100 font-bold bg-transparent border-0 border-b-2 border-primary-800 appearance-none focus:outline-none focus:ring-0 focus:border-primary-600 peer"
                     placeholder=" "
                     required

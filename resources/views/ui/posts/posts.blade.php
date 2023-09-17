@@ -10,7 +10,7 @@
 
         {{-- Search filter --}}
         <div x-data="{show: false}">
-            <x-auth.text-input wire:model.live="search" type="text" placeholder="search..." />
+            <x-auth.text-input wire:model="search" type="text" placeholder="search..." />
         </div>
 
     </div>

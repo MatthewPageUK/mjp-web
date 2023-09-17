@@ -4,7 +4,7 @@
 ])
 
 <div class="relative z-0 w-full mb-6 group">
-    <input type="text" name="{{ $name }}" wire:model.live="{{ $name }}" class="
+    <input type="text" name="{{ $name }}" wire:model="{{ $name }}" class="
             appearance-none
             font-gochi
             text-2xl font-bold text-primary-100
