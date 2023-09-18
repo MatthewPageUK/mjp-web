@@ -11,10 +11,7 @@
 
 {{-- Embedded demo iframe --}}
 @if ($demo->demo_url)
-    <iframe
-        src="{{ $demo->demo_url }}"
-        class="w-full h-[700px] mt-8"
-    ></iframe>
+    <livewire:ui.i-frame :src="$demo->demo_url" class="w-full h-[700px] mt-8" />
 @else
     {{-- or Image --}}
     <div class="w-full mt-8 border border-2 border-primary-900 shadow-lg" >
