@@ -63,7 +63,7 @@ class Widget extends Component
 
         return Skills::getFilteredQuery($filter)
             ->orderBy('level', 'desc')
-            ->paginate(10);
+            ->paginate(10, pageName: 'skills');
     }
 
     /**

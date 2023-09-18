@@ -53,8 +53,15 @@ trait HasSkillFilter
      */
     public function updatedSelectedSkill($skill): void
     {
+        $pageName = 'page';
+
+        if (is_array($this->paginators)) {
+            $pageName = array_key_first($this->paginators) ?? 'page';
+
+        }
+
         if (method_exists($this, 'resetPage')) {
-            $this->resetPage();
+            $this->resetPage($pageName);
         }
     }
 }

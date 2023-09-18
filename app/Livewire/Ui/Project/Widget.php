@@ -63,7 +63,7 @@ class Widget extends Component
             $filter['skill'] = $this->selectedSkill;
         }
 
-        return Projects::getFilteredQuery($filter)->paginate(2);
+        return Projects::getFilteredQuery($filter)->paginate(2, pageName: 'projects');
     }
 
     /**

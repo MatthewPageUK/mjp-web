@@ -65,7 +65,7 @@ class Widget extends Component
             $filter['skill'] = $this->selectedSkill;
         }
 
-        return Demos::getFilteredQuery($filter)->paginate(2);
+        return Demos::getFilteredQuery($filter)->paginate(2, pageName: 'demos');
     }
 
     /**
@@ -77,4 +77,5 @@ class Widget extends Component
     {
         return view('ui.demos.homepage');
     }
+
 }

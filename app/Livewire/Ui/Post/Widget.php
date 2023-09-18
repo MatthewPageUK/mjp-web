@@ -55,10 +55,10 @@ class Widget extends Component
      *
      * @return array
      */
-    public function getQueryString()
-    {
-        return [];
-    }
+    // public function getQueryString()
+    // {
+    //     return [];
+    // }
 
     /**
      * Updated selected skill
@@ -70,7 +70,7 @@ class Widget extends Component
     {
         $this->resetCategory();
         $this->resetSearch();
-        $this->resetPage();
+        $this->resetPage('posts');
     }
 
     /**
@@ -83,7 +83,7 @@ class Widget extends Component
     {
         $this->resetSkill();
         $this->resetSearch();
-        $this->resetPage();
+        $this->resetPage('posts');
     }
 
     /**
@@ -104,7 +104,7 @@ class Widget extends Component
             $filter['search'] = $this->search;
         }
 
-        return Posts::getFilteredQuery($filter)->paginate(4);
+        return Posts::getFilteredQuery($filter)->paginate(4, pageName: 'posts');
     }
 
     /**
