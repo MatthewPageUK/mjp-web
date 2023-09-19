@@ -12,7 +12,7 @@
         href="{{ $href }}"
         class="
             flex items-center
-            rounded px-6 py-2
+            rounded px-5 py-2
             ease-in-out duration-200
             hover:text-secondary-400
             hover:bg-primary-700

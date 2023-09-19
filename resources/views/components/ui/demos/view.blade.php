@@ -2,10 +2,10 @@
 
 @props(['demo'])
 
-<div class="border-b pb-4 md:pb-8 mb-4">
-    <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center">
+<div class="mb-4">
+    <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center gap-2">
         <span class="flex-1">{{ $demo->name }}</span>
-        <span class="hidden md:block material-icons-outlined text-6xl ml-1">smart_toy</span>
+        <x-icons.material :name="$demo->icon" class="hidden md:block text-6xl">smart_toy</x-icons.material>
     </h1>
 </div>
 
@@ -33,10 +33,12 @@
             @markdown($demo->description)
         </div>
 
-        {{-- Created --}}
+        {{-- Page updated --}}
         <p class="text-xs flex items-center gap-1">
-            Created : <x-ui.badges.age :date="$demo->created_at" />
+            Page updated : <x-ui.badges.age :date="$demo->updated_at" />
         </p>
+
+
 
     </div>
 

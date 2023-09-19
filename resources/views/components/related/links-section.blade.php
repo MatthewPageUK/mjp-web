@@ -15,13 +15,19 @@
         x-show="count > 0"
     >
         <h2 class="font-orbitron font-black text-3xl mt-8 mb-2 first:mt-0">
-            <a href="{{ route($relationship) }}">
-                <span class="material-icons-outlined text-2xl font-normal ml-1">{{ $icon }}</span> {{ $title }}
+            <a href="{{ route($relationship) }}" class="hover:text-secondary-400 transition">
+                <x-icons.material class="text-2xl font-normal ml-1">{{ $icon }}</x-icons.material>
+                {{ $title }}
             </a>
         </h1>
         <p class="pl-9">
             @foreach ($model->$relationship as $key => $link)
-                <a class="block" x-show="expanded || {{ $key }} < showCount" href="{{ $link->routeUrl }}">{{ $link->name }}</a>
+                <a
+                    class="block hover:text-secondary-400 transition"
+                    x-show="expanded || {{ $key }} < showCount"
+                    href="{{ $link->routeUrl }}"
+                    title="{{ $link->name }}"
+                >{{ $link->name }}</a>
             @endforeach
         </p>
         {{-- route($section, [$section => $link]) --}}

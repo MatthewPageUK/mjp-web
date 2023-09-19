@@ -36,7 +36,7 @@
             <x-ui.layout.header />
 
             {{-- Main page --}}
-            <main class="max-w-7xl mx-auto p-6 lg:p-8 text-white">
+            <main class="max-w-7xl mx-auto py-6 lg:py-12 text-white">
                 {{ $slot }}
             </main>
 

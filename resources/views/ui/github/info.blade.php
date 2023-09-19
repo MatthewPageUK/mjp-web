@@ -35,10 +35,16 @@
                         <span class="text-xl">{{ $this->watchers }} @choice('watcher|watchers', $this->watchers)</span>
                     </li>
                     {{-- Dates --}}
-                    <li>Created: {{ $this->created }}</li>
-                    <li>Updated: {{ $this->updated }}</li>
-                    <li>Pushed: {{ $this->pushed }}</li>
-                    <li>Open Issues: {{ $this->openIssues }}</li>
+                    <li class="text-sm flex items-center gap-1">
+                        Created: <x-ui.badges.age :date="$this->created" />
+                    </li>
+                    <li class="text-sm flex items-center gap-1">
+                        Updated: <x-ui.badges.age :date="$this->updated" />
+                    </li>
+                    <li class="text-sm flex items-center gap-1">
+                        Pushed: <x-ui.badges.age :date="$this->pushed" />
+                    </li>
+                    <li class="text-sm flex items-center gap-1">Open Issues: {{ $this->openIssues }}</li>
                 </ul>
 
                 <div class="grid grid-cols-2 gap-2 mt-4">
