@@ -64,7 +64,7 @@ trait HasSkillGroupFilter
 
         $pageName = 'page';
 
-        if (is_array($this->paginators)) {
+        if (property_exists($this, 'paginators') && is_array($this->paginators)) {
             $pageName = array_key_first($this->paginators) ?? 'page';
 
         }
