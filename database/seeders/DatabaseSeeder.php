@@ -86,6 +86,11 @@ class DatabaseSeeder extends Seeder
             'type' => 'text',
         ]);
         Setting::create([
+            'key' => 'demos_intro',
+            'value' => fake()->text(600),
+            'type' => 'text',
+        ]);
+        Setting::create([
             'key' => 'contact_email',
             'value' => fake()->email(),
             'type' => 'text',

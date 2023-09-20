@@ -27,15 +27,36 @@ class Widget extends Component
     use HasSkillFilter;
 
     /**
+     * Title of this widget on the page
+     *
+     * @var string
+     */
+    public string $title = 'Projects';
+
+    /**
      * Mount the component
      *
      * @return void
      */
-    public function mount(): void
+    public function mount(
+        $selectedSkill = null,
+        $selectableSkill = true,
+        $title = null
+    ): void
     {
+        $this->selectableSkill = $selectableSkill;
+
+        if ($title) {
+            $this->title = $title;
+        }
+
         $this->setSkills(
             Skills::getProjectableSkills()
         );
+
+        if ($selectedSkill) {
+            $this->updatedSelectedSkill($selectedSkill);
+        }
     }
 
     /**

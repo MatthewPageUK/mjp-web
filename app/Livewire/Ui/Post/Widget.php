@@ -32,12 +32,29 @@ class Widget extends Component
     use HasPostCategoryFilter;
 
     /**
+     * Title of this widget on the page
+     *
+     * @var string
+     */
+    public string $title = 'Posts';
+
+    /**
      * Mount the component
      *
      * @return void
      */
-    public function mount()
+    public function mount(
+        $selectedSkill = null,
+        $selectableSkill = true,
+        $title = null
+    ): void
     {
+        $this->selectableSkill = $selectableSkill;
+
+        if ($title) {
+            $this->title = $title;
+        }
+
         // Get the skills for the skill filter list
         $this->setSkills(
             Skills::getPostableSkills()
@@ -47,6 +64,10 @@ class Widget extends Component
         $this->setCategories(
             Posts::getCategories()
         );
+
+        if ($selectedSkill) {
+            $this->updatedSelectedSkill($selectedSkill);
+        }
     }
 
     /**

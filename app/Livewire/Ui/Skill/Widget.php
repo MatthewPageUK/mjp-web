@@ -38,6 +38,10 @@ class Widget extends Component
         $this->setSkillGroups(
             SkillGroups::getActiveGroups()
         );
+
+        // Default to web development skills.
+        $this->selectedSkillGroup = 'web-development';
+        $this->skillGroup = $this->skillGroups->where('slug', $this->selectedSkillGroup)->first();
     }
 
     /**

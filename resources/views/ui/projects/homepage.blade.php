@@ -10,13 +10,14 @@
                         class="hover:text-highlight-400"
                         href="{{ route('projects') }}"
                         title="View more of my projects"
-                    >Projects</a>
+                    >{{ $this->title }}</a>
                 </h1>
-
-                <div class="text-sm">
-                    Using
-                    <x-ui.skills.selected-skill-filter :skills="$this->skills" />
-                </div>
+                @if ($this->selectableSkill)
+                    <div class="text-sm">
+                        Using
+                        <x-ui.skills.selected-skill-filter :skills="$this->skills" />
+                    </div>
+                @endif
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

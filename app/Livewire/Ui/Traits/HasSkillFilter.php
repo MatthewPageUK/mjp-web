@@ -25,6 +25,13 @@ trait HasSkillFilter
     public string $selectedSkill = '';
 
     /**
+     * Is the skill select option active?
+     *
+     * @var bool
+     */
+    public bool $selectableSkill = true;
+
+    /**
      * Set the skills list
      *
      * @param Collection $skills
