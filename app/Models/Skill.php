@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\{
     SoftDeletes,
     Factories\HasFactory,
     Relations\BelongsToMany,
+    Relations\HasMany,
     Relations\MorphToMany,
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
@@ -72,6 +73,16 @@ class Skill extends Model
             $skill->posts()->detach();
 
         });
+    }
+
+    /**
+     * Skill Journeys
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function skillJourneys(): HasMany
+    {
+        return $this->hasMany(SkillJourney::class);
     }
 
     /**

@@ -14,6 +14,7 @@ use App\Models\Project;
 use App\Models\Setting;
 use App\Models\Skill;
 use App\Models\SkillGroup;
+use App\Models\SkillJourney;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +65,7 @@ class Reset extends Command
             ['Projects', Project::all()->count()],
             ['Settings', Setting::all()->count()],
             ['Skills', Skill::all()->count()],
+            ['Skill Journeys', SkillJourney::all()->count()],
             ['Skill Groups', SkillGroup::all()->count()],
             ['Users', User::all()->count()],
         ];
@@ -102,6 +104,7 @@ class Reset extends Command
         DB::table('projects')->truncate();
         DB::table('settings')->truncate();
         DB::table('skill_groups')->truncate();
+        DB::table('skill_journeys')->truncate();
         DB::table('skill_skill_group')->truncate();
         DB::table('skillables')->truncate();
         DB::table('skills')->truncate();

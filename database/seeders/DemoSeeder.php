@@ -69,6 +69,7 @@ class DemoSeeder extends Seeder
             Skill::factory(['name' => $skills[$x]])
                 ->hasAttached(SkillGroup::all()->random(1))
                 ->hasImage()
+                ->hasSkillJourneys(10)
                 ->create();
         }
 

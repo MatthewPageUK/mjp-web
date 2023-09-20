@@ -37,7 +37,20 @@ class View extends Component
      */
     public function render(): \Illuminate\View\View
     {
-        return view('ui.skills.skill')
+        $journeys = $this->skill->skillJourneys()
+            ->orderBy('created_at', 'desc')
+            ->whereNull('completed_at')
+            ->get();
+
+        $journeysCompleted = $this->skill->skillJourneys()
+            ->orderBy('completed_at', 'desc')
+            ->whereNotNull('completed_at')
+            ->get();
+
+        return view('ui.skills.skill', [
+            'journeys' => $journeys,
+            'journeysCompleted' => $journeysCompleted,
+        ])
             ->layout(UiLayout::class);
     }
 }

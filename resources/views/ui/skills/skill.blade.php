@@ -2,16 +2,15 @@
     UI - View Skill
 --}}
 <div>
-
-    <div class="border-b pb-4 md:pb-8 mb-4">
-        <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center">
+    <div class="mb-8">
+        <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center gap-2">
             <span class="flex-1">{{ $this->skill->name }}</span>
             @if ($skill->svg)
                 <div class="w-16 h-16">
                     {!! $skill->svg !!}
                 </div>
             @else
-                <span class="hidden md:block material-icons-outlined text-6xl ml-1">construction</span>
+                <x-icons.material class="hidden md:block text-6xl">construction</x-icons.material>
             @endif
         </h1>
     </div>
@@ -43,91 +42,32 @@
         </div>
 
         <div>
+            {{-- Skill Journey --}}
+            <h3 class="text-3xl mb-4 font-black">Skill Journey</h3>
 
-            <h3 class="text-2xl">Rate my skill</h3>
-            <div class="grid grid-cols-4 gap-2 text-xs text-center">
-                <x-primary-button>-1</x-primary-button>
-                <x-primary-button class="col-span-2">About right</x-primary-button>
-                <x-primary-button>+1</x-primary-button>
-            </div>
-
-            <h3 class="text-2xl my-4">Skill Journey</h3>
-
-            <ul class="h-64 text-sm space-y-2 overflow-y-auto pr-2">
-                <li class="flex items-center gap-2">
-                    <div class="w-4 h-4 rounded-full bg-white border border-black"> </div>
-                    <span>Setup some more tunnels</span>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="w-4 h-4 rounded-full bg-white border border-black"> </div>
-                    <span>Read documentation on advanced use</span>
-                </li>
+            <ul class="h-96 text-sm space-y-2 overflow-y-auto pr-2">
+                @foreach ($journeys as $journey)
+                    <li class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded-full bg-white"> </div>
+                        <span class="flex-1">{{ $journey->name }}</span>
+                    </li>
+                @endforeach
 
                 <li class="border-b pb-1"></li>
 
-                <li class="flex items-center gap-2">
-                    <div class="w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Setup a tunnel and share demo site
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="block w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Install the app
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Setup a tunnel and share demo site
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="block w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Install the app
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Setup a tunnel and share demo site
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="block w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Install the app
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Setup a tunnel and share demo site
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="block w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Install the app
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Setup a tunnel and share demo site
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
-                <li class="flex items-center gap-2">
-                    <div class="block w-4 h-4 rounded-full bg-green-400 border border-black"> </div>
-                    <p>Install the app
-                        <span class="text-xs block text-green-400">Completed 12/09/2023</span>
-                    </p>
-                </li>
+                @foreach ($journeysCompleted as $journey)
+                    <li class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded-full bg-green-400">
+                            <x-icons.material class="text-sm">tick</x-icons.material>
+                        </div>
+                        <p class="flex-1">{{ $journey->name }}
+                            <span class="text-xs block text-green-400">Completed on {{ $journey->completed_at }}</span>
+                        </p>
+                    </li>
+                @endforeach
+
             </ul>
 
-            {{-- <x-related.links :model="$skill" /> --}}
         </div>
 
         <div class="col-span-2">

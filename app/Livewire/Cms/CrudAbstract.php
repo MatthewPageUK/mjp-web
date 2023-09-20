@@ -176,7 +176,7 @@ abstract class CrudAbstract extends Component
      *
      * @return View
      */
-    public function render(): View
+    public function render()
     {
         return view($this->view)
             ->layout(CmsLayout::class, ['title' => $this->title]);

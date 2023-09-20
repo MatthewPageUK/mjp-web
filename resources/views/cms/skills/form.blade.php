@@ -32,6 +32,11 @@
 
     @if ($this->modeName === 'update')
 
+        {{-- Skill Journeys --}}
+        <x-cms.crud.field name="Skill Journey">
+            <livewire:cms.skill-journeys-editor :skill="$this->model"/>
+        </x-cms.crud.field>
+
         {{-- Image --}}
         <x-cms.crud.fields.imageable />
 
