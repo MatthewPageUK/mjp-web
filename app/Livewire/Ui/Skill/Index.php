@@ -54,8 +54,13 @@ class Index extends Component
             SkillGroups::getActiveGroups()
         );
 
+        // Default to web development skills.
+        if (empty($this->selectedSkillGroup)) {
+            $this->selectedSkillGroup = 'web-development';
+        }
+
         // Get the intro text from the settings.
-        $this->intro = Settings::getValue('skills_intro');
+        //$this->intro = Settings::getValue('skills_intro');
 
         Page::setTitle('Web Developement Skills');
         Page::setDescription('A list of web development skills and technologies I have experience with.');

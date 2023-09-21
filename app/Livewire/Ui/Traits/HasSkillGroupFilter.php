@@ -49,6 +49,17 @@ trait HasSkillGroupFilter
     }
 
     /**
+     * Set the selected skill group
+     *
+     * @return void
+     */
+    public function setSkillGroup($skillGroup): void
+    {
+        $this->selectedSkillGroup = $skillGroup;
+        $this->updatedSelectedSkillGroup($skillGroup);
+    }
+
+    /**
      * Updated selected skill group, reset pagination.
      *
      * @param string $skill

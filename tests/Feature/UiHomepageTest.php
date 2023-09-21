@@ -78,14 +78,16 @@ class UiHomepageTest extends TestCase
     }
 
     /**
-     * Test 10 best skills displayed
+     * Test 10 best web development skills displayed
      */
     public function test_homepage_10_best_skills_displayed(): void
     {
         $this->artisan('mjpweb:demosetup');
 
         $this->get('/')->assertSeeTextInOrder(
-            Skill::active()->orderBy('level', 'desc')->take(10)->pluck('name')->toArray()
+            Skill::active()->whereHas('skillGroups', function ($query) {
+                return $query->where('name', 'Web Development');
+            })->orderBy('level', 'desc')->take(10)->pluck('name')->toArray()
         );
     }
 

@@ -72,10 +72,14 @@ class UiHeaderTest extends TestCase
      */
     public function test_ui_header_social_icons_are_hidden_when_empty(): void
     {
+        Settings::setValue('url_github', '');
+        Settings::setValue('url_linkedin', '');
+        Settings::setValue('url_youtube', '');
+
         $this->blade('<x-ui.layout.header />')
-            ->assertDontSee('Github')
-            ->assertDontSee('Youtube')
-            ->assertDontSee('LinkedIn');
+            ->assertDontSee('header-icon-github')
+            ->assertDontSee('header-icon-linkedin')
+            ->assertDontSee('header-icon-youtube');
     }
 
     /**
