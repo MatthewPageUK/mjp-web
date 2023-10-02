@@ -26,12 +26,17 @@
     </x-cms.form.select>
 
     {{-- Create --}}
-    <a href="{{ route($route, ['mode' => 'create']) }}" class="leading-none hover:text-secondary-400 transition-all" title="Create a new {{ $title }}">
-        <x-icons.material >add_circle</x-icons.material>
-    </a>
+    <x-cms.icon-button
+        href="{{ route($route, ['mode' => 'create']) }}"
+        title="Create a new {{ $title }}"
+        icon="add_circle"
+    />
 
     {{-- View --}}
-    <a href="{{ route($route) }}" class="leading-none hover:text-secondary-400 transition-all" title="View {{ $title }}">
-        <x-icons.material >visibility</x-icons.material>
-    </a>
+    <x-cms.icon-button
+        href="{{ route($route) }}"
+        title="View {{ $title }}"
+        icon="visibility"
+    />
+
 </div>

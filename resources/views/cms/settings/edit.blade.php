@@ -70,18 +70,19 @@
                         title="Cancel editing"
                         wire:click="cancel"
                     >
-                        <x-icons.material>cancel</x-icons.material>
+                        <x-icons.material>undo</x-icons.material>
                         {{ __('Cancel') }}
                     </x-cms.button>
 
                     {{-- Save Button --}}
                     <x-cms.button
                         wire:key="setting-button-save"
-                        class="opacity-50 flex items-center gap-1"
+                        class="flex items-center gap-1"
                         title="Save changes"
                         wire:click="save"
-                        wire:dirty.class.remove="opacity-50"
+                        wire:dirty.remove.attr="disabled"
                         wire:target="value"
+                        disabled
                     >
                         <x-icons.material>save</x-icons.material>
                         {{ __('Save') }}
@@ -89,7 +90,11 @@
                 @break
 
                 @default
-                    <x-cms.icon-button icon="edit" wire:click.prevent="edit" title="Edit" />
+                    <x-cms.icon-button
+                        icon="edit"
+                        wire:click.prevent="edit"
+                        title="Edit this setting"
+                    />
 
             @endswitch
         </div>

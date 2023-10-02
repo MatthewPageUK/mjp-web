@@ -35,8 +35,8 @@
     <x-cms.crud.field name="Key Points">
         <ul>
             @foreach($this->model->key_points ?? [] as $key => $point)
-                <li class="pb-2 mb-2 flex gap-2" wire:key="keypoints-{{ $key }}">
-                    <div>
+                <li class="pb-2 mb-2 flex gap-2 items-start" wire:key="keypoints-{{ $key }}">
+                    <div class="mt-2">
                         <span class="text-2xl">{{ $key + 1 }}. </span>
                     </div>
                     <div class="flex-1">
@@ -45,9 +45,12 @@
                         <x-cms.validation-error field="model.key_points.{{ $key }}.title" />
                         <x-cms.validation-error field="model.key_points.{{ $key }}.text" />
                     </div>
-                    <x-primary-button wire:click.prevent="removeKeyPoint({{ $key }})" title="Remove Key Point">
-                        <span class="material-icons-outlined">delete</span>
-                    </x-primary-button>
+                    <x-cms.icon-button
+                        class="mt-2"
+                        icon="delete"
+                        wire:click.prevent="removeKeyPoint({{ $key }})"
+                        title="Remove Key Point"
+                    />
                 </li>
             @endforeach
         </ul>
@@ -55,8 +58,8 @@
         <div x-data="{open: false}">
             <div class="flex justify-end">
                 <button x-on:click.prevent="open = ! open" class="p-2 hover:text-secondary-400" title="Add Key Point">
-                    <span x-show="! open" class="material-icons-outlined">add_circle</span>
-                    <span x-show="open" class="material-icons-outlined">expand_less</span>
+                    <x-icons.material x-show="! open">add_circle</x-icons.material>
+                    <x-icons.material x-show="open">expand_less</x-icons.material>
                 </button>
             </div>
             <div x-show="open">
