@@ -16,12 +16,6 @@
         {{-- Edit / create form --}}
         @include('cms.experiences.form')
 
-        {{-- Delete confirmation form --}}
-        <x-cms.crud.delete-form
-            title="Delete {{ $this->modelName }} - {{ $this->model->name }}"
-            question="Are you sure you want to delete this {{ strtolower($this->modelName) }}?"
-        />
-
         {{-- List --}}
         @include('cms.experiences.list')
 
@@ -31,6 +25,12 @@
                 <li class="text-2xl" wire:init="add">No {{ strtolower($this->modelName) }} found, create a new one.</li>
             </ul>
         @endif
+
+        {{-- Delete confirmation form --}}
+        <x-cms.crud.delete-form
+            title="Delete {{ $this->modelName }} - {{ $this->model->name }}"
+            question="Are you sure you want to delete this {{ strtolower($this->modelName) }}?"
+        />
 
     </div>
 

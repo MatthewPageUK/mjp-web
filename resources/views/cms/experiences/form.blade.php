@@ -35,7 +35,7 @@
     <x-cms.crud.field name="Key Points">
         <ul>
             @foreach($this->model->key_points ?? [] as $key => $point)
-                <li class="pb-2 mb-2 flex gap-2">
+                <li class="pb-2 mb-2 flex gap-2" wire:key="keypoints-{{ $key }}">
                     <div>
                         <span class="text-2xl">{{ $key + 1 }}. </span>
                     </div>

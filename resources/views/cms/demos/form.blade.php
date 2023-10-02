@@ -1,4 +1,3 @@
-
 {{-- Create / Update form --}}
 <x-cms.crud.form
     x-show="mode === 'create' || mode === 'update'"
