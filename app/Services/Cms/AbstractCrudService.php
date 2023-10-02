@@ -63,4 +63,24 @@ abstract class AbstractCrudService
         return $this->model::orderBy($this->defaultSort)->get();
     }
 
+    /**
+     * Perform a simple search on the model.
+     *
+     * @param string    $search   Search string
+     * @param int       $perPage  Number of results to return
+     * @param string    $field    Field name to search on
+     * @return Collection
+     */
+    public function simpleSearch(
+        string $search,
+        int $perPage = 5,
+        string $field = 'name'
+    ): Collection
+    {
+        return $this->model::where($field, 'like', '%'.$search.'%')
+            ->orderBy($field)
+            ->limit($perPage)
+            ->get();
+    }
+
 }
