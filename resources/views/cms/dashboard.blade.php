@@ -10,6 +10,7 @@
         <div>
             <h3 class="text-3xl mt-8 mb-2">Start here...</h3>
             <x-cms.form.input wire:model.live="search" placeholder="search..."/>
+            <x-cms.validation-error field="search" />
         </div>
 
         @if (! empty($this->search))

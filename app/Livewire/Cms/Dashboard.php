@@ -2,80 +2,94 @@
 
 namespace App\Livewire\Cms;
 
-use App\Facades\BulletPoints;
-use App\Facades\Demos;
-use App\Models\BulletPoint;
-use App\Models\Demo;
-use App\Models\Experience;
-use App\Models\Post;
-use App\Models\Project;
-use App\Models\Skill;
+use App\Facades\Cms\{
+    BulletPoints,
+    Demos,
+    Experiences,
+    Posts,
+    Projects,
+    Skills
+};
+use App\Facades\Page;
 use App\View\Components\CmsLayout;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Livewire\Component;
 
 /**
- * CMS - Dashboard component
+ * CMS - Dashboard component with search filter.
  *
  */
-
-
 class Dashboard extends Component
 {
 
+    /**
+     * Current search string
+     *
+     * @var string
+     */
     public $search;
 
-    public $results = ['skills' => []];
+    /**
+     * Search results
+     *
+     * @var array
+     */
+    public $results = [];
 
     /**
-     * Mount the component and populate the data
+     * Updated the search string
      *
+     * @return void
      */
-    public function mount(Request $request)
-    {
-
-    }
-
-    public function updatedSearch()
+    public function updatedSearch(): void
     {
         $this->search();
     }
 
-    public function search()
+    /**
+     * Perform the search
+     *
+     * @return void
+     */
+    public function search(): void
     {
         if (empty($this->search)) {
             $this->results = [];
             return;
         }
 
-        $bullets = BulletPoint::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
-        $skills = Skill::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
-        $demos = Demo::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
-        $posts = Post::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
-        $projects = Project::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
-        $experience = Experience::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
+        try {
+            $bullets    = BulletPoints::simpleSearch($this->search);
+            $demos      = Demos::simpleSearch($this->search);
+            $experience = Experiences::simpleSearch($this->search);
+            $posts      = Posts::simpleSearch($this->search);
+            $projects   = Projects::simpleSearch($this->search);
+            $skills     = Skills::simpleSearch($this->search);
 
-        $this->results = [
-            'bullet-points' => $bullets,
-            'skills' => $skills,
-            'demos' => $demos,
-            'posts' => $posts,
-            'projects' => $projects,
-            'experiences' => $experience,
-        ];
-
-
+            $this->results = [
+                'bullet-points' => $bullets,
+                'demos'         => $demos,
+                'experiences'   => $experience,
+                'posts'         => $posts,
+                'projects'      => $projects,
+                'skills'        => $skills,
+            ];
+        } catch (\Exception $e) {
+            $this->addError('search', $e->getMessage());
+            $this->results = [];
+        }
     }
 
     /**
-     * Render the Bullet Points page
+     * Render the dashboard page
      *
      * @return View
      */
     public function render(): View
     {
+        Page::setTitle('CMS Dashboard');
+
         return view('cms.dashboard')
-            ->layout(CmsLayout::class, ['title' => 'CMS']);
+            ->layout(CmsLayout::class);
     }
 }
