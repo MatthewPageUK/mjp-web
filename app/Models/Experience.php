@@ -10,9 +10,9 @@ use App\Models\Traits\{
     HasSkills,
 };
 use Illuminate\Database\Eloquent\{
+    Factories\HasFactory,
     Model,
     SoftDeletes,
-    Factories\HasFactory,
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
@@ -32,12 +32,12 @@ class Experience extends Model
      * @var array
      */
     protected $fillable = [
-        'start',
-        'end',
-        'name',
-        'description',
-        'key_points',
         'active',
+        'description',
+        'end',
+        'key_points',
+        'name',
+        'start',
     ];
 
     /**
@@ -46,11 +46,30 @@ class Experience extends Model
      * @var array
      */
     protected $casts = [
-        // 'active' => 'boolean',
-        'start' => 'datetime:Y-m-d',
         'end' => 'datetime:Y-m-d',
         'key_points' => 'array',
+        'start' => 'datetime:Y-m-d',
     ];
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Deleting hook
+        static::deleting(function (Experience $experience) {
+
+            // Remove from posts
+            $experience->posts()->detach();
+
+            // Remove from skills
+            $experience->skills()->detach();
+
+            // Delete image
+            $experience->image()->delete();
+
+        });
+    }
 
     /**
      * Get the experience page route url

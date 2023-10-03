@@ -40,7 +40,7 @@ class SkillGroup extends Model
         // Deleting hook
         static::deleting(function (SkillGroup $skillGroup) {
 
-            // Remove skills
+            // Detach skills
             $skillGroup->skills()->detach();
 
         });

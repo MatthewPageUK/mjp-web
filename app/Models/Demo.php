@@ -11,9 +11,9 @@ use App\Models\Traits\{
     HasSkills,
 };
 use Illuminate\Database\Eloquent\{
+    Factories\HasFactory,
     Model,
     SoftDeletes,
-    Factories\HasFactory,
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
@@ -34,13 +34,36 @@ class Demo extends Model
      * @var array
      */
     protected $fillable = [
+        'active',
+        'demo_url',
+        'description',
         'name',
         'slug',
-        'description',
         'url',
-        'demo_url',
-        'active',
     ];
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Deleting hook
+        static::deleting(function (Demo $demo) {
+
+            // Remove posts
+            $demo->posts()->detach();
+
+            // Remove from skills
+            $demo->skills()->detach();
+
+            // Delete Github repos
+            $demo->githubRepo()->delete();
+
+            // Delete image
+            $demo->image()->delete();
+
+        });
+    }
 
     /**
      * Get the demo page route url

@@ -72,6 +72,12 @@ class Skill extends Model
             // Remove from posts
             $skill->posts()->detach();
 
+            // Delete skill journeys
+            $skill->skillJourneys()->delete();
+
+            // Delete skill image
+            $skill->image()->delete();
+
         });
     }
 

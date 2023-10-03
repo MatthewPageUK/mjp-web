@@ -36,6 +36,20 @@ class PostCategory extends Model
     ];
 
     /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Deleting hook
+        static::deleting(function (PostCategory $postCategory) {
+
+            // Remove posts
+            $postCategory->posts()->detach();
+
+        });
+    }
+
+    /**
      * Posts in this category
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
