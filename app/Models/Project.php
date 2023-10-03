@@ -53,6 +53,34 @@ class Project extends Model
         'last_active' => 'datetime',
     ];
 
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Deleting hook
+        static::deleting(function (Project $project) {
+
+            // Remove from posts
+            $project->posts()->detach();
+
+            // Remove from skills
+            $project->skills()->detach();
+
+            // Delete Github repos
+            $project->githubRepo()->delete();
+
+            // Delete post image
+            $project->image()->delete();
+
+        });
+    }
+
+    /**
+     * Get the last active attribute
+     *
+     * @return Attribute
+     */
     public function lastActive(): Attribute
     {
         return Attribute::make(

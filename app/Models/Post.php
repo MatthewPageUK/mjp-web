@@ -74,6 +74,12 @@ class Post extends Model
             // Remove from skills
             $post->skills()->detach();
 
+            // Delete Github repos
+            $post->githubRepo()->delete();
+
+            // Delete post image
+            $post->image()->delete();
+
         });
     }
 

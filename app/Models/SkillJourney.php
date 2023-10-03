@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\{
-    Model,
     Factories\HasFactory,
+    Model,
     Relations\BelongsTo,
 };
 
@@ -18,8 +18,8 @@ class SkillJourney extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
         'completed_at',
+        'name',
         'skill_id',
     ];
 
