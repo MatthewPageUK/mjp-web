@@ -61,13 +61,15 @@ class Imageable extends Component
      */
     public function updatedImageUrl()
     {
-        if ($this->imageable->hasImage()) {
-            $this->imageable->image?->update(['url' => $this->imageUrl]);
-        } else {
-            $this->imageable->image()->create(['url' => $this->imageUrl]);
+        try {
+            if ($this->imageable->hasImage()) {
+                $this->imageable->image?->update(['url' => $this->imageUrl]);
+            } else {
+                $this->imageable->image()->create(['url' => $this->imageUrl]);
+            }
+        } catch (\Exception $e) {
+            $this->addError('imageUrl', $e->getMessage());
         }
-
-//          dd('hey');
     }
 
     // /**
