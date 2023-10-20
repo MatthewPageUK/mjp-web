@@ -52,6 +52,15 @@ class Experience extends Model
     ];
 
     /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'key_points' => '[]',
+    ];
+
+    /**
      * The "booted" method of the model.
      */
     protected static function booted(): void
