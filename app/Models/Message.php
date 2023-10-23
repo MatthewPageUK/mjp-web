@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{
+    Model,
+    Factories\HasFactory,
+};
 
-class ContactMessage extends Model
+class Message extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

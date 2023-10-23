@@ -8,6 +8,7 @@ use App\Models\{
     Experience,
     GithubRepo,
     Image,
+    Message,
     Post,
     PostCategory,
     Project,
@@ -32,6 +33,7 @@ class DemoSeeder extends Seeder
      * 5 Projects
      * Skillable - attach 3 random skills to each skillable
      * Postable - attach 3 random posts to each postable
+     * 10 Messages
      */
     public function run(): void
     {
@@ -46,10 +48,6 @@ class DemoSeeder extends Seeder
             ->count(10)
             ->create();
 
-
-        /**
-         * Skills
-         */
         SkillGroup::factory()
             ->count(3)
             ->sequence(
@@ -117,6 +115,10 @@ class DemoSeeder extends Seeder
                 $project->posts()->attach(Post::all()->random(3));
                 $project->image()->save(Image::factory()->make());
             });
+
+        Message::factory()
+            ->count(10)
+            ->create();
 
     }
 }

@@ -11,6 +11,7 @@ use App\Livewire\Cms\ProjectsEditor;
 use App\Livewire\Cms\SettingsEditor;
 use App\Livewire\Cms\SkillGroupsEditor;
 use App\Livewire\Cms\SkillsEditor;
+use App\Livewire\Cms\MessagesEditor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,6 +98,15 @@ Route::prefix('cms')->name('cms.')->group(function () {
     |
     */
     Route::get('/media', MediaManager::class)->name('media');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Messages
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::get('/messages', MessagesEditor::class)->name('messages');
+
 
     // Route::get('/dashboard', function () {
     //     return view('dashboard');

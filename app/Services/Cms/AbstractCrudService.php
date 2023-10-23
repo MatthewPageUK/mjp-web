@@ -41,6 +41,13 @@ abstract class AbstractCrudService
     protected $defaultSort = 'name';
 
     /**
+     * Default sort order direction.
+     *
+     * @var string
+     */
+    protected $defaultSortDirection = 'asc';
+
+    /**
      * Get the model referenced by the id.
      *
      * @param int $id
@@ -60,7 +67,17 @@ abstract class AbstractCrudService
      */
     public function getAll(): Collection
     {
-        return $this->model::orderBy($this->defaultSort)->get();
+        return $this->model::orderBy($this->defaultSort, $this->defaultSortDirection)->get();
+    }
+
+    /**
+     * Get a count of all models.
+     *
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->model::count();
     }
 
     /**

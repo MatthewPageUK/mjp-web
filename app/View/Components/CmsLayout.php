@@ -6,8 +6,10 @@ use App\Facades\Cms\{
     BulletPoints,
     Demos,
     Experiences,
+    Messages,
     Projects,
 };
+use App\Models\Message;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Skill;
@@ -99,6 +101,8 @@ class CmsLayout extends Component
         $this->menu['experiences'] = $this->prepareMenuItem(
             Experiences::getAll()
         );
+
+        $this->menu['messageCount'] = Messages::getCount();
     }
 
     /**
