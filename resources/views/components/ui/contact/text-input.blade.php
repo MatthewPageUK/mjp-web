@@ -4,7 +4,7 @@
 ])
 
 <div class="relative z-0 w-full mb-6 group">
-    <input type="text" name="{{ $name }}" wire:model="{{ $name }}" class="
+    <input type="text" name="{{ $name }}" wire:model.blur="{{ $name }}" autocomplete="off" class="
             appearance-none
             font-gochi
             text-2xl font-bold text-primary-100
@@ -21,7 +21,8 @@
         duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
         peer-focus:left-0 peer-focus:text-secondary-500
         peer-placeholder-shown:scale-100
-        peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6
+        "
     >{{ $label }}</label>
 
 </div>

@@ -30,7 +30,7 @@
     @else
 
         {{-- Sending --}}
-        <div wire:loading wire:target="send" class="col-span-2">
+        <div wire:loading.delay.long wire:target="send" class="col-span-2">
             <div class="min-h-[250px]">
                 <div class="flex gap-4 items-center mb-8">
                     <x-icons.material class="text-6xl text-primary-300 animate-bounce">forward_to_inbox</x-icons.material>
@@ -48,7 +48,13 @@
             <div class="flex">
                 <div class="flex-1">
                     <h1 class="leading-7 text-4xl font-bold text-primary-200 mb-2">Get in touch...</h1>
-                    <p class="text-primary-400 mb-8">Reach out with your ideas and thoughts and together we can create something awesome.</p>
+                    <p class="text-primary-400 mb-2">Reach out with your ideas and thoughts and together we can create something awesome.</p>
+                    <p class="text-primary-400 mb-8">
+                        Please use the form below or email me direct on
+                        <a href="mailto:{{ Settings::getValue('contact_email') }}" class="text-secondary-400 hover:text-secondary-600">
+                            {{ Settings::getValue('contact_email') }}
+                        </a>
+                    </p>
                 </div>
                 <div>
                     <x-icons.contact class="w-12 h-12 md:w-24 md:h-24 fill-none text-primary-200" />
@@ -73,8 +79,9 @@
             <div class="relative z-0 w-full mb-6 group">
                 <textarea
                     name="message.message"
-                    wire:model="message.message"
-                    class="font-gochi h-32 block py-2.5 px-0 w-full text-2xl text-primary-100 font-bold bg-transparent border-0 border-b-2 border-primary-800 appearance-none focus:outline-none focus:ring-0 focus:border-primary-600 peer"
+                    wire:model.blur="message.message"
+                    class="font-gochi h-32 block py-2.5 px-0 w-full text-2xl text-primary-100 font-bold bg-transparent border-0 border-b-2 border-primary-800 appearance-none focus:outline-none focus:ring-0 focus:border-primary-600 peer
+                        @error('message.message') border-red-500 @enderror"
                     placeholder=" "
                     required
                 ></textarea>
@@ -87,7 +94,7 @@
             {{-- Agree --}}
             <p class="text-primary-300 text-xs mb-6">
                 <input id="agree" type="checkbox" x-model="agree" class="focus:bg-highlight-500 hover:checked:bg-highlight-500 checked:bg-highlight-500 mr-1">
-                <label for="agree">I agree to my email address being used in regards to this communication only. It will not be added to any list or database.</label>
+                <label for="agree">I agree to my email address being used in regards to this communication only.</label>
             </p>
 
             {{-- Send Button --}}

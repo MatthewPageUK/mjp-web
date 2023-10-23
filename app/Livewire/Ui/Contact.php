@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Ui;
 
-use App\Facades\Settings;
-use App\Mail\Contact as MailContact;
-use App\Models\ContactMessage;
-use Illuminate\Support\Facades\Mail;
+use App\Facades\Ui\Messages;
 use Illuminate\View\View;
 use Livewire\Component;
 
+/**
+ * Homepage contact form
+ *
+ */
 class Contact extends Component
 {
-
     /**
      * Sent status
      *
@@ -31,7 +31,7 @@ class Contact extends Component
      *
      * @var array
      */
-    public $message;
+    public $message = [];
 
     /**
      * Form rules
@@ -39,22 +39,13 @@ class Contact extends Component
      * @var array
      */
     protected $rules = [
-        'message.first_name' => 'required',
-        'message.surname' => 'nullable',
-        'message.company' => 'nullable',
-        'message.telephone' => 'nullable',
-        'message.email' => 'required|email',
-        'message.message' => 'nullable',
+        'message.first_name'    => 'required',
+        'message.surname'       => 'nullable',
+        'message.company'       => 'nullable',
+        'message.telephone'     => 'nullable',
+        'message.email'         => 'required|email',
+        'message.message'       => 'required',
     ];
-
-    /**
-     * Mount the component and populate the data
-     *
-     */
-    public function mount()
-    {
-        $this->message = (new ContactMessage())->toArray();
-    }
 
     /**
      * Updated a property - strip tags from it
@@ -66,10 +57,11 @@ class Contact extends Component
     public function updated($name, $value)
     {
         $this->{$name} = strip_tags($value);
+        $this->validateOnly($name);
     }
 
     /**
-     * Send the message
+     * Validate and send the message
      *
      * @return void
      */
@@ -78,10 +70,8 @@ class Contact extends Component
         $this->validate();
 
         try {
-            Mail::to(Settings::getValue('contact_email'))
-                ->send(
-                    new MailContact(new ContactMessage($this->message))
-                );
+            Messages::postMessage($this->message);
+
         } catch (\Exception $e) {
             $this->mailError = $e->getMessage();
             return;
@@ -89,11 +79,10 @@ class Contact extends Component
 
         $this->mailError = false;
         $this->sent = true;
-
     }
 
     /**
-     * Render the Project list
+     * Render the contact form
      *
      * @return View
      */

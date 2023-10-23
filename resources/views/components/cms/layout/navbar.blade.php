@@ -71,6 +71,11 @@
             <x-cms.layout.menu-link route="cms.settings" title="Settings" />
         </li>
 
+        {{-- Messages --}}
+        <li>
+            <x-cms.layout.menu-link route="cms.messages" title="Messages ({{ $menu['messageCount']}})" />
+        </li>
+
         {{-- Media Manager --}}
         <li>
             <x-cms.layout.menu-link route="cms.media" title="Media Manager" />
