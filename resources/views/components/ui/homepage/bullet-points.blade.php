@@ -8,7 +8,8 @@
     @foreach ($bullets as $bullet)
         <li
             class="{{ $bullet->colour }} grid h-full items-center text-center py-4 opacity-80
-                hover:rounded-xl hover:scale-105 hover:font-bold hover:opacity-100 transition ease-in-out hover:transition-all hover:animate-pulse
+                hover:rounded-xl hover:scale-105 hover:font-bold hover:opacity-100 transition
+                ease-in-out hover:transition-all hover:animate-pulse
             "
         >{{ $bullet->name }}</li>
     @endforeach

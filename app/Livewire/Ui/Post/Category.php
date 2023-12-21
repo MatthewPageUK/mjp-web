@@ -2,18 +2,25 @@
 
 namespace App\Livewire\Ui\Post;
 
-use App\Facades\Settings;
-use App\Facades\Ui\Posts;
-use App\Livewire\Ui\Traits\HasPostCategoryFilter;
-use App\Livewire\Ui\Traits\HasSearchFilter;
-use App\Livewire\Ui\Traits\HasSkillFilter;
+use App\Livewire\Ui\Traits\{
+    HasPostCategoryFilter,
+    HasSearchFilter,
+    HasSkillFilter,
+};
 use App\Models\PostCategory;
-use App\Services\SkillService;
+use App\Services\{
+    PageService,
+    Ui\PostService,
+};
 use App\View\Components\UiLayout;
-use Illuminate\Support\Collection;
-use Illuminate\View\View;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Illuminate\{
+    Support\Collection,
+    View\View,
+};
+use Livewire\{
+    Component,
+    WithPagination,
+};
 
 /**
  * Posts Homepage component
@@ -25,6 +32,13 @@ class Category extends Component
     use HasSearchFilter;
     use HasSkillFilter;
     use HasPostCategoryFilter;
+
+    /**
+     * Post Service
+     *
+     * @var PostService
+     */
+    protected PostService $postService;
 
     /**
      * Posts to show
@@ -50,29 +64,49 @@ class Category extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param PostService $postService
+     * @param PostCategory|null $category
      * @return void
      */
-    public function mount(?PostCategory $category = null)
+    public function mount(PostService $postService, ?PostCategory $category = null)
     {
         $this->populatePosts();
-        $this->setCategories(Posts::getCategories());
+        $this->setCategories($postService->getCategories());
 
         foreach ($this->categories as $category) {
-            $this->recentCategoryPosts[$category->slug] = Posts::getRecent(6, $category->slug);
+            $this->recentCategoryPosts[$category->slug] = $postService->getRecent(6, $category->slug);
         }
     }
 
     /**
-     * Populate the experiencs list
+     * Boot the component
+     *
+     * @param PostService $postService
+     * @param PageService $pageService
+     * @return void
+     */
+    public function boot(PostService $postService, PageService $pageService): void
+    {
+        $this->postService = $postService;
+
+        $pageService->setTitle('Posts');
+
+        if ($this->category) {
+            $pageService->appendTitle($this->category->name);
+        }
+    }
+
+    /**
+     * Populate the posts list
      *
      * @return void
      */
     private function populatePosts(): void
     {
         if ($this->category) {
-            $this->posts = Posts::getRecent(12, $this->category->slug);
+            $this->posts = $this->postService->getRecent(12, $this->category->slug);
         } else {
-            $this->posts = Posts::getRecent(12);
+            $this->posts = $this->postService->getRecent(12);
         }
 
     }
@@ -85,9 +119,7 @@ class Category extends Component
     public function render(): View
     {
         return view('ui.posts.posts')
-            ->layout(UiLayout::class, [
-                'title' => 'Posts',
-            ]);
+            ->layout(UiLayout::class);
     }
 
 }

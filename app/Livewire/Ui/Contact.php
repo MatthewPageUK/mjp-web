@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Ui;
 
-use App\Facades\Ui\Messages;
+use App\Services\Ui\MessageService;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -12,6 +12,13 @@ use Livewire\Component;
  */
 class Contact extends Component
 {
+    /**
+     * Message service
+     *
+     * @var MessageService
+     */
+    protected MessageService $messageService;
+
     /**
      * Sent status
      *
@@ -48,6 +55,17 @@ class Contact extends Component
     ];
 
     /**
+     * Boot the component
+     *
+     * @param MessageService $messageService
+     * @return void
+     */
+    public function boot(MessageService $messageService)
+    {
+        $this->messageService = $messageService;
+    }
+
+    /**
      * Updated a property - strip tags from it
      *
      * @param string $name
@@ -70,7 +88,7 @@ class Contact extends Component
         $this->validate();
 
         try {
-            Messages::postMessage($this->message);
+            $this->messageService->postMessage($this->message);
 
         } catch (\Exception $e) {
             $this->mailError = $e->getMessage();

@@ -43,7 +43,11 @@ trait HasImage
      */
     public function hasImage(): bool
     {
-        return $this->image()->exists();
+        // @WIP - review this
+        if ($this->relationLoaded('image'))
+            return $this->image !== null;
+
+        return false;
     }
 
 }

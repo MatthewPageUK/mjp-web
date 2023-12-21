@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Ui\Experience;
 
-use App\Facades\{
-    Page,
-    Settings,
-    Ui\Experiences,
+use App\Services\{
+    PageService,
+    SettingService,
+    Ui\ExperienceService,
 };
 use App\View\Components\UiLayout;
 use Illuminate\{
     Support\Collection,
     View\View,
 };
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 
 /**
@@ -20,13 +21,6 @@ use Livewire\Component;
  */
 class Index extends Component
 {
-    /**
-     * Experiences to show
-     *
-     * @var Collection
-     */
-    public Collection $experiences;
-
     /**
      * Intro text
      *
@@ -37,27 +31,34 @@ class Index extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param SettingService $settings
+     * @param PageService $page
      * @return void
      */
-    public function mount()
+    public function mount(
+        SettingService $settings,
+        PageService $page,
+    )
     {
-        $this->populateExperiences();
-        $this->intro = Settings::getValue('experience_intro') ?? '';
-        Page::setTitle('Experience Timeline');
+        $this->intro = $settings->getValue('experience_intro') ?? '';
+        $page->setTitle('Experience Timeline');
     }
 
     /**
-     * Populate the experiencs list
+     * Get the Experiences.
      *
-     * @return void
+     * @param ExperienceService $experienceService
+     * @return Collection|LengthAwarePaginator
      */
-    private function populateExperiences(): void
+    public function getExperiencesProperty(
+        ExperienceService $experienceService
+    ): Collection|LengthAwarePaginator
     {
-        $this->experiences = Experiences::getAll();
+        return $experienceService->getAll();
     }
 
     /**
-     * Render the Skills Explorer page
+     * Render the Experiences timeline page
      *
      * @return View
      */

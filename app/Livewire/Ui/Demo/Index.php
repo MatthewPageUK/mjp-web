@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Ui\Demo;
 
-use App\Facades\{
-    Page,
-    Settings,
-    Ui\Demos,
-    Ui\Skills,
-};
 use App\Livewire\Ui\Traits\HasSkillFilter;
+use App\Services\{
+    PageService,
+    SettingService,
+    Ui\DemoService,
+    Ui\SkillService
+};
 use App\View\Components\UiLayout;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
-use Illuminate\View\View;
+use Illuminate\{
+    Pagination\LengthAwarePaginator,
+    Support\Collection,
+    View\View,
+};
 use Livewire\Component;
 
 /**
@@ -43,27 +45,35 @@ class Index extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param SkillService $skillService
+     * @param SettingService $settings
+     * @param PageService $page
      * @return void
      */
-    public function mount()
+    public function mount(
+        SkillService $skillService,
+        SettingService $settings,
+        PageService $page,
+    ): void
     {
-        // Get the skills for the skill filter list
+        // Set the skills for the skill filter list
         $this->setSkills(
-            Skills::getDemoableSkills()
+            $skillService->getDemoableSkills()
         );
 
-        // Get the intro text
-        $this->intro = Settings::getValue('demos_intro');
+        // Get the page intro text
+        $this->intro = $settings->getValue('demos_intro');
 
-        Page::setTitle('Demos and Examples');
+        $page->setTitle('Demos and Examples');
     }
 
     /**
      * Get the Demos.
      *
+     * @param DemoService $demoService
      * @return Collection|LengthAwarePaginator
      */
-    public function getDemosProperty(): Collection|LengthAwarePaginator
+    public function getDemosProperty(DemoService $demoService): Collection|LengthAwarePaginator
     {
         $filter = [];
 
@@ -72,7 +82,18 @@ class Index extends Component
             $filter['skill'] = $this->selectedSkill;
         }
 
-        return Demos::getFilteredQuery($filter)->get();
+        try {
+            $demos = $demoService
+                ->getFilteredQuery($filter)
+                ->with(['skills', 'image'])
+                ->get();
+
+        } catch (\Exception $e) {
+            // @todo Log this
+            $demos = collect();
+        }
+
+        return $demos;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
     HasGithub,
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\{
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
-class Demo extends Model
+class Demo extends Model implements RouteableModel
 {
     use HasActive;
     use HasFactory;
@@ -70,11 +71,13 @@ class Demo extends Model
      *
      * @return string
      */
-    public function getRouteUrlAttribute()
+    public function getRouteUrlAttribute(): string
     {
         try {
             return route('demo', ['demo' => $this]);
+
         } catch (UrlGenerationException $e) {
+            // @todo: Log error
             return '';
         }
     }

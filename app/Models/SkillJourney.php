@@ -33,4 +33,25 @@ class SkillJourney extends Model
         return $this->belongsTo(Skill::class);
     }
 
+    /**
+     * Scope a query to only include completed journeys.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeComplete($query)
+    {
+        return $query->whereNotNull('completed_at');
+    }
+
+    /**
+     * Scope a query to only include incomplete journeys.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeIncomplete($query)
+    {
+        return $query->whereNull('completed_at');
+    }
 }

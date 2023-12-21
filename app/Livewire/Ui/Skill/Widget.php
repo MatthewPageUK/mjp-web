@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Ui\Skill;
 
-use App\Facades\Ui\{
-    SkillGroups,
-    Skills,
-};
 use App\Livewire\Ui\Traits\HasSkillGroupFilter;
+use App\Services\Ui\{
+    SkillGroupService,
+    SkillService,
+};
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
@@ -32,11 +32,11 @@ class Widget extends Component
      *
      * @return void
      */
-    public function mount(): void
+    public function mount(SkillGroupService $skillGroupService): void
     {
         // Get the skill groups for the skill filter list.
         $this->setSkillGroups(
-            SkillGroups::getActiveGroups()
+            $skillGroupService->getActiveGroups()
         );
 
         // Default to web development skills.
@@ -45,27 +45,16 @@ class Widget extends Component
     }
 
     /**
-     * Get the query string, return empty array
-     * to disable it on the homepage.
-     *
-     * @return array
-     */
-    public function getQueryString(): array
-    {
-        return [];
-    }
-
-    /**
      * Get the Skills and paginate them.
      *
      * @return Collection|LengthAwarePaginator
      */
-    public function getSkillsProperty(): Collection|LengthAwarePaginator
+    public function getSkillsProperty(SkillService $skillService): Collection|LengthAwarePaginator
     {
         $filter = $this->selectedSkillGroup ?
             ['skillGroup' => $this->selectedSkillGroup] : [];
 
-        return Skills::getFilteredQuery($filter)
+        return $skillService->getFilteredQuery($filter)
             ->orderBy('level', 'desc')
             ->paginate(10, pageName: 'skills');
     }

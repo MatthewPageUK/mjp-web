@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Ui\Project;
 
-use App\Facades\Ui\{
-    Projects,
-    Skills,
-};
 use App\Livewire\Ui\Traits\HasSkillFilter;
+use App\Services\Ui\{
+    Projects,
+    ProjectService,
+    Skills,
+    SkillService,
+};
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
@@ -39,6 +41,7 @@ class Widget extends Component
      * @return void
      */
     public function mount(
+        SkillService $skillService,
         $selectedSkill = null,
         $selectableSkill = true,
         $title = null
@@ -50,9 +53,11 @@ class Widget extends Component
             $this->title = $title;
         }
 
-        $this->setSkills(
-            Skills::getProjectableSkills()
-        );
+        if ($this->selectableSkill) {
+            $this->setSkills(
+                $skillService->getProjectableSkills()
+            );
+        }
 
         if ($selectedSkill) {
             $this->updatedSelectedSkill($selectedSkill);
@@ -60,22 +65,11 @@ class Widget extends Component
     }
 
     /**
-     * Get the query string, return empty array
-     * to disable it on the homepage.
-     *
-     * @return array
-     */
-    public function getQueryString(): array
-    {
-        return [];
-    }
-
-    /**
      * Get the Projects and paginate them.
      *
      * @return Collection|LengthAwarePaginator
      */
-    public function getProjectsProperty(): Collection|LengthAwarePaginator
+    public function getProjectsProperty(ProjectService $projectService): Collection|LengthAwarePaginator
     {
         $filter = [];
 
@@ -84,7 +78,10 @@ class Widget extends Component
             $filter['skill'] = $this->selectedSkill;
         }
 
-        return Projects::getFilteredQuery($filter)->paginate(2, pageName: 'projects');
+        return $projectService
+            ->getFilteredQuery($filter)
+            ->with(['skills', 'image'])
+            ->paginate(2, pageName: 'projects');
     }
 
     /**

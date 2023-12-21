@@ -2,41 +2,70 @@
 
 namespace App\Livewire\Ui;
 
-use App\Models\{Skill, Experience, Project, Demo, Post};
+use App\Interfaces\RouteableModel;
+use App\Models\{
+    Skill,
+    Experience,
+    Project,
+    Demo,
+    Post,
+};
 use Illuminate\View\View;
 use Livewire\Component;
 
 class RandomPage extends Component
 {
     /**
-     * The random page
+     * The models to pick from
      *
-     * @var string
+     * @var array
      */
-    public $page = '/';
+    protected $models = [
+        Skill::class,
+        Experience::class,
+        Project::class,
+        Demo::class,
+        Post::class,
+    ];
 
     /**
-     * Mount the component and pick a random
-     * model from the database.
+     * Get the random page route url from the models list.
      *
+     * @return string
      */
-    public function mount()
+    protected function getRandomUrl(): string
     {
         try {
-            $this->page = collect([
-                'skill' => Skill::class,
-                'experience' => Experience::class,
-                'project' => Project::class,
-                'demo' => Demo::class,
-                'post' => Post::class,
-            ])->random()::active()->get()->random()->routeUrl;
+            $url = collect($this->models)
+                ->filter(function ($model) {
+                    return in_array(RouteableModel::class, class_implements($model));
+                })
+                ->random()
+                ::active()
+                ->inRandomOrder()
+                ->limit(1)
+                ->first()
+                ->routeUrl;
+
         } catch (\Exception $e) {
-            $this->page = '/';
+            $url = '/';
         }
+
+        return $url;
     }
 
     /**
-     * Render the Project list
+     * Jump to random page
+     *
+     * @return void
+     */
+    public function jumpToRandomPage(): void
+    {
+        redirect($this->getRandomUrl());
+    }
+
+    /**
+     * Render the random page button.
      *
      * @return View
      */

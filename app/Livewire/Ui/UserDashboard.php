@@ -2,8 +2,7 @@
 
 namespace App\Livewire\Ui;
 
-use App\Facades\Page;
-use App\Models\Project;
+use App\Services\PageService;
 use App\View\Components\UiLayout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -14,17 +13,14 @@ class UserDashboard extends Component
      * Mount the component and populate the data
      *
      */
-    public function mount()
+    public function mount(PageService $page)
     {
-        // if (! $this->project->isActive()) {
-        //     abort(404);
-        // }
-
-        Page::setTitle('Dashboard - ' . Auth::user()->name);
+        $page->setTitle('Dashboard');
+        $page->appendTitle(Auth::user()->name);
     }
 
     /**
-     * Render the Project view
+     * Render the Dashboard view
      *
      * @return View
      */

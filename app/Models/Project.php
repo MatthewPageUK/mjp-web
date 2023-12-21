@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
     HasGithub,
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\{
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
-class Project extends Model
+class Project extends Model implements RouteableModel
 {
     use HasActive;
     use HasFactory;
@@ -93,7 +94,7 @@ class Project extends Model
      *
      * @return string
      */
-    public function getRouteUrlAttribute()
+    public function getRouteUrlAttribute(): string
     {
         try {
             return route('project', ['project' => $this]);

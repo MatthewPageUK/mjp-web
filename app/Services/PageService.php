@@ -13,6 +13,13 @@ namespace App\Services;
 class PageService
 {
     /**
+     * Page title seperator
+     *
+     * @var string
+     */
+    const TITLE_SEPERATOR = ' | ';
+
+    /**
      * Page title
      *
      * @var string
@@ -49,6 +56,17 @@ class PageService
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * Append to the page title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function appendTitle(string $title): void
+    {
+        $this->title .= self::TITLE_SEPERATOR . $title;
     }
 
     /**

@@ -18,8 +18,10 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-        @foreach ($this->demos as $demo)
+        @forelse ($this->demos as $demo)
             <x-ui.demos.cards.wide :demo="$demo" />
-        @endforeach
+        @empty
+            <p>Sorry, no demos where found.</p>
+        @endforelse
     </div>
 </div>

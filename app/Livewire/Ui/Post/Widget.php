@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Ui\Post;
 
-use App\Facades\Ui\{
-    Posts,
-    Skills,
-};
 use App\Livewire\Ui\Traits\{
     HasPostCategoryFilter,
     HasSearchFilter,
     HasSkillFilter,
+};
+use App\Services\Ui\{
+    PostService,
+    SkillService,
 };
 use Illuminate\View\View;
 use Livewire\{
@@ -41,9 +41,16 @@ class Widget extends Component
     /**
      * Mount the component
      *
+     * @param SkillService $skillService
+     * @param PostService $postService
+     * @param string|null $selectedSkill
+     * @param boolean $selectableSkill
+     * @param string|null $title
      * @return void
      */
     public function mount(
+        SkillService $skillService,
+        PostService $postService,
         $selectedSkill = null,
         $selectableSkill = true,
         $title = null
@@ -56,13 +63,14 @@ class Widget extends Component
         }
 
         // Get the skills for the skill filter list
-        $this->setSkills(
-            Skills::getPostableSkills()
-        );
-
+        if ($this->selectableSkill) {
+            $this->setSkills(
+                $skillService->getPostableSkills()
+            );
+        }
         // Get the post categories filter list
         $this->setCategories(
-            Posts::getCategories()
+            $postService->getCategories()
         );
 
         if ($selectedSkill) {
@@ -71,18 +79,8 @@ class Widget extends Component
     }
 
     /**
-     * Get the query string, return empty array
-     * to disable it on the homepage.
-     *
-     * @return array
-     */
-    // public function getQueryString()
-    // {
-    //     return [];
-    // }
-
-    /**
-     * Updated selected skill
+     * Updated selected skill - override the trait method
+     * to allow resetting search and category filters.
      *
      * @param string $skill
      * @return void
@@ -110,9 +108,10 @@ class Widget extends Component
     /**
      * Get the Posts and paginate them
      *
+     * @param PostService $postService
      * @return Collection
      */
-    public function getPostsProperty()
+    public function getPostsProperty(PostService $postService)
     {
         $filter = [];
         if ($this->selectedSkill) {
@@ -125,7 +124,10 @@ class Widget extends Component
             $filter['search'] = $this->search;
         }
 
-        return Posts::getFilteredQuery($filter)->paginate(4, pageName: 'posts');
+        return $postService
+            ->getFilteredQuery($filter)
+            ->with(['skills', 'image'])
+            ->paginate(4, pageName: 'posts');
     }
 
     /**

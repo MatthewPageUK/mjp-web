@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Ui\Demo;
 
-use App\Facades\Page;
 use App\Models\Demo;
+use App\Services\PageService;
 use App\View\Components\UiLayout;
 use Livewire\Component;
 
@@ -19,14 +19,18 @@ class View extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param PageService $page
+     * @param Demo $demo
+     * @return void
      */
-    public function mount(Demo $demo)
+    public function mount(PageService $page, Demo $demo): void
     {
         if (! $this->demo->isActive()) {
             abort(404);
         }
 
-        Page::setTitle('Demo - ' . $this->demo->name);
+        $page->setTitle('Code Demos');
+        $page->appendTitle($this->demo->name);
     }
 
     /**

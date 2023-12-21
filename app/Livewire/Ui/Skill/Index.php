@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Ui\Skill;
 
-use App\Facades\{
-    Page,
-    Settings,
-    Ui\Skills,
-    Ui\SkillGroups,
-};
 use App\Livewire\Ui\Traits\HasSkillGroupFilter;
+use App\Services\{
+    PageService,
+    SettingService,
+    Ui\SkillGroupService,
+    Ui\SkillService,
+};
 use App\View\Components\UiLayout;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
-use Illuminate\View\View;
+use Illuminate\{
+    Pagination\LengthAwarePaginator,
+    Support\Collection,
+    View\View,
+};
 use Livewire\Component;
 
 /**
@@ -47,11 +49,15 @@ class Index extends Component
      *
      * @return void
      */
-    public function mount()
+    public function mount(
+        SkillGroupService $skillGroupService,
+        PageService $page,
+        SettingService $settings,
+    ): void
     {
         // Get the skill groups for the skill filter list.
         $this->setSkillGroups(
-            SkillGroups::getActiveGroups()
+            $skillGroupService->getActiveGroups()
         );
 
         // Default to web development skills.
@@ -60,10 +66,10 @@ class Index extends Component
         }
 
         // Get the intro text from the settings.
-        //$this->intro = Settings::getValue('skills_intro');
+        $this->intro = $settings->getValue('skills_intro');
 
-        Page::setTitle('Web Developement Skills');
-        Page::setDescription('A list of web development skills and technologies I have experience with.');
+        $page->setTitle('Web Developement Skills');
+        $page->setDescription('A list of web development skills and technologies I have experience with.');
     }
 
     /**
@@ -71,12 +77,12 @@ class Index extends Component
      *
      * @return Collection|LengthAwarePaginator
      */
-    public function getSkillsProperty(): Collection|LengthAwarePaginator
+    public function getSkillsProperty(SkillService $skillService): Collection|LengthAwarePaginator
     {
         $filter = $this->selectedSkillGroup ?
             ['skillGroup' => $this->selectedSkillGroup] : [];
 
-        return Skills::getFilteredQuery($filter)
+        return $skillService->getFilteredQuery($filter)
             ->orderBy('level', 'desc')
             ->get();
     }

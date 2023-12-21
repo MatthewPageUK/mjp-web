@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Ui\Demo;
 
-use App\Facades\Ui\{
-    Demos,
-    Skills,
-};
 use App\Livewire\Ui\Traits\HasSkillFilter;
+use App\Services\Ui\{
+    DemoService,
+    SkillService,
+};
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
@@ -40,6 +40,7 @@ class Widget extends Component
      * @return void
      */
     public function mount(
+        SkillService $skillService,
         $selectedSkill = null,
         $selectableSkill = true,
         $title = null
@@ -52,9 +53,11 @@ class Widget extends Component
         }
 
         // Get the skills for the skill filter list
-        $this->setSkills(
-            Skills::getDemoableSkills()
-        );
+        if ($this->selectableSkill) {
+            $this->setSkills(
+                $skillService->getDemoableSkills()
+            );
+        }
 
         if ($selectedSkill) {
             $this->updatedSelectedSkill($selectedSkill);
@@ -75,9 +78,10 @@ class Widget extends Component
     /**
      * Get the Demos and paginate them.
      *
+     * @param DemoService $demoService
      * @return Collection|LengthAwarePaginator
      */
-    public function getDemosProperty(): Collection|LengthAwarePaginator
+    public function getDemosProperty(DemoService $demoService): Collection|LengthAwarePaginator
     {
         $filter = [];
 
@@ -86,7 +90,10 @@ class Widget extends Component
             $filter['skill'] = $this->selectedSkill;
         }
 
-        return Demos::getFilteredQuery($filter)->paginate(2, pageName: 'demos');
+        return $demoService
+            ->getFilteredQuery($filter)
+            ->with(['skills', 'image'])
+            ->paginate(2, pageName: 'demos');
     }
 
     /**

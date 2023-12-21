@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Ui\Skill;
 
-use App\Facades\Page;
 use App\Models\Skill;
+use App\Services\PageService;
 use App\View\Components\UiLayout;
 use Livewire\Component;
 
@@ -20,14 +20,17 @@ class View extends Component
      * Mount the component and populate the data
      *
      */
-    public function mount(Skill $skill)
+    public function mount(PageService $page, Skill $skill)
     {
         if (! $this->skill->isActive()) {
             abort(404);
         }
 
-        Page::setTitle('Skill - ' . $this->skill->name);
-        Page::setDescription('Brief description about my ' . $this->skill->name . ' skills including projects, demos, articles and example work.');
+        $skill->load(['skillJourneys', 'image', 'skillGroups']);
+
+        $page->setTitle('Skills');
+        $page->appendTitle($this->skill->name);
+        $page->setDescription('Brief description about my ' . $this->skill->name . ' skills including projects, demos, articles and example work.');
     }
 
     /**
@@ -37,15 +40,13 @@ class View extends Component
      */
     public function render(): \Illuminate\View\View
     {
-        $journeys = $this->skill->skillJourneys()
-            ->orderBy('created_at', 'desc')
-            ->whereNull('completed_at')
-            ->get();
+        $journeys = $this->skill->skillJourneys
+            ->where('completed_at', null)
+            ->sortByDesc('created_at');
 
-        $journeysCompleted = $this->skill->skillJourneys()
-            ->orderBy('completed_at', 'desc')
-            ->whereNotNull('completed_at')
-            ->get();
+        $journeysCompleted = $this->skill->skillJourneys
+            ->where('completed_at', '!=', null)
+            ->sortByDesc('completed_at');
 
         return view('ui.skills.skill', [
             'journeys' => $journeys,

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
     HasImage,
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\{
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
-class Experience extends Model
+class Experience extends Model implements RouteableModel
 {
     use HasActive;
     use HasFactory;
@@ -85,13 +86,15 @@ class Experience extends Model
      *
      * @return string
      */
-    public function getRouteUrlAttribute()
+    public function getRouteUrlAttribute(): string
     {
         try {
-            return route('experience', ['experience' => $this]);
+            $route = route('experience', ['experience' => $this]);
         } catch (UrlGenerationException $e) {
-            return '';
+            $route = '';
         }
+
+        return $route;
     }
 
 }

@@ -2,28 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\Page;
-use App\Facades\Settings;
-use App\Facades\Ui\BulletPoints;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
+use App\Services\{
+    PageService,
+    SettingService,
+    Ui\BulletPointService,
+};
+use Illuminate\{
+    Http\Request,
+    View\View,
+};
 
 class HomepageController extends Controller
 {
     /**
-     * Show the homepage
+     * Show the homepage.
      *
+     * @param BulletPointService $bulletPointService
+     * @param PageService $page
+     * @param Request $request
+     * @param SettingService $settings
      * @return View
      */
-    public function show(Request $request): View
+    public function show(
+        BulletPointService  $bulletPointService,
+        PageService         $page,
+        Request             $request,
+        SettingService      $settings,
+    ): View
     {
-        Page::setTitle('My Homepage');
+        $page->setTitle($settings->getValue('site_name'));
+        $page->appendTitle($settings->getValue('site_tagline'));
+        // @todo: Add description to settings
+        $page->setDescription('description...');
 
-        return view('welcome', [
-            'bulletPoints' => BulletPoints::getAll(),
-            'name' => Settings::getValue('homepage_name'),
-            'tagline' => Settings::getValue('homepage_tagline'),
-            'intro' => Settings::getValue('homepage_intro'),
-        ]);
+        $bulletPoints   = $bulletPointService->getAll();
+        $name           = $settings->getValue('homepage_name');
+        $tagline        = $settings->getValue('homepage_tagline');
+        $intro          = $settings->getValue('homepage_intro');
+
+        return view('homepage', compact('bulletPoints', 'name', 'tagline', 'intro'));
     }
 }

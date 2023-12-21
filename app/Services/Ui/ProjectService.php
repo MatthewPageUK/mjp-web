@@ -43,6 +43,7 @@ class ProjectService
     public function getAll(): Collection
     {
         return $this->getBaseQuery()
+            ->with(['skills', 'image'])
             ->orderBy('name')
             ->get();
     }
@@ -56,6 +57,7 @@ class ProjectService
     public function getFiltered(array $filters): Collection
     {
         return $this->getFilteredQuery($filters)
+            ->with(['skills', 'image'])
             ->orderBy('last_active', 'desc')
             ->get();
     }

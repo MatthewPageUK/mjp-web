@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Ui\Experience;
 
-use App\Facades\{
-    Page,
-    Ui\Experiences,
-};
 use App\Models\Experience;
+use App\Services\{
+    PageService,
+    Ui\ExperienceService,
+};
 use App\View\Components\UiLayout;
 use Livewire\Component;
 
@@ -36,23 +36,30 @@ class View extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param ExperienceService $experienceService
+     * @param PageService $page
+     * @param Experience $experience
+     * @return void
      */
-    public function mount(Experience $experience)
+    public function mount(
+        ExperienceService $experienceService,
+        PageService $page,
+        Experience $experience,
+    ): void
     {
         if (! $this->experience->isActive()) {
             abort(404);
         }
 
-        // Next and previous experiences
-        $this->next = Experiences::getNext($experience);
-        $this->previous = Experiences::getPrevious($experience);
+        $this->next = $experienceService->getNext($experience);
+        $this->previous = $experienceService->getPrevious($experience);
 
-        // Set the page title
-        Page::setTitle('Experience ' . $experience->name);
+        $page->setTitle('Experiences');
+        $page->appendTitle($experience->name);
     }
 
     /**
-     * Render the Skill view
+     * Render the Experience view
      *
      * @return View
      */

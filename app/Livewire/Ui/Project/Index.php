@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Ui\Project;
 
-use App\Facades\{
-    Page,
-    Settings,
-    Ui\Projects,
-    Ui\Skills,
-};
 use App\Livewire\Ui\Traits\HasSkillFilter;
+use App\Services\{
+    PageService,
+    SettingService,
+    Ui\ProjectService,
+};
+use App\Services\Ui\SkillService;
 use App\View\Components\UiLayout;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
-use Illuminate\View\View;
+use Illuminate\{
+    Pagination\LengthAwarePaginator,
+    Support\Collection,
+    View\View,
+};
 use Livewire\Component;
 
 /**
@@ -43,19 +45,24 @@ class Index extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param SkillService $skillService
+     * @param SettingService $settings
+     * @param PageService $page
      * @return void
      */
-    public function mount()
+    public function mount(
+        SkillService $skillService,
+        SettingService $settings,
+        PageService $page,
+    ): void
     {
-        // Get the skills for the skill filter list
         $this->setSkills(
-            Skills::getProjectableSkills()
+            $skillService->getProjectableSkills()
         );
 
-        // Get the intro text
-        $this->intro = Settings::getValue('projects_intro');
+        $this->intro = $settings->getValue('projects_intro', 'Coding projects I have worked on');
 
-        Page::setTitle('Projects and Examples');
+        $page->setTitle('Coding Projects');
     }
 
     /**
@@ -63,7 +70,7 @@ class Index extends Component
      *
      * @return Collection|LengthAwarePaginator
      */
-    public function getProjectsProperty(): Collection|LengthAwarePaginator
+    public function getProjectsProperty(ProjectService $projectService): Collection|LengthAwarePaginator
     {
         $filter = [];
 
@@ -72,7 +79,10 @@ class Index extends Component
             $filter['skill'] = $this->selectedSkill;
         }
 
-        return Projects::getFilteredQuery($filter)->get();
+        return $projectService
+            ->getFilteredQuery($filter)
+            ->with(['skills', 'image'])
+            ->get();
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Ui\Project;
 
-use App\Facades\Page;
 use App\Models\Project;
+use App\Services\PageService;
 use App\View\Components\UiLayout;
 use Livewire\Component;
 
@@ -19,14 +19,18 @@ class View extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param PageService $page
+     * @param Project $project
+     * @return void
      */
-    public function mount(Project $project)
+    public function mount(PageService $page, Project $project): void
     {
         if (! $this->project->isActive()) {
             abort(404);
         }
 
-        Page::setTitle('Project - ' . $this->project->name);
+        $page->setTitle('Coding Project');
+        $page->appendTitle($this->project->name);
     }
 
     /**
@@ -34,7 +38,7 @@ class View extends Component
      *
      * @return View
      */
-    public function render(): \Illuminate\View\View
+    public function render()
     {
         return view('ui.projects.project')
             ->layout(UiLayout::class);

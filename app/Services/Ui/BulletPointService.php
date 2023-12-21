@@ -26,8 +26,14 @@ class BulletPointService
      */
     public function getAll(): Collection
     {
-        // Get all the bullet points in order
-        $bulletPoints =  BulletPoint::orderBy('order')->get();
+        try {
+            // Get all the bullet points in order
+            $bulletPoints =  BulletPoint::orderBy('order')->get();
+
+        } catch (\Exception $e) {
+            // @todo logging
+            return collect();
+        }
 
         // Attach a colour to each bullet point in sequence
         $bulletPoints = $bulletPoints->map(function ($bulletPoint) {

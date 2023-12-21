@@ -51,6 +51,7 @@ class PostService
         }
 
         return $this->getFilteredQuery($filters)
+            ->with(['skills', 'image'])
             ->orderBy('created_at', 'desc')
             ->limit($count)
             ->get();
@@ -64,6 +65,7 @@ class PostService
     public function getAll(): Collection
     {
         return $this->getBaseQuery()
+            ->with(['skills', 'image'])
             ->orderBy('created_at', 'desc')
             ->get();
     }
@@ -90,6 +92,7 @@ class PostService
     public function getFiltered(array $filters)
     {
         return $this->getFilteredQuery($filters)
+            ->with(['skills', 'image'])
             ->orderBy('created_at', 'desc')
             ->get();
     }

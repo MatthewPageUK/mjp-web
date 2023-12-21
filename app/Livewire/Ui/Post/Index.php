@@ -2,16 +2,22 @@
 
 namespace App\Livewire\Ui\Post;
 
-use App\Facades\Page;
-use App\Facades\Ui\Posts;
-use App\Livewire\Ui\Traits\HasPostCategoryFilter;
-use App\Livewire\Ui\Traits\HasSearchFilter;
+use App\Livewire\Ui\Traits\{
+    HasPostCategoryFilter,
+    HasSearchFilter,
+};
 use App\Models\PostCategory;
+use App\Services\{
+    PageService,
+    Ui\PostService,
+};
 use App\View\Components\UiLayout;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\{
+    Component,
+    WithPagination,
+};
 
 /**
  * Posts Homepage component
@@ -22,6 +28,13 @@ class Index extends Component
     use WithPagination;
     use HasSearchFilter;
     use HasPostCategoryFilter;
+
+    /**
+     * Post Service
+     *
+     * @var PostService
+     */
+    protected PostService $postService;
 
     /**
      * Posts to show
@@ -47,16 +60,31 @@ class Index extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param PostService $postService
+     * @param PageService $page
      * @return void
      */
-    public function mount()
+    public function mount(PostService $postService, PageService $page): void
     {
         $this->populatePosts();
-        $this->setCategories(Posts::getCategories());
+        $this->setCategories($postService->getCategories());
 
         foreach ($this->categories as $category) {
-            $this->recentCategoryPosts[$category->slug] = Posts::getRecent(6, $category->slug);
+            $this->recentCategoryPosts[$category->slug] = $postService->getRecent(6, $category->slug);
         }
+
+        $page->setTitle('Posts');
+    }
+
+    /**
+     * Boot the component
+     *
+     * @param PostService $postService
+     * @return void
+     */
+    public function boot(PostService $postService): void
+    {
+        $this->postService = $postService;
     }
 
     /**
@@ -67,18 +95,18 @@ class Index extends Component
     private function populatePosts(): void
     {
         foreach ($this->categories as $category) {
-            $this->recentCategoryPosts[$category->slug] = Posts::getRecent(6, $category->slug);
+            $this->recentCategoryPosts[$category->slug] = $this->postService->getRecent(6, $category->slug);
         }
 
         if ($this->search) {
-            $this->posts = Posts::getFilteredQuery([
+            $this->posts = $this->postService->getFilteredQuery([
                 'search' => $this->search,
             ])->get();
 
             return;
         }
 
-        $this->posts = Posts::getRecent(12);
+        $this->posts = $this->postService->getRecent(12);
     }
 
     /**
@@ -109,8 +137,6 @@ class Index extends Component
      */
     public function render(): View
     {
-        Page::setTitle('Posts Home');
-
         return view('ui.posts.posts')
             ->layout(UiLayout::class);
     }

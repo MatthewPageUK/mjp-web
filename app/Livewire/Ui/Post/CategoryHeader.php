@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Ui\Post;
 
-use App\Facades\Ui\Posts;
 use App\Livewire\Ui\Traits\HasPostCategoryFilter;
 use App\Models\PostCategory;
+use App\Services\Ui\PostService;
 use Illuminate\View\View;
 use Livewire\Component;
 
 /**
- * Posts category header.
+ * UI - Posts category header.
  *
  */
 class CategoryHeader extends Component
@@ -26,12 +26,14 @@ class CategoryHeader extends Component
     /**
      * Mount the component and populate the data
      *
+     * @param PostService $postService
+     * @param string $category
      * @return void
      */
-    public function mount($category = null)
+    public function mount(PostService $postService, $category = null)
     {
         $this->setCategories(
-            Posts::getCategories()
+            $postService->getCategories()
         );
     }
 

@@ -40,7 +40,7 @@ class ExperienceService
      */
     public function getAll(): Collection
     {
-        return $this->getBaseQuery()->orderBy('start', 'desc')->get();
+        return $this->getBaseQuery()->with('skills')->orderBy('start', 'desc')->get();
     }
 
     /**
