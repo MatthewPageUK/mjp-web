@@ -8,9 +8,10 @@ use App\Services\Traits\{
     HasFilteredQuery,
 };
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Service for managing Demos.
+ * Service for retrieving Demos for use in the UI.
  *
  */
 class DemoService
@@ -30,21 +31,30 @@ class DemoService
      *
      * @param int $id
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @return BulletPoint
+     * @return Model
      */
-    public function get(int $id): Demo
+    public function get(int $id): Model
     {
-        return $this->getBaseQuery()->findOrFail($id);
+        $demo = $this
+            ->getBaseQuery()
+            ->findOrFail($id);
+
+        return $demo;
     }
 
     /**
-     * Get all Demos
+     * Get all active demos.
      *
      * @return Collection
      */
     public function getAll(): Collection
     {
-        return $this->getBaseQuery()->orderBy('name')->get();
+        $demos = $this
+            ->getBaseQuery()
+            ->orderBy('name')
+            ->get();
+
+        return $demos;
     }
 
     /**
@@ -55,9 +65,12 @@ class DemoService
      */
     public function getFiltered(array $filters): Collection
     {
-        return $this->getFilteredQuery($filters)
+        $demos = $this
+            ->getFilteredQuery($filters)
             ->orderBy('created_at', 'desc')
             ->get();
+
+        return $demos;
     }
 
 }

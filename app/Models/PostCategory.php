@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\HasNameSlug;
 use Illuminate\Database\Eloquent\{
+    Builder,
     Model,
     SoftDeletes,
     Factories\HasFactory,
@@ -73,5 +74,16 @@ class PostCategory extends Model
         } catch (UrlGenerationException $e) {
             return '';
         }
+    }
+
+    /**
+     * Active scope
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query): Builder
+    {
+        return $query;
     }
 }
