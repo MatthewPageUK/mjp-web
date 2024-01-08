@@ -53,6 +53,7 @@ class Setting extends Model
     {
         return Str::of($this->key)
             ->replace('_', ' ')
-            ->title();
+            ->title()
+            ->replace('Url', 'URL for ');
     }
 }

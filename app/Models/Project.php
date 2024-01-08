@@ -80,6 +80,8 @@ class Project extends Model implements RouteableModel
     /**
      * Get the last active attribute
      *
+     * @todo Is this needed?
+     *
      * @return Attribute
      */
     public function lastActive(): Attribute
