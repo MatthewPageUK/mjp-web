@@ -26,7 +26,7 @@ class View extends Component
             abort(404);
         }
 
-        $skill->load(['skillJourneys', 'image', 'skillGroups']);
+        $skill->load(['skillJourneys', 'image', 'skillGroups', 'skillLogs']);
 
         $page->setTitle('Skills');
         $page->appendTitle($this->skill->name);

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\SkillLevels;
 use App\Filament\Resources\SkillResource\Pages;
 use App\Filament\Resources\SkillResource\RelationManagers;
 use App\Filament\Resources\Traits;
@@ -14,8 +13,7 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn\TextColumnSize;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class SkillResource extends Resource
 {
@@ -44,10 +42,10 @@ class SkillResource extends Resource
                 Forms\Components\Select::make('skillGroups')
                     ->relationship('skillGroups', 'name')
                     ->label('Group')
-                    ->columnSpan(8),
+                    ->columnSpan(6),
                 Forms\Components\ViewField::make('level')
                     ->view('filament.forms.components.range-slider')
-                    ->columnSpan(4),
+                    ->columnSpan(6),
                 Forms\Components\Textarea::make('svg')
                     ->maxLength(65535)
                     ->columnSpan(12),
@@ -80,6 +78,12 @@ class SkillResource extends Resource
                 Tables\Columns\TextColumn::make('skillGroups.name')
                     ->label('Group'),
                 static::getSkillLevelColumn(),
+                Tables\Columns\TextColumn::make('skill_journeys_count')
+                    ->label('Journeys')
+                    ->counts('skillJourneys'),
+                Tables\Columns\TextColumn::make('skill_logs_count')
+                    ->label('Logs')
+                    ->counts('skillLogs'),
                 Tables\Columns\TextColumn::make('demos_count')
                     ->label('Demos')
                     ->counts('demos'),
@@ -109,6 +113,7 @@ class SkillResource extends Resource
     {
         return [
             RelationManagers\SkillJourneysRelationManager::class,
+            RelationManagers\SkillLogsRelationManager::class,
         ];
     }
 

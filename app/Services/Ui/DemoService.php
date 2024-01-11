@@ -67,7 +67,7 @@ class DemoService
     {
         $demos = $this
             ->getFilteredQuery($filters)
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->get();
 
         return $demos;

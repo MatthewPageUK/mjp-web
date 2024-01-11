@@ -14,6 +14,7 @@ use App\Models\{
     Project,
     Skill,
     SkillGroup,
+    SkillLog,
     User,
 };
 use Illuminate\Database\Seeder;
@@ -23,17 +24,6 @@ class DemoSeeder extends Seeder
     /**
      * Seed the application's database with demo data
      * for development only.
-     *
-     * Demo user (admin and normal)
-     * Demo settings
-     * 3 Skill Groups with 5 skills in each
-     * 3 Post Categories with 5 posts in each
-     * 5 Demos
-     * 5 Experiences
-     * 5 Projects
-     * Skillable - attach 3 random skills to each skillable
-     * Postable - attach 3 random posts to each postable
-     * 10 Messages
      */
     public function run(): void
     {
@@ -63,13 +53,20 @@ class DemoSeeder extends Seeder
             'Caching', 'Redis', 'Memcached', 'Queueing', 'RabbitMQ',
             'Beanstalkd', 'Supervisor'];
 
-        for ($x = 0; $x < count($skills); $x++) {
-            Skill::factory(['name' => $skills[$x]])
+        foreach ($skills as $skill) {
+            Skill::factory(['name' => $skill])
                 ->hasAttached(SkillGroup::all()->random(1))
                 ->hasImage()
                 ->hasSkillJourneys(10)
                 ->create();
         }
+
+        SkillLog::factory()
+            ->count(100)
+            ->create()
+            ->each(function ($skillLog) {
+                $skillLog->skills()->attach(Skill::all()->random(1));
+            });
 
         PostCategory::factory()
             ->count(3)

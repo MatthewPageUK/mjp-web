@@ -58,7 +58,7 @@ class ProjectService
     {
         return $this->getFilteredQuery($filters)
             ->with(['skills', 'image'])
-            ->orderBy('last_active', 'desc')
+            ->latest('last_active')
             ->get();
     }
 }

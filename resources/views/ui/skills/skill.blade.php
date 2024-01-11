@@ -68,6 +68,28 @@
 
             </ul>
 
+            {{-- Skill Log --}}
+            <h3 class="text-3xl mb-4 mt-8 font-black">Skill Log</h3>
+
+            <ul class="h-96 text-sm space-y-2 overflow-y-auto pr-2">
+                @php ($lastDate = null)
+                @foreach ($skill->skillLogs as $log)
+                    <li class="flex items-center gap-2">
+                        <p class="flex-1">
+                            @if ($lastDate !== $log->date->format('D M Y'))
+                                @php ($lastDate = $log->date->format('D M Y'))
+                                <span class="text-xs block text-green-400 border-b pb-1 mb-1">{{ $log->date->format('d M Y') }}</span>
+                            @endif
+
+                            <x-icons.material class="text-sm mr-1">{{ $log->type->getUiIcon() }}</x-icons.material>
+
+                            {{ $log->description }}<br />
+                            <span class="text-primary-500">{{ $log->level->getLabel() }} ({{ $log->duration }})</span>
+                        </p>
+                    </li>
+                @endforeach
+
+            </ul>
         </div>
 
         <div class="col-span-2">

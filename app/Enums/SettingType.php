@@ -8,7 +8,7 @@ use Filament\Support\Contracts\HasLabel;
  * Setting input types.
  *
  */
-enum SettingTypes: string implements HasLabel
+enum SettingType: string implements HasLabel
 {
     case String = 'string';
     case Text   = 'text';

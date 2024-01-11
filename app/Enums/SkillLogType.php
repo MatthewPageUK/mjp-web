@@ -2,24 +2,17 @@
 
 namespace App\Enums;
 
+use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
 /**
  * Setting input types.
  *
  */
-enum SkillLevels: int implements HasLabel
+enum SkillLogType: string implements HasLabel, HasIcon
 {
-    case One   = 1;
-    case Two   = 2;
-    case Three = 3;
-    case Four  = 4;
-    case Five  = 5;
-    case Six   = 6;
-    case Seven = 7;
-    case Eight = 8;
-    case Nine  = 9;
-    case Ten   = 10;
+    case Learn = 'learn';
+    case Use   = 'use';
 
     /**
      * Return the values from a Backed Enum as an array.
@@ -46,16 +39,19 @@ enum SkillLevels: int implements HasLabel
         return $this->name;
     }
 
-    public function getGeneralLabel(): ?string
+    public function getIcon(): ?string
     {
-        if ($this->value <= 3) {
-            return 'Junior';
-        }
+        return match ($this) {
+            self::Learn => 'heroicon-o-book-open',
+            self::Use => 'heroicon-o-wrench',
+        };
+    }
 
-        if ($this->value <= 7) {
-            return 'Intermediate';
-        }
-
-        return 'Senior';
+    public function getUiIcon(): ?string
+    {
+        return match ($this) {
+            self::Learn => 'school',
+            self::Use => 'build',
+        };
     }
 }

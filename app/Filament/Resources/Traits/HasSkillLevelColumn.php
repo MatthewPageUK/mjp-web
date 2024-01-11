@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Traits;
 
-use App\Enums\SkillLevels;
+use App\Enums\SkillLevel;
 use Filament\Tables;
 
 trait HasSkillLevelColumn
@@ -13,7 +13,7 @@ trait HasSkillLevelColumn
             ->badge()
             ->color(function (string $state): string {
                 return match(
-                    SkillLevels::tryFrom($state)?->getGeneralLabel()
+                    SkillLevel::tryFrom($state)?->getGeneralLabel()
                 ) {
                     'Junior' => 'danger',
                     'Intermediate' => 'warning',

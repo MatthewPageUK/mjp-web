@@ -13,7 +13,7 @@ class SkillJourneysChart extends ChartWidget
 {
     protected static ?string $heading = 'Completed Skill Journeys';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = '1';
 
     protected static ?string $maxHeight = '300px';
 

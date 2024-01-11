@@ -40,7 +40,7 @@ class ExperienceService
      */
     public function getAll(): Collection
     {
-        return $this->getBaseQuery()->with('skills')->orderBy('start', 'desc')->get();
+        return $this->getBaseQuery()->with('skills')->latest('start')->get();
     }
 
     /**
@@ -53,7 +53,7 @@ class ExperienceService
     {
         return $this->getBaseQuery()
             ->where('start', '>', $experience->start)
-            ->orderBy('start', 'asc')
+            ->latest('start')
             ->first();
     }
 
@@ -67,7 +67,7 @@ class ExperienceService
     {
         return $this->getBaseQuery()
             ->where('start', '<', $experience->start)
-            ->orderBy('start', 'desc')
+            ->latest('start')
             ->first();
     }
 

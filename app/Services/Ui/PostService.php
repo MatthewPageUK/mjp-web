@@ -52,7 +52,7 @@ class PostService
 
         return $this->getFilteredQuery($filters)
             ->with(['skills', 'image'])
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->limit($count)
             ->get();
     }
@@ -66,7 +66,7 @@ class PostService
     {
         return $this->getBaseQuery()
             ->with(['skills', 'image'])
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->get();
     }
 
@@ -93,7 +93,7 @@ class PostService
     {
         return $this->getFilteredQuery($filters)
             ->with(['skills', 'image'])
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->get();
     }
 

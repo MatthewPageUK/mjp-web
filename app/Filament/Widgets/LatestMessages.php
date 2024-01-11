@@ -17,7 +17,7 @@ class LatestMessages extends BaseWidget
     {
         return $table
             ->query(
-                Message::orderByDesc('created_at')->limit(10)
+                Message::latest()->limit(10)
             )
             ->columns([
                 Tables\Columns\ViewColumn::make('from')

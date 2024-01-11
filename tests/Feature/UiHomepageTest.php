@@ -99,7 +99,7 @@ class UiHomepageTest extends TestCase
         $this->artisan('mjpweb:demosetup');
 
         $this->get('/')->assertSeeTextInOrder(
-            Demo::active()->orderBy('created_at', 'desc')->take(2)->pluck('name')->toArray()
+            Demo::active()->latest()->take(2)->pluck('name')->toArray()
         );
     }
 
@@ -111,7 +111,7 @@ class UiHomepageTest extends TestCase
         $this->artisan('mjpweb:demosetup');
 
         $this->get('/')->assertSeeTextInOrder(
-            Project::active()->orderBy('updated_at', 'desc')->take(2)->pluck('name')->toArray()
+            Project::active()->latest('updated_at')->take(2)->pluck('name')->toArray()
         );
     }
 

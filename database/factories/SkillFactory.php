@@ -21,6 +21,7 @@ class SkillFactory extends Factory
     public function definition(): array
     {
         return [
+            'parent_id' => null,
             'name' => fake()->sentence(3),
             'description' => fake()->paragraphs(3, true),
             'level' => fake()->numberBetween(1, 10),

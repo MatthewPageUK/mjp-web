@@ -22,6 +22,7 @@ class SkillJourneyFactory extends Factory
             'name' => fake()->sentence(6),
             'completed_at' => fake()->randomElement([null, fake()->dateTimeBetween('-1 year', 'now')]),
             'skill_id' => Skill::factory(),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 

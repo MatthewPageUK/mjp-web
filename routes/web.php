@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Ui\UserDashboard;
 use App\Livewire\Ui\Experience\Index as ExperienceIndex;
 use App\Livewire\Ui\Experience\View as ExperienceView;
+use App\Livewire\Ui\Journal\Index as JournalIndex;
 use App\Livewire\Ui\Skill\Index as SkillIndex;
 use App\Livewire\Ui\Skill\View as SkillView;
 use App\Livewire\Ui\Demo\Index as DemoIndex;
@@ -79,6 +80,14 @@ Route::get('/experience/{experience}', ExperienceView::class)->name('experience'
 Route::get('/posts', PostIndex::class)->name('posts');
 Route::get('/posts/{category}', PostCategory::class)->name('posts.category');
 Route::get('/post/{year}/{month}/{day}/{post}', PostView::class)->name('post');
+
+/*
+|--------------------------------------------------------------------------
+| Journal
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/journal', JournalIndex::class)->name('journal');
 
 /*
 |--------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\SettingTypes;
+use App\Enums\SettingType;
 use App\Filament\Resources\SettingResource\Pages;
 use App\Filament\Resources\Traits;
 use App\Models\Setting;
@@ -38,7 +38,7 @@ class SettingResource extends Resource
                     ->rows(15)
                     ->columnSpanFull(),
                 Forms\Components\Select::make('type')
-                    ->options(SettingTypes::class)
+                    ->options(SettingType::class)
                     ->required()
             ]);
     }
