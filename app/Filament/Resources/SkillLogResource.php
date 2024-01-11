@@ -49,6 +49,7 @@ class SkillLogResource extends Resource
                 Forms\Components\Select::make('skills')
                     ->relationship('skills', 'name')
                     ->multiple()
+                    ->preload()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('description')
                     ->required()
