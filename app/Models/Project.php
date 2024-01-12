@@ -43,6 +43,9 @@ class Project extends Model implements RouteableModel
         'website',
         'last_active',
         'active',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

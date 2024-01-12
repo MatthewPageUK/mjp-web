@@ -39,6 +39,9 @@ class Experience extends Model implements RouteableModel
         'key_points',
         'name',
         'start',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

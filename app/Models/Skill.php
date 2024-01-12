@@ -42,6 +42,9 @@ class Skill extends Model implements RouteableModel
         'parent_id',
         'slug',
         'svg',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**
