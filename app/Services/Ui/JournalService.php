@@ -16,11 +16,59 @@ use Illuminate\Support\Facades\DB;
 class JournalService
 {
 
+    /**
+     * Models that can be used as journal entries.
+     *
+     * @var array
+     */
     public static $journableModels = [
         'skillLog' => SkillLog::class,
         'skillJourney' => SkillJourney::class,
         'demo' => Demo::class,
     ];
+
+    /**
+     * Get the most recent journal entries.
+     *
+     * @param int $count
+     * @return Collection
+     */
+    public function getRecent($count = 10)
+    {
+        // @todo wip / isJournable trait / model vars...
+        $skillLogs = SkillLog::with('skills')
+            ->latest('date')
+            ->limit(10)
+            ->get()
+            ->map(function ($log) {
+                $log->created_at = $log->date;
+                return $log;
+        });
+        $journeys = SkillJourney::with('skill')
+            ->whereNotNull('completed_at')
+            ->latest()
+            ->limit(10)
+            ->get()
+            ->map(function ($journey) {
+                $journey->created_at = $journey->completed_at;
+                return $journey;
+        });
+        $demos = Demo::with('skills')
+            ->latest()
+            ->limit(10)
+            ->get()
+            ->map(function ($demo) {
+                return $demo;
+        });
+
+        $entries = $skillLogs
+            ->concat($journeys)
+            ->concat($demos)
+            ->sortByDesc('created_at')
+            ->take($count);
+
+        return $entries;
+    }
 
     public function getAll($year = null, $month = null)
     {
@@ -78,6 +126,11 @@ class JournalService
         return $entries;
     }
 
+    /**
+     * Get the first date that a journal entry was made.
+     *
+     * @return Carbon
+     */
     public function getFirstEntryDate()
     {
         return collect([

@@ -50,10 +50,15 @@
                     {{ __('Demos') }}
                 </x-ui.layout.header-button>
 
-                {{-- Posts --}}
-                <x-ui.layout.header-button href="{{ route('posts') }}" icon="feed" tag="post" title="Posts and articles">
-                    {{ __('Posts') }}
+                {{-- Journal --}}
+                <x-ui.layout.header-button href="{{ route('journal') }}" icon="draw" tag="journal" title="Developer Journal">
+                    {{ __('Journal') }}
                 </x-ui.layout.header-button>
+
+                {{-- Posts --}}
+                {{-- <x-ui.layout.header-button href="{{ route('posts') }}" icon="feed" tag="post" title="Posts and articles">
+                    {{ __('Posts') }}
+                </x-ui.layout.header-button> --}}
             </nav>
 
             <nav class="mt-8 lg:mt-0 flex space-x-3 flex-grow justify-center lg:justify-end">

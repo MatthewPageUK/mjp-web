@@ -17,7 +17,7 @@
                     <x-ui.journal.day :entry="$entry" />
                 @endif
 
-                <p class="flex items-center space-x-4 border rounded-lg p-3 mb-2 border-primary-500 bg-primary-700 hover:border-primary-700 hover:shadow-lg hover:bg-primary-600 hover:scale-105 transition transition-all duration-500 ease-in-out">
+                <p class="flex items-center space-x-4 border rounded-lg p-3 mb-2 border-primary-500 bg-primary-800 hover:border-primary-700 hover:shadow-lg hover:bg-primary-700 hover:scale-105 transition transition-all duration-500 ease-in-out">
                     @switch (get_class($entry))
 
                         @case('App\Models\SkillLog')
