@@ -1,7 +1,7 @@
 <x-icons.material>{{ $skillLog->type->getUiIcon() }}</x-icons.material>
 <span class="flex-1">
     {{ $skillLog->type->getLabel() }}
-    <x-ui.skills.linked-skill-list :skills="$skillLog->skills" />
+    <x-ui.skills.linked-skill-list :models="$skillLog->skills" />
     - {{ $skillLog->description }}
     @if ($skillLog->notes)
         <br />{{ $skillLog->notes }}
