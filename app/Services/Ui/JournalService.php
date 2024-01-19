@@ -141,47 +141,59 @@ class JournalService
     }
 
     /**
-     * Get the years that have journal entries
+     * Get the years that have journal entries along with
+     * the total number of entries for that year.
      *
      * @return Collection
      */
     public function getYearsWithJournalEntries(): Collection
     {
-        $years = SkillLog::select(DB::raw('YEAR(date) as year'))
-            ->union(SkillJourney::select(DB::raw('YEAR(completed_at) as year'))
-                ->distinct()
-                ->whereNotNull('completed_at'))
-            ->union(Demo::select(DB::raw('YEAR(created_at) as year'))
-                ->distinct())
-            ->distinct()
-            ->get()
-            ->sortByDesc('year')
-            ->pluck('year');
+        $skillLogs = SkillLog::select(DB::raw('YEAR(date) as year, COUNT(*) as count'))
+            ->groupBy('year');
+
+        $skillJounries = SkillJourney::select(DB::raw('YEAR(completed_at) as year, COUNT(*) as count'))
+            ->whereNotNull('completed_at')
+            ->groupBy('year');
+
+        $demos = Demo::select(DB::raw('YEAR(created_at) as year, COUNT(*) as count'))
+            ->groupBy('year');
+
+        $years = SkillLog::select(DB::raw('year as value, SUM(count) as total'))
+            ->from($skillLogs->union($skillJounries)->union($demos))
+            ->groupBy('value')
+            ->orderBy('value', 'desc')
+            ->get();
 
         return $years;
     }
 
     /**
-     * Get the months that have journal entries
+     * Get the months that have journal entries along with
+     * the total number of entries for that month.
      *
      * @param int $year
      * @return Collection
      */
     public function getMonthsWithJournalEntries(int $year): Collection
     {
-        $months = SkillLog::select(DB::raw('MONTH(date) as month'))
+        $skillLogs = SkillLog::select(DB::raw('MONTH(date) as month, COUNT(*) as count'))
             ->whereYear('date', $year)
-            ->union(SkillJourney::select(DB::raw('MONTH(completed_at) as month'))
-                ->whereYear('completed_at', $year)
-                ->distinct()
-                ->whereNotNull('completed_at'))
-            ->union(Demo::select(DB::raw('MONTH(created_at) as month'))
-                ->whereYear('created_at', $year)
-                ->distinct())
-            ->distinct()
-            ->get()
-            ->sortBy('month')
-            ->pluck('month');
+            ->groupBy('month');
+
+        $skillJounries = SkillJourney::select(DB::raw('MONTH(completed_at) as month, COUNT(*) as count'))
+            ->whereNotNull('completed_at')
+            ->whereYear('completed_at', $year)
+            ->groupBy('month');
+
+        $demos = Demo::select(DB::raw('MONTH(created_at) as month, COUNT(*) as count'))
+            ->whereYear('created_at', $year)
+            ->groupBy('month');
+
+        $months = SkillLog::select(DB::raw('month as value, SUM(count) as total'))
+            ->from($skillLogs->union($skillJounries)->union($demos))
+            ->groupBy('value')
+            ->orderBy('value', 'desc')
+            ->get();
 
         return $months;
     }

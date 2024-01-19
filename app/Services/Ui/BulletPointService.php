@@ -18,7 +18,7 @@ class BulletPointService
     use WithRainbow;
 
     /**
-     * Get all bullet points with a rainbow colour
+     * Get all bullet points in order with a rainbow colour
      * attached as $model->colour.
      *
      * @throws \Exception
@@ -27,24 +27,29 @@ class BulletPointService
     public function getAll(): Collection
     {
         try {
-            // Get all the bullet points in order
             $bulletPoints =  BulletPoint::orderBy('order')->get();
-
         } catch (\Exception $e) {
-            // @todo logging
             return collect();
         }
 
-        // Attach a colour to each bullet point in sequence
-        $bulletPoints = $bulletPoints->map(function ($bulletPoint) {
+        $bulletPoints = $this->attachRainbowColour($bulletPoints);
+
+        return $bulletPoints;
+    }
+
+    /**
+     * Attach a rainbow colour to each bullet point.
+     *
+     * @param Collection $bulletPoints
+     * @return Collection
+     */
+    public function attachRainbowColour(Collection $bulletPoints): Collection
+    {
+        $this->resetColour();
+
+        return $bulletPoints->map(function ($bulletPoint) {
             $bulletPoint->colour = $this->getNextColour();
             return $bulletPoint;
         });
-
-        // Reset the colour sequence
-        $this->resetColour();
-
-        // Return the bullet points
-        return $bulletPoints;
     }
 }

@@ -86,7 +86,7 @@ class Index extends Component
     public function setYear(int $year): void
     {
         $this->year = $year;
-        $this->month = $this->months->first();
+        $this->month = $this->months->first()?->value;
     }
     /**
      * Get the journal entries for the current year and month.

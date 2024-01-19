@@ -3,18 +3,21 @@
 namespace Tests\Feature;
 
 use App\Facades\Settings;
-use App\Facades\Ui\BulletPoints;
-use App\Facades\Ui\Posts;
 use App\Models\Demo;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Skill;
+use App\Models\SkillLog;
+use App\Services\Ui\BulletPointService;
+use App\Services\Ui\PostService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UiHomepageTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Test homepage returns 200
      */
@@ -70,10 +73,12 @@ class UiHomepageTest extends TestCase
      */
     public function test_homepage_bullets_displayed(): void
     {
+        $bulletPointService = app(BulletPointService::class);
+
         $this->artisan('mjpweb:demosetup');
 
         $this->get('/')->assertSeeTextInOrder(
-            BulletPoints::getAll()->pluck('name')->toArray()
+            $bulletPointService->getAll()->pluck('name')->toArray()
         );
     }
 
@@ -116,20 +121,31 @@ class UiHomepageTest extends TestCase
     }
 
     /**
+     * Test the journal is displayed
+     */
+    public function test_homepage_latest_journal_entries_displayed(): void
+    {
+        // create some skill logs
+        $skillLogs = SkillLog::factory(5)->create()->sortByDesc('date');
+
+        // do they appear
+        $this->get('/')->assertSeeTextInOrder(
+            $skillLogs->pluck('description')->toArray()
+        );
+    }
+
+    /**
      * Test 4 most recent posts are displayed
      *
-     * @todo Buggy test...
      */
     public function test_homepage_4_most_recent_posts_displayed(): void
     {
+        $posts = app(PostService::class);
+
         $this->artisan('mjpweb:demosetup');
 
-        // These two should return the same results.. why don't they?
-        // dd(Posts::getFiltered([])->take(4)->pluck('name')->toArray());
-        // dd(Posts::getFilteredQuery([])->paginate(4)->pluck('name')->toArray());
-
         $this->get('/')->assertSeeTextInOrder(
-            Posts::getFilteredQuery([])->paginate(4)->pluck('name')->toArray()
+            $posts->getFilteredQuery([])->paginate(4)->pluck('name')->toArray()
         );
     }
 

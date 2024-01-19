@@ -52,11 +52,11 @@ class UiHeaderTest extends TestCase
     }
 
     /**
-     * Test Header has link to posts page
+     * Test Header has link to journal page
      */
-    public function test_ui_header_has_link_to_posts_page(): void
+    public function test_ui_header_has_link_to_journal_page(): void
     {
-        $this->blade('<x-ui.layout.header />')->assertSee(route('posts'));
+        $this->blade('<x-ui.layout.header />')->assertSee(route('journal'));
     }
 
     /**

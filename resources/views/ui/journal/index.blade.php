@@ -45,25 +45,33 @@
                     <div
                         @class([
                             'border p-2  border rounded-lg p-3 mb-2 border-primary-500 bg-primary-700',
-                            'hover:bg-primary-600 hover:scale-105 transition transition-all duration-500 ease-in-out' => $this->year !== $year,
+                            'hover:bg-primary-600 hover:scale-105 transition transition-all duration-500 ease-in-out' => $this->year !== $year->value,
                         ])
                     >
                         <a
-                            wire:click.prevent="setYear({{ $year }})"
-                            href="{{ route('journal', ['year' => $year, 'month' => 1]) }}"
-                            class="block hover:text-secondary-500 {{ $this->year === $year ? 'text-secondary-500' : '' }}"
-                        >{{ $year }}</a>
+                            wire:click.prevent="setYear({{ $year->value }})"
+                            href="{{ route('journal', ['year' => $year->value, 'month' => 1]) }}"
+                            class="block flex items-center hover:text-secondary-500 {{ $this->year === $year->value ? 'text-secondary-500' : '' }}"
+                        >
+                            <span class="flex-1">{{ $year->value }}</span>
+                            @if ($this->year !== $year->value)
+                                <span class="text-xs">{{ $year->total }}</span>
+                            @endif
+                        </a>
 
 
-                        @if ($this->year === $year)
+                        @if ($this->year === $year->value)
                             <div class="mt-2">
                                 @foreach ($this->months as $month)
                                     <div class="py-2 flex space-x-2 content-center  border rounded-lg p-3 mb-2 border-primary-500 bg-primary-700 hover:bg-primary-600 hover:scale-105 transition transition-all duration-500 ease-in-out">
                                         <x-icons.material class="text-sm mt-0.5">calendar_month</x-icons.material>
                                         <a
-                                            href="{{ route('journal', ['year' => $year, 'month' => $month]) }}"
-                                            class="block flex-1 hover:text-secondary-500 {{ $this->month === $month ? 'text-secondary-500' : '' }}"
-                                        >{{ date("F", mktime(0, 0, 0, $month, 10)) }}</a>
+                                            href="{{ route('journal', ['year' => $year->value, 'month' => $month->value]) }}"
+                                            class="block flex items-center flex-1 hover:text-secondary-500 {{ $this->month === $month->value ? 'text-secondary-500' : '' }}"
+                                        >
+                                            <span class="flex-1">{{ date("F", mktime(0, 0, 0, $month->value, 10)) }}</span>
+                                            <span class="text-xs">{{ $month->total }}</span>
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>

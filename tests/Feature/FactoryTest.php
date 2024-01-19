@@ -3,24 +3,34 @@
 namespace Tests\Feature;
 
 use App\Models\{
+    BulletPoint,
     Demo,
     Experience,
+    GithubRepo,
+    Image,
+    Message,
     Post,
     PostCategory,
     Project,
+    Setting,
     Skill,
     SkillGroup,
+    SkillJourney,
+    SkillLog,
 };
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class FactoryTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * Factory tests
      */
+    public function test_bulletpoint_factory(): void
+    {
+        $bullet = BulletPoint::factory()->create();
+        $this->assertModelExists($bullet);
+    }
 
     public function test_demo_factory(): void
     {
@@ -32,6 +42,24 @@ class FactoryTest extends TestCase
     {
         $experience = Experience::factory()->create();
         $this->assertModelExists($experience);
+    }
+
+    public function test_github_repo_factory(): void
+    {
+        $repo = GithubRepo::factory()->create();
+        $this->assertModelExists($repo);
+    }
+
+    public function test_image_factory(): void
+    {
+        $image = Image::factory()->create();
+        $this->assertModelExists($image);
+    }
+
+    public function test_skill_message_factory(): void
+    {
+        $message = Message::factory()->create();
+        $this->assertModelExists($message);
     }
 
     public function test_post_category_factory(): void
@@ -60,6 +88,12 @@ class FactoryTest extends TestCase
         $this->assertModelExists($project);
     }
 
+    public function test_setting_factory(): void
+    {
+        $setting = Setting::factory()->create();
+        $this->assertModelExists($setting);
+    }
+
     public function test_skill_factory(): void
     {
         $skill = Skill::factory()->create();
@@ -70,6 +104,18 @@ class FactoryTest extends TestCase
     {
         $skillGroup = SkillGroup::factory()->create();
         $this->assertModelExists($skillGroup);
+    }
+
+    public function test_skill_journey_factory(): void
+    {
+        $skillJourney = SkillJourney::factory()->create();
+        $this->assertModelExists($skillJourney);
+    }
+
+    public function test_skill_log_factory(): void
+    {
+        $skillLog = SkillLog::factory()->create();
+        $this->assertModelExists($skillLog);
     }
 
     public function test_skill_skillgroup_factory(): void

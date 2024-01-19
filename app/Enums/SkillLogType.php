@@ -5,10 +5,6 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-/**
- * Setting input types.
- *
- */
 enum SkillLogType: string implements HasLabel, HasIcon
 {
     case Learn = 'learn';
@@ -41,7 +37,7 @@ enum SkillLogType: string implements HasLabel, HasIcon
 
     public function getIcon(): ?string
     {
-        return match ($this) {
+        return match($this) {
             self::Learn => 'heroicon-o-book-open',
             self::Use => 'heroicon-o-wrench',
         };
@@ -49,7 +45,7 @@ enum SkillLogType: string implements HasLabel, HasIcon
 
     public function getUiIcon(): ?string
     {
-        return match ($this) {
+        return match($this) {
             self::Learn => 'school',
             self::Use => 'build',
         };
