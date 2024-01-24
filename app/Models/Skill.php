@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SkillLevel;
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
@@ -17,8 +18,6 @@ use Illuminate\Database\Eloquent\{
     Relations\HasMany,
     Relations\MorphToMany,
 };
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class Skill extends Model implements RouteableModel
@@ -53,6 +52,7 @@ class Skill extends Model implements RouteableModel
      * @var array
      */
     protected $casts = [
+        'level' => SkillLevel::class,
         //'active' => 'boolean',
     ];
 

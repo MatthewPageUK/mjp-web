@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Interfaces\CanBeJournalEntry;
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
@@ -10,6 +11,7 @@ use App\Models\Traits\{
     HasNameSlug,
     HasPosts,
     HasSkills,
+    IsJournable,
 };
 use Illuminate\Database\Eloquent\{
     Factories\HasFactory,
@@ -18,7 +20,7 @@ use Illuminate\Database\Eloquent\{
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
-class Demo extends Model implements RouteableModel
+class Demo extends Model implements RouteableModel, CanBeJournalEntry
 {
     use HasActive;
     use HasFactory;
@@ -28,6 +30,7 @@ class Demo extends Model implements RouteableModel
     use HasPosts;
     use HasSkills;
     use SoftDeletes;
+    use IsJournable;
 
     /**
      * The attributes that are mass assignable.

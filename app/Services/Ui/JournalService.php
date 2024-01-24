@@ -5,6 +5,7 @@ namespace App\Services\Ui;
 use App\Models\Demo;
 use App\Models\SkillJourney;
 use App\Models\SkillLog;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -19,12 +20,15 @@ class JournalService
     /**
      * Models that can be used as journal entries.
      *
+     * Each model should implement the CanBeJournalEntry interface
+     * and use the IsJournable trait to get started with default methods.
+     *
      * @var array
      */
-    public static $journableModels = [
-        'skillLog' => SkillLog::class,
-        'skillJourney' => SkillJourney::class,
-        'demo' => Demo::class,
+    public array $journableModels = [
+        SkillLog::class,
+        SkillJourney::class,
+        Demo::class,
     ];
 
     /**
@@ -35,33 +39,34 @@ class JournalService
      */
     public function getRecent($count = 10)
     {
-        // @todo wip / isJournable trait / model vars...
-        $skillLogs = SkillLog::with('skills')
-            ->latest('date')
-            ->limit(10)
+        // wip
+        // $recentQuery = $this->buildUnionQuery('getJournalRecentQuery', $count);
+
+        // $entries = DB::table($recentQuery)
+        //     ->orderBy('journal_date', 'desc')
+        //     ->limit($count)
+        //     ->get();
+
+        $skillLogs = SkillLog::getJournalRecentQuery($count)
             ->get()
             ->map(function ($log) {
                 $log->created_at = $log->date;
                 return $log;
         });
-        $journeys = SkillJourney::with('skill')
-            ->whereNotNull('completed_at')
-            ->latest()
-            ->limit(10)
+        $journeys = SkillJourney::getJournalRecentQuery($count)
             ->get()
             ->map(function ($journey) {
                 $journey->created_at = $journey->completed_at;
                 return $journey;
         });
-        $demos = Demo::with('skills')
-            ->latest()
-            ->limit(10)
+        $demos = Demo::getJournalRecentQuery($count)
             ->get()
             ->map(function ($demo) {
                 return $demo;
         });
 
-        $entries = $skillLogs
+        $entries = collect()
+            ->concat($skillLogs)
             ->concat($journeys)
             ->concat($demos)
             ->sortByDesc('created_at')
@@ -133,11 +138,10 @@ class JournalService
      */
     public function getFirstEntryDate()
     {
-        return collect([
-            SkillLog::oldest('date')->first()?->date,
-            SkillJourney::oldest()->whereNotNull('completed_at')->first()?->completed_at,
-            Demo::oldest()->first()?->created_at,
-        ])->except(null)->min();
+        // @todo - make this a single query.....
+        return collect($this->journableModels)->each(function ($model) {
+            $model::getJournalFirstEntryDate();
+        })->except(null)->min();
     }
 
     /**
@@ -148,18 +152,17 @@ class JournalService
      */
     public function getYearsWithJournalEntries(): Collection
     {
-        $skillLogs = SkillLog::select(DB::raw('YEAR(date) as year, COUNT(*) as count'))
-            ->groupBy('year');
+        /**
+         * Get the year sub totals from each model and create a
+         * union of the $model::getJournalYearsQuery queries.
+         */
+        $yearSubTotalsQuery = $this->buildUnionQuery('getJournalYearsQuery');
 
-        $skillJounries = SkillJourney::select(DB::raw('YEAR(completed_at) as year, COUNT(*) as count'))
-            ->whereNotNull('completed_at')
-            ->groupBy('year');
-
-        $demos = Demo::select(DB::raw('YEAR(created_at) as year, COUNT(*) as count'))
-            ->groupBy('year');
-
-        $years = SkillLog::select(DB::raw('year as value, SUM(count) as total'))
-            ->from($skillLogs->union($skillJounries)->union($demos))
+        /**
+         * Query and total the sub queries.
+         */
+        $years = DB::table($yearSubTotalsQuery)
+            ->select(DB::raw('year as value, SUM(count) as total'))
             ->groupBy('value')
             ->orderBy('value', 'desc')
             ->get();
@@ -176,26 +179,44 @@ class JournalService
      */
     public function getMonthsWithJournalEntries(int $year): Collection
     {
-        $skillLogs = SkillLog::select(DB::raw('MONTH(date) as month, COUNT(*) as count'))
-            ->whereYear('date', $year)
-            ->groupBy('month');
+        /**
+         * Get the month sub totals from each model and create a
+         * union of the $model::getJournalMonthsQuery queries.
+         */
+        $monthSubTotalsQuery = $this->buildUnionQuery('getJournalMonthsQuery', $year);
 
-        $skillJounries = SkillJourney::select(DB::raw('MONTH(completed_at) as month, COUNT(*) as count'))
-            ->whereNotNull('completed_at')
-            ->whereYear('completed_at', $year)
-            ->groupBy('month');
-
-        $demos = Demo::select(DB::raw('MONTH(created_at) as month, COUNT(*) as count'))
-            ->whereYear('created_at', $year)
-            ->groupBy('month');
-
-        $months = SkillLog::select(DB::raw('month as value, SUM(count) as total'))
-            ->from($skillLogs->union($skillJounries)->union($demos))
+        /**
+         * Query and total the sub queries.
+         */
+        $months = DB::table($monthSubTotalsQuery)
+            ->select(DB::raw('month as value, SUM(count) as total'))
             ->groupBy('value')
             ->orderBy('value', 'desc')
             ->get();
 
         return $months;
+    }
+
+    /**
+     * Build a multiple model union query by calling $method
+     * with $arguments on each model.
+     *
+     * @param string $method
+     * @param mixed ...$arguments
+     * @return Builder
+     */
+    protected function buildUnionQuery($method, ...$arguments): Builder
+    {
+        $query = DB::query();
+        foreach ($this->journableModels as $key => $model) {
+            if ($key === 0) {
+                $query = $model::$method(...$arguments);
+            } else {
+                $query->union($model::$method(...$arguments));
+            }
+        }
+
+        return $query;
     }
 
 }

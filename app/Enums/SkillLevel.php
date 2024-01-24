@@ -41,21 +41,37 @@ enum SkillLevel: int implements HasLabel
         return array_column(self::cases(), 'value', 'name');
     }
 
+    /**
+     * Get the label for the enum value.
+     *
+     * @return string|null
+     */
     public function getLabel(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Get the generalised label for the enum value.
+     *
+     * @return string|null
+     */
     public function getGeneralLabel(): ?string
     {
-        if ($this->value <= 3) {
-            return 'Junior';
-        }
+        return $this->value <= 3 ? 'Junior' : ( $this->value <= 7 ? 'Intermediate' : 'Senior' );
+    }
 
-        if ($this->value <= 7) {
-            return 'Intermediate';
-        }
-
-        return 'Senior';
+    /**
+     * Get the description for the enum value.
+     *
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return match($this->getGeneralLabel()) {
+            'Junior' => 'I have a basic understanding of the skill and can perform simple tasks.',
+            'Intermediate' => 'I have a good understanding of the skill and can perform most tasks.',
+            'Senior' => 'I have an advanced understanding of the skill and can perform complex tasks.',
+        };
     }
 }

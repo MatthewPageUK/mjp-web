@@ -26,9 +26,10 @@
                     @endforeach
                 </p>
 
+                {{-- General label --}}
                 <p>
                     <x-ui.skills.stars :skill="$skill" />
-                    <p class="text-sm text-primary-500">Competent but may need some help...</p>
+                    <p class="text-sm text-primary-500">{{ $skill->level->getGeneralLabel() }} - {{ $skill->level->getDescription() }}</p>
                 </p>
             </div>
             {{-- Skill description --}}

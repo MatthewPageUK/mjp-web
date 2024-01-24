@@ -6,14 +6,19 @@ use App\Enums\{
     SkillLogLevel,
     SkillLogType,
 };
+use App\Interfaces\CanBeJournalEntry;
 use App\Models\Traits\HasSkills;
+use App\Models\Traits\IsJournable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
-class SkillLog extends Model
+class SkillLog extends Model implements CanBeJournalEntry
 {
     use HasFactory;
     use HasSkills;
+    use IsJournable;
 
     protected $fillable = [
         'type',
@@ -54,6 +59,12 @@ class SkillLog extends Model
         }
 
         return $this->hours . ' hours';
+    }
+
+    #[\Override]
+    public static function getJournalDateField(): string
+    {
+        return 'date';
     }
 
 }

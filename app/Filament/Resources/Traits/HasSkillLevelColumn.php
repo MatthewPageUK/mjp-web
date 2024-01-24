@@ -10,10 +10,13 @@ trait HasSkillLevelColumn
     public static function getSkillLevelColumn(): Tables\Columns\Column
     {
         return Tables\Columns\TextColumn::make('level')
+            ->formatStateUsing(function (SkillLevel $state): string {
+                return $state->value . ' - ' . $state->getGeneralLabel();
+            })
             ->badge()
-            ->color(function (string $state): string {
+            ->color(function (SkillLevel $state): string {
                 return match(
-                    SkillLevel::tryFrom($state)?->getGeneralLabel()
+                    $state->getGeneralLabel()
                 ) {
                     'Junior' => 'danger',
                     'Intermediate' => 'warning',

@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
+use App\Interfaces\CanBeJournalEntry;
+use App\Models\Traits\IsJournable;
 use Illuminate\Database\Eloquent\{
+    Builder,
     Factories\HasFactory,
     Model,
     Relations\BelongsTo,
 };
+use Illuminate\Support\Facades\DB;
 
-class SkillJourney extends Model
+class SkillJourney extends Model implements CanBeJournalEntry
 {
     use HasFactory;
+    use IsJournable;
 
     /**
      * The attributes that are mass assignable.
@@ -56,4 +61,17 @@ class SkillJourney extends Model
     {
         return $query->whereNull('completed_at');
     }
+
+    #[\Override]
+    public static function getJournalDateField(): string
+    {
+        return 'completed_at';
+    }
+
+    #[\Override]
+    public static function getJournalRelations(): array
+    {
+        return ['skill'];
+    }
+
 }
