@@ -1,8 +1,8 @@
 <x-ui-layout>
 
     <div class="space-y-16 lg:space-y-24">
-        <div class="grid grid-cols-6 lg:grid-cols-12 gap-4 lg:gap-16">
-            <div class="col-span-6">
+        <div class="grid grid-cols-6 md:grid-cols-12 gap-4 md:gap-16">
+            <div class="col-span-6 md:col-span-8">
                 <h1 class="text-4xl lg:text-6xl font-bold font-orbitron">
                     {{-- Site title --}}
                     {{ $name }}
@@ -11,12 +11,12 @@
                     {{-- Site tagline --}}
                     {{ $tagline }}
                 </h1>
-                <div class="prose prose-primary">
+                <div class="prose prose-primary max-w-full">
                     {{-- Introduction text --}}
                     @markdown($intro)
                 </div>
             </div>
-            <div class="col-span-6">
+            <div class="col-span-6 md:col-span-4">
                 {{-- Bullet Points component --}}
                 <x-ui.homepage.bullet-points :bullets="$bulletPoints" />
             </div>

@@ -37,7 +37,7 @@
 
                 {{-- Experience --}}
                 <x-ui.layout.header-button href="{{ route('experiences') }}" icon="public" tag="experience" title="Professional work experience">
-                    {{ __('Experience') }}
+                    {{ __('Work') }}
                 </x-ui.layout.header-button>
 
                 {{-- Projects --}}
@@ -55,6 +55,11 @@
                     {{ __('Journal') }}
                 </x-ui.layout.header-button>
 
+                {{-- Books --}}
+                {{-- <x-ui.layout.header-button href="{{ route('posts') }}" icon="feed" tag="post" title="Posts and articles">
+                    {{ __('Books') }}
+                </x-ui.layout.header-button> --}}
+
                 {{-- Posts --}}
                 {{-- <x-ui.layout.header-button href="{{ route('posts') }}" icon="feed" tag="post" title="Posts and articles">
                     {{ __('Posts') }}
@@ -65,27 +70,27 @@
                 {{-- Github Icon --}}
                 @if (Settings::getValue('url_github'))
                     <x-ui.layout.header-icon id="header-icon-github" href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-secondary-400">
-                        <x-icons.github class="w-8 h-8 text-white"/>
+                        <x-icons.github class="w-6 h-6 xl:w-8 xl:h-8 text-white"/>
                     </x-ui.layout.header-icon>
                 @endif
 
                 {{-- LinkedIn Icon --}}
                 @if (Settings::getValue('url_linkedin'))
                     <x-ui.layout.header-icon id="header-icon-linkedin" href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-secondary-400">
-                        <x-icons.linkedin class="w-8 h-8 text-white"/>
+                        <x-icons.linkedin class="w-6 h-6 xl:w-8 xl:h-8 text-white"/>
                     </x-ui.layout.header-icon>
                 @endif
 
                 {{-- Youtube Icon --}}
                 @if (Settings::getValue('url_youtube'))
                     <x-ui.layout.header-icon id="header-icon-youtube" href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-secondary-400">
-                        <x-icons.youtube class="w-8 h-8 text-white"/>
+                        <x-icons.youtube class="w-6 h-6 xl:w-8 xl:h-8 text-white"/>
                     </x-ui.layout.header-icon>
                 @endif
 
                 {{-- Contact Icon --}}
                 <x-ui.layout.header-icon href="/#contact" title="Contact me" target="_self" class="fill-none">
-                    <x-icons.contact class="w-8 h-8 text-white hover:text-secondary-400"/>
+                    <x-icons.contact class="w-6 h-6 xl:w-8 xl:h-8 text-white hover:text-secondary-400"/>
                 </x-ui.layout.header-icon>
             </nav>
 
