@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Models;
+
+use App\Interfaces\RouteableModel;
+use App\Models\Traits\{
+    HasImage,
+    HasNameSlug,
+    HasSkills,
+};
+use Illuminate\Database\Eloquent\{
+    Factories\HasFactory,
+    Model,
+    Relations\HasMany,
+};
+use Illuminate\Routing\Exceptions\UrlGenerationException;
+
+class Book extends Model implements RouteableModel
+{
+    use HasFactory;
+    use HasImage;
+    use HasNameSlug;
+    use HasSkills;
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'tagline',
+        'author',
+        'isbn',
+        'publisher',
+        'first_published',
+        'published',
+        'read_count',
+        'notes',
+    ];
+
+    protected $casts = [
+        'first_published' => 'date',
+        'published' => 'date',
+    ];
+
+    /**
+     * Reading sessions of this book
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function readings(): HasMany
+    {
+        return $this->hasMany(Reading::class);
+    }
+
+    /**
+     * Get the route url for this model
+     *
+     * @return string
+     */
+    public function getRouteUrlAttribute(): string
+    {
+        try {
+            return route('library.book', ['book' => $this]);
+        } catch (UrlGenerationException $e) {
+            return '';
+        }
+    }
+
+    /**
+     * Scope to unread books
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnread($query)
+    {
+        return $query
+            ->doesntHave('readings')
+            ->where('read_count', 0);
+    }
+
+    /**
+     * Scope to unfinished books
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnfinished($query)
+    {
+        return $query
+            ->whereHas('readings')
+            ->where('read_count', 0);
+    }
+
+    /**
+     * Scope to recently read books
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRecentlyRead($query)
+    {
+        return $query
+            ->whereHas('readings')
+            ;
+    }
+
+}

@@ -117,5 +117,7 @@ class DemoSeeder extends Seeder
             ->count(10)
             ->create();
 
+        $this->call(BookSeeder::class);
+
     }
 }

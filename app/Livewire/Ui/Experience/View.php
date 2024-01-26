@@ -54,6 +54,7 @@ class View extends Component
         $this->next = $experienceService->getNext($experience);
         $this->previous = $experienceService->getPrevious($experience);
 
+        $page->setBackgroundImage('mjp-back-work.jpg');
         $page->setTitle('Experiences');
         $page->appendTitle($experience->name);
     }

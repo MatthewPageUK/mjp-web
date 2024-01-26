@@ -55,10 +55,10 @@
                     {{ __('Journal') }}
                 </x-ui.layout.header-button>
 
-                {{-- Books --}}
-                {{-- <x-ui.layout.header-button href="{{ route('posts') }}" icon="feed" tag="post" title="Posts and articles">
-                    {{ __('Books') }}
-                </x-ui.layout.header-button> --}}
+                {{-- Library --}}
+                <x-ui.layout.header-button href="{{ route('library') }}" icon="local_library" tag="library" title="Come through to the library...">
+                    {{ __('Library') }}
+                </x-ui.layout.header-button>
 
                 {{-- Posts --}}
                 {{-- <x-ui.layout.header-button href="{{ route('posts') }}" icon="feed" tag="post" title="Posts and articles">

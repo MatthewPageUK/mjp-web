@@ -32,6 +32,15 @@
                             <x-ui.journal.demo :demo="$entry" />
                             @break
 
+                        @case('App\Models\Reading')
+                            <x-ui.journal.reading :reading="$entry" />
+                            @break
+
+                        @default
+                            <p>Sorry, no entry type was found.</p>
+                            {{ $entry }}
+                            {{ get_class($entry) }}
+
                     @endswitch
                 </p>
             @empty

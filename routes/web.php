@@ -91,6 +91,15 @@ Route::get('/journal', JournalIndex::class)->name('journal');
 
 /*
 |--------------------------------------------------------------------------
+| Library
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/library', App\Livewire\Ui\Library\Index::class)->name('library');
+Route::get('/library/{book}', App\Livewire\Ui\Library\Book::class)->name('library.book');
+
+/*
+|--------------------------------------------------------------------------
 | Stuff
 |--------------------------------------------------------------------------
 |

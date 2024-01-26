@@ -48,6 +48,13 @@ class PageService
     protected $robots = 'all';
 
     /**
+     * Page background image
+     *
+     * @var string
+     */
+    protected $backgroundImage = null;
+
+    /**
      * Set the page title
      *
      * @param string $title
@@ -103,6 +110,16 @@ class PageService
     }
 
     /**
+     * Set the page background image
+     *
+     * @param string $image
+     */
+    public function setBackgroundImage(string $image): void
+    {
+        $this->backgroundImage = $image;
+    }
+
+    /**
      * Get the page title
      *
      * @return string
@@ -140,6 +157,16 @@ class PageService
     public function getRobots(): string
     {
         return $this->robots;
+    }
+
+    /**
+     * Get the page background image
+     *
+     * @return string
+     */
+    public function getBackgroundImage(): string
+    {
+        return $this->backgroundImage ?? 'mjp-back-1.jpg';
     }
 
     /**
