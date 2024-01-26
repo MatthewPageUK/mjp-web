@@ -53,6 +53,10 @@
                             <x-ui.journal.demo :demo="$entry" />
                             @break
 
+                        @case('App\Models\Reading')
+                            <x-ui.journal.reading :reading="$entry" />
+                            @break
+
                     @endswitch
                 </p>
             @empty

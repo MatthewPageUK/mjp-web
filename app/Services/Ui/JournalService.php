@@ -3,6 +3,7 @@
 namespace App\Services\Ui;
 
 use App\Models\Demo;
+use App\Models\Reading;
 use App\Models\SkillJourney;
 use App\Models\SkillLog;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,6 +30,7 @@ class JournalService
         SkillLog::class,
         SkillJourney::class,
         Demo::class,
+        Reading::class,
     ];
 
     /**
@@ -64,11 +66,17 @@ class JournalService
             ->map(function ($demo) {
                 return $demo;
         });
+        $readings = Reading::getJournalRecentQuery($count)
+            ->get()
+            ->map(function ($reading) {
+                return $reading;
+        });
 
         $entries = collect()
             ->concat($skillLogs)
             ->concat($journeys)
             ->concat($demos)
+            ->concat($readings)
             ->sortByDesc('created_at')
             ->take($count);
 
@@ -122,10 +130,16 @@ class JournalService
             ->latest()->get()->map(function ($demo) {
                 return $demo;
         });
+        $readings = Reading::with('book')
+            ->whereBetween('created_at', [$from, $to])
+            ->latest()->get()->map(function ($reading) {
+                return $reading;
+        });
 
         $entries = $skillLogs
             ->concat($journeys)
             ->concat($demos)
+            ->concat($readings)
             ->sortByDesc('created_at');
 
         return $entries;

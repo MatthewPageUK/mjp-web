@@ -20,14 +20,14 @@ trait HasTimestampsTab
             ->schema([
                 Forms\Components\DateTimePicker::make('created_at')
                     ->disabled($disabled)
-                    ->columnSpan(['sm' => 12, 'md' => 6]),
+                    ->columnSpan(['sm' => 12, 'md' => 6, 'lg' => 4]),
                 Forms\Components\DateTimePicker::make('updated_at')
                     ->disabled($disabled)
-                    ->columnSpan(['sm' => 12, 'md' => 6]),
+                    ->columnSpan(['sm' => 12, 'md' => 6, 'lg' => 4]),
                 Forms\Components\DateTimePicker::make('deleted_at')
                     ->disabled($disabled)
                     ->visible($deleted)
-                    ->columnSpan(['sm' => 12, 'md' => 6]),
+                    ->columnSpan(['sm' => 12, 'md' => 6, 'lg' => 4]),
             ])
             ->columns(12);
     }
