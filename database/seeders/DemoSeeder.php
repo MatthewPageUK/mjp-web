@@ -118,6 +118,7 @@ class DemoSeeder extends Seeder
             ->create();
 
         $this->call(BookSeeder::class);
+        $this->call(AvailabilitySeeder::class);
 
     }
 }

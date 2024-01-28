@@ -50,34 +50,20 @@ class JournalService
         //     ->get();
 
         $skillLogs = SkillLog::getJournalRecentQuery($count)
-            ->get()
-            ->map(function ($log) {
-                $log->created_at = $log->date;
-                return $log;
-        });
+            ->get();
         $journeys = SkillJourney::getJournalRecentQuery($count)
-            ->get()
-            ->map(function ($journey) {
-                $journey->created_at = $journey->completed_at;
-                return $journey;
-        });
+            ->get();
         $demos = Demo::getJournalRecentQuery($count)
-            ->get()
-            ->map(function ($demo) {
-                return $demo;
-        });
+            ->get();
         $readings = Reading::getJournalRecentQuery($count)
-            ->get()
-            ->map(function ($reading) {
-                return $reading;
-        });
+            ->get();
 
         $entries = collect()
             ->concat($skillLogs)
             ->concat($journeys)
             ->concat($demos)
             ->concat($readings)
-            ->sortByDesc('created_at')
+            ->sortByDesc('journal_date')
             ->take($count);
 
         return $entries;

@@ -22,6 +22,11 @@ class Reading extends Model implements CanBeJournalEntry
         'notes',
     ];
 
+    protected $casts = [
+        'created_at' => 'date',
+        'journal_date' => 'date',
+    ];
+
     /**
      * The Book being read
      *

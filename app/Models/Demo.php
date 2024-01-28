@@ -49,6 +49,11 @@ class Demo extends Model implements RouteableModel, CanBeJournalEntry
         'deleted_at',
     ];
 
+    protected $casts = [
+        'created_at' => 'date',
+        'journal_date' => 'date',
+    ];
+
     /**
      * The "booted" method of the model.
      */

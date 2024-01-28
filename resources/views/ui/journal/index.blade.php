@@ -12,8 +12,8 @@
             {{-- Entries --}}
             @php ($lastDate = null)
             @forelse ($this->entries as $entry)
-                @if ($lastDate !== $entry->created_at->format('D M Y'))
-                    @php ($lastDate = $entry->created_at->format('D M Y'))
+                @if ($lastDate !== $entry->created_at->format('d m Y'))
+                    @php ($lastDate = $entry->created_at->format('d m Y'))
                     <x-ui.journal.day :entry="$entry" />
                 @endif
 
