@@ -14,7 +14,7 @@ class AvailabilitySeeder extends Seeder
     {
         for ($i = 0; $i < 600; $i++) {
             $date = \Carbon\Carbon::now()->startOfYear()->addDays($i);
-            Availability::factory()->create([
+            Availability::create([
                 'date' => $date,
                 'pm' => $date->isWeekday(),
                 'am' => $date->isWeekday(),
