@@ -35,6 +35,7 @@ class SkillLog extends Model implements CanBeJournalEntry
         'type' => SkillLogType::class,
         'level' => SkillLogLevel::class,
         'date' => 'date',
+        'journal_date' => 'date',
     ];
 
     #[\Override]

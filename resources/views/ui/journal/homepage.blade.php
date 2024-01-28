@@ -20,19 +20,19 @@
             {{-- Entries --}}
             @php ($lastDate = null)
             @forelse ($this->entries as $entry)
-                @if ($lastDate !== $entry->created_at->format('D M Y'))
-                    @php ($lastDate = $entry->created_at->format('D M Y'))
+                @if ($lastDate !== $entry->journal_date->format('d m Y'))
+                    @php ($lastDate = $entry->journal_date->format('d m Y'))
                     {{-- @todo merge this and add outer font size? --}}
                     {{-- <x-ui.journal.day :entry="$entry" /> --}}
                     <div class="grid grid-cols-2">
-                        @if ($lastDate === now()->format('D M Y'))
+                        @if ($lastDate === now()->format('d m Y'))
                             <span class="block text-secondary-400">Today</span>
                         @else
                             <span class="block text-secondary-400">
-                                {{ $entry->created_at->format('l') }}
+                                {{ $entry->journal_date->format('l') }}
                             </span>
                             <span class="justify-self-end block text-secondary-400">
-                                {{ $entry->created_at->format('j') }}<span class="font-light">{{ $entry->created_at->format('S') }}</span>
+                                {{ $entry->journal_date->format('j') }}<span class="font-light">{{ $entry->journal_date->format('S') }}</span>
                             </span>
                         @endif
                     </div>

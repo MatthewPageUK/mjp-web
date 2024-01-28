@@ -30,6 +30,11 @@ class SkillJourney extends Model implements CanBeJournalEntry
         'updated_at',
     ];
 
+    protected $casts = [
+        'completed_at' => 'date',
+        'journal_date' => 'date',
+    ];
+
     /**
      * The skill this journey item belongs to
      *
