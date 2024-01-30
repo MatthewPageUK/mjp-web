@@ -83,6 +83,7 @@ class Index extends Component
             ['skillGroup' => $this->selectedSkillGroup] : [];
 
         return $skillService->getFilteredQuery($filter)
+            ->with('skillLogs', 'skillJourneys', 'books', 'books.readings', 'demos', 'projects')
             ->orderBy('level', 'desc')
             ->get();
     }

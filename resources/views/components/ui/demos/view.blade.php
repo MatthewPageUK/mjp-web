@@ -30,7 +30,7 @@
 
         {{-- Demo description --}}
         <div class="prose prose-xl prose-primary">
-            @markdown($demo->description)
+            @markdown($demo->description ?? '')
         </div>
 
         {{-- Page updated --}}

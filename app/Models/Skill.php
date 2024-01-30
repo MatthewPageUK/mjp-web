@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\{
     Relations\HasMany,
     Relations\MorphToMany,
 };
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class Skill extends Model implements RouteableModel
@@ -161,6 +162,28 @@ class Skill extends Model implements RouteableModel
     public function experiences(): MorphToMany
     {
         return $this->morphedByMany(Experience::class, 'skillable');
+    }
+
+    /**
+     * Books about this skill
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function books(): MorphToMany
+    {
+        return $this->morphedByMany(Book::class, 'skillable');
+    }
+
+    /**
+     * Get the number of reading sessions for books in this skill.
+     *
+     * @return int
+     */
+    public function getReadingsCountAttribute(): int
+    {
+        return $this->books->reduce(function ($total, $book) {
+            return $total + $book->readings->count();
+        }, 0);
     }
 
     /**

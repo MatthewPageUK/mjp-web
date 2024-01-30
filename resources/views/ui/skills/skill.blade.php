@@ -1,109 +1,146 @@
 {{--
     UI - View Skill
 --}}
-<div>
-    <div class="mb-8">
-        <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center gap-2">
-            <span class="flex-1">{{ $this->skill->name }}</span>
-            @if ($skill->svg)
-                <div class="w-16 h-16">
-                    {!! $skill->svg !!}
-                </div>
-            @else
-                <x-icons.material class="hidden md:block text-6xl">construction</x-icons.material>
-            @endif
-        </h1>
-    </div>
+@use('App\Enums\SkillLogType')
+<div class="space-y-6">
 
-    <div class="lg:grid lg:grid-cols-4 gap-16 mb-16">
+    {{-- Header --}}
+    <h1 class="font-orbitron font-black text-6xl flex items-center gap-2">
+        <span class="flex-1">{{ $this->skill->name }}</span>
+        <a href="{{ route('skills', ['group' => $this->skill->skillGroups->first()->slug]) }}" class="hover:text-secondary-400" title="Back to the skills index">
+            <x-icons.material class="hidden md:block text-6xl">construction</x-icons.material>
+        </a>
+    </h1>
 
-        <div class="lg:col-span-3 space-y-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-16 mb-16">
+        <div class="lg:col-span-2 space-y-8">
 
             <div class="space-y-1">
+                {{-- Skill groups --}}
                 <p>
                     @foreach ($skill->skillGroups as $skillGroup)
                         <a class="border-r mr-2 pr-2 last:border-none" href="{{ route('skills', ['group' => $skillGroup->slug]) }}">{{ $skillGroup->name }}</a>
                     @endforeach
                 </p>
 
-                {{-- General label --}}
+                {{-- Stars and general label --}}
                 <p>
                     <x-ui.skills.stars :skill="$skill" />
-                    <p class="text-sm text-primary-500">{{ $skill->level->getGeneralLabel() }} - {{ $skill->level->getDescription() }}</p>
+                    <p class="text-sm text-primary-300">{{ $skill->level->getGeneralLabel() }} - {{ $skill->level->getDescription() }}</p>
                 </p>
             </div>
+
             {{-- Skill description --}}
-            <div class="prose prose-xl prose-primary w-full max-w-none">
-                @markdown($skill->description)
-            </div>
+            @if ($skill->description)
+                <div class="prose prose-xl prose-primary w-full max-w-none">
+                    @markdown($skill->description ?? '')
+                </div>
+            @endif
 
             {{-- Image --}}
             <x-ui.imageable :model="$skill" />
 
+            {{-- Projects and Demos --}}
+            @if ($skill->demos->count() + $skill->projects->count() > 0)
+                <div class="relative">
+                    <a name="projects" class="absolute -top-32"></a>
+                    <h3 class="text-5xl mb-8 mt-8">Projects and Demos</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        @foreach ($skill->demos->concat($skill->projects)->sortByDesc('created_at') as $item)
+                            @if ($item instanceof App\Models\Demo)
+                                <x-ui.demos.cards.small :demo="$item" />
+                            @elseif ($item instanceof App\Models\Project)
+                                <x-ui.projects.cards.small :project="$item" />
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- Books --}}
+            <div class="relative">
+                <a name="books" class="absolute -top-32"></a>
+                <h3 class="text-5xl mb-8 mt-8">Books</h3>
+                <div class="grid grid-cols-4 gap-4">
+                    @foreach ($skill->books as $book)
+                        <x-ui.library.book-card :book="$book" />
+                    @endforeach
+                </div>
+            </div>
+
         </div>
+        <div class="col-span-1 space-y-4">
 
-        <div>
+            {{-- Recent activity --}}
+            <livewire:ui.skill.activity :skill="$skill"/>
+
             {{-- Skill Journey --}}
-            <h3 class="text-3xl mb-4 font-black">Skill Journey</h3>
+            @if ($this->hasSkillJourneys())
+                <x-ui.card class="p-4 relative">
+                    <a name="skillJourneys" class="absolute -top-32"></a>
+                    <h3 class="text-4xl mb-4">Skill Journey</h3>
 
-            <ul class="h-96 text-sm space-y-2 overflow-y-auto pr-2">
-                @foreach ($journeys as $journey)
-                    <li class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded-full bg-white"> </div>
-                        <span class="flex-1">{{ $journey->name }}</span>
-                    </li>
-                @endforeach
-
-                <li class="border-b pb-1"></li>
-
-                @foreach ($journeysCompleted as $journey)
-                    <li class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded-full bg-green-400">
-                            <x-icons.material class="text-sm">tick</x-icons.material>
-                        </div>
-                        <p class="flex-1">{{ $journey->name }}
-                            <span class="text-xs block text-green-400">Completed on {{ $journey->completed_at }}</span>
-                        </p>
-                    </li>
-                @endforeach
-
-            </ul>
+                    <ul class="max-h-96 text-sm space-y-2 overflow-y-auto pr-2">
+                        @if ($this->hasIncompleteSkillJourneys())
+                            @foreach ($journeys as $journey)
+                                <li class="flex items-center gap-2">
+                                    <x-icons.material class="text-base text-primary-300">circle</x-icons.material>
+                                    <span class="flex-1 leading-tight">{{ $journey->name }}</span>
+                                </li>
+                            @endforeach
+                            <li class="border-b border-primary-500 pb-1"></li>
+                        @endif
+                        @foreach ($journeysCompleted as $journey)
+                            <li class="flex gap-2">
+                                <x-icons.material class="text-base text-green-500">task_alt</x-icons.material>
+                                <p class="flex-1 leading-tight">
+                                    {{ $journey->name }}
+                                    <span class="flex text-xs block text-primary-500">
+                                        <span class="flex-1">{{ $journey->completed_at->format('dS F Y') }}</span>
+                                        <span>{{ $journey->completed_at->diffForHumans() }}</span>
+                                    </span>
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </x-ui.card>
+            @endif
 
             {{-- Skill Log --}}
-            <h3 class="text-3xl mb-4 mt-8 font-black">Skill Log</h3>
+            @if ($skill->skillLogs->count() > 0)
+                <x-ui.card class="p-4 relative">
+                    <a name="skillLogs" class="absolute -top-32"></a>
+                    <h3 class="text-4xl mb-4">Skill Log</h3>
 
-            <ul class="h-96 text-sm space-y-2 overflow-y-auto pr-2">
-                @php ($lastDate = null)
-                @foreach ($skill->skillLogs as $log)
-                    <li class="flex items-center gap-2">
-                        <p class="flex-1">
-                            @if ($lastDate !== $log->date->format('D M Y'))
-                                @php ($lastDate = $log->date->format('D M Y'))
-                                <span class="text-xs block text-green-400 border-b pb-1 mb-1">{{ $log->date->format('d M Y') }}</span>
-                            @endif
+                    <ul class="max-h-96 text-sm space-y-2 overflow-y-auto pr-2">
+                        @php ($lastDate = null)
+                        @foreach ($skill->skillLogs as $log)
+                            <li class="flex items-center gap-2">
+                                <p class="flex-1">
+                                    @if ($lastDate !== $log->date->format('D M Y'))
+                                        @php ($lastDate = $log->date->format('D M Y'))
+                                        <span class="text-xs block border-b pb-1 mb-1 text-secondary-400">{{ $log->date->format('d M Y') }}</span>
+                                    @endif
 
-                            <x-icons.material class="text-sm mr-1">{{ $log->type->getUiIcon() }}</x-icons.material>
+                                    <span class="flex gap-1">
+                                        <x-icons.material class="text-sm mr-1">{{ $log->type->getUiIcon() }}</x-icons.material>
+                                        <span class="flex-1 leading-tight">
+                                            {{ $log->description }}<br />
+                                            <span class="text-primary-500 text-xs">{{ $log->level->getLabel() }} ({{ $log->duration }})</span>
+                                        </span>
+                                    </span>
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </x-ui.card>
+            @endif
 
-                            {{ $log->description }}<br />
-                            <span class="text-primary-500">{{ $log->level->getLabel() }} ({{ $log->duration }})</span>
-                        </p>
-                    </li>
-                @endforeach
-
-            </ul>
         </div>
 
-        <div class="col-span-2">
-            <livewire:ui.demo.widget :selectedSkill="$skill->slug" :selectableSkill="false" title="{{ $skill->name }} Demos"/>
-        </div>
-
-        <div class="col-span-2">
-            <livewire:ui.project.widget :selectedSkill="$skill->slug" :selectableSkill="false" title="{{ $skill->name }} Projects"/>
-        </div>
-
-        <div class="col-span-4">
+        {{-- <div class="lg:col-span-3">
             <livewire:ui.post.widget :selectedSkill="$skill->slug" :selectableSkill="false" title="{{ $skill->name }} Posts"/>
-        </div>
-    </div>
+        </div> --}}
 
+    </div>
 </div>

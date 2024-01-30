@@ -17,7 +17,7 @@
                 <p class="col-span-10">{{ $this->book->publisher }}</p>
 
                 <p class="col-span-2">Year</p>
-                <p class="col-span-10">{{ $this->book->first_published->format('Y') }} / {{ $this->book->published->format('Y') }}</p>
+                <p class="col-span-10">{{ $this->book->first_published?->format('Y') }} / {{ $this->book->published?->format('Y') }}</p>
 
                 <p class="col-span-2">ISBN</p>
                 <p class="col-span-10">ISBN - {{ $this->book->isbn }}</p>

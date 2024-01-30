@@ -13,7 +13,7 @@
                 </h1>
                 <div class="prose prose-primary prose-lg max-w-full">
                     {{-- Introduction text --}}
-                    @markdown($intro)
+                    @markdown($intro ?? '')
                 </div>
                 <div class="mt-4 XXtext-right">
                     <x-primary-button href="{{ route('availability') }}" title="Check my availability." class="text-sm gap-2">

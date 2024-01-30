@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Skill Journies
+ * Skill journeys
  *
  */
 return new class extends Migration

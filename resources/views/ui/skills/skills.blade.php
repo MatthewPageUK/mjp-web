@@ -1,25 +1,18 @@
 {{--
     UI - Skills index / list
 --}}
-<div class="space-y-16 group">
-    <div class="md:flex items-center gap-8 space-y-8 md:space-y-0">
-        <div class="flex-1">
-            <h1 class="font-orbitron font-black text-5xl flex items-center gap-2">
-                <x-icons.material class="text-6xl group-hover:text-highlight-500 transition-all duration-500">construction</x-icons-material>
-                Skills
-            </h1>
-        </div>
+<div class="space-y-16">
 
-        {{-- <div class="flex items-center gap-2">
-            <h2 class="">Skills Group</h2>
-            <x-ui.skills.selected-skill-group-filter :skillGroups="$this->skillGroups" />
-        </div> --}}
-    </div>
+    {{-- Header --}}
+    <h1 class="font-orbitron font-black text-6xl flex items-center gap-2">
+        <x-icons.material class="text-6xl">construction</x-icons-material>
+        Skills
+    </h1>
 
-    <div class="grid grid-cols-3 gap-x-16">
+    <div class="grid grid-cols-4 gap-x-16">
+        <div class="col-span-3">
 
-        <div class="col-span-2">
-
+            {{-- Group tabs --}}
             <div class="flex items-center gap-0">
                 @foreach ($this->skillGroups as $skillGroup)
                     <button wire:click="setSkillGroup('{{ $skillGroup->slug }}')"
@@ -36,8 +29,10 @@
                 @endforeach
                 <div class="flex-1 h-12 border-0 border-b border-primary-600"> </div>
             </div>
+
+            {{-- Skills --}}
             <div class="p-8 border border-t-0 border-primary-600 bg-primary-800 rounded-b-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     @foreach ($this->skills as $skill)
                         <x-ui.skills.cards.wide :skill="$skill" />
                     @endforeach
@@ -45,9 +40,9 @@
             </div>
 
         </div>
+        <div class="text-primary-200 prose prose-secondary pt-8">
 
-        <div class="text-primary-200 prose prose-secondary">
-
+            {{-- Sidebar text --}}
             @markdown(Settings::getValue('skills_content'))
 
         </div>

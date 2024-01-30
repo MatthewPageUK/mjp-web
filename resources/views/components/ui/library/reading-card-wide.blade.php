@@ -24,6 +24,6 @@
         </span>
     </p>
     <div x-show="openNote === {{ $reading->id }}" class="prose prose-primary max-w-full max-h-[300px] overflow-y-scroll bg-primary-800 p-8 border rounded mt-2">
-        @markdown($reading->notes)
+        @markdown($reading->notes ?? '')
     </div>
 </div>

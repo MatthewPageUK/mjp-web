@@ -1,6 +1,6 @@
 {{-- UI Contact Form --}}
 <form class="pt-8 bg-primary-700 p-8 rounded shadow-lg" id="contact-form">
-
+    <a name="contact"></a>
     @if ($this->mailError)
         {{-- Send Error --}}
         <div class="min-h-[250px]">

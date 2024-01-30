@@ -9,7 +9,7 @@
                 Projects
             </h1>
             <div class="prose prose-xl prose-primary">
-                @markdown($this->intro)
+                @markdown($this->intro ?? '')
             </div>
         </div>
 

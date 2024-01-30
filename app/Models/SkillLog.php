@@ -44,4 +44,25 @@ class SkillLog extends Model implements CanBeJournalEntry
         return 'date';
     }
 
+    /**
+     * Scope a query to only include learning.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLearning($query)
+    {
+        return $query->where('type', SkillLogType::Learn);
+    }
+
+    /**
+     * Scope a query to only include use.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUsing($query)
+    {
+        return $query->where('type', SkillLogType::Use);
+    }
 }
