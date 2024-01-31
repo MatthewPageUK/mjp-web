@@ -4,6 +4,7 @@ namespace App\Livewire\Github;
 
 use App\Livewire\Github\Traits\HasGithubRepo;
 use GrahamCampbell\GitHub\Facades\GitHub;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -47,9 +48,10 @@ class Repo extends Component
     {
         try {
             $this->setRepo(
-                GitHub::connection('main')->repo()->show($this->model->githubRepo->owner, $this->model->githubRepo->name)
+                Cache::remember($this->getCacheKey(), $this->cacheSeconds, function () {
+                    return GitHub::connection('main')->repo()->show($this->model->githubRepo->owner, $this->model->githubRepo->name);
+                })
             );
-
         } catch (\Exception $e) {
             $this->error = sprintf('Error getting Github repo - %s', $e->getMessage());
             return;
@@ -57,7 +59,9 @@ class Repo extends Component
 
         try {
             $this->setIssues(
-                GitHub::connection('main')->issues()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, array('state' => 'open'))
+                Cache::remember($this->getCacheKey('issues'), $this->cacheSeconds, function () {
+                    return GitHub::connection('main')->issues()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, ['state' => 'open']);
+                })
             );
 
         } catch (\Exception $e) {
@@ -67,11 +71,19 @@ class Repo extends Component
 
         try {
             $this->setOpenPullRequests(
-                GitHub::connection('main')->pull_requests()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, array('state' => 'open'))
+                Cache::remember($this->getCacheKey('pr-open'), $this->cacheSeconds, function () {
+                    return GitHub::connection('main')->pull_requests()->all(
+                        $this->model->githubRepo->owner,
+                        $this->model->githubRepo->name,
+                        ['state' => 'open']
+                    );
+                })
             );
 
             $this->setClosedPullRequests(
-                GitHub::connection('main')->pull_requests()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, array('state' => 'closed'))
+                Cache::remember($this->getCacheKey('pr-all'), $this->cacheSeconds, function () {
+                    return GitHub::connection('main')->pull_requests()->all($this->model->githubRepo->owner, $this->model->githubRepo->name, ['state' => 'closed']);
+                })
             );
 
         } catch (\Exception $e) {

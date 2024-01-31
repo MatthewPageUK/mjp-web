@@ -2,18 +2,19 @@
     UI - View Skill
 --}}
 @use('App\Enums\SkillLogType')
+@use('App\Enums\Section')
 <div class="space-y-6">
 
     {{-- Header --}}
     <h1 class="font-orbitron font-black text-6xl flex items-center gap-2">
         <span class="flex-1">{{ $this->skill->name }}</span>
         <a href="{{ route('skills', ['group' => $this->skill->skillGroups->first()->slug]) }}" class="hover:text-secondary-400" title="Back to the skills index">
-            <x-icons.material class="hidden md:block text-6xl">construction</x-icons.material>
+            <x-icons.material class="hidden md:block text-6xl">{{ Section::Skills->getUiIcon() }}</x-icons.material>
         </a>
     </h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-16 mb-16">
-        <div class="lg:col-span-2 space-y-8">
+        <div class="lg:col-span-2 space-y-8 order-last lg:order-first">
 
             <div class="space-y-1">
                 {{-- Skill groups --}}
@@ -32,7 +33,7 @@
 
             {{-- Skill description --}}
             @if ($skill->description)
-                <div class="prose prose-xl prose-primary w-full max-w-none">
+                <div class="prose prose-lg prose-primary w-full max-w-none">
                     @markdown($skill->description ?? '')
                 </div>
             @endif
@@ -45,7 +46,7 @@
                 <div class="relative">
                     <a name="projects" class="absolute -top-32"></a>
                     <h3 class="text-5xl mb-8 mt-8">Projects and Demos</h3>
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
                         @foreach ($skill->demos->concat($skill->projects)->sortByDesc('created_at') as $item)
                             @if ($item instanceof App\Models\Demo)
                                 <x-ui.demos.cards.small :demo="$item" />
@@ -61,7 +62,7 @@
             <div class="relative">
                 <a name="books" class="absolute -top-32"></a>
                 <h3 class="text-5xl mb-8 mt-8">Books</h3>
-                <div class="grid grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                     @foreach ($skill->books as $book)
                         <x-ui.library.book-card :book="$book" />
                     @endforeach

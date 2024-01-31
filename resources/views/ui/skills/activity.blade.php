@@ -1,6 +1,7 @@
 {{--
     Livewire component to display recent activity for a skill with filter for time period.
 --}}
+@use('App\Enums\Section')
 @use('App\Enums\SkillLogType')
 @use('Illuminate\Support\Str')
 
@@ -64,7 +65,7 @@
             </a>
 
             <a href="#projects" class="block flex gap-2 items-center group/totals" x-show="hasProjects">
-                <x-icons.material class="text-base group-hover/totals:text-green-400">rocket_launch</x-icons.material>
+                <x-icons.material class="text-base group-hover/totals:text-green-400">{{ Section::Projects->getUiIcon() }}</x-icons.material>
                 {{ $projects }} {{ Str::plural('project', $projects) }} started
             </a>
         </p>

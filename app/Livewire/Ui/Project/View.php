@@ -29,6 +29,10 @@ class View extends Component
             abort(404);
         }
 
+        $project->load([
+            'image', 'skills',
+        ]);
+
         $page->setTitle('Coding Project');
         $page->appendTitle($this->project->name);
     }

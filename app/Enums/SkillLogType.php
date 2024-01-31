@@ -5,6 +5,10 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
+/**
+ * Skill log types.
+ *
+ */
 enum SkillLogType: string implements HasLabel, HasIcon
 {
     case Learn = 'learn';

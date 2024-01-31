@@ -1,7 +1,7 @@
 {{-- UI - Demo - View demo --}}
 
 @props(['demo'])
-
+@use('App\Enums\Section')
 <div class="mb-4">
     <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center gap-2">
         <span class="flex-1">{{ $demo->name }}</span>
@@ -29,7 +29,7 @@
         @endif
 
         {{-- Demo description --}}
-        <div class="prose prose-xl prose-primary">
+        <div class="prose prose-lg prose-primary max-w-full">
             @markdown($demo->description ?? '')
         </div>
 
@@ -42,9 +42,23 @@
 
     </div>
 
-    <div class="">
+    <div class="space-y-8">
 
-        <x-related.links :model="$demo" />
+        {{-- <x-related.links :model="$demo" /> --}}
+        {{-- Skills used --}}
+        <div>
+            <h2 class="text-4xl mb-4 flex items-center gap-2">
+                <x-icons.material class="text-3xl">{{ Section::Skills->getUiIcon() }}</x-icons.material>
+                Skills used
+            </h2>
+            <div class="flex flex-wrap gap-2">
+                @foreach ($demo->skills as $skill)
+                    <x-primary-button href="{{ $skill->routeUrl }}" title="" class="text-sm">
+                        {{ $skill->name }}
+                    </x-primary-button>
+                @endforeach
+            </div>
+        </div>
 
         <div>
             @if ($demo->hasGithubRepo())

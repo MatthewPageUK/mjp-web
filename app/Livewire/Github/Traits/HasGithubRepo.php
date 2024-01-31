@@ -5,6 +5,7 @@ namespace App\Livewire\Github\Traits;
 use Carbon\Carbon;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Github - has repo trait for loading the basic repo
@@ -104,6 +105,13 @@ trait HasGithubRepo
     public Model $model;
 
     /**
+     * Cache time in seconds
+     *
+     * @var int
+     */
+    public int $cacheSeconds = 120;
+
+    /**
      * Mount the component
      *
      * @param Model $model
@@ -123,8 +131,9 @@ trait HasGithubRepo
     {
         try {
             $this->setRepo(
-                GitHub::connection('main')->repo()->show($this->model->githubRepo->owner, $this->model->githubRepo->name)
-            );
+                Cache::remember($this->getCacheKey(), $this->cacheSeconds, function () {
+                    return GitHub::connection('main')->repo()->show($this->model->githubRepo->owner, $this->model->githubRepo->name);
+            }));
 
         } catch (\Exception $e) {
             $this->error = sprintf('Error getting Github repo - %s', $e->getMessage());
@@ -158,4 +167,17 @@ trait HasGithubRepo
             'readme' => $this->urlHome . '/#readme',
         ];
     }
+
+    /**
+     * Get the cache key for this repo
+     *
+     * @return string
+     */
+    public function getCacheKey(string|null $suffix = null): string
+    {
+        $key = "github-repo-{$this->model?->githubRepo?->id}";
+        $key .= $suffix ? "-{$suffix}" : '';
+        return $key;
+    }
+
 }

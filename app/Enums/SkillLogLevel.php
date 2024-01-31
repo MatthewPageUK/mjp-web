@@ -10,9 +10,9 @@ use Filament\Support\Contracts\HasLabel;
  */
 enum SkillLogLevel: string implements HasLabel
 {
-    case Basic = 'basic';
+    case Basic          = 'basic';
     case Intermediate   = 'intermediate';
-    case Advanced = 'advanced';
+    case Advanced       = 'advanced';
 
     /**
      * Return the values from a Backed Enum as an array.

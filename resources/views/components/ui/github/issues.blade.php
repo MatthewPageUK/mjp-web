@@ -1,10 +1,11 @@
 @props(['issues' => []])
+@use('App\Enums\GithubIcon')
 
 {{-- Tasks --}}
 
 {{-- Header --}}
 <h1 class="text-4xl mb-2 flex gap-4 items-center">
-    <x-icons.material class="text-3xl">task</x-icons.material>
+    <x-icons.material class="text-3xl">{{ GithubIcon::Task->value }}</x-icons.material>
     Tasks
 </h1>
 

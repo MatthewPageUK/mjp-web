@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasLabel;
 
 /**
- * Setting input types.
+ * Skill levels
  *
  */
 enum SkillLevel: int implements HasLabel

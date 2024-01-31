@@ -61,8 +61,15 @@
 
         <div class="md:col-span-6 lg:col-span-4 self-end">
             <template x-if="daysSelected() < 1">
-                <div class="text-right font-semibold mr-2">
-                    Click on a day or period to reserve the time slot
+                <div class="text-right mr-2">
+                    @if ($this->userIsAdmin)
+                        <span class="flex items-center gap-1 justify-end">
+                            <x-icons.material class="text-yellow-500">admin_panel_settings</x-icons.material>
+                            Click on a period to toggle availability.
+                        </span>
+                    @else
+                        Click on a day or period to reserve the time slot.
+                    @endif
                 </div>
             </template>
 
@@ -74,8 +81,6 @@
                             <div class="grid grid-cols-12 items-center gap-1">
                                 <p class="text-sm col-span-4">Hours</p>
                                 <p class="col-span-8 font-bold" x-text="hoursSelected()"></p>
-
-
 
                                 <span class="text-sm col-span-4" x-text="firstDay() === lastDay() ? 'On' : 'From' "></span>
                                 <span class="text-sm col-span-8" x-text="firstDay()">...</span>
@@ -107,52 +112,18 @@
         </div>
     </div>
 
+    {{-- Calendar --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        @foreach ($this->months as $month)
 
-        @foreach ($this->months as $month => $monthDate)
+            <x-ui.availability.month
+                :month="$month"
+                :days="$this->days->whereBetween('date', [
+                    $month->format('Y-m-d'),
+                    $month->copy()->endOfMonth()->addDay(1)->format('Y-m-d')
+                ])"
+            />
 
-            {{-- Month --}}
-            <x-ui.card class="px-8 py-4 pb-8">
-
-                {{-- Name and year --}}
-                <h2 class="text-3xl font-semibold mb-4 flex">
-                    <span class="flex-1">{{ $monthDate->format('F') }}</span>
-                    <span class="text-xl font-light">{{ $monthDate->format('Y') }}</span>
-                </h2>
-
-                <div class="grid grid-cols-4 md:grid-cols-7 gap-2">
-
-                    {{-- Day names --}}
-                    <x-ui.availability.calendar-day-names />
-
-                    {{-- First day spacers --}}
-                    @php($spacers = $monthDate->copy()->firstOfMonth()->dayOfWeek == 0 ? 6 : $monthDate->copy()->firstOfMonth()->dayOfWeek - 1)
-                    @for ($i = 0; $i < $spacers; $i++)
-                        <div class="hidden md:block"></div>
-                    @endfor
-                    {{-- Days in the month --}}
-                    @foreach ($this->days->whereBetween('date', [$monthDate->format('Y-m-d'), $monthDate->copy()->endOfMonth()->addDay(1)->format('Y-m-d')]) as $day)
-                        <div @class([
-                            'border border-primary-600 rounded overflow-hidden',
-                            'opacity-30' => $day->date->isPast() || ( ! $day->am && ! $day->pm ),
-                            'hover:border-primary-400' => ! $day->date->isPast() && ( $day->am || $day->pm ),
-                        ])>
-                            {{-- Day number --}}
-                            <x-ui.availability.day-toggle :day="$day" />
-
-                            <div class="grid grid-cols-2">
-
-                                {{-- AM period --}}
-                                <x-ui.availability.period-toggle :day="$day" period="am" />
-
-                                {{-- PM period --}}
-                                <x-ui.availability.period-toggle :day="$day" period="pm" />
-
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </x-ui.card>
         @endforeach
     </div>
 </div>

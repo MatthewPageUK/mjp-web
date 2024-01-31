@@ -2,6 +2,10 @@
 
 namespace App\Enums;
 
+/**
+ * Filter values for the library books list.
+ *
+ */
 enum LibraryBookFilter: string
 {
     case All        = 'all';

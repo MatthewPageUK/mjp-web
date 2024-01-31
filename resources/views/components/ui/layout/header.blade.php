@@ -1,5 +1,6 @@
 
 {{-- Main web site header component --}}
+@use('App\Enums\Section')
 <header
     x-data="{
         openMenu: false,
@@ -31,7 +32,7 @@
             {{-- Header buttons --}}
             <nav class="mt-8 lg:mt-0 lg:flex lg:space-x-2">
                 {{-- Skills --}}
-                <x-ui.layout.header-button href="{{ route('skills') }}" icon="construction" tag="skill" title="My web development skills">
+                <x-ui.layout.header-button href="{{ route('skills') }}" icon="{{ Section::Skills->getUiIcon() }}" tag="skill" title="My web development skills">
                     {{ __('Skills') }}
                 </x-ui.layout.header-button>
 
@@ -41,7 +42,7 @@
                 </x-ui.layout.header-button>
 
                 {{-- Projects --}}
-                <x-ui.layout.header-button href="{{ route('projects') }}" icon="rocket_launch" tag="project" title="Developer projects I am working on">
+                <x-ui.layout.header-button href="{{ route('projects') }}" icon="{{ Section::Projects->getUiIcon() }}" tag="project" title="Developer projects I am working on">
                     {{ __('Projects') }}
                 </x-ui.layout.header-button>
 

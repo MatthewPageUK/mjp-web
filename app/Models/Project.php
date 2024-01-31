@@ -87,12 +87,12 @@ class Project extends Model implements RouteableModel
      *
      * @return Attribute
      */
-    public function lastActive(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
-        );
-    }
+    // public function lastActive(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
+    //     );
+    // }
 
     /**
      * Get the project page route url

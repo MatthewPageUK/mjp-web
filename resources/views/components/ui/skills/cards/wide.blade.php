@@ -3,6 +3,7 @@
 --}}
 @props(['skill' => null])
 @use('App\Enums\SkillLogType')
+@use('App\Enums\Section')
 
 <x-ui.card>
     <div class="p-4">
@@ -38,47 +39,11 @@
                 @endif
 
                 @if ($skill->projects->count() > 0)
-                    <x-icons.material class="text-base">rocket_launch</x-icons.material>
+                    <x-icons.material class="text-base">{{ Section::Projects->getUiIcon() }}</x-icons.material>
                 @endif
             </p>
 
             <span class="block text-primary-500 text-xs">Last activity {{ $skill->skillLogs->last()?->date->diffForHumans() }}</span>
-
-{{--
-            <p class="text-xs text-primary-300 grid grid-cols-6 mt-4">
-
-                <span class="block text-center group/stat" title="Skill journeys completed">
-                    <x-icons.material class="block text-base group-hover/stat:text-green-500">task_alt</x-icons.material>
-                    {{ $skill->skillJourneys->count() }}
-                </span>
-
-                <span class="block text-center group/stat" title="Learning logs">
-                    <x-icons.material class="block text-base group-hover/stat:text-green-500">{{ SkillLogType::Learn->getUiIcon() }}</x-icons.material>
-                    {{ $skill->skillLogs->where('type', SkillLogType::Learn)->count() }}
-                </span>
-
-                <span class="block text-center group/stat" title="Usage logs">
-                    <x-icons.material class="block text-base group-hover/stat:text-green-500">{{ SkillLogType::Use->getUiIcon() }}</x-icons.material>
-                    {{ $skill->skillLogs->where('type', SkillLogType::Use)->count() }}
-                </span>
-
-                <span class="block text-center group/stat" title="Reading sessions">
-                    <x-icons.material class="block text-base group-hover/stat:text-green-500">local_library</x-icons.material>
-                    {{ $skill->readingsCount }}
-                </span>
-
-                <span class="block text-center group/stat" title="Demos created">
-                    <x-icons.material class="block text-base group-hover/stat:text-green-500">smart_toy</x-icons.material>
-                    {{ $skill->demos->count() }}
-                </span>
-
-                <span class="block text-center group/stat" title="Projects created">
-                    <x-icons.material class="block text-base group-hover/stat:text-green-500">rocket_launch</x-icons.material>
-                    {{ $skill->projects->count() }}
-                </span>
-
-            </p> --}}
-
 
         </a>
     </div>

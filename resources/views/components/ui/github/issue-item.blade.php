@@ -1,4 +1,5 @@
 @props(['issue' => []])
+@use('App\Enums\GithubIcon')
 
 <div class="flex items-center">
 
@@ -12,7 +13,7 @@
         @if ($issue['comments'] > 0)
             <a href="{{ $issue['html_url'] }}" target="_blank" class="text-xs flex items-center gap-1 mr-1" title="Active discussion">
                 {{ $issue['comments'] }}
-                <x-icons.material class="text-sm">forum</x-icons.material>
+                <x-icons.material class="text-sm">{{ GithubIcon::Chat->value }}</x-icons.material>
             </a>
         @endif
         @foreach ($issue['labels'] as $label)

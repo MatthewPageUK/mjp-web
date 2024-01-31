@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
+    HasDuration,
     HasImage,
     HasNameSlug,
     HasSkills,
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\{
     Relations\HasMany,
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
+use Illuminate\Support\Str;
 
 class Book extends Model implements RouteableModel
 {
@@ -21,6 +23,7 @@ class Book extends Model implements RouteableModel
     use HasImage;
     use HasNameSlug;
     use HasSkills;
+    use HasDuration;
 
     protected $fillable = [
         'name',
@@ -48,6 +51,20 @@ class Book extends Model implements RouteableModel
     public function readings(): HasMany
     {
         return $this->hasMany(Reading::class);
+    }
+
+    /**
+     * Get the total reading time of this book
+     * Returns a string '34 minutes' / '2.4 hours'
+     *
+     * @return string
+     */
+    public function getReadingTimeAttribute(): string
+    {
+        $this->minutes = $this->readings->sum('minutes');
+
+        return $this->duration;
+
     }
 
     /**

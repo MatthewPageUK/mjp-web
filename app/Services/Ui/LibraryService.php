@@ -5,6 +5,7 @@ namespace App\Services\Ui;
 use App\Models\Book;
 use App\Models\Reading;
 use Flowframe\Trend\Trend;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 /**
@@ -50,7 +51,9 @@ class LibraryService
      */
     public function getRecentlyReadBooks()
     {
-        return Book::with(['readings', 'image'])->whereHas('readings')->get()->sortByDesc('readings.created_at');
+        return(Book::with(['readings', 'image'])->whereHas('readings', function (Builder $query) {
+            $query->orderBy('created_at', 'desc')->limit(1);
+        })->get());
     }
 
     /**

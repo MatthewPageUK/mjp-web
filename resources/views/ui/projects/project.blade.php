@@ -1,12 +1,13 @@
 {{--
     UI - View Project
 --}}
+@use('App\Enums\Section')
 <div>
 
     <div class="border-b pb-4 md:pb-8 mb-4">
         <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center">
             <span class="flex-1">{{ $this->project->name }}</span>
-            <span class="hidden md:block material-icons-outlined text-6xl ml-1">rocket_launch</span>
+            <span class="hidden md:block material-icons-outlined text-6xl ml-1">{{ Section::Projects->getUiIcon() }}</span>
         </h1>
     </div>
 
@@ -15,26 +16,58 @@
         <div class="lg:col-span-3 space-y-8">
 
             {{-- Project description --}}
-            <div class="prose prose-xl prose-primary">
-                @markdown($project->description)
+            <div class="prose prose-lg prose-primary">
+                @markdown($project->description ?? '')
             </div>
 
             <x-ui.imageable :model="$project" />
 
             {{-- Link to Github page --}}
-            @if ($project->github)
+            {{-- @if ($project->github)
                 <x-ui.external-link href="{{ $project->github }}" title="Github" />
-            @endif
+            @endif --}}
+
+
+        </div>
+
+
+        <div class="space-y-4">
+            {{-- Project details --}}
+            <x-ui.card class="p-4 grid grid-cols-2 text-xs gap-y-2">
+
+                <div>Last activity</div>
+                <div class="text-right">{{ $project->last_active?->diffForHumans() }}</div>
+
+                <div>Created</div>
+                <div class="text-right">{{ $project->created_at?->format('M d, Y') }}</div>
+
+                <div>Updated</div>
+                <div class="text-right">{{ $project->updated_at?->format('M d, Y') }}</div>
+
+            </x-ui.card>
 
             {{-- Link to project web site --}}
             @if ($project->website)
+            <x-ui.card class="p-4">
                 <x-ui.external-link href="{{ $project->website }}" title="Project Website" />
+            </x-ui.card>
             @endif
-        </div>
 
-        {{-- Related links --}}
-        <div class="text-right">
-            <x-related.links :model="$project" />
+            {{-- Skills used --}}
+            <div>
+                <h2 class="text-4xl mb-4 flex items-center gap-2">
+                    <x-icons.material class="text-3xl">{{ Section::Skills->getUiIcon() }}</x-icons.material>
+                    Skills used
+                </h2>
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($project->skills as $skill)
+                        <x-primary-button href="{{ $skill->routeUrl }}" title="" class="text-sm">
+                            {{ $skill->name }}
+                        </x-primary-button>
+                    @endforeach
+                </div>
+            </div>
+
         </div>
 
     </div>

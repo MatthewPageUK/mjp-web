@@ -2,10 +2,10 @@
     'openRullRequests' => [],
     'closedRullRequests' => [],
 ])
-
+@use('App\Enums\GithubIcon')
 
 <h1 class="text-4xl mb-2 flex gap-4 items-center">
-    <x-icons.material class="text-3xl">compare_arrows</x-icons.material>
+    <x-icons.material class="text-3xl">{{ GithubIcon::PR->value }}</x-icons.material>
     Pull Requests
 </h1>
 
@@ -13,15 +13,7 @@
 <div class="overflow-y-auto h-[200px] pr-2">
     <ul>
         @foreach ($openPullRequests as $pr)
-            <li class="flex gap-4 bg-primary-900 rounded-lg p-2 pl-3 mb-1 items-center">
-
-                <a class="flex-1" href="{{ $pr['html_url'] }}" target="_blank">
-                    #{{ $pr['number'] }}. {{ $pr['title'] }}
-                </a>
-                <span class="text-xs text-primary-500">
-                    {{ \Carbon\Carbon::parse($pr['created_at'])->diffForHumans() }}
-                </span>
-            </li>
+            <x-ui.github.pull-request :pr="$pr" :closed="false" />
         @endforeach
     </ul>
 </div>
@@ -30,16 +22,7 @@
 <div class="overflow-y-auto h-[300px] pr-2">
     <ul>
         @foreach ($closedPullRequests as $pr)
-
-            <li class="flex gap-4 bg-primary-900 rounded-lg p-2 pl-3 mb-1 items-center">
-
-                <a class="flex-1" href="{{ $pr['html_url'] }}" target="_blank">
-                    #{{ $pr['number'] }}. <span class="line-through">{{ $pr['title'] }}</span>
-                </a>
-                <span class="text-xs text-primary-500">
-                    {{ \Carbon\Carbon::parse($pr['closed_at'])->diffForHumans() }}
-                </span>
-            </li>
+            <x-ui.github.pull-request :pr="$pr" :closed="true" />
         @endforeach
     </ul>
 </div>
