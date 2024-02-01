@@ -4,6 +4,12 @@ namespace App\Services\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * Model services with an active status.
+ *
+ * @property bool $activeOnly
+ * @method Builder active()
+ */
 trait HasActiveStatus
 {
     /**

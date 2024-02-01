@@ -6,9 +6,9 @@
 
 <div>
     <div class="md:flex mb-8 gap-8">
-        <h1 class="font-orbitron font-black text-5xl flex items-center gap-2">
-            <span class="material-icons-outlined text-5xl">local_library</span>
-            Library
+        <h1 class="text-6xl flex items-center gap-2">
+            <x-icons.material class="text-6xl">local_library</x-icons.material>
+            Learning Library
         </h1>
     </div>
 

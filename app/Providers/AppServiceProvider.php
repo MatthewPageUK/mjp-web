@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Services\PageService;
 use App\Services\SettingService;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(PageService::class, function () {
             return new PageService();
         });
+
+        $this->app->bind(\App\Contracts\BulletPoints::class, \App\Services\BulletPoints::class);
     }
 
     /**

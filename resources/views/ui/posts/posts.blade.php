@@ -4,7 +4,7 @@
 --}}
 <div>
     <div class="md:flex mb-8 gap-8">
-        <h1 class="flex-1 text-4xl font-black font-orbitron text-secondary-400">
+        <h1 class="flex-1 text-4xl font-black XXfont-orbitron text-secondary-400">
             <a class="hover:text-highlight-400" href="{{ route('posts') }}">Posts</a>
         </h1>
 

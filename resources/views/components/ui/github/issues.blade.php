@@ -18,7 +18,7 @@
 
         {{-- Age sub heading --}}
         @if ($lastAge !== Carbon\Carbon::parse($issue['created_at'])->diffForHumans())
-            <div class="text-sm text-right font-orbitron">
+            <div class="text-sm text-right XXfont-orbitron">
                 {{ Carbon\Carbon::parse($issue['created_at'])->diffForHumans() }}
             </div>
             @php($lastAge = Carbon\Carbon::parse($issue['created_at'])->diffForHumans())

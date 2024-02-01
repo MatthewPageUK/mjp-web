@@ -12,9 +12,9 @@
             Copyright &copy; {{ date('Y') }}
         </p>
         <p class="flex-1">
-            <a class="flex justify-end hover:text-secondary-400" href="#top" title="{{ __('Go to top of page') }}">
+            <a class="flex items-center justify-end hover:text-secondary-400" href="#top" title="{{ __('Go to top of page') }}">
                 {{ __('Top') }}
-                <span class="material-icons-outlined text-sm ml-1 hover:fill-secondary-400">arrow_circle_up</span>
+                <x-icons.material class="text-base ml-1 hover:fill-secondary-400">arrow_circle_up</x-icons.material>
             </a>
         </p>
     </div>

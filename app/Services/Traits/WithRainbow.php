@@ -2,12 +2,15 @@
 
 namespace App\Services\Traits;
 
+use Illuminate\Database\Eloquent\Collection;
+
 /**
  * Helper trait with a rainbow of colours and a
  * colour cycling method.
  *
  * @method string getNextColour()
  * @method void resetColour()
+ * @method Collection attachRainbowColour(Collection $models, string $colourProperty = 'colour')
  */
 trait WithRainbow
 {
@@ -16,14 +19,14 @@ trait WithRainbow
      *
      * @var int
      */
-    public static $lastColour = 0;
+    protected static $lastColour = 0;
 
     /**
      * Colours of the rainbow.
      *
      * @var array<string>
      */
-    public static $colours = [
+    protected static $colours = [
         'bg-red-400',
         'bg-orange-400',
         'bg-amber-400',
@@ -70,5 +73,23 @@ trait WithRainbow
     public function resetColour(): void
     {
         self::$lastColour = 0;
+    }
+
+    /**
+     * Attach a rainbow colour to each model in the collection
+     * and return the modified collection.
+     *
+     * @param  Collection    $models
+     * @param  string        $colourProperty
+     * @return Collection
+     */
+    protected function attachRainbowColour(Collection $models, string $colourProperty = 'colour'): Collection
+    {
+        $this->resetColour();
+
+        return $models->map(function ($model) use ($colourProperty) {
+            $model->$colourProperty = $this->getNextColour();
+            return $model;
+        });
     }
 }

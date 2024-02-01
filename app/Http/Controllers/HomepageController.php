@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Services\{
     PageService,
     SettingService,
-    Ui\BulletPointService,
+};
+use App\Contracts\{
+    BulletPoints,
 };
 use Illuminate\{
     Http\Request,
@@ -17,14 +19,14 @@ class HomepageController extends Controller
     /**
      * Show the homepage.
      *
-     * @param BulletPointService $bulletPointService
+     * @param BulletPoints $bulletPoints
      * @param PageService $page
      * @param Request $request
      * @param SettingService $settings
      * @return View
      */
     public function show(
-        BulletPointService  $bulletPointService,
+        BulletPoints        $bulletPoints,
         PageService         $page,
         Request             $request,
         SettingService      $settings,
@@ -35,7 +37,7 @@ class HomepageController extends Controller
         // @todo: Add description to settings
         $page->setDescription('description...');
 
-        $bulletPoints   = $bulletPointService->getAll();
+        $bulletPoints   = $bulletPoints->getAllWithRainbow();
         $name           = $settings->getValue('homepage_name');
         $tagline        = $settings->getValue('homepage_tagline');
         $intro          = $settings->getValue('homepage_intro');

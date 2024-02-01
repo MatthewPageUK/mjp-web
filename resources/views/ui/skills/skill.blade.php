@@ -6,7 +6,7 @@
 <div class="space-y-6">
 
     {{-- Header --}}
-    <h1 class="font-orbitron font-black text-6xl flex items-center gap-2">
+    <h1 class="XXfont-orbitron font-black text-6xl flex items-center gap-2">
         <span class="flex-1">{{ $this->skill->name }}</span>
         <a href="{{ route('skills', ['group' => $this->skill->skillGroups->first()->slug]) }}" class="hover:text-secondary-400" title="Back to the skills index">
             <x-icons.material class="hidden md:block text-6xl">{{ Section::Skills->getUiIcon() }}</x-icons.material>

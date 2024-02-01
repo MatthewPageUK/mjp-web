@@ -1,8 +1,8 @@
 <div>
     <div class="md:flex items-end my-4 md:my-8 py-4 gap-16">
         <div class="flex-1">
-            <h1 class="font-orbitron font-black text-5xl mb-8 flex items-center gap-2">
-                <span class="material-icons-outlined text-4xl">public</span>Work Experience
+            <h1 class="text-6xl mb-8 flex items-center gap-2">
+                <x-icons.material class="text-6xl">public</x-icons.material>Work Experience
             </h1>
             @if ($this->intro)
                 <p class="text-xl w-1/2">{{ $this->intro }}</p>
@@ -28,7 +28,7 @@
                         <x-ui.experience.key-points :key_points="$experience->key_points" />
 
 
-                        <x-primary-button class="font-orbitron" href="{{ $experience->routeUrl }}">
+                        <x-primary-button class="XXfont-orbitron" href="{{ $experience->routeUrl }}">
                             Read More
                             <x-icons.material>play_arrow</x-icons.material>
                         </x-primary-button>

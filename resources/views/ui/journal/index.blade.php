@@ -6,7 +6,7 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-16">
 
         <div class="col-span-8">
-            <h2 class="text-5xl text-center">{{ date("F", mktime(0, 0, 0, $this->month, 10)) }} {{ $this->year }}</h2>
+            <h2 class="text-6xl text-center">{{ date("F", mktime(0, 0, 0, $this->month, 10)) }} {{ $this->year }}</h2>
             <h3 class="text-2xl text-center mb-8 font-light">Developer Journal</h3>
 
             {{-- Entries --}}

@@ -6,7 +6,7 @@
         <div class="space-y-4">
             <div class="text-center md:text-left md:flex">
                 {{-- Widget title --}}
-                <h1 class="flex-1 text-4xl font-black font-orbitron text-secondary-400">
+                <h1 class="flex-1 text-4xl font-black XXfont-orbitron text-secondary-400">
                     <a
                         class="hover:text-highlight-400"
                         href="{{ route('demos') }}"

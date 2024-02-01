@@ -24,8 +24,8 @@
     {{-- Expand --}}
     <div>
         <button x-on:click.prevent="open = ! open ? {{ $issue['number'] }} : open !== {{ $issue['number']}} ? {{ $issue['number'] }} : false" class="flex items-center hover:text-secondary-400" title="View issue details">
-            <span x-show="open != {{ $issue['number'] }}" class="material-icons-outlined">expand_more</span>
-            <span x-show="open == {{ $issue['number'] }}" class="material-icons-outlined">expand_less</span>
+            <x-icons.material x-show="open != {{ $issue['number'] }}" class="">expand_more</x-icons.material>
+            <x-icons.material x-show="open == {{ $issue['number'] }}" class="">expand_less</x-icons.material>
         </button>
     </div>
 </div>

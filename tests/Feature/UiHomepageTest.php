@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\Project;
 use App\Models\Skill;
 use App\Models\SkillLog;
-use App\Services\Ui\BulletPointService;
+use App\Contracts\BulletPoints;
 use App\Services\Ui\PostService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -73,12 +73,10 @@ class UiHomepageTest extends TestCase
      */
     public function test_homepage_bullets_displayed(): void
     {
-        $bulletPointService = app(BulletPointService::class);
-
         $this->artisan('mjpweb:demosetup');
 
         $this->get('/')->assertSeeTextInOrder(
-            $bulletPointService->getAll()->pluck('name')->toArray()
+            app(BulletPoints::class)->getAll()->pluck('name')->toArray()
         );
     }
 

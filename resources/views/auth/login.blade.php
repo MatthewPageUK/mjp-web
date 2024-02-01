@@ -5,7 +5,7 @@
         <!-- Session Status -->
         <x-auth.auth-session-status class="mb-4" :status="session('status')" />
 
-        <h1 class="font-orbitron text-4xl flex items-center mb-8">
+        <h1 class="XXfont-orbitron text-4xl flex items-center mb-8">
             <span class="flex-1">Login</span>
             <x-icons.material class="text-6xl">login</x-icons.material>
         </h1>

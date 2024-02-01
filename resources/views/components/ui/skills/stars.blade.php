@@ -1,7 +1,7 @@
 @for ($x = 0; $x < 10; $x++)
     @if ($x >= $skill->level->value)
-        <span class="material-icons-outlined text-primary-300 text-base opacity-10">star_rate</span>
+        <x-icons.material class="text-primary-300 text-lg opacity-10">star_rate</x-icons.material>
     @else
-        <span class="material-icons-outlined text-secondary-400 text-base">star_rate</span>
+        <x-icons.material class="text-secondary-400 text-lg">star_rate</x-icons.material>
     @endif
 @endfor

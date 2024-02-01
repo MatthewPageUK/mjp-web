@@ -1,6 +1,6 @@
 
 <div class="z-10 relative flex-1 space-y-8 group">
-    <h1 class="font-orbitron font-black text-5xl flex items-center gap-2">
+    <h1 class="XXfont-orbitron font-black text-5xl flex items-center gap-2">
         <x-icons.material class="text-6xl group-hover:text-highlight-500 transition-all duration-500">account_circle</x-icons-material>
         <span class="flex-1">Dashboard</span>
         <ul class="text-base flex gap-2">

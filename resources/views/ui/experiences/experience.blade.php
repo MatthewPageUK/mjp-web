@@ -2,7 +2,7 @@
     <div class="border-b pb-8 mb-4">
         <h1 class="text-6xl font-black flex items-center">
             <span class="flex-1">{{ $experience->name }}</span>
-            <span class="material-icons-outlined text-6xl ml-1">public</span>
+            <x-icons.material class="text-6xl ml-1">public</x-icons.material>
         </h1>
     </div>
 

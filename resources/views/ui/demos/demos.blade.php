@@ -5,9 +5,9 @@
     <div class="md:flex items-start gap-8 space-y-8 md:space-y-0">
         <div class="flex-1 space-y-8 group">
             {{-- Page title --}}
-            <h1 class="font-orbitron font-black text-5xl flex items-center gap-2">
+            <h1 class="text-6xl flex items-center gap-2">
                 <x-icons.material
-                    class="text-4xl group-hover:animate-bounce group-hover:text-6xl group-hover:text-highlight-500 transition-all duration-500"
+                    class="text-6xl group-hover:animate-bounce group-hover:text-6xl group-hover:text-highlight-500 transition-all duration-500"
                 >smart_toy</x-icons-material>
 
                 Demos

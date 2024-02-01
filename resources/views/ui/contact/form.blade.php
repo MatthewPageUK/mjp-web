@@ -14,7 +14,7 @@
                     {{ Settings::getValue('contact_email') }}
                 </a>.
             </p>
-            <p class="font-orbitron text-red-700 border border-red-700 border-2 p-2 text-xs font-semibold mb-8 ml-16">{{ $this->mailError }}</p>
+            <p class="XXfont-orbitron text-red-700 border border-red-700 border-2 p-2 text-xs font-semibold mb-8 ml-16">{{ $this->mailError }}</p>
         </div>
     @endif
 

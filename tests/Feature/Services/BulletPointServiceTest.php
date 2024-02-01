@@ -3,7 +3,7 @@
 namespace Tests\Feature\Services;
 
 use App\Models\BulletPoint;
-use App\Services\Ui\BulletPointService;
+use App\Contracts\BulletPoints;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -24,7 +24,7 @@ class BulletPointServiceTest extends TestCase
             ['name' => 'Bullet Point 5', 'order' => 1],
         )->create();
 
-        $bulletPoints = app(BulletPointService::class)->getAll();
+        $bulletPoints = app(BulletPoints::class)->getAll();
 
         $this->assertEquals('Bullet Point 5', $bulletPoints->first()->name);
         $this->assertEquals('Bullet Point 1', $bulletPoints->last()->name);
@@ -37,11 +37,9 @@ class BulletPointServiceTest extends TestCase
     {
         BulletPoint::factory(5)->create();
 
-        $bulletPointService = app(BulletPointService::class);
+        $bulletPoints = app(BulletPoints::class)->getAllWithRainbow();
 
-        $bullets = $bulletPointService->getAll();
-
-        $this->assertNotEmpty($bullets->first()->colour);
-        $this->assertNotEquals($bullets->first()->colour, $bullets->last()->colour);
+        $this->assertNotEmpty($bulletPoints->first()->colour);
+        $this->assertNotEquals($bulletPoints->first()->colour, $bulletPoints->last()->colour);
     }
 }

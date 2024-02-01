@@ -14,7 +14,7 @@
         }"
         x-show="count > 0"
     >
-        <h2 class="font-orbitron font-black text-3xl mt-8 mb-2 first:mt-0">
+        <h2 class="XXfont-orbitron font-black text-3xl mt-8 mb-2 first:mt-0">
             <a href="{{ route($relationship) }}" class="hover:text-secondary-400 transition">
                 <x-icons.material class="text-2xl font-normal ml-1">{{ $icon }}</x-icons.material>
                 {{ $title }}
@@ -32,14 +32,14 @@
         </p>
         {{-- route($section, [$section => $link]) --}}
 
-        <p class="text-xs pl-9 font-orbitron">
+        <p class="text-xs pl-9 XXfont-orbitron">
             <x-primary-button
                 class="px-2 py-1 rounded mt-2 hover:text-secondary-400"
                 x-show="! expanded && count > showCount"
                 x-on:click="expanded = true"
             >
                 <span>Show <span x-text="count - showCount"></span> more</span>
-                <span class="material-icons-outlined text-xs">keyboard_arrow_down</span>
+                <x-icons.material class="text-xs">keyboard_arrow_down</x-icons.material>
             </x-primary-button>
             <x-primary-button
                 class="px-2 py-1 rounded mt-2 hover:text-secondary-400"
@@ -47,7 +47,7 @@
                 x-on:click="expanded = false"
             >
                 <span>Show less</span>
-                <span class="material-icons-outlined text-xs">keyboard_arrow_up</span>
+                <x-icons.material class="text-xs">keyboard_arrow_up</x-icons.material>
             </x-primary-button>
         </p>
     </div>

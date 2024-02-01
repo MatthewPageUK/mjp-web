@@ -4,10 +4,10 @@
 @use('App\Enums\Section')
 <div>
 
-    <div class="border-b pb-4 md:pb-8 mb-4">
-        <h1 class="text-2xl md:text-5xl tracking-tight font-black flex items-center">
+    <div class="border-b pb-4 md:pb-8 mb-8">
+        <h1 class="text-2xl md:text-5xl tracking-tight flex items-center">
             <span class="flex-1">{{ $this->project->name }}</span>
-            <span class="hidden md:block material-icons-outlined text-6xl ml-1">{{ Section::Projects->getUiIcon() }}</span>
+            <x-icons.material class="hidden md:block text-6xl ml-1">{{ Section::Projects->getUiIcon() }}</x-icons.material>
         </h1>
     </div>
 

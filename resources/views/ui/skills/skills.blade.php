@@ -6,7 +6,7 @@
 <div class="space-y-4 lg:space-y-16">
 
     {{-- Header --}}
-    <h1 class="font-orbitron font-black text-3xl lg:text-6xl flex items-center gap-2">
+    <h1 class="text-3xl lg:text-6xl flex items-center gap-2">
         <x-icons.material class="text-3xl lg:text-6xl">{{ Section::Skills->getUiIcon() }}</x-icons-material>
         Skills
     </h1>

@@ -55,7 +55,7 @@
 }">
     <div class="md:grid grid-cols-12 mb-4">
         <div class="md:col-span-6 lg:col-span-8">
-            <h1 class="text-5xl">Availability</h1>
+            <h1 class="text-6xl">Availability</h1>
             <p class="mt-2">Morning and afternoon periods are 3.5 hours each.</p>
         </div>
 
