@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Ui\Experience;
 
+use App\Contracts\Settings;
 use App\Services\{
     PageService,
-    SettingService,
     Ui\ExperienceService,
 };
 use App\View\Components\UiLayout;
@@ -31,16 +31,16 @@ class Index extends Component
     /**
      * Mount the component and populate the data
      *
-     * @param SettingService $settings
+     * @param Settings $settings
      * @param PageService $page
      * @return void
      */
     public function mount(
-        SettingService $settings,
+        Settings $settings,
         PageService $page,
     )
     {
-        $this->intro = $settings->getValue('experience_intro') ?? '';
+        $this->intro = $settings->tryGetValue('experience_intro') ?? '';
         $page->setBackgroundImage('mjp-back-work.jpg');
         $page->setTitle('Experience Timeline');
     }

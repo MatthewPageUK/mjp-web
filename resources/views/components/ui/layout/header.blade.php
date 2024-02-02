@@ -69,22 +69,22 @@
 
             <nav class="mt-8 lg:mt-0 flex space-x-3 flex-grow justify-center lg:justify-end">
                 {{-- Github Icon --}}
-                @if (Settings::getValue('url_github'))
-                    <x-ui.layout.header-icon id="header-icon-github" href="{{ Settings::getValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-secondary-400">
+                @if (Settings::tryGetValue('url_github'))
+                    <x-ui.layout.header-icon id="header-icon-github" href="{{ Settings::tryGetValue('url_github') }}" title="My Github profile" class="fill-white hover:fill-secondary-400">
                         <x-icons.github class="w-6 h-6 xl:w-8 xl:h-8 text-white"/>
                     </x-ui.layout.header-icon>
                 @endif
 
                 {{-- LinkedIn Icon --}}
-                @if (Settings::getValue('url_linkedin'))
-                    <x-ui.layout.header-icon id="header-icon-linkedin" href="{{ Settings::getValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-secondary-400">
+                @if (Settings::tryGetValue('url_linkedin'))
+                    <x-ui.layout.header-icon id="header-icon-linkedin" href="{{ Settings::tryGetValue('url_linkedin') }}" title="My LinkedIn profile" class="fill-white hover:fill-secondary-400">
                         <x-icons.linkedin class="w-6 h-6 xl:w-8 xl:h-8 text-white"/>
                     </x-ui.layout.header-icon>
                 @endif
 
                 {{-- Youtube Icon --}}
-                @if (Settings::getValue('url_youtube'))
-                    <x-ui.layout.header-icon id="header-icon-youtube" href="{{ Settings::getValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-secondary-400">
+                @if (Settings::tryGetValue('url_youtube'))
+                    <x-ui.layout.header-icon id="header-icon-youtube" href="{{ Settings::tryGetValue('url_youtube') }}" title="My Youtube channel" class="fill-white hover:fill-secondary-400">
                         <x-icons.youtube class="w-6 h-6 xl:w-8 xl:h-8 text-white"/>
                     </x-ui.layout.header-icon>
                 @endif

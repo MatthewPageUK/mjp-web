@@ -9,7 +9,7 @@
             Register
         </h1>
         <div class="prose prose-xl prose-primary">
-            @markdown(Settings::getValue('register_intro'))
+            @markdown(Settings::tryGetValue('register_intro') ?? '')
         </div>
 
         <form method="POST" action="{{ route('register') }}" class="max-w-3xl">

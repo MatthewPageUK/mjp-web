@@ -10,8 +10,8 @@
             </div>
             <p class="text-primary-700 mb-4 ml-16">
                 Sorry {{ $this->message['first_name'] }}, there was an error sending your message. Please try again, or email me direct on
-                <a href="mailto:{{ Settings::getValue('contact_email') }}" class="text-primary-800 font-bold hover:text-primary-600">
-                    {{ Settings::getValue('contact_email') }}
+                <a href="mailto:{{ Settings::tryGetValue('contact_email') }}" class="text-primary-800 font-bold hover:text-primary-600">
+                    {{ Settings::tryGetValue('contact_email') }}
                 </a>.
             </p>
             <p class="XXfont-orbitron text-red-700 border border-red-700 border-2 p-2 text-xs font-semibold mb-8 ml-16">{{ $this->mailError }}</p>
@@ -51,8 +51,8 @@
                     <p class="text-primary-400 mb-2">Reach out with your ideas and thoughts and together we can create something awesome.</p>
                     <p class="text-primary-400 mb-8">
                         Please use the form below or email me direct on
-                        <a href="mailto:{{ Settings::getValue('contact_email') }}" class="text-secondary-400 hover:text-secondary-600">
-                            {{ Settings::getValue('contact_email') }}
+                        <a href="mailto:{{ Settings::tryGetValue('contact_email') }}" class="text-secondary-400 hover:text-secondary-600">
+                            {{ Settings::tryGetValue('contact_email') }}
                         </a>
                     </p>
                 </div>

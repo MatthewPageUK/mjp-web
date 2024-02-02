@@ -3,16 +3,15 @@
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
-use Laravel\Dusk\Page;
 
-class ProjectQuote extends Page
+class Homepage extends Page
 {
     /**
      * Get the URL for the page.
      */
     public function url(): string
     {
-        return route('project-quote');
+        return route('home');
     }
 
     /**
@@ -20,7 +19,7 @@ class ProjectQuote extends Page
      */
     public function assert(Browser $browser): void
     {
-        // $browser->assertPathIs($this->url());
+        //
     }
 
     /**

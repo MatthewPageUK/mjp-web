@@ -5,7 +5,7 @@
     <div class="w-full max-w-7xl mx-auto md:flex px-6 py-4 text-sm text-white">
         <p class="flex-1">
             <a href="{{ route('home') }}" title="Homepage" class="hover:text-amber-400">
-                {{ Settings::getValue('site_name') }} - {{ Settings::getValue('site_tagline') }}
+                {{ Settings::tryGetValue('site_name') }} - {{ Settings::tryGetValue('site_tagline') }}
             </a>
         </p>
         <p class="flex-1 md:text-center text-xs text-primary-400">
@@ -23,8 +23,8 @@
     <p class="w-full max-w-7xl mx-auto md:flex md:items-center gap-4 text-xs text-green-700 px-6 py-4">
         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
 
-        @if (Settings::getValue('source'))
-            <a href="{{ Settings::getValue('source') }}" class="flex items-center gap-1 hover:text-green-500 hover:drop-shadow-[1px_1px_7px_rgba(100,255,100,1)] transition duration-1000" target="_blank">
+        @if (Settings::tryGetValue('source'))
+            <a href="{{ Settings::tryGetValue('source') }}" class="flex items-center gap-1 hover:text-green-500 hover:drop-shadow-[1px_1px_7px_rgba(100,255,100,1)] transition duration-1000" target="_blank">
                 <x-icons.material>terminal</x-ui.icons.material>
                 Source code
             </a>

@@ -45,7 +45,7 @@
         <div class="text-primary-200 prose prose-secondary prose-sm lg:prose-base lg:pt-8">
 
             {{-- Sidebar text --}}
-            @markdown(Settings::getValue('skills_content'))
+            @markdown(Settings::tryGetValue('skills_content') ?? '')
 
         </div>
     </div>

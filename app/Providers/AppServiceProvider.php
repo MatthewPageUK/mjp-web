@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\Settings;
 use App\Services\PageService;
-use App\Services\SettingService;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,8 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // The SettingService singleton
-        $this->app->singleton(SettingService::class, function () {
-            return new SettingService();
+        $this->app->singleton(\App\Contracts\Settings::class, function () {
+            return new \App\Services\Settings();
         });
 
         // The PageService singleton
@@ -24,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(\App\Contracts\BulletPoints::class, \App\Services\BulletPoints::class);
+
+        $this->app->singleton(\App\Contracts\Homepage::class, function (Application $app) {
+            return new \App\Services\Ui\Homepage($app->make(Settings::class));
+        });
     }
 
     /**
@@ -31,7 +36,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Share the settings variable on all views
-        //View::share('settings', app(SettingService::class));
+        //
     }
 }
