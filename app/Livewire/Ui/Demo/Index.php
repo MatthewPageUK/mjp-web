@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Ui\Demo;
 
+use App\Contracts\Settings;
 use App\Livewire\Ui\Traits\HasSkillFilter;
 use App\Services\{
     PageService,
-    SettingService,
     Ui\DemoService,
     Ui\SkillService
 };
@@ -46,13 +46,13 @@ class Index extends Component
      * Mount the component and populate the data
      *
      * @param SkillService $skillService
-     * @param SettingService $settings
+     * @param Settings $settings
      * @param PageService $page
      * @return void
      */
     public function mount(
         SkillService $skillService,
-        SettingService $settings,
+        Settings $settings,
         PageService $page,
     ): void
     {
@@ -62,7 +62,7 @@ class Index extends Component
         );
 
         // Get the page intro text
-        $this->intro = $settings->getValue('demos_intro');
+        $this->intro = $settings->tryGetValue('demos_intro');
 
         $page->setTitle('Demos and Examples');
     }

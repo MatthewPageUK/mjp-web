@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Services\{
     PageService,
-    SettingService,
 };
 use App\Contracts\{
     BulletPoints,
+    Homepage,
+    Settings,
 };
 use Illuminate\{
     Http\Request,
@@ -20,16 +21,18 @@ class HomepageController extends Controller
      * Show the homepage.
      *
      * @param BulletPoints $bulletPoints
+     * @param Homepage $homepage
      * @param PageService $page
      * @param Request $request
-     * @param SettingService $settings
+     * @param Settings $settings
      * @return View
      */
     public function show(
         BulletPoints        $bulletPoints,
+        Homepage            $homepage,
         PageService         $page,
         Request             $request,
-        SettingService      $settings,
+        Settings            $settings,
     ): View
     {
         $page->setTitle($settings->getValue('site_name'));
@@ -38,9 +41,10 @@ class HomepageController extends Controller
         $page->setDescription('description...');
 
         $bulletPoints   = $bulletPoints->getAllWithRainbow();
-        $name           = $settings->getValue('homepage_name');
-        $tagline        = $settings->getValue('homepage_tagline');
-        $intro          = $settings->getValue('homepage_intro');
+
+        $name           = $homepage->getName();
+        $tagline        = $homepage->getTagline();
+        $intro          = $homepage->getIntroduction();
 
         return view('homepage', compact('bulletPoints', 'name', 'tagline', 'intro'));
     }

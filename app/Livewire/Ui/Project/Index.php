@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Ui\Project;
 
+use App\Contracts\Settings;
 use App\Livewire\Ui\Traits\HasSkillFilter;
 use App\Services\{
     PageService,
-    SettingService,
     Ui\ProjectService,
 };
 use App\Services\Ui\SkillService;
@@ -46,13 +46,13 @@ class Index extends Component
      * Mount the component and populate the data
      *
      * @param SkillService $skillService
-     * @param SettingService $settings
+     * @param Settings $settings
      * @param PageService $page
      * @return void
      */
     public function mount(
         SkillService $skillService,
-        SettingService $settings,
+        Settings $settings,
         PageService $page,
     ): void
     {
@@ -60,7 +60,7 @@ class Index extends Component
             $skillService->getProjectableSkills()
         );
 
-        $this->intro = $settings->getValue('projects_intro', 'Coding projects I have worked on');
+        $this->intro = $settings->tryGetValue('projects_intro', 'Coding projects I have worked on');
 
         $page->setTitle('Coding Projects');
     }

@@ -3,7 +3,7 @@
     <div class="space-y-16 lg:space-y-24">
         <div class="grid grid-cols-6 md:grid-cols-12 gap-4 md:gap-16">
             <div class="col-span-6 md:col-span-8">
-                <h1 class="text-4xl lg:text-6xl mb-2 font-bold XXfont-orbitron">
+                <h1 dusk="content-name" class="text-4xl lg:text-6xl mb-2 font-bold XXfont-orbitron">
                     {{-- Site title --}}
                     {{ $name }}
                 </h1>

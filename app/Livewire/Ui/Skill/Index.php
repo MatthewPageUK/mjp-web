@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Ui\Skill;
 
+use App\Contracts\Settings;
 use App\Livewire\Ui\Traits\HasSkillGroupFilter;
 use App\Services\{
     PageService,
-    SettingService,
     Ui\SkillGroupService,
     Ui\SkillService,
 };
@@ -52,7 +52,7 @@ class Index extends Component
     public function mount(
         SkillGroupService $skillGroupService,
         PageService $page,
-        SettingService $settings,
+        Settings $settings,
     ): void
     {
         // Get the skill groups for the skill filter list.
@@ -66,7 +66,7 @@ class Index extends Component
         }
 
         // Get the intro text from the settings.
-        $this->intro = $settings->getValue('skills_intro');
+        $this->intro = $settings->tryGetValue('skills_intro');
 
         $page->setTitle('Web Developement Skills');
         $page->setDescription('A list of web development skills and technologies I have experience with.');

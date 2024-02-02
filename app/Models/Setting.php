@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SettingType;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\{
     Model,
@@ -21,6 +22,15 @@ class Setting extends Model
         'key',
         'value',
         'type',
+    ];
+
+    /**
+     * Casts
+     *
+     * @var array
+     */
+    protected $casts = [
+        'type' => SettingType::class,
     ];
 
     /**
