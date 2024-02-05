@@ -30,7 +30,7 @@ class Index extends Component
 
     public int $year = 2024;
 
-    public int $month = 1;
+    public ?int $month = null;
 
     /**
      * Query string parameters
@@ -50,7 +50,7 @@ class Index extends Component
      */
     public function mount(PageService $page): void
     {
-        $this->month = (int) now()->format('n');
+        $this->month = $this->month ?? (int) now()->format('n');
         $page->setTitle('Developer Journal - ' . date("F", mktime(0, 0, 0, $this->month, 10)) . ' ' . $this->year);
     }
 
