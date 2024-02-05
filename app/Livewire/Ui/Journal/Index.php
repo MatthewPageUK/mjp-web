@@ -28,7 +28,7 @@ class Index extends Component
      */
     public string $intro = 'intro....';
 
-    public int $year = 2024;
+    public int $year = 2025;
 
     public int $month = 1;
 
@@ -38,7 +38,7 @@ class Index extends Component
      * @var array
      */
     protected $queryString = [
-        'year'  => ['except' => '2024'],
+        'year'  => ['except' => '2025'],
         'month',
     ];
 
