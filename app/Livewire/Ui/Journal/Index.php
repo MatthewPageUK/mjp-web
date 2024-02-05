@@ -28,7 +28,7 @@ class Index extends Component
      */
     public string $intro = 'intro....';
 
-    public int $year = 2025;
+    public int $year = 2024;
 
     public int $month = 1;
 
@@ -38,7 +38,7 @@ class Index extends Component
      * @var array
      */
     protected $queryString = [
-        'year'  => ['except' => '2025'],
+        'year'  => ['except' => '2024'],
         'month',
     ];
 
@@ -50,6 +50,7 @@ class Index extends Component
      */
     public function mount(PageService $page): void
     {
+        $this->month = (int) now()->format('n');
         $page->setTitle('Developer Journal - ' . date("F", mktime(0, 0, 0, $this->month, 10)) . ' ' . $this->year);
     }
 
