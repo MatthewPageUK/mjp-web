@@ -72,8 +72,8 @@ class JournalService
     public function getAll($year = null, $month = null)
     {
         if ($year && $month) {
-            $from = Carbon::createFromDate($year, $month, 1);
-            $to = $from->copy()->endOfMonth();
+            $from = Carbon::createFromDate($year, $month, 1)->subDay();
+            $to = $from->copy()->addDay()->endOfMonth();
         }
 
         // @todo wip / isJournable trait / model vars...
