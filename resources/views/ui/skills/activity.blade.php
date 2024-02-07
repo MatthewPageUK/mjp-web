@@ -30,44 +30,44 @@
         </p>
 
         {{-- Activity totals --}}
-        <p class="text-sm font-light mt-4"
-            x-data="{
-                hasJourneys: {{ $journeysCompleted > 0 ? 'true' : 'false' }},
-                hasLearningLogs: {{ $learningLogs > 0 ? 'true' : 'false' }},
-                hasUseLogs: {{ $useLogs > 0 ? 'true' : 'false' }},
-                hasReadings: {{ $readings > 0 ? 'true' : 'false' }},
-                hasDemos: {{ $demos > 0 ? 'true' : 'false' }},
-                hasProjects: {{ $projects > 0 ? 'true' : 'false' }},
-        }">
-            <a href="#skillJourneys" class="block flex gap-2 items-center group/totals" x-show="hasJourneys">
-                <x-icons.material class="text-base group-hover/totals:text-green-400">task_alt</x-icons.material>
-                {{ $journeysCompleted }} skill {{ Str::plural('journey', $journeysCompleted) }}
-            </a>
+        <p class="text-sm font-light mt-4">
 
-            <a href="#skillLogs" class="block flex gap-2 items-center group/totals" x-show="hasLearningLogs">
-                <x-icons.material class="text-base group-hover/totals:text-green-400">{{ SkillLogType::Learn->getUiIcon() }}</x-icons.material>
-                {{ $learningLogs }} learning {{ Str::plural('log', $learningLogs) }}
-            </a>
-
-            <a href="#skillLogs" class="block flex gap-2 items-center group/totals" x-show="hasUseLogs">
-                <x-icons.material class="text-base group-hover/totals:text-green-400">{{ SkillLogType::Use->getUiIcon() }}</x-icons.material>
-                {{ $useLogs }} usage {{ Str::plural('log', $useLogs) }}
-            </a>
-
-            <a href="#books" class="block flex gap-2 items-center group/totals" x-show="hasReadings">
-                <x-icons.material class="text-base group-hover/totals:text-green-400">local_library</x-icons.material>
-                {{ $readings }} reading {{ Str::plural('session', $readings) }}
-            </a>
-
-            <a href="#projects" class="block flex gap-2 items-center group/totals" x-show="hasDemos">
-                <x-icons.material class="text-base group-hover/totals:text-green-400">smart_toy</x-icons.material>
-                {{ $demos }} {{ Str::plural('demo', $demos) }} created
-            </a>
-
-            <a href="#projects" class="block flex gap-2 items-center group/totals" x-show="hasProjects">
-                <x-icons.material class="text-base group-hover/totals:text-green-400">{{ Section::Projects->getUiIcon() }}</x-icons.material>
-                {{ $projects }} {{ Str::plural('project', $projects) }} started
-            </a>
+            @if ($journeysCompleted > 0)
+                <a href="#skillJourneys" class="block flex gap-2 items-center group/totals">
+                    <x-icons.material class="text-base group-hover/totals:text-green-400">task_alt</x-icons.material>
+                    {{ $journeysCompleted }} skill {{ Str::plural('journey', $journeysCompleted) }}
+                </a>
+            @endif
+            @if ($learningLogs > 0)
+                <a href="#skillLogs" class="block flex gap-2 items-center group/totals">
+                    <x-icons.material class="text-base group-hover/totals:text-green-400">{{ SkillLogType::Learn->getUiIcon() }}</x-icons.material>
+                    {{ $learningLogs }} learning {{ Str::plural('log', $learningLogs) }}
+                </a>
+            @endif
+            @if ($useLogs > 0)
+                <a href="#skillLogs" class="block flex gap-2 items-center group/totals">
+                    <x-icons.material class="text-base group-hover/totals:text-green-400">{{ SkillLogType::Use->getUiIcon() }}</x-icons.material>
+                    {{ $useLogs }} usage {{ Str::plural('log', $useLogs) }}
+                </a>
+            @endif
+            @if ($readings > 0)
+                <a href="#books" class="block flex gap-2 items-center group/totals">
+                    <x-icons.material class="text-base group-hover/totals:text-green-400">local_library</x-icons.material>
+                    {{ $readings }} reading {{ Str::plural('session', $readings) }}
+                </a>
+            @endif
+            @if ($demos > 0)
+                <a href="#projects" class="block flex gap-2 items-center group/totals">
+                    <x-icons.material class="text-base group-hover/totals:text-green-400">smart_toy</x-icons.material>
+                    {{ $demos }} {{ Str::plural('demo', $demos) }} created
+                </a>
+            @endif
+            @if ($projects > 0)
+                <a href="#projects" class="block flex gap-2 items-center group/totals">
+                    <x-icons.material class="text-base group-hover/totals:text-green-400">{{ Section::Projects->getUiIcon() }}</x-icons.material>
+                    {{ $projects }} {{ Str::plural('project', $projects) }} started
+                </a>
+            @endif
         </p>
 
     </x-ui.card>
