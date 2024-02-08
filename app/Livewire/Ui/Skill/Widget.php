@@ -3,6 +3,7 @@
 namespace App\Livewire\Ui\Skill;
 
 use App\Livewire\Ui\Traits\HasSkillGroupFilter;
+use App\Models\SkillStat;
 use App\Services\Ui\{
     SkillGroupService,
     SkillService,
@@ -55,7 +56,9 @@ class Widget extends Component
             ['skillGroup' => $this->selectedSkillGroup] : [];
 
         return $skillService->getFilteredQuery($filter)
-            ->orderBy('level', 'desc')
+            ->select('id', 'name', 'slug', 'level')
+            ->with(['skillGroups', 'stats'])
+            ->orderByLastUsedStat()
             ->paginate(10, pageName: 'skills');
     }
 

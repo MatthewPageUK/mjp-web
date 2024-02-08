@@ -24,6 +24,7 @@ class DemoFactory extends Factory
             'description' => fake()->paragraphs(3, true),
             'url' => fake()->url(),
             'active' => true,
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 

@@ -25,6 +25,7 @@ class ProjectFactory extends Factory
             'website' => fake()->url(),
             'last_active' => fake()->dateTimeBetween('-1 year'),
             'active' => true,
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 

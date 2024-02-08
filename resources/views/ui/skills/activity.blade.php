@@ -6,12 +6,15 @@
 @use('Illuminate\Support\Str')
 
 <div>
-    <x-ui.card class="p-4">
+    <x-ui.card class="p-4 space-y-2">
 
-        <h3 class="text-4xl">Recent activity</h3>
+        <h3 class="text-4xl flex gap-4 items-end">
+            <span class="flex-1">Activity</span>
+            <x-icons.material class="text-3xl group-hover/card:animate-ping">sprint</x-icons.material>
+        </h3>
 
         {{-- Period filter --}}
-        <p class="text-xs mt-1">
+        <p class="text-xs">
             <x-ui.skills.activity-filter :currentPeriod="$this->getPeriod()" period="3">
                 3 months
             </x-ui.skills.activity-filter> |
@@ -30,7 +33,7 @@
         </p>
 
         {{-- Activity totals --}}
-        <p class="text-sm font-light mt-4">
+        <p class="text-sm font-light">
 
             @if ($journeysCompleted > 0)
                 <a href="#skillJourneys" class="block flex gap-2 items-center group/totals">

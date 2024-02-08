@@ -44,7 +44,12 @@ class View extends Component
         $skill->load([
             'demos', 'demos.image', 'demos.skills',
             'projects', 'projects.image', 'projects.skills',
-            'books', 'books.image', 'books.skills', 'books.readings',
+            'books' => function ($query) {
+                $query->select('id', 'slug', 'name', 'tagline', 'author', 'read_count');
+            },
+            'books.image',
+            'books.skills',
+            'books.readings',
             'skillJourneys', 'image', 'skillGroups', 'skillLogs'
         ]);
 

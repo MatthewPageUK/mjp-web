@@ -13,9 +13,10 @@
             class="flex-1 block"
             >
             <span class="block font-bold text-xl group-hover/card:text-secondary-400">{{ $skill->name }}</span>
-            <x-ui.skills.stars :skill="$skill" />
-            <span class="block text-sm">{{ $skill->level->getGeneralLabel() }}</span>
 
+            {{-- <x-ui.skills.stars :skill="$skill" /> --}}
+
+            <span class="block text-sm">{{ $skill->level->getGeneralLabel() }}</span>
 
             <p class="text-primary-300">
                 @if ($skill->skillJourneys->count() > 0)
@@ -43,7 +44,7 @@
                 @endif
             </p>
 
-            <span class="block text-primary-500 text-xs">Last activity {{ $skill->skillLogs->last()?->date->diffForHumans() }}</span>
+            <span class="block text-primary-500 text-xs">Last used {{ $skill->lastUsed?->diffForHumans() }}</span>
 
         </a>
     </div>

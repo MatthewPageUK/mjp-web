@@ -3,14 +3,18 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Traits\MjpSetup;
+use App\Models\Availability;
+use App\Models\Book;
 use App\Models\BulletPoint;
 use App\Models\Demo;
 use App\Models\Experience;
 use App\Models\GithubRepo;
 use App\Models\Image;
+use App\Models\Message;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Project;
+use App\Models\Reading;
 use App\Models\Setting;
 use App\Models\Skill;
 use App\Models\SkillGroup;
@@ -56,14 +60,18 @@ class Reset extends Command
         $this->warn('This will delete all the database content.');
 
         $table = [
+            ['Availability', Availability::all()->count()],
+            ['Books', Book::all()->count()],
             ['Bullet Points', BulletPoint::all()->count()],
             ['Demos', Demo::all()->count()],
             ['Experiences', Experience::all()->count()],
             ['Github Repos', GithubRepo::all()->count()],
             ['Images', Image::all()->count()],
+            ['Messages', Message::all()->count()],
             ['Posts', Post::all()->count()],
             ['Post Categories', PostCategory::all()->count()],
             ['Projects', Project::all()->count()],
+            ['Readings', Reading::all()->count()],
             ['Settings', Setting::all()->count()],
             ['Skills', Skill::all()->count()],
             ['Skill Journeys', SkillJourney::all()->count()],
@@ -94,6 +102,8 @@ class Reset extends Command
         Log::critical('Resetting application via artisan command.');
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('availability')->truncate();
+        DB::table('books')->truncate();
         DB::table('bullet_points')->truncate();
         DB::table('demos')->truncate();
         DB::table('experiences')->truncate();
@@ -104,6 +114,7 @@ class Reset extends Command
         DB::table('postables')->truncate();
         DB::table('posts')->truncate();
         DB::table('projects')->truncate();
+        DB::table('readings')->truncate();
         DB::table('settings')->truncate();
         DB::table('skill_groups')->truncate();
         DB::table('skill_journeys')->truncate();

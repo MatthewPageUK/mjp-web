@@ -91,7 +91,5 @@ class DatabaseSeeder extends Seeder
             'type' => 'text',
         ]);
 
-        $this->call(AvailabilitySeeder::class);
-
     }
 }

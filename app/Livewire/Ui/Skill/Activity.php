@@ -101,7 +101,6 @@ class Activity extends Component
             ->where('date', '>=', $fromDate)
             ->count();
 
-        // @todo: This is not correct, it should be the number of readings in the period
         $this->readings = $this->skill->readingsCount;
 
         $this->demos = $this->skill->demos

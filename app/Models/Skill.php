@@ -9,6 +9,7 @@ use App\Models\Traits\{
     HasNameSlug,
     HasImage,
 };
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\{
     Builder,
     Model,
@@ -18,7 +19,6 @@ use Illuminate\Database\Eloquent\{
     Relations\HasMany,
     Relations\MorphToMany,
 };
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
 class Skill extends Model implements RouteableModel
@@ -89,7 +89,19 @@ class Skill extends Model implements RouteableModel
             // Delete skill image
             $skill->image()->delete();
 
+            // @todo
+
         });
+    }
+
+    /**
+     * Additional stats attached to this skill such as last used, monthly usage, etc.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stats(): HasMany
+    {
+        return $this->hasMany(SkillStat::class);
     }
 
     /**
@@ -187,6 +199,16 @@ class Skill extends Model implements RouteableModel
     }
 
     /**
+     * Get the last used attribute from the stats
+     *
+     * @return Carbon
+     */
+    public function getLastUsedAttribute(): Carbon
+    {
+        return Carbon::parse($this->stats->where('key', 'last_used')->first()?->value) ?? Carbon::now()->subYears(10);
+    }
+
+    /**
      * Scope the query to only include skills within the specified group.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -198,6 +220,19 @@ class Skill extends Model implements RouteableModel
         return $query->whereHas('skillGroups', function ($query) use ($group) {
             $query->where('slug', $group);
         });
+    }
+
+
+    public function scopeOrderByLastUsedStat(Builder $query): Builder
+    {
+        return $query->orderBy(
+            SkillStat::query()
+                ->select('value')
+                ->whereColumn('skill_id', 'skills.id')
+                ->where('key', 'last_used')
+                ->limit(1),
+            'desc'
+        );
     }
 
     /**

@@ -16,7 +16,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-16 mb-16">
         <div class="lg:col-span-2 space-y-8 order-last lg:order-first">
 
-            <div class="space-y-1">
+            <div class="space-y-2">
                 {{-- Skill groups --}}
                 <p>
                     @foreach ($skill->skillGroups as $skillGroup)
@@ -24,11 +24,12 @@
                     @endforeach
                 </p>
 
-                {{-- Stars and general label --}}
-                <p>
-                    <x-ui.skills.stars :skill="$skill" />
-                    <p class="text-sm text-primary-300">{{ $skill->level->getGeneralLabel() }} - {{ $skill->level->getDescription() }}</p>
-                </p>
+                {{-- Last used and general label --}}
+                <x-ui.card class="px-2 py-1 -ml-1 text-sm font-semibold">
+                    <p>{{ $skill->level->getGeneralLabel() }} - {{ $skill->level->getDescription() }}</p>
+                </x-ui.card>
+                <p class="text-sm text-primary-500">Last used {{ $skill->lastUsed?->diffForHumans() }}</p>
+
             </div>
 
             {{-- Skill description --}}
@@ -61,7 +62,10 @@
             {{-- Books --}}
             <div class="relative">
                 <a name="books" class="absolute -top-32"></a>
-                <h3 class="text-5xl mb-8 mt-8">Books</h3>
+                <h3 class="text-5xl mb-8 mt-8 flex items-center gap-2">
+                    <x-icons.material class="text-5xl">local_library</x-icons.material>
+                    Books
+                </h3>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                     @foreach ($skill->books as $book)
                         <x-ui.library.book-card :book="$book" />
@@ -79,7 +83,10 @@
             @if ($this->hasSkillJourneys())
                 <x-ui.card class="p-4 relative">
                     <a name="skillJourneys" class="absolute -top-32"></a>
-                    <h3 class="text-4xl mb-4">Skill Journey</h3>
+                    <h3 class="text-4xl mb-4 flex items-end gap-4">
+                        <span class="flex-1">Skill Journey</span>
+                        <x-icons.material class="text-3xl group-hover/card:animate-ping">route</x-icons.material>
+                    </h3>
 
                     <ul class="max-h-96 text-sm space-y-2 overflow-y-auto pr-2">
                         @if ($this->hasIncompleteSkillJourneys())
@@ -111,7 +118,10 @@
             @if ($skill->skillLogs->count() > 0)
                 <x-ui.card class="p-4 relative">
                     <a name="skillLogs" class="absolute -top-32"></a>
-                    <h3 class="text-4xl mb-4">Skill Log</h3>
+                    <h3 class="text-4xl mb-4 flex items-end gap-4">
+                        <span class="flex-1">Skill Log</span>
+                        <x-icons.material class="text-3xl group-hover/card:animate-ping">sticky_note_2</x-icons.material>
+                    </h3>
 
                     <ul class="max-h-96 text-sm space-y-2 overflow-y-auto pr-2">
                         @php ($lastDate = null)
