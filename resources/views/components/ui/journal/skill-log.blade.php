@@ -1,4 +1,8 @@
-<x-icons.material>{{ $skillLog->type->getUiIcon() }}</x-icons.material>
+<x-icons.material
+    @class([
+        'group-hover/card:animate-spanner' => $skillLog->type === \App\Enums\SkillLogType::Use,
+    ])
+>{{ $skillLog->type->getUiIcon() }}</x-icons.material>
 <span class="flex-1">
     {{ $skillLog->type->getLabel() }}
     <x-ui.skills.linked-skill-list :models="$skillLog->skills" />

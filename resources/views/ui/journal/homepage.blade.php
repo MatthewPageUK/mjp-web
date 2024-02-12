@@ -57,6 +57,10 @@
                             <x-ui.journal.reading :reading="$entry" />
                             @break
 
+                        @case('App\Models\Project')
+                            <x-ui.journal.project :project="$entry" />
+                            @break
+
                     @endswitch
                 </x-ui.card>
             @empty

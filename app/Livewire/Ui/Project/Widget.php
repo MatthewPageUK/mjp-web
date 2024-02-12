@@ -81,6 +81,7 @@ class Widget extends Component
         return $projectService
             ->getFilteredQuery($filter)
             ->with(['skills', 'image'])
+            ->orderBy('created_at', 'desc')
             ->paginate(2, pageName: 'projects');
     }
 

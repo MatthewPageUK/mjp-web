@@ -113,11 +113,16 @@ module.exports = {
                     '0%, 100%': { transform: 'rotate(0deg) scale(1)' },
                     '30%': { transform: 'rotate(5deg) scale(1.2) translateX(7%)' },
                     '70%': { transform: 'rotate(-5deg) scale(1.2) translateX(-7%)' },
+                },
+                spanner : {
+                    '0%, 100%': { transform: 'rotate(0deg) scale(1)', transformOrigin: '4px 4px' },
+                    '50%': { transform: 'rotate(-45deg)', transformOrigin: '4px 4px' },
                 }
             },
 
             animation: {
                 wiggle: 'wiggle 1s ease-in-out infinite',
+                spanner: 'spanner 1s ease-in-out infinite',
             },
 
         },

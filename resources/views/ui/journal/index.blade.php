@@ -36,6 +36,10 @@
                             <x-ui.journal.reading :reading="$entry" />
                             @break
 
+                        @case('App\Models\Project')
+                            <x-ui.journal.project :project="$entry" />
+                            @break
+
                         @default
                             <p>Sorry, no entry type was found.</p>
                             {{ $entry }}

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Interfaces\CanBeJournalEntry;
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
@@ -10,8 +11,8 @@ use App\Models\Traits\{
     HasNameSlug,
     HasPosts,
     HasSkills,
+    IsJournable,
 };
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\{
     Model,
     SoftDeletes,
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\{
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 
-class Project extends Model implements RouteableModel
+class Project extends Model implements RouteableModel, CanBeJournalEntry
 {
     use HasActive;
     use HasFactory;
@@ -29,6 +30,7 @@ class Project extends Model implements RouteableModel
     use HasNameSlug;
     use HasPosts;
     use HasSkills;
+    use IsJournable;
     use SoftDeletes;
 
     /**
@@ -55,6 +57,7 @@ class Project extends Model implements RouteableModel
      */
     protected $casts = [
         'last_active' => 'datetime',
+        'journal_date' => 'date',
     ];
 
     /**

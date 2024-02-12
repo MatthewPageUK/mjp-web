@@ -3,6 +3,7 @@
 namespace App\Services\Ui;
 
 use App\Models\Demo;
+use App\Models\Project;
 use App\Models\Reading;
 use App\Models\SkillJourney;
 use App\Models\SkillLog;
@@ -31,6 +32,7 @@ class JournalService
         SkillJourney::class,
         Demo::class,
         Reading::class,
+        Project::class,
     ];
 
     /**
@@ -57,12 +59,15 @@ class JournalService
             ->get();
         $readings = Reading::getJournalRecentQuery($count)
             ->get();
+        $projects = Project::getJournalRecentQuery($count)
+            ->get();
 
         $entries = collect()
             ->concat($skillLogs)
             ->concat($journeys)
             ->concat($demos)
             ->concat($readings)
+            ->concat($projects)
             ->sortByDesc('journal_date')
             ->take($count);
 
@@ -77,6 +82,7 @@ class JournalService
         }
 
         // @todo wip / isJournable trait / model vars...
+        //
         // $entries = collect();
         // foreach (self::$journableModels as $model) {
         //     $entries = $entries->concat(
@@ -111,7 +117,7 @@ class JournalService
                 $journey->created_at = $journey->completed_at;
                 return $journey;
         });
-        $demos = Demo::with('skills')
+        $demos = Demo::with(['skills', 'image'])
             ->whereBetween('created_at', [$from, $to])
             ->latest()->get()->map(function ($demo) {
                 return $demo;
@@ -121,11 +127,17 @@ class JournalService
             ->latest()->get()->map(function ($reading) {
                 return $reading;
         });
+        $projects = Project::with(['skills', 'image'])
+            ->whereBetween('created_at', [$from, $to])
+            ->latest()->get()->map(function ($demo) {
+                return $demo;
+        });
 
         $entries = $skillLogs
             ->concat($journeys)
             ->concat($demos)
             ->concat($readings)
+            ->concat($projects)
             ->sortByDesc('created_at');
 
         return $entries;
