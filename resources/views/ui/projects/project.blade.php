@@ -16,17 +16,18 @@
         <div class="lg:col-span-3 space-y-8">
 
             {{-- Project description --}}
-            <div class="prose prose-lg prose-primary">
+            <div class="prose prose-lg prose-primary max-w-full">
                 @markdown($project->description ?? '')
             </div>
 
-            <x-ui.imageable :model="$project" />
-
-            {{-- Link to Github page --}}
-            {{-- @if ($project->github)
-                <x-ui.external-link href="{{ $project->github }}" title="Github" />
-            @endif --}}
-
+            {{-- Image --}}
+            @if ($project->website)
+                <a href="{{ $project->website }}" target="_blank">
+                    <x-ui.imageable :model="$project" />
+                </a>
+            @else
+                <x-ui.imageable :model="$project" />
+            @endif
 
         </div>
 

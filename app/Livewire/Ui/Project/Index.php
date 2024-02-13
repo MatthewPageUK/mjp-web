@@ -82,6 +82,7 @@ class Index extends Component
         return $projectService
             ->getFilteredQuery($filter)
             ->with(['skills', 'image'])
+            ->orderBy('name', 'asc')
             ->get();
     }
 
