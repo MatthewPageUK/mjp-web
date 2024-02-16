@@ -1,7 +1,7 @@
 @use('App\Enums\GithubIcon')
-<header class="md:flex mb-4 border-b pb-4">
-    <h1 class="flex-1 text-2xl md:text-4xl flex gap-4 items-center XXfont-orbitron">
-        <x-icons.github class="w-8 h-8 fill-secondary-400" />
+<header class="md:flex mb-4 border-b border-primary-500 dark:border-primary-300 pb-4">
+    <h1 class="flex-1 text-2xl md:text-4xl flex gap-4 items-center">
+        <x-icons.github class="w-8 h-8 fill-amber-700 dark:fill-secondary-400" />
         Project Development
     </h1>
     <div class="flex gap-2">

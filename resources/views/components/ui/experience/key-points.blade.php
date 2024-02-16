@@ -16,7 +16,7 @@
                         <path d="M14.4 8.4L13 7l-4 4-2-2-1.4 1.4L9 13.8z"></path>
                     </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-primary-100 pl-9">{{ $point['title'] }}</h3>
+                <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-100 pl-9">{{ $point['title'] }}</h3>
             </div>
             <div class="pl-9">{{ $point['text'] }}</div>
         </li>

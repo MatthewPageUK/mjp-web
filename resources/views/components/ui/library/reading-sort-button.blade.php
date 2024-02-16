@@ -1,7 +1,7 @@
 @props(['sort', 'current'])
 
 <x-primary-button
-    @class(['text-xs', '!text-secondary-400' => $current === $sort])
+    @class(['text-xs', '!dark:text-secondary-400 !text-white' => $current === $sort])
     wire:click="setReadingSort('{{ $sort->value }}')"
 >
     {{ $slot }}

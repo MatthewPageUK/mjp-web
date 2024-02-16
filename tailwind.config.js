@@ -9,10 +9,26 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './app/**/*.php',
     ],
-
+    darkMode: 'class',
+    safelist: [
+        'bg-default-light',
+        'dark:bg-default-dark',
+        'bg-work-light',
+        'dark:bg-work-dark',
+        'bg-library-light',
+        'dark:bg-library-dark',
+    ],
     theme: {
         extend: {
 
+            backgroundImage: {
+                'default-light': "url('https://media.mjp.co/storage/users/mjp-web/site/mjp-back-light.jpg')",
+                'default-dark': "url('https://media.mjp.co/storage/users/mjp-web/site/mjp-back-dark.jpg')",
+                'work-light': "url('https://media.mjp.co/storage/users/mjp-web/site/mjp-back-work-light.jpg')",
+                'work-dark': "url('https://media.mjp.co/storage/users/mjp-web/site/mjp-back-work-dark.jpg')",
+                'library-light': "url('https://media.mjp.co/storage/users/mjp-web/site/mjp-back-library-light.jpg')",
+                'library-dark': "url('https://media.mjp.co/storage/users/mjp-web/site/mjp-back-library-dark.jpg')",
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 orbitron: ['Orbitron'],
@@ -127,7 +143,11 @@ module.exports = {
 
         },
     },
-
+    variants: {
+        extend: {
+            backgroundImage: ['dark'],
+        }
+    },
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),

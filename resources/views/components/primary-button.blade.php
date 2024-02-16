@@ -1,39 +1,44 @@
-@if (isset($href))
-    <a {{ $attributes->merge(['type' => 'submit', 'class' => '
-        inline-flex items-center px-4 py-2
-        bg-primary-800
-        text-white uppercase
-        tracking-widest hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-900
-        focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2
-        transition ease-in-out duration-500
+@php(
+    $class = "inline-flex
+        items-center
+        px-4 py-2
+        uppercase
+        tracking-widest
 
+        text-primary-900
+        dark:text-white
+
+        dark:focus:bg-primary-700
+        dark:active:bg-primary-900
+        focus:outline-none
+        focus:ring-2
+        focus:ring-secondary-500
+        focus:ring-offset-2
+        XXtransition ease-in-out duration-500
+
+        bg-amber-400
+        hover:bg-amber-500
 
         rounded-md
-        border border-t-primary-700 border-r-primary-700 border-b-primary-900 border-l-primary-900
-        hover:text-secondary-400
-        hover:bg-primary-700
-        hover:border-t-primary-500 hover:border-r-primary-500 hover:border-b-primary-900 hover:border-l-primary-900
-
-        ']) }}>
+        dark:bg-primary-800
+        dark:border
+        dark:border-t-primary-700
+        dark:border-r-primary-700
+        dark:border-b-primary-900
+        dark:border-l-primary-900
+        dark:hover:text-secondary-400
+        dark:hover:bg-primary-700
+        dark:hover:border-t-primary-500
+        dark:hover:border-r-primary-500
+        dark:hover:border-b-primary-900
+        dark:hover:border-l-primary-900"
+)
+@if (isset($href))
+    <a {{ $attributes->merge(['class' => $class]) }}>
         {{ $slot }}
     </a>
 @else
-    <button {{ $attributes->merge(['type' => 'submit', 'class' => '
-        inline-flex items-center px-4 py-2
-        bg-primary-800
-        text-white uppercase
-        tracking-widest hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-900
-        focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2
-        transition ease-in-out duration-500
-
-
-        rounded-md
-        border border-t-primary-700 border-r-primary-700 border-b-primary-900 border-l-primary-900
-        hover:text-secondary-400
-        hover:bg-primary-700
-        hover:border-t-primary-500 hover:border-r-primary-500 hover:border-b-primary-900 hover:border-l-primary-900
-
-        ']) }}>
+    <button {{ $attributes->merge(['type' => 'submit', 'class' => $class]) }}>
         {{ $slot }}
     </button>
 @endif

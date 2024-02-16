@@ -33,7 +33,7 @@
 {{-- Task Body --}}
 <div x-show="open == {{ $issue['number'] }}">
     <div class="grid grid-cols-4 gap-8">
-        <div class="col-span-4 prose prose-primary p-4">
+        <div class="col-span-4 prose-sm dark:prose-primary max-w-full p-4">
             @markdown($issue['body'] ?? '')
         </div>
     </div>

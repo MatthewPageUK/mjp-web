@@ -46,7 +46,7 @@ class Index extends Component
             'lastMonth' => $libraryService->getTotalReadingMinutesLastMonth(),
         ];
 
-        $page->setBackgroundImage('mjp-back-library.jpg');
+        $page->setBackgroundImage('library');
         $page->setTitle('Library');
     }
 

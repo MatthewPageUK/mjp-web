@@ -29,7 +29,7 @@
         @endif
 
         {{-- Demo description --}}
-        <div class="prose prose-lg prose-primary max-w-full">
+        <div class="prose dark:prose-primary max-w-full">
             @markdown($demo->description ?? '')
         </div>
 

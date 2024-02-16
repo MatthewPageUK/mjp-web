@@ -5,7 +5,7 @@
     <div class="space-y-4">
         <div class="text-center md:text-left md:flex">
             {{-- Widget title --}}
-            <h1 class="flex-1 text-4xl font-black XXfont-orbitron text-secondary-400">
+            <h1 class="flex-1 text-6xl md:text-4xl md:font-black text-amber-700 dark:text-secondary-400">
                 <a
                     class="hover:text-highlight-400"
                     href="{{ route('journal') }}"
@@ -26,12 +26,12 @@
                     {{-- <x-ui.journal.day :entry="$entry" /> --}}
                     <div class="grid grid-cols-2">
                         @if ($lastDate === now()->format('d m Y'))
-                            <span class="block text-secondary-400">Today</span>
+                            <span class="block text-amber-700 dark:text-secondary-400">Today</span>
                         @else
-                            <span class="block text-secondary-400">
+                            <span class="block text-amber-700 dark:text-secondary-400">
                                 {{ $entry->journal_date->format('l') }}
                             </span>
-                            <span class="justify-self-end block text-secondary-400">
+                            <span class="justify-self-end block text-amber-700 dark:text-secondary-400">
                                 {{ $entry->journal_date->format('j') }}<span class="font-light">{{ $entry->journal_date->format('S') }}</span>
                             </span>
                         @endif
@@ -71,7 +71,7 @@
 
         <div class="text-right">
             <a
-                href="{{ route('journal') }}" class="text-secondary-400 hover:text-highlight-400"
+                href="{{ route('journal') }}" class="text-amber-700 dark:text-secondary-400 hover:text-highlight-400"
                 title="Read more journal entries"
             >
                 Read more...

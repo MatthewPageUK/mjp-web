@@ -35,7 +35,7 @@ class Book extends Component
     {
         $this->book->load(['readings', 'image']);
 
-        $page->setBackgroundImage('mjp-back-library.jpg');
+        $page->setBackgroundImage('library');
         $page->setTitle('Books');
         $page->appendTitle($this->book->name);
     }

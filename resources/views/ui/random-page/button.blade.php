@@ -1,6 +1,6 @@
 {{-- UI - Jump to random page button --}}
 <div class="text-center" id="jump-to-random-page">
-    <h1 class="text-2xl font-black XXfont-orbitron text-secondary-400 my-4">
+    <h1 class="text-2xl font-black text-secondary-400 my-4">
         Still looking for more?
     </h1>
     <x-primary-button class="text-sm flex items-center gap-2" wire:click="jumpToRandomPage">

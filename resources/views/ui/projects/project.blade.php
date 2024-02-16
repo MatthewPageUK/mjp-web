@@ -16,7 +16,7 @@
         <div class="lg:col-span-3 space-y-8">
 
             {{-- Project description --}}
-            <div class="prose prose-lg prose-primary max-w-full">
+            <div class="prose dark:prose-primary max-w-full">
                 @markdown($project->description ?? '')
             </div>
 

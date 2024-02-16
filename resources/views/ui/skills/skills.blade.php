@@ -19,21 +19,21 @@
                 @foreach ($this->skillGroups as $skillGroup)
                     <button wire:click="setSkillGroup('{{ $skillGroup->slug }}')"
                         @class([
-                            'w-full lg:w-auto h-12 px-8 py-2 border border-primary-600 bg-primary-800 rounded-t-lg',
-                            'bg-primary-900 text-primary-300 border-t-0 border-r-0 border-l-0 border-b-1 hover:bg-secondary-400 hover:text-primary-800' => $skillGroup->slug !== $this->selectedSkillGroup,
-                            'text-secondary-400 border-b-0 font-semibold' => $skillGroup->slug === $this->selectedSkillGroup,
+                            'w-full lg:w-auto h-12 px-8 py-2 border dark:border-primary-600 border-primary-300 bg-primary-100 dark:bg-primary-800 rounded-t-lg',
+                            'bg-primary-300 dark:bg-primary-900 text-primary-800 dark:text-primary-300 border-t-0 border-r-0 border-l-0 border-b-1 hover:bg-secondary-400 dark:hover:text-secondary-400 hover:text-primary-800' => $skillGroup->slug !== $this->selectedSkillGroup,
+                            'text-amber-600 dark:text-secondary-400 border-b-0 font-semibold' => $skillGroup->slug === $this->selectedSkillGroup,
 
                         ])
                     >
                         {{ $skillGroup->name }}
                     </button>
-                    <div class="hidden lg:block w-1 h-12 border-0 border-b border-primary-600"> </div>
+                    <div class="hidden lg:block w-1 h-12 border-0 border-b dark:border-primary-600 border-primary-300"> </div>
                 @endforeach
-                <div class="hidden lg:block flex-1 h-12 border-0 border-b border-primary-600"> </div>
+                <div class="hidden lg:block flex-1 h-12 border-0 border-b dark:border-primary-600 border-primary-300"> </div>
             </div>
 
             {{-- Skills --}}
-            <div class="p-4 lg:p-8 border border-t-0 border-primary-600 bg-primary-800 rounded-b-lg">
+            <div class="p-4 lg:p-8 border border-t-0 dark:border-primary-600 border-primary-300 bg-primary-100 dark:bg-primary-800 rounded-b-lg">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     @foreach ($this->skills as $skill)
                         <x-ui.skills.cards.wide :skill="$skill" />
@@ -42,7 +42,7 @@
             </div>
 
         </div>
-        <div class="text-primary-200 prose prose-secondary prose-sm lg:prose-base lg:pt-8">
+        <div class="prose dark:prose-primary max-w-full lg:pt-8">
 
             {{-- Sidebar text --}}
             @markdown(Settings::tryGetValue('skills_content') ?? '')

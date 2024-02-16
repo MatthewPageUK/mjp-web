@@ -28,7 +28,7 @@
         @endphp
         <a
             href="{{ $url }}"
-            class="text-secondary-100 hover:text-secondary-400"
+            class="text-amber-600 hover:text-amber-400 dark:text-secondary-100 dark:hover:text-secondary-400"
             title="{{ sprintf($title, $name) }}"
         >{{ $name }}</a>{{ $seperator }}
     @endforeach

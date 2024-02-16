@@ -6,7 +6,7 @@
 <div class="space-y-6">
 
     {{-- Header --}}
-    <h1 class="XXfont-orbitron font-black text-6xl flex items-center gap-2">
+    <h1 class="font-black text-6xl flex items-center gap-2">
         <span class="flex-1">{{ $this->skill->name }}</span>
         <a href="{{ route('skills', ['group' => $this->skill->skillGroups->first()->slug]) }}" class="hover:text-secondary-400" title="Back to the skills index">
             <x-icons.material class="hidden md:block text-6xl">{{ Section::Skills->getUiIcon() }}</x-icons.material>
@@ -25,7 +25,7 @@
                 </p>
 
                 {{-- Last used and general label --}}
-                <x-ui.card class="px-2 py-1 -ml-1 text-sm font-semibold">
+                <x-ui.card class="p-2 px-3  -ml-1 text-sm font-semibold">
                     <p>{{ $skill->level->getGeneralLabel() }} - {{ $skill->level->getDescription() }}</p>
                 </x-ui.card>
                 <p class="text-sm text-primary-500">Last used {{ $skill->lastUsed?->diffForHumans() }}</p>
@@ -34,7 +34,7 @@
 
             {{-- Skill description --}}
             @if ($skill->description)
-                <div class="prose prose-lg prose-primary w-full max-w-none">
+                <div class="prose dark:prose-primary max-w-full">
                     @markdown($skill->description ?? '')
                 </div>
             @endif

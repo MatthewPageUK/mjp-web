@@ -3,15 +3,15 @@
     <div class="space-y-16 lg:space-y-24">
         <div class="grid grid-cols-6 md:grid-cols-12 gap-4 md:gap-16">
             <div class="col-span-6 md:col-span-8">
-                <h1 dusk="content-name" class="text-4xl lg:text-6xl mb-2 font-bold XXfont-orbitron">
+                <h1 dusk="content-name" class="text-4xl lg:text-6xl mb-2 font-bold">
                     {{-- Site title --}}
                     {{ $name }}
                 </h1>
-                <h1 class="text-xl lg:text-4xl font-bold text-secondary-400 mb-8 XXfont-orbitron">
+                <h1 class="text-xl lg:text-4xl font-bold text-amber-600 dark:text-secondary-400 mb-8">
                     {{-- Site tagline --}}
                     {{ $tagline }}
                 </h1>
-                <div class="prose prose-primary prose-lg max-w-full">
+                <div class="prose dark:prose-primary prose-lg max-w-full">
                     {{-- Introduction text --}}
                     @markdown($intro ?? '')
                 </div>

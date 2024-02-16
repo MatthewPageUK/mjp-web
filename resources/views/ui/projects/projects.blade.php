@@ -6,10 +6,10 @@
     <div class="md:flex items-start gap-8 space-y-8 md:space-y-0">
         <div class="flex-1 space-y-8 group">
             <h1 class="text-6xl flex items-center gap-2">
-                <x-icons.material class="text-6xl group-hover:animate-spin group-hover:text-5xl group-hover:text-highlight-500 transition-all duration-500">{{ Section::Projects->getUiIcon() }}</x-icons-material>
+                <x-icons.material class="text-6xl group-hover:animate-spin group-hover:text-5xl group-hover:text-highlight-500 XXtransition-all duration-500">{{ Section::Projects->getUiIcon() }}</x-icons-material>
                 Projects
             </h1>
-            <div class="prose prose-lg prose-primary">
+            <div class="prose dark:prose-primary max-w-full">
                 @markdown($this->intro ?? '')
             </div>
         </div>

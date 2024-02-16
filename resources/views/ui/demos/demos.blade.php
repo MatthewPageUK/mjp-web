@@ -7,7 +7,7 @@
             {{-- Page title --}}
             <h1 class="text-6xl flex items-center gap-2">
                 <x-icons.material
-                    class="text-6xl group-hover:animate-bounce group-hover:text-6xl group-hover:text-highlight-500 transition-all duration-500"
+                    class="text-6xl group-hover:animate-bounce group-hover:text-6xl group-hover:text-highlight-500 XXtransition-all duration-500"
                 >smart_toy</x-icons-material>
 
                 Demos

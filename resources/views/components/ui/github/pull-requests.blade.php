@@ -9,7 +9,7 @@
     Pull Requests
 </h1>
 
-<h1 class="text-sm XXfont-orbitron mt-2 mb-2">Open</h1>
+<h1 class="text-sm mt-2 mb-2">Open</h1>
 <div class="overflow-y-auto h-[200px] pr-2">
     <ul>
         @foreach ($openPullRequests as $pr)
@@ -18,7 +18,7 @@
     </ul>
 </div>
 
-<h1 class="text-sm XXfont-orbitron mt-8 mb-2">Closed</h1>
+<h1 class="text-sm mt-8 mb-2">Closed</h1>
 <div class="overflow-y-auto h-[300px] pr-2">
     <ul>
         @foreach ($closedPullRequests as $pr)

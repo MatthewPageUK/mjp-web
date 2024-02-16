@@ -2,8 +2,8 @@
 
 <div
     @class([
-        'rounded-lg mb-2 bg-primary-700 overflow-hidden',
-        'border border-primary-500 hover:bg-primary-600 hover:scale-105 transition transition-all duration-500 ease-in-out' => $month !== $current,
+        'rounded-lg mb-2 bg-primary-100 dark:bg-primary-700 overflow-hidden',
+        'border dark:border-primary-500 hover:bg-white dark:hover:bg-primary-600 hover:scale-105 XXtransition XXtransition-all duration-500 ease-in-out' => $month !== $current,
         'scale-105' => $month === $current,
     ])
 >

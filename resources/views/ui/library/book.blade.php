@@ -59,7 +59,7 @@
             </div>
 
             <div class="mt-16">
-                <x-primary-button href="{{ route('library') }}" class="text-secondary-400 hover:text-secondary-600 gap-2 w-full">
+                <x-primary-button href="{{ route('library') }}" class="XXtext-secondary-400 XXhover:text-secondary-600 gap-2 w-full">
                     <x-icons.material class="text-base">arrow_back</x-icons.material>
                     Back to the bookshelf
                 </x-primary-button>
@@ -73,7 +73,7 @@
             {{-- Notes --}}
             @if ($this->book->notes)
                 <h3 class="text-2xl mt-8 border-b pb-2 mb-2">Notes</h3>
-                <div class="prose prose-sm prose-primary max-w-full XXbg-primary-800 XXp-8 XXborder XXrounded mt-2">
+                <div class="prose prose-sm dark:prose-primary max-w-full XXbg-primary-800 XXp-8 XXborder XXrounded mt-2">
                     @markdown($this->book->notes)
                 </div>
             @endif

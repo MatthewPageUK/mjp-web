@@ -18,14 +18,14 @@
 
         {{-- Age sub heading --}}
         @if ($lastAge !== Carbon\Carbon::parse($issue['created_at'])->diffForHumans())
-            <div class="text-sm text-right XXfont-orbitron">
+            <div class="text-sm text-right">
                 {{ Carbon\Carbon::parse($issue['created_at'])->diffForHumans() }}
             </div>
             @php($lastAge = Carbon\Carbon::parse($issue['created_at'])->diffForHumans())
         @endif
 
         {{-- Task --}}
-        <div class="bg-primary-900 rounded-lg p-2 pl-3">
+        <div class="bg-primary-100 dark:bg-primary-900 rounded-lg p-2 pl-3">
             <x-ui.github.issue-item :issue="$issue" />
         </div>
 

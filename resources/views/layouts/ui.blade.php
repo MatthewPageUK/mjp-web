@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    x-data="{
+        darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'dark'),
+        page: '{{ \Route::currentRouteName() }}',
+    }"
+    x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
+    x-bind:class="{'dark': darkMode === 'dark' || (darkMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}"
+>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,12 +27,18 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
+
     </head>
-    <body class="font-sans antialiased bg-fixed bg-cover bg-primary-800 bg-gradient-to-b from-black"
-        style="background-image: url('/{{ Page::getBackgroundImage() }}')"
-        x-data="{
-            page: '{{ \Route::currentRouteName() }}',
-        }"
+    <body
+        x-cloak
+        class="
+            font-sans antialiased
+            text-primary-900 dark:text-primary-100
+            bg-primary-100 dark:bg-primary-900
+            bg-fixed bg-cover
+            {{ Page::getBackgroundClasses() }}
+
+        "
     >
         <div class="min-h-screen">
 
@@ -33,7 +46,8 @@
             <x-ui.layout.header />
 
             {{-- Main page --}}
-            <main class="max-w-7xl mx-auto px-8 xl:px-0 py-6 lg:py-12 text-white">
+            <main
+                class="max-w-7xl mx-auto px-8 xl:px-0 py-6 lg:py-12">
                 {{ $slot }}
             </main>
 

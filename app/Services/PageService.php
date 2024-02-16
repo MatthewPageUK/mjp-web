@@ -166,7 +166,17 @@ class PageService
      */
     public function getBackgroundImage(): string
     {
-        return $this->backgroundImage ?? 'mjp-back-1.jpg';
+        return $this->backgroundImage ?? 'default';
+    }
+
+    /**
+     * Get the background classes
+     *
+     * @return string
+     */
+    public function getBackgroundClasses(): string
+    {
+        return 'bg-' . $this->getBackgroundImage() .'-light dark:bg-' . $this->getBackgroundImage() . '-dark';
     }
 
     /**

@@ -12,10 +12,12 @@
 
     @foreach ($this->experiences as $experience)
 
-        <article class="pt-6 px-6 odd:bg-gradient-to-l even:bg-gradient-to-r from-primary-900 from-20% to-50%  mb-8">
+        <article class="pt-6 px-6
+            odd:bg-gradient-to-l even:bg-gradient-to-r from-primary-100 from-20% to-50%
+            dark:odd:bg-gradient-to-l dark:even:bg-gradient-to-r dark:from-primary-900 dark:from-20% dark:to-50%  mb-8">
             <div class="xl:flex">
                 <div class="w-32 shrink-0">
-                    <h2 class="text-xl leading-snug font-bold text-primary-100 xl:leading-7 mb-4 xl:mb-0">{{ $experience->start->format('Y') }}</h2>
+                    <h2 class="text-xl leading-snug font-bold text-primary-500 dark:text-primary-100 xl:leading-7 mb-4 xl:mb-0">{{ $experience->start->format('Y') }}</h2>
                 </div>
                 <div class="relative grow pb-6">
                     <header class="text-2xl mb-4 leading-none">
@@ -28,7 +30,7 @@
                         <x-ui.experience.key-points :key_points="$experience->key_points" />
 
 
-                        <x-primary-button class="XXfont-orbitron" href="{{ $experience->routeUrl }}">
+                        <x-primary-button class="" href="{{ $experience->routeUrl }}">
                             Read More
                             <x-icons.material>play_arrow</x-icons.material>
                         </x-primary-button>

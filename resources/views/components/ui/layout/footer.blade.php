@@ -1,33 +1,20 @@
 {{-- Main web site footer component --}}
-<footer
-    class="bg-primary-800"
->
-    <div class="w-full max-w-7xl mx-auto md:flex px-6 py-4 text-sm text-white">
+<footer class="bg-primary-200 dark:bg-primary-800">
+    <div class="w-full max-w-7xl mx-auto md:flex md:items-center px-6 py-4 text-sm ">
         <p class="flex-1">
-            <a href="{{ route('home') }}" title="Homepage" class="hover:text-amber-400">
-                {{ Settings::tryGetValue('site_name') }} - {{ Settings::tryGetValue('site_tagline') }}
-            </a>
+            <x-ui.layout.footer.site-name />
         </p>
+
         <p class="flex-1 md:text-center text-xs text-primary-400">
-            Copyright &copy; {{ date('Y') }}
+            <x-ui.layout.footer.copyright />
         </p>
+
         <p class="flex-1">
-            <a class="flex items-center justify-end hover:text-secondary-400" href="#top" title="{{ __('Go to top of page') }}">
-                {{ __('Top') }}
-                <x-icons.material class="text-base ml-1 hover:fill-secondary-400">arrow_circle_up</x-icons.material>
-            </a>
+            <x-ui.layout.footer.go-top-of-page />
         </p>
     </div>
-</footer>
-<div class="bg-black">
-    <p class="w-full max-w-7xl mx-auto md:flex md:items-center gap-4 text-xs text-green-700 px-6 py-4">
-        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
 
-        @if (Settings::tryGetValue('source'))
-            <a href="{{ Settings::tryGetValue('source') }}" class="flex items-center gap-1 hover:text-green-500 hover:drop-shadow-[1px_1px_7px_rgba(100,255,100,1)] transition duration-1000" target="_blank">
-                <x-icons.material>terminal</x-ui.icons.material>
-                Source code
-            </a>
-        @endif
-    </p>
-</div>
+    <div class="bg-white dark:bg-black ">
+        <x-ui.layout.footer.code />
+    </div>
+</footer>

@@ -6,7 +6,7 @@
         <div class="space-y-4 h-full">
 
             <div class="text-center md:text-left md:flex">
-                <h1 class="flex-1 text-4xl font-black XXfont-orbitron text-secondary-400">
+                <h1 class="flex-1 text-4xl font-black text-amber-700 dark:text-secondary-400">
                     <a
                         class="hover:text-highlight-400"
                         href="{{ route('skills') }}"

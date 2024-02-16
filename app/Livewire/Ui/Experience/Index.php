@@ -41,7 +41,7 @@ class Index extends Component
     )
     {
         $this->intro = $settings->tryGetValue('experience_intro') ?? '';
-        $page->setBackgroundImage('mjp-back-work.jpg');
+        $page->setBackgroundImage('work');
         $page->setTitle('Experience Timeline');
     }
 

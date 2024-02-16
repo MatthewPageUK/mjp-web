@@ -1,5 +1,5 @@
-    <h1 class="XXfont-orbitron font-black text-5xl flex items-center gap-2 col-span-2">
-        <x-icons.material class="text-6xl group-hover:text-highlight-500 transition-all duration-500">account_circle</x-icons-material>
+    <h1 class="font-black text-5xl flex items-center gap-2 col-span-2">
+        <x-icons.material class="text-6xl group-hover:text-highlight-500 XXtransition-all duration-500">account_circle</x-icons-material>
         <span class="flex-1">Dashboard</span>
         <ul class="text-base flex gap-2">
             <li>
@@ -72,7 +72,7 @@
                 <p
                     x-data="{ show: true }"
                     x-show="show"
-                    x-transition
+                    x-XXtransition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-primary-300"
                 >{{ __('Saved.') }}</p>

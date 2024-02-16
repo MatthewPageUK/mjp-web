@@ -38,7 +38,7 @@
                 <p
                     x-data="{ show: true }"
                     x-show="show"
-                    x-transition
+                    x-XXtransition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-primary-300"
                 >{{ __('Saved.') }}</p>

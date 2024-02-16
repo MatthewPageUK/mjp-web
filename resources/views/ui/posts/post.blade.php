@@ -35,14 +35,14 @@
             </div>
 
             {{-- Snippet --}}
-            <div class="prose prose-xl prose-primary font-bold mb-8">
+            <div class="prose dark:prose-primary max-w-full font-bold mb-8">
                 @markdown($post->snippet)
             </div>
 
             <x-ui.imageable :model="$post" />
 
             {{-- Description --}}
-            <div class="prose prose-lg prose-primary">
+            <div class="prose dark:prose-primary max-w-full">
                 @markdown($post->content)
             </div>
 

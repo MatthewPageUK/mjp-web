@@ -2,7 +2,7 @@
     'pr' => [],
     'closed' => false,
 ])
-<li class="flex gap-4 bg-primary-900 rounded-lg p-2 pl-3 mb-1 items-center">
+<li class="flex gap-4 bg-primary-100 dark:bg-primary-900 rounded-lg p-2 pl-3 mb-1 items-center">
 
     <a class="flex-1" href="{{ $pr['html_url'] }}" target="_blank">
         #{{ $pr['number'] }}.

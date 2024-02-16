@@ -17,9 +17,9 @@
         {{-- Main Panel --}}
         <div wire:loading.remove>
 
-            <h2 class="XXfont-orbitron XXfont-black text-3xl mt-8 mb-4 first:mt-0">
-                <a href="{{ $this->urlHome }}" class="flex items-center gap-3 hover:text-secondary-400 group transition" target="_blank" title="Codebase on Github">
-                    <x-icons.github class="w-6 h-6 fill-primary-100 group-hover:fill-secondary-400 transition" />
+            <h2 class="XXfont-black text-3xl mt-8 mb-4 first:mt-0">
+                <a href="{{ $this->urlHome }}" class="flex items-center gap-3 hover:text-secondary-400 group XXtransition" target="_blank" title="Codebase on Github">
+                    <x-icons.github class="w-6 h-6  fill-amber-700 dark:fill-primary-100 group-hover:fill-secondary-400 XXtransition" />
                     Github Repository
                 </a>
             </h2>

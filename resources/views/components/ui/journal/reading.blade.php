@@ -4,7 +4,7 @@
     <a
         href="{{ $reading->book->routeUrl }}"
         title="{{ $reading->book->name }} - {{ $reading->book->tagline }}"
-        class="text-secondary-100 hover:text-secondary-400"
+        class="text-amber-600 hover:text-amber-400 dark:text-secondary-100 dark:hover:text-secondary-400"
     >{{ $reading->book->name }}</a>
 
     Chapter {{ $reading->chapter }}.

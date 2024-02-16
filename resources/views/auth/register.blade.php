@@ -4,11 +4,11 @@
 <x-ui-layout>
 
     <div class="flex-1 space-y-8 group max-w-3xl mx-auto">
-        <h1 class="XXfont-orbitron font-black text-5xl flex items-center gap-2">
-            <x-icons.material class="group-hover:animate-pulse text-6xl group-hover:text-highlight-500 transition-all duration-500">group_add</x-icons-material>
+        <h1 class="font-black text-5xl flex items-center gap-2">
+            <x-icons.material class="group-hover:animate-pulse text-6xl group-hover:text-highlight-500 XXtransition-all duration-500">group_add</x-icons-material>
             Register
         </h1>
-        <div class="prose prose-xl prose-primary">
+        <div class="prose dark:prose-primary max-w-full">
             @markdown(Settings::tryGetValue('register_intro') ?? '')
         </div>
 
@@ -69,7 +69,7 @@
 
     {{-- <div class="w-full md:w-1/2 mx-auto md:p-16"> --}}
 
-        {{-- <h1 class="XXfont-orbitron text-4xl flex items-center mb-8">
+        {{-- <h1 class="text-4xl flex items-center mb-8">
             Register for VIP access
             <x-icons.material class="text-6xl">group_add</x-icons.material>
         </h1> --}}
