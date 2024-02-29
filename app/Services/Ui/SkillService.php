@@ -51,6 +51,24 @@ class SkillService
     }
 
     /**
+     * Get recently used skills
+     *
+     * @param int $limit
+     * @return Collection
+     */
+    public function getRecentlyUsed(int $limit): Collection
+    {
+        return $this->getBaseQuery()
+            ->join('skill_stats', 'skills.id', '=', 'skill_stats.skill_id')
+            ->with(['stats' => function ($query) {
+                $query->where('key', 'last_used');
+            }])
+            ->orderBy('skill_stats.value', 'desc')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
      * Get filtered list of skills
      *
      * @param array $filters

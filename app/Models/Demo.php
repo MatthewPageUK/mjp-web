@@ -6,6 +6,7 @@ use App\Interfaces\CanBeJournalEntry;
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
+    HasCvs,
     HasGithub,
     HasImage,
     HasNameSlug,
@@ -23,6 +24,7 @@ use Illuminate\Routing\Exceptions\UrlGenerationException;
 class Demo extends Model implements RouteableModel, CanBeJournalEntry
 {
     use HasActive;
+    use HasCvs;
     use HasFactory;
     use HasGithub;
     use HasImage;

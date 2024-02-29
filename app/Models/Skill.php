@@ -6,6 +6,7 @@ use App\Enums\SkillLevel;
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
+    HasCvs,
     HasNameSlug,
     HasImage,
 };
@@ -24,6 +25,7 @@ use Illuminate\Routing\Exceptions\UrlGenerationException;
 class Skill extends Model implements RouteableModel
 {
     use HasActive;
+    use HasCvs;
     use HasFactory;
     use HasImage;
     use HasNameSlug;

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
     HasActive,
+    HasCvs,
     HasImage,
     HasNameSlug,
     HasPosts,
@@ -20,6 +21,7 @@ use Illuminate\Routing\Exceptions\UrlGenerationException;
 class Experience extends Model implements RouteableModel
 {
     use HasActive;
+    use HasCvs;
     use HasFactory;
     use HasImage;
     use HasNameSlug;

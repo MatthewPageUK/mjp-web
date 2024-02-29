@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CvController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Ui\UserDashboard;
@@ -20,6 +21,7 @@ use App\Livewire\Ui\Post\{
     View as PostView,
 };
 use Illuminate\Support\Facades\Route;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,20 +118,22 @@ Route::get('/quote', App\Livewire\Ui\ProjectQuote::class)->name('project-quote')
 
 /*
 |--------------------------------------------------------------------------
+| CV Download
+|--------------------------------------------------------------------------
+|
+*/
+Route::middleware('auth')->group(function () {
+    Route::get('/pdf/{cv}/download', [CvController::class, 'make'])->name('cv.pdf.download');
+    Route::get('/pdf/{cv}/view', [CvController::class, 'view'])->name('cv.pdf.view');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Stuff
 |--------------------------------------------------------------------------
 |
 */
-
-
 Route::get('/dashboard', UserDashboard::class)->middleware(['auth'])->name('dashboard');
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -137,4 +141,10 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 |
 */
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 require __DIR__.'/auth.php';
