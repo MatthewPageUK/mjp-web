@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Interfaces\RouteableModel;
 use App\Models\Traits\{
+    HasCvs,
     HasDuration,
     HasImage,
     HasNameSlug,
@@ -15,10 +16,10 @@ use Illuminate\Database\Eloquent\{
     Relations\HasMany,
 };
 use Illuminate\Routing\Exceptions\UrlGenerationException;
-use Illuminate\Support\Str;
 
 class Book extends Model implements RouteableModel
 {
+    use HasCvs;
     use HasFactory;
     use HasImage;
     use HasNameSlug;

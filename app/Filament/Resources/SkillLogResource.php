@@ -21,7 +21,7 @@ class SkillLogResource extends Resource
 
     protected static ?string $model = SkillLog::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static ?string $navigationIcon = 'heroicon-o-chart-bar-square';
 
     protected static ?string $navigationGroup = 'Data';
 
