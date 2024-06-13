@@ -10,4 +10,13 @@ class Reference extends Model
 {
     use HasCvs;
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'position',
+        'company',
+        'email',
+        'phone',
+        'notes',
+    ];
 }
