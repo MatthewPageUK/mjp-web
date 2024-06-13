@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\SkillLogLevel;
 use App\Enums\SkillLogType;
 use App\Filament\Resources\SkillLogResource\Pages;
-use App\Filament\Resources\SkillLogResource\RelationManagers;
+use App\Models\Skill;
 use App\Models\SkillLog;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -27,28 +27,39 @@ class SkillLogResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $defaultSkills = Skill::where('slug', 'laravel')
+            ->orWhere('slug', 'php')
+            ->orWhere('slug', 'livewire')
+            ->orWhere('slug', 'alpinejs')
+            ->get()
+            ->pluck('id')
+            ->toArray();
+
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('date')
                     ->required()
                     ->default(now())
-                    ->columnSpan(3),
+                    ->columnSpan(['default' => 2, 'md' => 3]),
                 Forms\Components\Select::make('type')
                     ->options(SkillLogType::class)
+                    ->default(SkillLogType::Use)
                     ->required()
-                    ->columnSpan(3),
+                    ->columnSpan(['default' => 2, 'md' => 3]),
                 Forms\Components\Select::make('level')
                     ->options(SkillLogLevel::class)
+                    ->default(SkillLogLevel::Intermediate)
                     ->required()
-                    ->columnSpan(3),
-                Forms\Components\TextInput::make('minutes')
+                    ->columnSpan(['default' => 2, 'md' => 3]),
+                Forms\Components\Select::make('minutes')
+                    ->options(['30' => '1/2 hour', '60' => '1 hour', '120' => '2 hours', '180' => '3 hours', '240' => '4 hours', '300' => '5 hours'])
+                    ->default('60')
                     ->required()
-                    ->numeric()
-                    ->default(60)
-                    ->columnSpan(3),
+                    ->columnSpan(['default' => 2, 'md' => 3]),
                 Forms\Components\Select::make('skills')
                     ->relationship('skills', 'name')
                     ->multiple()
+                    ->default($defaultSkills)
                     ->preload()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('description')
@@ -57,10 +68,10 @@ class SkillLogResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('notes')
                     ->maxLength(65535)
-                    ->columnSpanFull()
-                    ->rows(5),
+                    ->rows(5)
+                    ->columnSpanFull(),
             ])
-            ->columns(12);
+            ->columns(['default' => 4, 'md' => 12, 'lg' => 12]);
     }
 
     public static function table(Table $table): Table
