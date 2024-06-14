@@ -8,6 +8,7 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './app/**/*.php',
+        './vendor/filament/**/*.blade.php',
     ],
     darkMode: 'class',
     safelist: [

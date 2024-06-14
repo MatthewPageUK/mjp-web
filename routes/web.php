@@ -21,7 +21,6 @@ use App\Livewire\Ui\Post\{
     View as PostView,
 };
 use Illuminate\Support\Facades\Route;
-use Spatie\LaravelPdf\Facades\Pdf;
 
 /*
 |--------------------------------------------------------------------------

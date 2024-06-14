@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
 
         <!-- Scripts -->
+        @filamentStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
 
@@ -55,7 +56,8 @@
 
         {{-- Footer --}}
         <x-ui.layout.footer />
-
+        @livewire('notifications')
+        @filamentScripts
         @livewireScripts
     </body>
 </html>

@@ -76,6 +76,20 @@
         </div>
         <div class="col-span-1 space-y-4">
 
+            @if(auth()->user()?->isAdmin())
+                <x-ui.card class="p-4 relative hover:scale-100 hover:bg-primary-100 dark:hover:bg-primary-800">
+                    <div x-data="{open: false}">
+                        <h3 class="text-2xl text-amber-500 flex items-center gap-4 cursor-pointer" x-on:click="open = ! open">
+                            <span class="flex-1">Log skill use</span>
+                            <x-icons.material class="text-2xl">admin_panel_settings</x-icons.material>
+                        </h3>
+                        <div x-show="open" class="mt-4">
+                            <livewire:ui.skill.create-skill-log :skill="$skill->slug"/>
+                        </div>
+                    </div>
+                </x-ui.card>
+            @endif
+
             {{-- Recent activity --}}
             <livewire:ui.skill.activity :skill="$skill"/>
 

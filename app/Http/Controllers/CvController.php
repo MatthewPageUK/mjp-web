@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Settings;
 use App\Models\Cv;
-use Spatie\LaravelPdf\Facades\Pdf;
+// use Spatie\LaravelPdf\Facades\Pdf;
 
 class CvController extends Controller
 {
@@ -42,9 +42,11 @@ class CvController extends Controller
      */
     public function make(Cv $cv, Settings $settings)
     {
-        return Pdf::view('cv-pdf', ['data' => $this->getData($cv, $settings)])
-            ->format('a4')
-            ->name($cv->filename);
+        abort(404, 'Not implemented');
+
+        // return Pdf::view('cv-pdf', ['data' => $this->getData($cv, $settings)])
+        //     ->format('a4')
+        //     ->name($cv->filename);
     }
 
     /**
