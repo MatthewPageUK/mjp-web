@@ -59,7 +59,7 @@ class SkillResource extends Resource
                         static::getImageableTab(),
                         static::getPostablesTab(),
                         static::getProjectablesTab(),
-                        static::getTimestampsTab(),
+                        //static::getTimestampsTab(),
                     ])
                     ->columnSpanFull(),
             ])
