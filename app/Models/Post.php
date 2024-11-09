@@ -136,9 +136,9 @@ class Post extends Model implements RouteableModel
     {
         try {
             return route('post', [
-                'year' => $this->created_at->format('Y'),
-                'month' => $this->created_at->format('m'),
-                'day' => $this->created_at->format('d'),
+                'year' => $this->created_at?->format('Y'),
+                'month' => $this->created_at?->format('m'),
+                'day' => $this->created_at?->format('d'),
                 'post' => $this
             ]);
         } catch (UrlGenerationException $e) {

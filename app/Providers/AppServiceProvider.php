@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(\App\Contracts\BulletPoints::class, \App\Services\BulletPoints::class);
 
-        $this->app->singleton(\App\Contracts\Homepage::class, function (Application $app) {
+        $this->app->singleton(\App\Contracts\Homepage::class, function (Application $app): \App\Services\Ui\Homepage {
             return new \App\Services\Ui\Homepage($app->make(Settings::class));
         });
     }

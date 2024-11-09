@@ -39,6 +39,6 @@ trait HasActive
      */
     public function isActive(): bool
     {
-        return $this->active;
+        return $this->active ? true : false;
     }
 }

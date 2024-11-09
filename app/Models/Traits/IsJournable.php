@@ -58,7 +58,7 @@ trait IsJournable
     {
         return self::oldest(static::getJournalDateField())
             ->whereNotNull(static::getJournalDateField())
-            ->first()?->static::getJournalDateField();
+            ->first()?->{static::getJournalDateField()};
     }
 
     /**
