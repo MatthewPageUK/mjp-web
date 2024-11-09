@@ -52,16 +52,16 @@ class SkillResource extends Resource
                 Forms\Components\MarkdownEditor::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                // Forms\Components\Tabs::make('Tabs')
-                //     ->tabs([
+                Forms\Components\Tabs::make('Tabs')
+                    ->tabs([
                 //         static::getDemoablesTab(),
                 //         static::getExperienceablesTab(),
                 //         static::getImageableTab(),
                 //         static::getPostablesTab(),
                 //         static::getProjectablesTab(),
-                //         static::getTimestampsTab(),
-                //     ])
-                //     ->columnSpanFull(),
+                        static::getTimestampsTab(),
+                    ])
+                    ->columnSpanFull(),
             ])
             ->columns(12);
     }
