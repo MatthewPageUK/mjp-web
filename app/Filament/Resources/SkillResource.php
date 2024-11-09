@@ -54,11 +54,11 @@ class SkillResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Tabs::make('Tabs')
                     ->tabs([
-                //         static::getDemoablesTab(),
-                //         static::getExperienceablesTab(),
-                //         static::getImageableTab(),
-                //         static::getPostablesTab(),
-                //         static::getProjectablesTab(),
+                        static::getDemoablesTab(),
+                        static::getExperienceablesTab(),
+                        static::getImageableTab(),
+                        static::getPostablesTab(),
+                        static::getProjectablesTab(),
                         static::getTimestampsTab(),
                     ])
                     ->columnSpanFull(),

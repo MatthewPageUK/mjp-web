@@ -14,7 +14,7 @@ trait HasExperienceablesTab
             ->schema([
                 Forms\Components\CheckboxList::make('experiences')
                     ->columnSpanFull()
-                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} : {$record->start->format('F Y')} - {$record->end->format('F Y')}")
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} : {$record->start?->format('F Y')} - {$record->end?->format('F Y')}")
                     ->nullable()
                     ->relationship('experiences', 'name'),
             ])
