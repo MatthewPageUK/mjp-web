@@ -39,19 +39,19 @@ class SkillResource extends Resource
         return $form
             ->schema([
                 ...static::getNameSlugActiveFormFields(),
-                // Forms\Components\Select::make('skillGroups')
-                //     ->relationship('skillGroups', 'name')
-                //     ->label('Group')
-                //     ->columnSpan(6),
-                // Forms\Components\ViewField::make('level')
-                //     ->view('filament.forms.components.range-slider')
-                //     ->columnSpan(6),
-                // Forms\Components\Textarea::make('svg')
-                //     ->maxLength(65535)
-                //     ->columnSpan(12),
-                // Forms\Components\MarkdownEditor::make('description')
-                //     ->maxLength(65535)
-                //     ->columnSpanFull(),
+                Forms\Components\Select::make('skillGroups')
+                    ->relationship('skillGroups', 'name')
+                    ->label('Group')
+                    ->columnSpan(6),
+                Forms\Components\ViewField::make('level')
+                    ->view('filament.forms.components.range-slider')
+                    ->columnSpan(6),
+                Forms\Components\Textarea::make('svg')
+                    ->maxLength(65535)
+                    ->columnSpan(12),
+                Forms\Components\MarkdownEditor::make('description')
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
                 // Forms\Components\Tabs::make('Tabs')
                 //     ->tabs([
                 //         static::getDemoablesTab(),
